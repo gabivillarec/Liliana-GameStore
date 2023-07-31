@@ -1,15 +1,28 @@
-import { GET } from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL } from "./action-type";
 
 const initialState = {
-    estado:  []
+    products:  [],
+    productsCopy:  [],
+    detail: {},
 }
 
 const reducer = (state = initialState , action ) => {
     switch(action.type){
-        case GET:
+        case GET_ALL_PRODUCTS:
             return{
                 ...state,
-                estado : action.payload
+                products : action.payload,
+                productsCopy: action.payload,
+            }
+        case GET_PRODUCT_DETAIL:
+            return {
+                ...state,
+                detail: action.payload,
+            }
+        case CLEAR_DETAIL:
+            return {
+                ...state,
+                detail: {}
             }
         default:
             return {...state}
