@@ -8,6 +8,8 @@ require('./db.js'); // importa conf y conexion bas de datos
 
 const server = express(); // instancia express dsads
 
+console.log('hola')
+
 server.name = 'API';
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' })); //Establece la opción extended en true para permitir datos anidados en los cuerpos de las solicitudes y establece un límite de tamaño de 50 MB para los cuerpos de las solicitudes.
