@@ -5,11 +5,6 @@ const { Sequelize } = require('sequelize');// para interactuar con postgresSQL
 const fs = require('fs');//manipula sistemas de archivos
 const path = require('path');
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b7dfb537287650262b51aeba962e12bd10581009
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
