@@ -1,8 +1,8 @@
 const {DataTypes} = require('sequelize');
 
-const Socket = (Sequelize) => {
+const Socket = (sequelize) => {
 
-    Sequelize.define("socket", {
+    sequelize.define("socket", {
         
         id : {
             type : DataTypes.INTEGER,
@@ -19,4 +19,4 @@ const Socket = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = Socket;
+module.exports = Socket;
