@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 const Users = (sequelize)=>{
 
@@ -56,7 +56,7 @@ const Users = (sequelize)=>{
             defaultValue : false
         }
     
-      }, {timestamp : false});
+    }, {timestamp : false})
 
 };
 
