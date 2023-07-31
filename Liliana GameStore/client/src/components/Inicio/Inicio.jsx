@@ -1,18 +1,17 @@
 //hooks
 import Carousel from "./Carousel/Carousel";
 import CardsContainer from "../CardsContainer/CardsContainer";
-import { useSelector } from "react-redux";
-
+import {useSelector} from './react-redux'
 
 const Inicio = () => {
-    const { products } = useSelector(state => state)
+    const {products } = useSelector()
 
     return (
         <div>
             <article>
                 <Carousel/>
+                <CardsContainer products={products}/>
             </article>
-            <CardsContainer products={products}/>
         </div>
     );
 }
