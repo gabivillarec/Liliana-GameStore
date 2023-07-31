@@ -1,15 +1,20 @@
-require('dotenv').config();//crea variables en .env
+require('dotenv').config();
+const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
+
 const { Sequelize } = require('sequelize');// para interactuar con postgresSQL
 const fs = require('fs');//manipula sistemas de archivos
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b7dfb537287650262b51aeba962e12bd10581009
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+
 const basename = path.basename(__filename);// Obtiene el nombre base del archivo actual.
 
 const modelDefiners = [];// Crea un arreglo para almacenar los definidores de modelos.
@@ -21,6 +26,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
+
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
@@ -28,8 +34,10 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
+
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+const { Users } = sequelize.models;
 
 
 // Aca vendrian las relaciones
@@ -38,5 +46,5 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
 };
