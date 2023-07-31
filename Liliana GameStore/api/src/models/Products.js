@@ -23,6 +23,10 @@ const Products = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		rating: {
+			type: DataTypes.DECIMAL,
+			allowNull: false,
+		},
 		description: {
 			type: DataTypes.STRING,
 			allowNull: false,
