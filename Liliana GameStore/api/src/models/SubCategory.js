@@ -1,8 +1,8 @@
 const {DataTypes} = require('sequelize');
 
-const SubCategory = (Sequelize) => {
+const SubCategory = (sequelize) => {
 
-    Sequelize.define("subCategory", {
+    sequelize.define("subCategory", {
         
         id : {
             type : DataTypes.INTEGER,

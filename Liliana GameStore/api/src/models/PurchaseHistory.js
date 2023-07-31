@@ -1,8 +1,8 @@
 const {DataTypes} = require('sequelize');
 
-const PurchaseHistory = (Sequelize) => {
+const PurchaseHistory = (sequelize) => {
 
-    Sequelize.define("purchaseHistory", {
+    sequelize.define("purchaseHistory", {
         
         id : {
             type : DataTypes.INTEGER,

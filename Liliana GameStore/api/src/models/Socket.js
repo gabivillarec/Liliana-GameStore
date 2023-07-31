@@ -1,8 +1,8 @@
 const {DataTypes} = require('sequelize');
 
-const Socket = (Sequelize) => {
+const Socket = (sequelize) => {
 
-    Sequelize.define("socket", {
+    sequelize.define("socket", {
         
         id : {
             type : DataTypes.INTEGER,
