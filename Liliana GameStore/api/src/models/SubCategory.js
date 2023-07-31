@@ -19,4 +19,4 @@ const SubCategory = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = SubCategory;
+module.exports = SubCategory;

@@ -19,4 +19,4 @@ const Socket = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = Socket;
+module.exports = Socket;

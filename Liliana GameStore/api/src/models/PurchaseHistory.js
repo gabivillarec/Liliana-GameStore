@@ -14,4 +14,4 @@ const PurchaseHistory = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = PurchaseHistory;
+module.exports = PurchaseHistory;

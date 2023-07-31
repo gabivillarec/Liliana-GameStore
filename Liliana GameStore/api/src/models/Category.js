@@ -19,4 +19,4 @@ const Category = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = Category;
+module.exports = Category;

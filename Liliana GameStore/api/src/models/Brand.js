@@ -19,4 +19,4 @@ const Brand = (Sequelize) => {
     },{timestamps : false});
 };
 
-module.export = Brand;
+module.exports = Brand;

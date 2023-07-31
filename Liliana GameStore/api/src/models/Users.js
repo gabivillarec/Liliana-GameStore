@@ -1,17 +1,5 @@
 const { DataTypes } = require('sequelize');
 
-<<<<<<< HEAD
-const Users = (sequelize) => {
-	sequelize.define(
-		'users',
-		{
-			id: {
-				type: DataTypes.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-				allowNull: false,
-			},
-=======
 const Users = (sequelize)=>{
 
     sequelize.define("users",{
@@ -68,16 +56,8 @@ const Users = (sequelize)=>{
             defaultValue : false
         }
     
-      }, {timestamp : false});
->>>>>>> 4df57a7d8cee7603dd23da1170e3b0c7706c8ddf
+    }, {timestamp : false})
 
-			name: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
-		},
-		{ timestamp: false }
-	);
 };
 
 module.exports = Users;
