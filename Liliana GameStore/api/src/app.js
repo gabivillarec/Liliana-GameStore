@@ -1,4 +1,4 @@
-const express = require('express');// modulo principal express
+const express = require('express');
 const cookieParser = require('cookie-parser');//middleware para analizar las cookies en las solicitudes entrantes.
 const bodyParser = require('body-parser');//middleware utilizado para analizar los cuerpos de las solicitudes HTTP entrantes.
 const morgan = require('morgan');//middleware de registro de solicitudes HTTP. Registra detalles sobre cada solicitud que llega al servidor.
