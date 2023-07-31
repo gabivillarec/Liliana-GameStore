@@ -1,16 +1,17 @@
 //hooks
 import Carousel from "./Carousel/Carousel";
-
-
+import CardsContainer from "../CardsContainer/CardsContainer";
 
 
 const Inicio = () => {
 
-
     return (
-        <article>
-            <Carousel/>
-        </article>
+        <div>
+            <article>
+                <Carousel/>
+            </article>
+            <CardsContainer>
+        </div>
     );
 }
 
