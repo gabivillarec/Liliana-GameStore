@@ -1,9 +1,13 @@
+//hooks
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+//redux
 import { get } from "../../redux/actions";
-import styles from './Inicio.module.css';
+//components
+import NavBar from "../Nav/NavBar";
 
-import Card from '../Card/Card';
+
+
 
 const Inicio = () => {
     const dispatch = useDispatch();
@@ -16,9 +20,10 @@ const Inicio = () => {
 
 
     return (
-        <div className="card">
+        <>
+            <NavBar/>
             <button className="btn btn-danger">hola</button>
-        </div>
+        </>
     );
 }
 

@@ -1,8 +1,13 @@
+
+import { Link } from "react-router-dom";
+
+
 const NavBar = () => {
     return(
-        <div>
-            navbar
-        </div>
+        <nav class="nav">
+            <Link>Inicio</Link>
+
+        </nav>
     )
 }
 
