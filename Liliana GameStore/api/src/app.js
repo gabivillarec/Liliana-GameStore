@@ -2,13 +2,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');//middleware para analizar las cookies en las solicitudes entrantes.
 const bodyParser = require('body-parser');//middleware utilizado para analizar los cuerpos de las solicitudes HTTP entrantes.
 const morgan = require('morgan');//middleware de registro de solicitudes HTTP. Registra detalles sobre cada solicitud que llega al servidor.
-const routes = require('./routes/index.js');// import definicion de las rutas
+const routes = require('./routes/index.js');// import definición de las rutas
 
-require('./db.js');// importa conf y conexion bas de datos
+require('./db.js');
 
-const server = express();// instancia express
-
-console.log('hola')
+const server = express();
 
 server.name = 'API';
 
