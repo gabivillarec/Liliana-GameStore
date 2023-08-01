@@ -1,8 +1,8 @@
 import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL } from "./action-type";
 
 const initialState = {
-    products:  [],
-    productsCopy:  [],
+    products: [],
+    productsCopy: [],
     detail: {},
 }
 
