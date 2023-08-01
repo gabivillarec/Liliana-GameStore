@@ -1,0 +1,42 @@
+const { Users } = require("../db");
+const bcrypt = require('bcrypt');
+
+const createUser = async (req, res) => {
+  try {
+    const { name, username, email, password, cp, address, phone, avatar_img, admin } = req.body;
+
+    if (username && email) {
+      const [register, created] = await Users.findOrCreate({
+        where: { username, email },
+        defaults: { name, password, cp, address, phone, avatar_img, admin },
+      });
+
+      const saltRounds = 10; // Número de rondas de cifrado
+      const hashedPassword = await bcrypt.hash(register.password, saltRounds);
+
+      if (created) {
+        const response = {
+          name: register.name,
+          username: register.username,
+          email: register.email,
+          password: hashedPassword,
+          cp: register.cp,
+          address: register.address,
+          phone: register.phone,
+          avatar_img: register.avatar_img,
+          admin: register.admin
+        };
+
+        return res.json(response);
+      } else {
+        return res.status(400).send("The user already exists, try another one");
+      }
+    }
+
+    return res.status(400).send("email and username are required");
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = createUser;
