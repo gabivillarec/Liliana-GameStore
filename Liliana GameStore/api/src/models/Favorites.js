@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         product: {
             type: DataTypes.ARRAY(DataTypes.JSON),
             allowNull: false,
-            defaultValue:[]
         }
     }, { timestamps: false});
+    
 };
