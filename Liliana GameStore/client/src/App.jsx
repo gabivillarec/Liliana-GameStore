@@ -3,6 +3,7 @@ import Inicio from "./components/Inicio/Inicio";
 import Login from "./components/Login/Login";
 import User from "./components/User/User";
 import NavBar from "./components/Nav/NavBar";
+import Detail from "./components/Detail/Detail";
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
           <Route path="/" element={<Inicio/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/user" element={<User/>}/>
-          <Route path="/detail" element={<User/>}/>
+          <Route path="/detail/:id" element={<Detail/>}/>
       </Routes>
     </>
   )

@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const Card = ({id, name, image, precio, rating, stock}) => {
+const Card = ({ id, name, image, price, rating, stock }) => {
     const navigate = useNavigate()
     return (
+
+
         <div className="card "  style={{width:'12rem'}}>
             <img className="img-thumbnail" src={image} alt={name} />
             <div className="card-body">
@@ -16,5 +18,3 @@ const Card = ({id, name, image, precio, rating, stock}) => {
 }
 
 export default Card;
-
-
