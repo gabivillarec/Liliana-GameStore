@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false
         },
-        products: {
+        product: {
             type: DataTypes.ARRAY(DataTypes.JSON),
             allowNull: false,
             defaultValue:[]
