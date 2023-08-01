@@ -56,7 +56,7 @@ const Users = (sequelize)=>{
             defaultValue : false
         }
     
-    }, {timestamp : false})
+    }, {timestamps: false})
 
 };
 
