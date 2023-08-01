@@ -17,8 +17,9 @@ const Users = (sequelize)=>{
         },
 
         username : {
-            type : DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull : false,
+            unique: true
         },
 
         email : {
@@ -47,7 +48,7 @@ const Users = (sequelize)=>{
         },
 
         avatar_img : {
-            type : DataTypes.STRING,
+            type : DataTypes.TEXT,
             allowNull : false
         },
 
