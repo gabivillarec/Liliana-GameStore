@@ -90,4 +90,4 @@ const products = [
       description: 'Altavoz Bluetooth JBL Charge 4 resistente al agua y con una batería de 7500mAh.'
     }
   ];
-  
+   
