@@ -4,7 +4,6 @@ const usersRoutes = require('./usersRoutes')
 const router = Router();
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
 router.use('/LilianaGameStore',usersRoutes);
 //router.use('/LilianaGameStore',productRoutes);
