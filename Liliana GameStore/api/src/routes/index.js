@@ -11,7 +11,7 @@ router.use('/LilianaGameStore',usersRoutes);
 //router.use('/LilianaGameStore',brandRoutes);
 //router.use('/LilianaGameStore',cartRoutes);
 //router.use('/LilianaGameStore',categoryRoutes);
-router.use('/LilianaGameStore/Favorites',favoritesRoutes);
+router.use('/LilianaGameStore',favoritesRoutes);
 //router.use('/LilianaGameStore',orderRoutes);
 //router.use('/LilianaGameStore',purchaseHistoryRoutes);
 //router.use('/LilianaGameStore',socketRoutes);
