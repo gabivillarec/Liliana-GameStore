@@ -5,13 +5,13 @@ const { deleteFavorite } = require('../Controllers/deleteFav')
 
 const favoritesRoutes = Router();
 
-favoritesRoutes.get('/:id', getFavoriteById);
+favoritesRoutes.get('/Favorites/:id', getFavoriteById);
 
-favoritesRoutes.get('/', getFavorites);
+favoritesRoutes.get('/Favorites', getFavorites);
 
-favoritesRoutes.delete('/:id', deleteFavorite);
+favoritesRoutes.delete('/Favorites/:id', deleteFavorite);
 
-favoritesRoutes.post('/', postFavorite);
+favoritesRoutes.post('/Favorites', postFavorite);
 
 
 
