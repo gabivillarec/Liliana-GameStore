@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
 
-const Card = ({id, name, image, precio, rating, stock}) => {
+const Card = ({ id, name, image, price, rating, stock }) => {
     const navigate = useNavigate()
 
     return (
-        <div className="card" onClick={() => navigate(`/detail/${id}`)}>
+        <div onClick={ () => navigate(`/detail/${id}`) }>
             <img src={image} alt={name} />
             <h3>{name}</h3>
-            <h3>{precio}</h3>
+            <h4>{price}</h4>
             <h4>{rating}</h4>
+            <h4>{stock}</h4>
         </div>
     )
 }
+
 export default Card;
