@@ -1,10 +1,10 @@
 //hooks
 import Carousel from "./Carousel/Carousel";
 import CardsContainer from "../CardsContainer/CardsContainer";
-import {useSelector} from './react-redux'
+import {useSelector} from 'react-redux'
 
 const Inicio = () => {
-    const {products } = useSelector()
+    const {products } = useSelector(state => state)
 
     return (
         <div>
