@@ -6,20 +6,20 @@ const createUser = async (req, res) => {
     const { name, username, email, password, cp, address, phone, avatar_img, admin } = req.body;
 
     if (username && email) {
+      const saltRounds = 10; // Número de rondas de cifrado
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
       const [register, created] = await Users.findOrCreate({
         where: { username, email },
-        defaults: { name, password, cp, address, phone, avatar_img, admin },
+        defaults: { name, password: hashedPassword, cp, address, phone, avatar_img, admin },
       });
-
-      const saltRounds = 10; // Número de rondas de cifrado
-      const hashedPassword = await bcrypt.hash(register.password, saltRounds);
 
       if (created) {
         const response = {
           name: register.name,
           username: register.username,
           email: register.email,
-          password: hashedPassword,
+          password: register.password,
           cp: register.cp,
           address: register.address,
           phone: register.phone,
