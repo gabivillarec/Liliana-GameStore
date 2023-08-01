@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const usersRoutes = require('./usersRoutes')
 const favoritesRoutes = require('./favoritesRoutes')
+const login = require('../Controllers/login')
 
 const router = Router();
 
