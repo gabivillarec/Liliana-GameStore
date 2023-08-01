@@ -23,7 +23,7 @@ const createUser = async (req,res)=>{
                     cp: register.cp,
                     address: register.address,
                     phone: register.phone,
-                    avatar_img,admin: register.avatar_img,
+                    avatar_img: register.avatar_img,
                 }
 
                 return res.json(response)
