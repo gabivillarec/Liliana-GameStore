@@ -42,8 +42,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory } = sequelize.models;
 
 // Relación de Users
-Users.hasMany(Orders);
-Orders.belongsTo(Users);
+//Orders.belongsTo(Users);
+Users.hasMany(Orders, {as:'users'});
 
 Users.hasOne(PurchaseHistory);
 PurchaseHistory.hasOne(Users);
@@ -67,14 +67,14 @@ Favorites.belongsToMany(Products, {through:"favorites_products"});
 Products.belongsToMany(Socket, {through:"socket_products"});
 Socket.belongsToMany(Products, {through:"socket_products"});
 
-Products.belongsTo(Category);
-Category.hasMany(Products);
+//Products.belongsTo(Category);
+Category.hasMany(Products, {as:'products-category'});
 
-Products.belongsTo(SubCategory);
-SubCategory.hasMany(Products);
+//Products.belongsTo(SubCategory);
+SubCategory.hasMany(Products, {as:'products-subcategory'});
 
-Products.belongsTo(Brand);
-Brand.hasMany(Products);
+//Products.belongsTo(Brand);
+Brand.hasMany(Products, {as:'products-brand'});
 
 
 
