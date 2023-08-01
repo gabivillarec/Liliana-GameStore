@@ -1,6 +1,6 @@
 
 
-export default arrayFran = [
+const arrayFran = [
     {
         id:20,
         name:'Sony PlayStation 5 825GB Standard color blanco y negro',
@@ -30,3 +30,5 @@ export default arrayFran = [
         descripcion:'Mejora tu experiencia de juego con el Procesador gamer AMD Ryzen 5 5600G, diseñado para brindarte un rendimiento excepcional en tus juegos favoritos. Con sus 6 núcleos y 12 hilos, este procesador te permitirá disfrutar de una multitarea fluida y eficiente. Gracias a su arquitectura x86-64 y litografía de 7 nm, obtendrás un rendimiento óptimo con un menor consumo de energía.'
     },
 ]
+
+export default arrayFran
