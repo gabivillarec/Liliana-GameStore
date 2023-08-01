@@ -1,18 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import style from "./Card.module.css"
 
 const Card = ({ id, name, image, price, rating, stock }) => {
     const navigate = useNavigate()
+
     return (
-
-
-        <div className="card "  style={{width:'12rem'}}>
-            <img className="img-thumbnail" src={image} alt={name} />
-            <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                <p className="card-text">Rating: {rating}</p>
-                <p className="card-text">En Stock: {stock} </p>
-                <p className="card-text">Precio: {price}</p>
-            </div>
+        <div className={style.card} onClick={() => navigate(`/detail/${id}`)}>
+            <img className={style.image} src={image} alt={name} />
+            <h5 className={style.detailCard}>${price}</h5>
+            <h6 className={style.detailCard}>{name}</h6>
+            <h6 className={style.detailCard}>{rating}⭐</h6>
+            <h6 className={style.detailCard}>Stock: {stock} </h6>
         </div>
     )
 }
