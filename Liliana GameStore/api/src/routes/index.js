@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const usersRoutes = require('./usersRoutes')
-
+const productRoutes = require('./productRoutes')
 const router = Router();
 
 // Configurar los routers
 
 router.use('/LilianaGameStore',usersRoutes);
-//router.use('/LilianaGameStore',productRoutes);
+router.use('/LilianaGameStore',productRoutes);
 //router.use('/LilianaGameStore',brandRoutes);
 //router.use('/LilianaGameStore',cartRoutes);
 //router.use('/LilianaGameStore',categoryRoutes);
