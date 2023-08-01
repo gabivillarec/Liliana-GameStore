@@ -11,7 +11,7 @@ const Card = ({ id, name, image, price, rating, stock }) => {
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">Rating: {rating}</p>
                 <p className="card-text">En Stock: {stock} </p>
-                <p className="card-text">Precio: {precio}</p>
+                <p className="card-text">Precio: {price}</p>
             </div>
         </div>
     )
