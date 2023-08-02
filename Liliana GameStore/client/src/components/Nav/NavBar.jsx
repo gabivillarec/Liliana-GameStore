@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import style from "./NavBar.module.css"
 
 const NavBar = () => {
@@ -11,6 +11,8 @@ const NavBar = () => {
                 <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/login')}>Login</button>
                 <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/user')}>User</button>
                 <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')}>Favorites</button>
+                <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/carrito')}>🛒</button>
+                <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/categorypage')}>category</button>
             </div>
         </nav>
     )
