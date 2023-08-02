@@ -1,18 +1,17 @@
-
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import style from "./NavBar.module.css"
 
 const NavBar = () => {
+    const navigate = useNavigate()
+
     return(
-        <nav id="navbar-example2" className="navbar bg-body-tertiary px-3 mb-3">
-            <h3>
-                <Link to='/' className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >Liliana-GameStore</Link>
-            </h3>
-            <ul className="nav nav-pills">
-                <Link to='/login' className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >Login</Link>
-                <Link to='/user'className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >User</Link>
-                <Link to='/favorites'className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" >Favorites</Link>
-            </ul>
+        <nav id="navbar-example2" className={`navbar px-3 p-3 ${style.navbarE}`}>
+            <img className={style.logo} src='../../../vistas/LilianaGameStore.png' alt="logo" onClick={() => navigate('/')}/>
+            <div className="d-flex flex-wrap gap-2">
+                <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/login')}>Login</button>
+                <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/user')}>User</button>
+                <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')}>Favorites</button>
+            </div>
         </nav>
     )
 }
