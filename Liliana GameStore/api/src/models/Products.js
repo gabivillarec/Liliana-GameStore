@@ -20,7 +20,7 @@ const Products = (sequelize) => {
 			allowNull: false,
 		},
 		stock: {
-			type: DataTypes.STRING,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		rating: {
@@ -31,6 +31,18 @@ const Products = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		category_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+		subcategory_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+		brand_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
 	});
 };
 
