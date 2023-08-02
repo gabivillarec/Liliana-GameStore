@@ -1,12 +1,13 @@
 const { Router } = require('express');
-const createUser = require('../Controllers/createUser')
-const login = require('../Controllers/login')
+const login = require('../Controllers/login');
+const getAllUsers = require('../Controllers/getAllUsers');
+const createUser = require('../Controllers/createUser');
 
 const userRoutes = Router();
 
 userRoutes.get("/login", login);
 
-//userRoutes.get("/user" , getAllUsers);
+userRoutes.get("/user" , getAllUsers);
 
 //userRoutes.get("/user/:id" , getUserById);
 
