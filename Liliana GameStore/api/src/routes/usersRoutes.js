@@ -3,6 +3,7 @@ const login = require('../Controllers/login');
 const getAllUsers = require('../Controllers/getAllUsers');
 const createUser = require('../Controllers/createUser');
 const getUserById = require('../Controllers/getUserById')
+const updateUsers = require('../Controllers/updateUsers')
 
 const userRoutes = Router();
 
@@ -14,7 +15,7 @@ userRoutes.get("/user/:id" , getUserById);
 
 userRoutes.post("/user" , createUser);
 
-//userRoutes.put("/user/:id" , updateUser);
+userRoutes.put("/user/:id" , updateUsers);
 
 //userRoutes.delete("/user/:id" , deleteUser);
 
