@@ -1,6 +1,5 @@
 .contenedor{
-    background: rgb(19, 19, 72);
-    background: linear-gradient(0deg, rgba(19, 19, 72,1) 95%, rgb(11, 11, 43) 100%);
+    background-color: rgb(19, 19, 72);
     height: 85vh
 }
 
