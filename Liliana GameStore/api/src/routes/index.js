@@ -15,7 +15,7 @@ const subCategoryRoutes = require('./subCategoryRoutes');
 const router = Router();
 
 // Configurar los routers
-router.use('/LilianaGameStore',login);
+//router.use('/LilianaGameStore',login);
 router.use('/LilianaGameStore',usersRoutes);
 router.use('/LilianaGameStore',productRoutes);
 //router.use('/LilianaGameStore',brandRoutes);
