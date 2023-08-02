@@ -2,7 +2,7 @@ import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useState , useEffect } from "react";
 import modificarArray from "./cortarArray";
 
-const Categorias = ({products , categoriaNombre}) => {
+const Categorias = ({products , categoriaNombres}) => {
     const [categoria , setCategoria] = useState([])
     
     useEffect(()=>{
@@ -11,7 +11,7 @@ const Categorias = ({products , categoriaNombre}) => {
 
     return(
         <div className="container">
-            <h2>Categoria: {categoriaNombre}</h2>
+            <h2>Categoria: {categoriaNombres}</h2>
             <CardsContainer products={categoria}/>
         </div>
     )

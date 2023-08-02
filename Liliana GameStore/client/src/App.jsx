@@ -5,6 +5,7 @@ import User from "./components/User/User";
 import NavBar from "./components/Nav/NavBar";
 import Detail from "./components/Detail/Detail";
 import Favorites from './components/Favorites/Favorites'
+import CategoryPage from "./components/CategoryPage/CategoryPage";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/detail/:id" element={<Detail/>}/>
           <Route path="/carrito" element={<User/>}/>
           <Route path="/favorites" element={<Favorites/>}/>
+          <Route path="/categorypage" element={<CategoryPage/>}/>
       </Routes>
     </>
   )
