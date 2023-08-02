@@ -1,7 +1,8 @@
 import CardsContainer from "../CardsContainer/CardsContainer"
 import { useState , useEffect } from "react";
 import Botones from "./Botones/Botones";
-
+import {ordenamiento} from './Botones/ordenamientos'
+import styles from './Favorites.module.css'
 
 const Categorias = ({}) => {
     const [favoritos , setFavoritos] = useState([])
@@ -23,22 +24,35 @@ const Categorias = ({}) => {
         stock: 15,
         rating: 4.8,
         description: 'Smartphone Samsung Galaxy S20 con pantalla AMOLED de 6.2 pulgadas y cámara de 64MP.'
-      }]
+      },
+      {
+        id: 5,
+        name: 'Tablet Apple iPad Pro',
+        price: 900,
+        image: 'https://images.fravega.com/f500/9dfd3d3abcd86de7eca96ca7c02ad1d2.jpg',
+        stock: 20,
+        rating: 4.6,
+        description: 'Tablet Apple iPad Pro con pantalla Liquid Retina de 11 pulgadas y chip M1.'
+      },
+    ]
     
-
-    
+    const handlerOrder = (tipo) => {
+        setFavoritos(ordenamiento(favoArray , tipo ))
+    }
     
     useEffect(()=>{
         setFavoritos(favoArray)
-    }, [favoritos])
-    console.log(favoritos)
+    }, [])
+
     return(
-        <div className="container">
-            <h2>Favoritos: Usuario Name</h2>
-            <div>
-                <Botones/>
+        <div className={styles.inicio}>
+            <div className="container">
+                <h2>Favoritos: Usuario Name</h2>
+                <div>
+                    <Botones handlerOrder={handlerOrder}/>
+                </div>
+                <CardsContainer products={favoritos}/>
             </div>
-            <CardsContainer products={favoritos}/>
         </div>
     )
 }
