@@ -1,9 +1,17 @@
 const { Router } = require('express');
-const usersRoutes = require('./usersRoutes')
-const favoritesRoutes = require('./favoritesRoutes')
-const login = require('../Controllers/login')
+const usersRoutes = require('./usersRoutes');
+const favoritesRoutes = require('./favoritesRoutes');
+const login = require('../Controllers/login');
+const productRoutes = require('./productRoutes');
+const brandRoutes = require('./brandRoutes');
+const cartRoutes = require('./cartRoutes');
+const categoryRoutes = require('./categoryRoutes');
+const orderRoutes = require('./orderRoutes');
+const purchaseHistoryRoutes = require('./purchaseHistoryRoutes');
+const socketRoutes = require('./socketRoutes');
+const subCategoryRoutes = require('./subCategoryRoutes');
 
-const productRoutes = require('./productRoutes')
+
 const router = Router();
 
 // Configurar los routers
