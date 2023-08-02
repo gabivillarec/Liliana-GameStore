@@ -1,0 +1,15 @@
+.logo{
+    width: 15%;
+    filter: drop-shadow(0 0 5px #4a1873) drop-shadow(0 0 20px #391150) contrast(1.2) brightness(1.5);
+    transition: 220ms;
+}
+.logo:hover{
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 5px #4a1873) drop-shadow(0 0 20px #391150) contrast(1) brightness(2);
+}
+
+.navbarE{
+    background-image: url('../../../vistas/PS_Background_Medium.png');
+    background-size: cover;
+    background-position-y: bottom;
+}
