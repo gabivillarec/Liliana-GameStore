@@ -13,9 +13,9 @@ const createProduct = async (req , res) => {
 
         //Validación repetidos
 
-        const productExist = await Products.findOne({
+        const productExist = await Products.findOne({         
             where:{
-                name: { [Op.iLike]: name}
+                name: { [Op.iLike]: name} 
             },
         });
 
@@ -54,19 +54,19 @@ const createProduct = async (req , res) => {
         });
 
 
-        let socketDB = undefined;
-
-        if(socket) {
-            [socketDB] = await Socket.findOrCreate({
+        const socketDBs = await Promise.all((socket).map(async (socketValue) => {
+            const [socketDB] = await Socket.findOrCreate({
                 where: {
-                    name: { [Op.iLike]: socket }
+                    name: { [Op.iLike]: socketValue }
                 },
                 defaults: {
-                    name: socket
-                }           
+                    name: socketValue
+                }
             });
-        };
+            return socketDB;
+        }));
 
+        console.log(socketDBs)
 
         const newProduct = await Products.create(
             {
@@ -76,15 +76,19 @@ const createProduct = async (req , res) => {
                 stock: stock,
                 rating: rating,
                 description: description,
+                category_name:catDB.dataValues.name,
+                subcategory_name:subCatDB.dataValues.name,
+                brand_name:brandDB.dataValues.name,
                 categoryId: catDB.dataValues.id,
                 subCategoryId: subCatDB.dataValues.id,
                 brandId: brandDB.dataValues.id
-            }, 
+            },
         );
 
         //Asocio la tabla Socket con el producto creado (en caso de que exista)
-        if(socket) await newProduct.addSocket(socketDB);
-
+        if (socketDBs.length > 0) {
+            await newProduct.setSockets(socketDBs);
+        }
         
         return res.status(200).json({newProduct});
 
