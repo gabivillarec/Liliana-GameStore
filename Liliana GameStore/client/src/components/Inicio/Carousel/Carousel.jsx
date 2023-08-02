@@ -1,10 +1,7 @@
 import ImgCarousel from "./ImgCarousel";
+import styles from './Carousel.module.css'
 
 const arrayFran = [
-    {
-        name:'Hyper auricular',
-        image:'https://imagenes.compragamer.com/bannerPrincipal/DC_20230731112408_6DDt4vlp.jpg',
-    },
     {
         name:'logitech auricular',
         image:'https://imagenes.compragamer.com/bannerPrincipal/DC_20230731172357_JkMiVg5i.jpg',
@@ -26,6 +23,9 @@ const Carousel = () => {
         <section>
             <div id="carouselExampleIndicators" className="carousel slide">
                 <div className="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src='https://imagenes.compragamer.com/bannerPrincipal/DC_20230731112408_6DDt4vlp.jpg' className={styles.img} alt="Hyper auricular"/>
+                    </div>
                     {
                         arrayFran.map((produc , index) => <ImgCarousel key={index} name={produc.name} img={produc.image} />)
                     }
