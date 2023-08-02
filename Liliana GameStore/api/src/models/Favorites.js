@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         product: {
-            type: DataTypes.ARRAY(DataTypes.JSON),
+            type: DataTypes.JSON,
             allowNull: false,
         }
     }, { timestamps: false});
