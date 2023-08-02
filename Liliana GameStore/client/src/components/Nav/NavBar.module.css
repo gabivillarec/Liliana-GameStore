@@ -12,4 +12,5 @@
     background-image: url('../../../vistas/PS_Background_Medium.png');
     background-size: cover;
     background-position-y: bottom;
+    height: 15vh;
 }
