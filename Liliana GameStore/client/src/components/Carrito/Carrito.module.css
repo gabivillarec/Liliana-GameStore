@@ -1,5 +1,15 @@
-.inicio{
+body{
     background-image: url('../../../vistas/PS_Background_Medium.png');
     background-size: cover;
     background-position-y: bottom;
+}
+
+img{
+    width: 70px;
+    height: 70px;
+}
+
+.containerProducts{
+    display: flex;
+    gap: 20px;
 }
