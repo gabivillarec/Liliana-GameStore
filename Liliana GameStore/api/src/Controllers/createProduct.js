@@ -9,7 +9,7 @@ const createProduct = async (req , res) => {
         
         const {name , price , image , stock , rating , description , category , subcategory , brand , socket} = req.body;
 
-        if(!name || !price || !image || !stock || !rating || !description) return res.status(400).send("Faltan datos");
+        if(!name || !price || !image || !stock || !rating || !description || !category || !subcategory || !brand) return res.status(400).send("Faltan datos");
 
         //Validación repetidos
 
