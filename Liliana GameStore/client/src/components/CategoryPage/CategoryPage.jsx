@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const CategoryPage = () => {
     const { products } = useSelector(state => state)
- 
+
 
     return(
         <div className={styles.inicio}>

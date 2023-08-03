@@ -1,3 +1,5 @@
 .inicio{
-    background-color: rgb(19, 19, 72);
+    background-image: url('../../../vistas/PS_Background_Medium.png');
+    background-size: cover;
+    background-position-y: bottom;
 }
