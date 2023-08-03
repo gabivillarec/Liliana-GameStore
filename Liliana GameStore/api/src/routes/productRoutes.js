@@ -4,6 +4,7 @@ const createProduct = require("../Controllers/createProduct");
 const getAllProducts = require("../Controllers/getAllProducts");
 const getProductById = require("../Controllers/getProductById");
 const updateProduct = require("../Controllers/updateProduct");
+const deleteProduct = require("../Controllers/deleteProduct");
 
 const productRoutes = Router();
 
@@ -15,7 +16,7 @@ productRoutes.post("/products" , createProduct);
 
 productRoutes.put("/products/:id" , updateProduct);
 
-//productRoutes.delete("/products/:id" , deleteProduct);
+productRoutes.delete("/products/:id" , deleteProduct);
 
 
 module.exports = productRoutes;
