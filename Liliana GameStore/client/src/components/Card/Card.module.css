@@ -1,5 +1,5 @@
 .card{
-  background-color: rgb(20, 53, 125);
+  background-color: rgba(20, 53, 125, 0.781);
   border: solid 3px rgb(11, 24, 54);
   border-radius: 10px;
   color: white;
