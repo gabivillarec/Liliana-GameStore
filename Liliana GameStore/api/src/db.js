@@ -54,6 +54,8 @@ Cart.hasOne(Users);
 Users.hasMany(Favorites,{foreignKey: 'userId'});
 Favorites.belongsTo(Users, {foreignKey: 'userId'});
 
+Users.hasMany(Orders, {foreignKey: 'user_orders'});
+
 // Relación de Products
 Products.belongsToMany(Orders, {through:"orders_products"});
 Orders.belongsToMany(Products, {through:"orders_products"});

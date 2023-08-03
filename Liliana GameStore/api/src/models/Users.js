@@ -11,11 +11,16 @@ const Users = (sequelize)=>{
             allowNull : false,
         },
 
-        name : {
+        first_name : {
             type : DataTypes.STRING,
             allowNull : false,
         },
 
+        last_name : {
+            type : DataTypes.STRING,
+            allowNull : false,
+        },
+        
         username : {
             type: DataTypes.TEXT,
             allowNull : false,
@@ -24,7 +29,8 @@ const Users = (sequelize)=>{
 
         email : {
             type: DataTypes.STRING,
-            allowNull : false
+            allowNull : false,
+            unique: true
         },
 
         password : {
