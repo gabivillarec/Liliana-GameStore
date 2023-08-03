@@ -5,11 +5,11 @@ const deleteUser = async (req, res) => {
 
     try {
         
-        const deletedUserCount = await Users.destroy({
+        const deletedUserAccount = await Users.destroy({
             where: { id: id }
         });
 
-        if (deletedUserCount === 1) {
+        if (deletedUserAccount === 1) {
             return res.json({ message: "User deleted successfully." });
         } else {
             return res.status(400).json({ error: "Could not delete user. User not found." });
