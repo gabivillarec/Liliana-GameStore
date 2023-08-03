@@ -1,13 +1,13 @@
-const { Favorites } = require('../db');
+const { Socket } = require('../db');
 
 
-const deleteFavorite = async (req, res) => {
+const deleteSocket = async (req, res) => {
     try {
         const {id} = req.params;
 
         if(!id) throw new Error('Missing Favorite ID');
 
-        const response = await Favorites.findByPk(id);
+        const response = await Socket.findByPk(id);
         response.destroy();
 
         res.json(response);
@@ -16,4 +16,4 @@ const deleteFavorite = async (req, res) => {
     }
 }
 
-module.exports = { deleteFavorite }
+module.exports = { deleteSocket }

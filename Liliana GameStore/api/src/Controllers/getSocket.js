@@ -1,8 +1,8 @@
-const { Cart } = require('../db');
+const { Socket } = require('../db')
 
-const getCart = async (req, res) => {
+const getSocket = async (req, res) => {
     try {
-        const response = await Cart.findAll()
+        const response = await Socket.findAll()
         res.json(response);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -10,5 +10,5 @@ const getCart = async (req, res) => {
 }
 
 module.exports = {
-    getCart,
-};
+    getSocket,
+}

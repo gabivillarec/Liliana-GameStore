@@ -8,10 +8,13 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false
         },
-        product: {
-            type: DataTypes.ARRAY(DataTypes.JSON),
-            allowNull: false,
-            defaultValue:[]
+        productId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        cantidad: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, { timestamps: false});
 };

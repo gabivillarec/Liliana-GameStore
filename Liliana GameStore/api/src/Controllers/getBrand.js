@@ -1,8 +1,8 @@
-const { Cart } = require('../db');
+const { Brand } = require('../db')
 
-const getCart = async (req, res) => {
+const getBand = async (req, res) => {
     try {
-        const response = await Cart.findAll()
+        const response = await Brand.findAll()
         res.json(response);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -10,5 +10,5 @@ const getCart = async (req, res) => {
 }
 
 module.exports = {
-    getCart,
-};
+    getBand,
+}
