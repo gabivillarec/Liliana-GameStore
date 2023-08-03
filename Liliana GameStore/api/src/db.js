@@ -43,7 +43,7 @@ const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCa
 
 Users.beforeCreate((user, options) => {
 	if (!user.avatar_img) {
-	  // Asignar la imagen por defecto solo si la URL de imagen no está proporcionada
+	  // Asigno la imagen por defecto al avatar solo si la URL de la imagen no se pasa
 	  user.avatar_img = '../assets/Perfil_Neutro.png';
 	}
   });
