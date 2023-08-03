@@ -4,8 +4,8 @@ const Item = ({product}) =>{
     let {image , name , price} = product
     return(
         <div className={style.item}>
-            <img src={image} alt={name} />
-            <h5>{name}</h5>
+            <img src={image} className="object-fit-xxl-contain border rounded" alt={name} />
+            <h5 className='text-center'>{name}</h5>
             <p>{price}</p>
         </div>
                 
