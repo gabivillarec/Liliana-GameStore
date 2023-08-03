@@ -35,7 +35,7 @@ const login = async (req, res) => {
             };
         };
 
-        return res.status(400).send("Invalid Username");
+        return res.status(400).json({ error: 'Invalid Username' });
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
