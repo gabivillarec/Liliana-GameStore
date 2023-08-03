@@ -8,7 +8,7 @@ const deleteUser = require('../Controllers/deleteUser');
 
 const userRoutes = Router();
 
-userRoutes.get("/login", login);
+userRoutes.post("/login", login);
 
 userRoutes.get("/user" , getAllUsers);
 
