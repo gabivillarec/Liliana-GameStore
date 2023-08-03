@@ -38,6 +38,7 @@ const Carrito = () => {
 
     
     return(
+
       <div>
         <table className="table align-middle mb-0 bg-white">
         <thead className="bg-dark">
@@ -53,6 +54,7 @@ const Carrito = () => {
       </table>
 
       </div>
+
     )
 }
 

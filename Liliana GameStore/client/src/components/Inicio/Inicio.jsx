@@ -11,7 +11,7 @@ const Inicio = () => {
     let categoriaNombre = 'nombre'
 
     return (
-        <div>
+        <div className={style.contenedorInicio}>
             <article className={style.inicio} >
                 <Carousel/>
                 <Categorias products={products} categoriaNombre={categoriaNombre}/>
