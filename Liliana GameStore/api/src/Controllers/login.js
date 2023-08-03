@@ -19,8 +19,8 @@ const login = async (req, res) => {
                 return passwordMatches 
                 ? res.json(user)       
                 : res.status(400).json({ error: 'Invalid Password' });
-             };
-         };
+            };
+        };
 
         if(email){ 
             const emailUser = await Users.findOne( { where: { email } })

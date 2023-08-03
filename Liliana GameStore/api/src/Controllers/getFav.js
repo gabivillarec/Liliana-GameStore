@@ -5,7 +5,7 @@ const getFavorites = async (req, res) => {
         const response = await Favorites.findAll();
         res.json(response);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 };
 
