@@ -4,9 +4,9 @@ body{
     background-position-y: bottom;
 }
 
-img{
-    width: 70px;
-    height: 70px;
+.img{
+    width: 45px; 
+    height: 45px;
 }
 
 .containerProducts{
