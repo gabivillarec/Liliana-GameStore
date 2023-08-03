@@ -44,7 +44,7 @@ const Users = (sequelize)=>{
         },
 
         address : {
-            type : DataTypes.INTEGER,
+            type : DataTypes.STRING,
             allowNull : false
         },
 
@@ -54,8 +54,9 @@ const Users = (sequelize)=>{
         },
 
         avatar_img : {
-            type : DataTypes.TEXT,
-            allowNull : false
+            type : DataTypes.STRING,
+            allowNull : true,
+            defaultValue: '../assets/Perfil_Neutro.png'
         },
 
         admin : {
@@ -63,7 +64,7 @@ const Users = (sequelize)=>{
             defaultValue : false
         }
     
-    }, {timestamps: false})
+    }, {timestamps: false});
 
 };
 

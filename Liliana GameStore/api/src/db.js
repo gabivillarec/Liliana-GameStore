@@ -41,6 +41,13 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory } = sequelize.models;
 
+Users.beforeCreate((user, options) => {
+	if (!user.avatar_img) {
+	  // Asignar la imagen por defecto solo si la URL de imagen no está proporcionada
+	  user.avatar_img = '../assets/Perfil_Neutro.png';
+	}
+  });
+
 // Relación de Users
 //Orders.belongsTo(Users);
 Users.hasMany(Orders, {as:'users'});
