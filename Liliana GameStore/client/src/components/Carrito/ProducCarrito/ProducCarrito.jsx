@@ -11,13 +11,35 @@ const ProducCarrito = ({estado}) => {
         setProducts(estado)
     },[])
 
+    const handlerDelete = (id) => {
+        setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
+    };
+
+    const handlerCantidad = (id, operacion) => {
+        setProducts(prevProducts => {
+            // Busca el producto con el id correspondiente
+            const updatedProducts = prevProducts.map(product => {
+                if (product.id === id) {
+                    // Realiza la operación de agregar o restar cantidad
+                    if (operacion === "agregar") {
+                        return { ...product, cantidad: product.cantidad + 1 };
+                    } else if (operacion === "restar") {
+                        return { ...product, cantidad: product.cantidad - 1 };
+                    }
+                }
+                return product;
+            });
+            return updatedProducts;
+        });
+    };
+
     return(
-        <section className={style.containerProduct}>
+        <tbody>
             {
-                products.map((product , index)=> <Item key={index} product={product} />)
+                products.map((product , index)=> <Item key={index} product={product} handlerCantidad={handlerCantidad} handlerDelete={handlerDelete}/>)
             }
-            <Totalizar total={calcualarTotal(products)}/>
-        </section>
+            <Totalizar total={calcualarTotal(products )}/>
+        </tbody>
     )
 }
 

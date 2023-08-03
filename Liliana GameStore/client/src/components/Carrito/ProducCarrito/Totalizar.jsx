@@ -1,14 +1,12 @@
-import { useState } from "react";
+
 
 const Totalizar = ({total}) => {
-    const [quantity, setQuantity] = useState(1);
-
 
     return(
-        <div>
+        <div className="d-flex bg-dark">
             total: {total}
-            <div className="d-flex">
-                <button className="btn btn-light flex-shrink-0" type="button">
+            <div className="d-flex bg-dark">
+                <button className="btn btn-dark flex-shrink-0" type="button">
                 <i className="bi-cart-fill me-1"></i>Comprar Ahora</button>
                 </div>
         </div>

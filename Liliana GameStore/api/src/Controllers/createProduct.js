@@ -9,7 +9,7 @@ const createProduct = async (req , res) => {
         
         const {name , price , image , stock , rating , description , category , subcategory , brand , socket} = req.body;
 
-        if(!name || !price || !image || !stock || !rating || !description) return res.status(400).send("Faltan datos");
+        if(!name || !price || !image || !stock || !rating || !description || !category || !subcategory || !brand) return res.status(400).send("Faltan datos");
 
         //Validación repetidos
 
@@ -53,18 +53,23 @@ const createProduct = async (req , res) => {
             }         
         });
 
+        // Inicializar socketDBs como un array vacío
+        let socketDBs = [];
 
-        const socketDBs = await Promise.all((socket).map(async (socketValue) => {
-            const [socketDB] = await Socket.findOrCreate({
-                where: {
-                    name: { [Op.iLike]: socketValue }
-                },
-                defaults: {
-                    name: socketValue
-                }
-            });
-            return socketDB;
-        }));
+        // Verificar si socket existe y no está vacío antes de buscar o crear los sockets
+        if (socket && socket.length > 0) {
+            socketDBs = await Promise.all(socket.map(async (socketValue) => {
+                const [socketDB] = await Socket.findOrCreate({
+                    where: {
+                        name: { [Op.iLike]: socketValue }
+                    },
+                    defaults: {
+                        name: socketValue
+                    }
+                });
+                return socketDB;
+            }));
+        }
 
         console.log(socketDBs)
 
