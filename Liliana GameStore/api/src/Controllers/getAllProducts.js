@@ -1,9 +1,9 @@
-const { Products, Socket, Category } = require("../db");
+const { Products, Socket } = require("../db");
 const { Op } = require("sequelize");
 
 const getAllProducts = async (req, res) => {
   try {
-    let { name, price, image, stock, rating, description, category, subcategory, brand, sockets, order, pageNumber } = req.query;
+    let { name, price, category, subcategory, brand, sockets, order, pageNumber } = req.query;
 
     let offset = 0;
     let limit = 10;
