@@ -1,25 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import style from "./Login.module.css"
 import axios from "axios"
+import { useEffect } from "react";
 
 const Login = () => {
     const navigate = useNavigate()
     const userData = {
-        username: 'Pirulo10',
+        username: 'Pirulo1',
         password: '12345678'
       };
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    useEffect(async()=>{
         try {
-            let respuesta = axios.get('http://localhost:3001/LilianaGameStore/login', userData)
+            let respuesta = await axios.post('http://localhost:3001/LilianaGameStore/login', userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
                 console.log(response.data);
               })                                                                      
         } catch (error) {
-            
+            console.log(error.response.data);
         }
+    },[])
+
+    const handleSubmit = () => {
+        
     }
 
     return(
