@@ -35,7 +35,7 @@ const Carrito = () => {
 
     
     return(
-        <article className={style}>
+        <article className={style.articuloCarrito}>
             <ProducCarrito estado={estado}/>
         </article>
     )
