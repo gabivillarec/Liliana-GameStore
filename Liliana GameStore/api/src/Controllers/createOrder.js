@@ -31,7 +31,8 @@ const createOrders = async (req,res) =>{
         const order = await Orders.create({
             order_date: new Date(),
             quantity,
-            total_price: product.price * quantity 
+            total_price: product.price * quantity,
+            created: true
           });
     
         // Asocio el usuario y el producto a la orden 
@@ -52,15 +53,15 @@ const createOrders = async (req,res) =>{
             product_id: product.id,
             product_name: product.name
           };
-      
-          
+                
           const response = {
             order_number: order.order_numer,
             order_date: formatDate(order.order_date),
             ...userDetails,
             ...productDetails,
             quantity: quantity,
-            total_price: order.total_price
+            total_price: order.total_price,
+            created: order.created
           };
     
         return res.json( response );
