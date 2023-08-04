@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const createProduct = async (req, res) => {
   try {
     const productsData = req.body; // Array de objetos con datos de los productos
-
+    
     // Array para almacenar los productos creados
     const createdProducts = [];
 
@@ -120,7 +120,7 @@ const createProduct = async (req, res) => {
 
     // Finalización respuesta exitosa con los productos creados
     return res.status(200).json({ createdProducts });
-    
+
   } catch (error) {
     
     return res.status(500).json({ error: error.message });
