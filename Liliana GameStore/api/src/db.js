@@ -52,9 +52,6 @@ Users.beforeCreate((user, options) => {
 //Orders.belongsTo(Users);
 Users.hasMany(Orders, {as:'users'});
 
-Users.hasOne(PurchaseHistory, { foreignKey: 'userId' } );
-PurchaseHistory.hasOne(Users, { foreignKey: 'userId' });
-
 Users.hasOne(Cart, { foreignKey: 'userId' });
 Cart.hasOne(Users, { foreignKey: 'userId' });
 
