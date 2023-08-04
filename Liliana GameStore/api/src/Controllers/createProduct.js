@@ -32,7 +32,8 @@ const createProduct = async (req, res) => {
         !rating ||
         !category ||
         !subcategory ||
-        !brand
+        !brand ||
+        !description_text
       )
         return res.status(400).send("Faltan datos");
 
