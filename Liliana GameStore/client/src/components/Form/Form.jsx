@@ -27,18 +27,18 @@ const Form = () => {
 
   useEffect(() => {
     setError(validation(form));
-  }, [form]);
+  }, []);
+
+
 
   const handleChange = (event) => {
+
     const { name, value } = event.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value
-    }));
-    setError(validation({
+
+    setForm({
       ...form,
       [name]: value
-    }));
+    });
   };
   
 
@@ -66,7 +66,7 @@ const Form = () => {
                   <form onSubmit={handleSubmit}>
 
                     <div className="form-outline mb-4">
-                      <input type="text" id="username" className="form-control form-control-lg"
+                      <input type="text" id="username" name='username' className="form-control form-control-lg"
                         value={form.username} onChange={handleChange} />
                         {error.username && <span>{error.username}</span>}
                       <label className="form-label" htmlFor="username">Nombre de Usuario</label>

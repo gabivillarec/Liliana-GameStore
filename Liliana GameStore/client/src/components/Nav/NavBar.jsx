@@ -20,6 +20,7 @@ const NavBar = () => {
                 </div>
                 <div className={`offcanvas-body d-flex flex-column gap-3 ${style.perfilCanvaBody}`}>
                     <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/user')} data-bs-dismiss="offcanvas" aria-label="Close">Profile</button>
+                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/micuenta')} data-bs-dismiss="offcanvas" aria-label="Close">Mi Cuenta</button>
                     <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')} data-bs-dismiss="offcanvas" aria-label="Close">Favorites</button>
                     <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/')} data-bs-dismiss="offcanvas" aria-label="Close">logOut</button>
                 </div>
