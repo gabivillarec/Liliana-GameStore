@@ -3,10 +3,16 @@ const cookieParser = require('cookie-parser'); //middleware para analizar las co
 const bodyParser = require('body-parser'); //middleware utilizado para analizar los cuerpos de las solicitudes HTTP entrantes.
 const morgan = require('morgan'); //middleware de registro de solicitudes HTTP. Registra detalles sobre cada solicitud que llega al servidor.
 const routes = require('./routes/index.js'); // import definicion de las rutas
+const mercadopago = require("mercadopago"); // agrego mercadopago
 
-require('./db.js'); // importa conf y conexion bas de datos
+// Agrego credenciales de prueba
+mercadopago.configure({
+	access_token: "TEST-058e4c02-551d-4b69-b638-fa316e26912a",
+  });
 
-const server = express(); // instancia express dsads
+require('./db.js'); 
+
+const server = express(); // instancia express 
 
 server.name = 'API';
 
