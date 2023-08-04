@@ -15,7 +15,7 @@
 
 .login{
     width: 30%;
-    height: 60%;
+    height: 70%;
     background-color: rgba(20, 53, 125, 0.781);
     border: solid 3px rgb(11, 24, 54);
     border-radius: 10px;
@@ -29,4 +29,20 @@
 }
 .login hr{
     width: 100%;
+}
+
+@keyframes brillo {
+    0% {
+      opacity: 1; /* Opacidad máxima al inicio */
+    }
+    50% {
+      opacity: 0.5; /* Opacidad reducida a la mitad */
+    }
+    100% {
+      opacity: 1; /* Opacidad máxima nuevamente al final */
+    }
+  }
+  
+.brilloElemento {
+    animation: brillo 3s; /* Nombre de la animación, duración y número de repeticiones */
 }

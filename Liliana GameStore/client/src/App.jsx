@@ -8,6 +8,7 @@ import Favorites from './components/Favorites/Favorites'
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import Carrito from "./components/Carrito/Carrito";
 import MiCuenta from "./components/Perfil/MiCuenta";
+import AdminPage from "./components/AdminPage/AdminPage";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/favorites" element={<Favorites/>}/>
           <Route path="/categorypage" element={<CategoryPage/>}/>
           <Route path="/micuenta" element={<MiCuenta/>}/>
+          <Route path="/adminpage" element={<AdminPage/>}/>
       </Routes>
     </>
   )
