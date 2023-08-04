@@ -3,7 +3,6 @@ import style from './Item.module.css'
 const Item = ({product , handlerCantidad , handlerDelete}) =>{
     let {image , name , price , id , cantidad} = product
     return(
-
         <tr className='table-dark'>
             <td>
                 <div className="d-flex align-items-center">
