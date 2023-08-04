@@ -9,6 +9,7 @@ const Login = () => {
         username: '',
         password: ''
     })
+    const [error, setError] = useState({})
 
     const handleChange = (event) => {
         setUserData({
@@ -19,16 +20,18 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setError({})
         try {
             let respuesta = await axios.post('http://localhost:3001/LilianaGameStore/login', userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
                 console.log(response.data);
-                localStorage.setItem("user", response.data.username)
+                localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin }) )
                 navigate('/')
               })                                                                     
         } catch (error) {
             console.log(error.response.data);
+            setError(error.response.data)
         }
     }
 
@@ -38,7 +41,7 @@ const Login = () => {
                 <div className={`p-4 m-4 ${style.login}`}>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label for="exampleInputEmail1" className="form-label">Email address</label>
+                            <label for="exampleInputEmail1" className="form-label">User Name</label>
                             <input type="text" className="form-control" name="username" value={userData.username} onChange={handleChange} id="exampleInputEmail1" aria-describedby="emailHelp"/>
                         </div>
                         <div className="mb-3">
@@ -46,9 +49,9 @@ const Login = () => {
                             <input type="password" className="form-control" name="password" value={userData.password} onChange={handleChange} id="exampleInputPassword1"/>
                         </div>
                         <button type="submit" className="btn btn-outline-info">Submit</button>
+                        {error && (<p className="mt-3 text-danger">{error.error}</p>)}
                     </form>
                     <hr className="border-2 opacity-50"/>
-                    <h6>or</h6>
                     <button className="btn btn-outline-info" onClick={()=> navigate('/user')}>Register</button>
                 </div>
             </div>

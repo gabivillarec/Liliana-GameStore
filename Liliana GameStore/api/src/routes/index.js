@@ -16,7 +16,7 @@ const router = Router();
 
 // Configurar los routers
 router.use('/LilianaGameStore',usersRoutes);
-//router.use('/LilianaGameStore',login);
+router.use('/LilianaGameStore',login);
 router.use('/LilianaGameStore',productRoutes);
 router.use('/LilianaGameStore',brandRoutes);
 router.use('/LilianaGameStore',cartRoutes);
