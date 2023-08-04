@@ -1,10 +1,10 @@
-
+import Form from '../Form/Form'
 
 const User = () => {
     return(
-        <article>
-            User
-        </article>
+        <div>
+            <Form/>
+        </div>
     )
 }
 
