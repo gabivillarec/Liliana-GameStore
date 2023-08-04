@@ -27,9 +27,13 @@ const Products = (sequelize) => {
 			type: DataTypes.DECIMAL,
 			allowNull: false,
 		},
-		description: {
+		description_text: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			allowNull: false
+		},
+		characteristics: {
+			type: DataTypes.JSON,
+			allowNull: true,
 		},
 		category_name: {
             type: DataTypes.STRING,

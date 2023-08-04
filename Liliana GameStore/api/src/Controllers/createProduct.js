@@ -16,7 +16,8 @@ const createProduct = async (req, res) => {
         image,
         stock,
         rating,
-        description,
+        description_text,
+        characteristics,
         category,
         subcategory,
         brand,
@@ -29,7 +30,6 @@ const createProduct = async (req, res) => {
         !image ||
         !stock ||
         !rating ||
-        !description ||
         !category ||
         !subcategory ||
         !brand
@@ -100,7 +100,8 @@ const createProduct = async (req, res) => {
         image: image,
         stock: stock,
         rating: rating,
-        description: description,
+        description_text: description_text,
+        characteristics: characteristics,
         category_name: catDB.dataValues.name,
         subcategory_name: subCatDB.dataValues.name,
         brand_name: brandDB.dataValues.name,
