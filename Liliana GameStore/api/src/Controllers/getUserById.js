@@ -1,4 +1,4 @@
-const { Users, Favorites, PurchaseHistory } = require("../db");
+const { Users, Favorites, PurchaseHistory, Orders } = require("../db");
 
 
 const getUserById = async (req, res) => {
@@ -6,7 +6,7 @@ const getUserById = async (req, res) => {
     try {
         const { id } = req.params
         
-        const idUser = await Users.findOne({where: { id: id }, include:[{model:Favorites}, {model:PurchaseHistory}]});
+        const idUser = await Users.findOne({where: { id: id }, include:[{model:Favorites}, {model:PurchaseHistory}, {model:Orders}]});
 
         return idUser 
         ?  res.json(idUser) 
