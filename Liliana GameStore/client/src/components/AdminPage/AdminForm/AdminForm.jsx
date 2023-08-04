@@ -8,7 +8,7 @@ const AdminForm = () => {
         image:"",
         stock:undefined,
         rating:undefined,
-        description:"",
+        description_text:"",
         category:'',
         subcategory:"",
         brand:"",
