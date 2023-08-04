@@ -1,6 +1,10 @@
 const { Orders, Users, Products, Cart } = require("../db");
 const mercadopago = require("mercadopago");
 
+// Agrego credenciales de prueba
+mercadopago.configure({
+	access_token: "TEST-225481503403433-080411-1b1e4fa5ace6ac244082f24d57c07281-60345564",
+  });
 
 // Creo una función para establecer la fecha
 const formatDate = (date) => {
@@ -16,7 +20,7 @@ const formatDate = (date) => {
 
 // Controlador
 const createOrders = async (req,res) =>{
-  
+
   try {
       const { userId, productId, quantity } = req.body;
   
@@ -44,8 +48,8 @@ const createOrders = async (req,res) =>{
       // Resto el stock del producto
       for (const item of cart) {
         const cartProduct = await Products.findByPk(item.productId);
-        if (cartProduct && cartProduct.stock >= item.quantity) {
-          await cartProduct.decrement('stock', { by: item.quantity });
+        if (cartProduct && cartProduct.stock >= item.cantidad) {
+          await cartProduct.decrement('stock', { by: item.cantidad });
         }
       }
                   
@@ -56,11 +60,11 @@ const createOrders = async (req,res) =>{
       
       for (const item of cart) {
         const product = await Products.findByPk(item.productId);
-        if (product && product.stock >= item.quantity) {
+        if (product && product.stock >= item.cantidad) {
           preference.items.push({
             title: product.name,
             unit_price: product.price,
-            quantity: item.quantity,
+            quantity: item.cantidad,
           });
         }
       };
