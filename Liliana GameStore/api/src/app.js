@@ -4,9 +4,10 @@ const bodyParser = require('body-parser'); //middleware utilizado para analizar 
 const morgan = require('morgan'); //middleware de registro de solicitudes HTTP. Registra detalles sobre cada solicitud que llega al servidor.
 const routes = require('./routes/index.js'); // import definicion de las rutas
 
-require('./db.js'); // importa conf y conexion bas de datos
 
-const server = express(); // instancia express dsads
+require('./db.js'); 
+
+const server = express(); // instancia express 
 
 server.name = 'API';
 

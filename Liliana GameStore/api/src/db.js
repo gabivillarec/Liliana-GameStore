@@ -52,17 +52,14 @@ Users.beforeCreate((user, options) => {
 //Orders.belongsTo(Users);
 Users.hasMany(Orders, {as:'users'});
 
-Users.hasOne(PurchaseHistory);
-PurchaseHistory.hasOne(Users);
-
-Users.hasOne(Cart);
-Cart.hasOne(Users);
+Users.hasOne(Cart, { foreignKey: 'userId' });
+Cart.hasOne(Users, { foreignKey: 'userId' });
 
 Users.hasMany(Favorites,{foreignKey: 'userId'});
 Favorites.belongsTo(Users, {foreignKey: 'userId'});
 
 Users.hasMany(Orders, {foreignKey: 'userId'});
-Orders.belongsTo(Users, {foreignKey: 'userId'})
+Orders.belongsTo(Users, {foreignKey: 'userId'});
 
 // Relación de Products
 Products.belongsToMany(Orders, {through:"orders_products"});

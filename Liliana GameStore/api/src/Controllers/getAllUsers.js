@@ -1,4 +1,4 @@
-const { Users, Favorites, PurchaseHistory } = require("../db");
+const { Users, Favorites, PurchaseHistory, Orders } = require("../db");
 const { Op } = require('sequelize');
 
 const getAllUsers = async (req,res)=>{
@@ -8,7 +8,7 @@ const getAllUsers = async (req,res)=>{
         const users = await Users.findAll({where : {admin : {
             [Op.or]: [true, false]
         }
-    }, include:[{model:Favorites}, {model:PurchaseHistory}]});
+    }, include:[{model:Favorites}, {model:PurchaseHistory}, {model:Orders}]});
 
         const usersArray = [...users];
 

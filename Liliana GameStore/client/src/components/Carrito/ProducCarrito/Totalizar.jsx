@@ -3,7 +3,7 @@
 const Totalizar = ({total}) => {
 
     return(
-        <div className="d-flex bg-dark">
+        <div className="container-fluid d-flex bg-dark">
             total: {total}
             <div className="d-flex bg-dark">
                 <button className="btn btn-dark flex-shrink-0" type="button">

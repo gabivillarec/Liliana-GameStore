@@ -26,7 +26,9 @@ const Form = () => {
 
   useEffect(() => {
     setError(validation(form));
-  }, [form]);
+  }, []);
+
+
 
   const handleFieldFocus = (fieldName) => {
     setTouchedFields({

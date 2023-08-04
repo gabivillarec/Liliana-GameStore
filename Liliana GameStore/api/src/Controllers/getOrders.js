@@ -8,7 +8,7 @@ const getOrders = async (req,res) => {
 
 
         if (orders.length === 0) {
-            return res.status(404).json({ message: 'No se encontraron órdenes creadas.' });
+            return res.status(400).json({ message: 'No created orders found.' });
           }
 
         return res.json(orders);
