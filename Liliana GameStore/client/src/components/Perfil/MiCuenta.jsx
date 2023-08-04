@@ -28,8 +28,6 @@ const MiCuenta = () => {
             <section className='container'>
                 <PerfilData client={client}/>
                 <PedidosCurso/>
-                <Sections misReservas title={'Direciones'}/>
-                <Sections misReservas title={'Mis Facturas'}/>
             </section>
         </article>
     )
