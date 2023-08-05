@@ -20,8 +20,8 @@ const NavBar = () => {
         <nav id="navbar-example2" className={`navbar px-3 p-3 ${style.navbarE}`}>
             <img className={style.logo} src='../../../vistas/LilianaGameStore.png' alt="logo" onClick={() => navigate('/')}/>
             <div className="d-flex flex-wrap gap-2">
-                {usuario && usuario.admin &&(<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/categorypage')}>Admin</button>)}
-                <button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/categorypage')}>category</button>
+                {usuario && usuario.admin &&(<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/adminpage')}>Admin</button>)}
+                <button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/categorypage')}>Catalogue</button>
                 {usuario ? 
                 (<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/carrito')}>🛒</button>
                 ) : 
@@ -36,8 +36,7 @@ const NavBar = () => {
                     <button type="button" className="btn btn-outline-info fs-5" data-bs-dismiss="offcanvas" aria-label="Close">✖</button>
                 </div>
                 <div className={`offcanvas-body d-flex flex-column gap-3 ${style.perfilCanvaBody}`}>
-                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/user')} data-bs-dismiss="offcanvas" aria-label="Close">Profile</button>
-                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/micuenta')} data-bs-dismiss="offcanvas" aria-label="Close">Mi Cuenta</button>
+                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/micuenta')} data-bs-dismiss="offcanvas" aria-label="Close">My Account</button>
                     <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')} data-bs-dismiss="offcanvas" aria-label="Close">Favorites</button>
                     <button className="btn btn-outline-info border-3 fs-5" onClick={()=> handleLogOut()} data-bs-dismiss="offcanvas" aria-label="Close">logOut</button>
                 </div>
