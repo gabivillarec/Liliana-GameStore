@@ -7,7 +7,9 @@ const deleteFavorite = async (req, res) => {
 
         if(!id) throw new Error('Missing Favorite ID');
 
-        const response = await Favorites.findByPk(id);
+        const response = await Favorites.findOne({
+            where:{product: id}
+        });
         response.destroy();
 
         res.json(response);
