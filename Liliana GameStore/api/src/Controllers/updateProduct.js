@@ -6,7 +6,7 @@ const updateProduct = async (req , res) => {
     try {
 
         const { id } = req.params;
-        const { name , price , image , stock , rating , description , category , subcategory , brand , socket } = req.body;
+        const { name , price , image , stock , rating , description_text , category , subcategory , brand , socket } = req.body;
 
         // Buscar el producto que se desea actualizar
         const product = await Products.findByPk(id);
@@ -57,7 +57,7 @@ const updateProduct = async (req , res) => {
 
         // Actualizar los campos del producto en la tabla Products
         const result = await product.update({
-            name, price, image, stock, rating, description,
+            name, price, image, stock, rating, description_text,
             category_name: catDB.name,
             subcategory_name: subCatDB.name,
             brand_name: brandDB.name,
