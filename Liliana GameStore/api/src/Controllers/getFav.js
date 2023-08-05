@@ -10,7 +10,7 @@ const getFavorites = async (req, res) => {
 };
 
 
-const getFavoriteById = async (req, res) => {
+const getFavoriteByUser = async (req, res) => {
     try {
         const { id } = req.params;
         if (id) {
@@ -25,7 +25,7 @@ const getFavoriteById = async (req, res) => {
             });
 
             // Enviar la respuesta después de obtener los productos
-            res.status(200).json(favoriteProducts); // Mover esto aquí
+            res.status(200).json(favoriteProducts); 
 
         } else {
             // Manejar el caso en que no se proporciona el ID
@@ -39,6 +39,6 @@ const getFavoriteById = async (req, res) => {
 
 
 module.exports = {
-    getFavoriteById,
+    getFavoriteByUser,
     getFavorites,
 };
