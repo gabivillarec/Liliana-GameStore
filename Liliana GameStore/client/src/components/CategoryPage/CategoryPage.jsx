@@ -1,9 +1,16 @@
 import Products from './Products/Products';
 import styles from './CategoryPage.module.css'
-import { useSelector } from "react-redux";
+import { useSelector ,  useDispatch} from "react-redux";
+import { useEffect } from "react";
+import {getAllProducts} from '../../redux/actions'
 
 const CategoryPage = () => {
-    const { products } = useSelector(state => state)
+    let dispatch = useDispatch()
+    useEffect(()=> {
+        dispatch(getAllProducts())
+    },[dispatch])
+
+    let  products = useSelector(state => state.products)
 
 
     return(
