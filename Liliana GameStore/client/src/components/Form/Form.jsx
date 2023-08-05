@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 import style from './Form.module.css'
 import validation from './Validation.js';
 import backgroundImage from '../../../vistas/PS_Background_Medium.png';
@@ -20,6 +21,7 @@ const Form = () => {
     address: "",
     phone: "",
     avatar_img: "",
+    admin: false,
     repeatPassword: "",
     agreeTerms: false,
   })
@@ -27,8 +29,6 @@ const Form = () => {
   useEffect(() => {
     setError(validation(form));
   }, []);
-
-
 
   const handleFieldFocus = (fieldName) => {
     setTouchedFields({
@@ -52,15 +52,32 @@ const Form = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(validation(form));
-    if (Object.keys(error).length > 0) {
-      return alert("Asegurate de completar todos los campos");
+    setError(validation(form));    
+    // if (Object.keys(error).length > 0) {
+    //   return alert("Asegurate de completar todos los campos");
+    // }
+    try {
+        let answer = await axios.post('http://localhost:3001/LilianaGameStore/user', form)
+        .then(response => {
+            console.log(response.data);
+            localStorage.setItem("newUser", JSON.stringify({
+              first_name : response.data.first_name,
+              last_name : response.data.last_name,
+              username : response.data.username,
+              email : response.data.email,
+              password : response.data.password,
+              cp : response.data.cp,
+              address : response.data.address,
+              phone : response.data.phone,
+              avatar_img : response.data.avatar_img,
+          }))
+            navigate('/')
+          })
+    } catch (error) {
+        setError(error.response.data)
     }
-    dispatch(createUser(form));
-    alert("Usuario creado");
-    navigate("/home");
   };
 
   return (
