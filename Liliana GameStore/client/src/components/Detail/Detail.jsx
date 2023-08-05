@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail, clearDetail } from "../../Redux/actions"
+import { getProductDetail, clearDetail } from "../../redux/actions"
 import style from "./Detail.module.css"
 import DisqusComments from '../DisqusComments/DisqusComments'
 
@@ -10,6 +10,7 @@ function Detail() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
+    console.log(detail)
     
     const [quantity, setQuantity] = useState(1);
 
@@ -101,7 +102,7 @@ function Detail() {
                     <span className="h5">${detail.price}</span>
                   </div>
 
-                  <p>{detail.description}</p>
+                  <p>{detail.description_text} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, consectetur aperiam. Est tenetur corrupti vel iusto facere quos repellat. Necessitatibus inventore quis exercitationem laudantium. Optio corporis assumenda ducimus totam explicabo? </p>
 
                   <div className="row">
                     <dt className="col-3">Brand</dt>
