@@ -6,11 +6,10 @@ import axios from 'axios'
 export const getAllProducts = () => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get('https://rickandmortyapi.com/api/character');
-            console.log(response)
+            let response = await axios.get('http://localhost:3001/LilianaGameStore/products');
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
-                    payload: response.data.results
+                    payload: response.data.data
                 })    // type indica la action a ejecutar payload pasa la info al estado global
         } catch (error) {
                 return dispatch({
@@ -24,7 +23,7 @@ export const getAllProducts = () => {       //funcion que trae si no hay o serve
 
 export const getProductDetail = (id) => {
     try {
-        const endpoint = `http://localhost:3001/products/${id}`
+        const endpoint = `http://localhost:3001/LilianaGameStore/products/${id}`
         return async (dispatch) => {
         const { data } = await axios.get(endpoint)
             return dispatch({

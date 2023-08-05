@@ -7,8 +7,7 @@ const Categorias = ({products , categoriaNombres}) => {
     
     useEffect(()=>{
         setCategoria(modificarArray(products))
-    }, [])
-
+    }, [products])
     return(
         <div className="container">
             <h2>Categoria: {categoriaNombres}</h2>
