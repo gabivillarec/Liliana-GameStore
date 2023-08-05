@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const { getFavoriteById, getFavorites } = require('../Controllers/getFav')
+const { getFavoriteByUser, getFavorites } = require('../Controllers/getFav')
 const { postFavorite } = require('../Controllers/postFav')
 const { deleteFavorite } = require('../Controllers/deleteFav')
 
 const favoritesRoutes = Router();
 
-favoritesRoutes.get('/Favorites/:id', getFavoriteById);
+favoritesRoutes.get('/Favorites/:id', getFavoriteByUser);
 
 favoritesRoutes.get('/Favorites', getFavorites);
 
