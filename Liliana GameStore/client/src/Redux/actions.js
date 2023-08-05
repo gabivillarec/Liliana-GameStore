@@ -3,10 +3,10 @@ import axios from 'axios'
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
 
-export const getAllProducts = () => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get('http://localhost:3001/LilianaGameStore/products');
+            let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload: response.data.data

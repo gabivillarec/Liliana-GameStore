@@ -6,7 +6,7 @@ const getAllProducts = async (req, res) => {
     let { name, price, category, subcategory, brand, sockets, order, pageNumber } = req.query;
 
     let offset = 0;
-    let limit = 10;
+    let limit = 20;
 
     if (pageNumber) {
       pageNumber = parseInt(pageNumber);
