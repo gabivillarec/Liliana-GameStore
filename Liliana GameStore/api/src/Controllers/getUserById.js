@@ -6,7 +6,7 @@ const getUserById = async (req, res) => {
     try {
         const { id } = req.params
         
-        const idUser = await Users.findOne({where: { id: id }, include:[{model:Favorites}, {model:PurchaseHistory}, {model:Orders}]});
+        const idUser = await Users.findOne({where: { id: id }, include:[{model:Favorites}, {model:Orders}]});
 
         return idUser 
         ?  res.json(idUser) 
