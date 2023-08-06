@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail, clearDetail } from "../../redux/actions"
 import style from "./Detail.module.css"
 import DisqusComments from '../DisqusComments/DisqusComments'
+import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 
 function Detail() {
 
@@ -47,8 +48,13 @@ function Detail() {
     const handleAddItem = () => {
       console.log('Agregar al carrito');
     };
-    const handleFavorites = () => {
-      console.log('Favoritos');
+    const handleFavorites = async() => {
+      let response = await createFavorite( 1, detail.id )
+      console.log(response.product)
+      alert(`producto con id  ${detail.id} agragado con exito`, response.product)
+    };
+    const handleDeleteFavorites = () => {
+      
     };
 
     useEffect(() => {
