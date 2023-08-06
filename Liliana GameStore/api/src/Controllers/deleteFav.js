@@ -4,7 +4,7 @@ const { Favorites } = require('../db');
 const deleteFavorite = async (req, res) => {
     try {
         const {id} = req.params;
-
+        console.log(id)
         if(!id) throw new Error('Missing Favorite ID');
 
         const response = await Favorites.findOne({
