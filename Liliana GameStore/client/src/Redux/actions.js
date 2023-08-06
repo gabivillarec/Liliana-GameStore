@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL } from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL , GET_FAVORITES } from "./action-type";
 import axios from 'axios'
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
@@ -39,4 +39,21 @@ export const clearDetail = () => {
     return { type: CLEAR_DETAIL }
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------FAVRITES---------------------------------------------------------------------------------------//
+
+export const getFavorites = () => {
+    return (dispatch) => { // No uses async/await aquí
+      axios.get('http://localhost:3001/LilianaGameStore/Favorites')
+        .then((response) => {
+          dispatch({
+            type: GET_FAVORITES,
+            payload: response.data,
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    };
+  };
+
+
