@@ -28,7 +28,7 @@ const Form = () => {
 
   useEffect(() => {
     setError(validation(form));
-  }, []);
+  }, [form]);  
 
   const handleFieldFocus = (fieldName) => {
     setTouchedFields({
@@ -39,44 +39,45 @@ const Form = () => {
 
   const handleChange = (event) => {
     const fieldName = event.target.name;
+    const fieldValue = event.target.type === "checkbox" ? event.target.checked : event.target.value;  
     setForm({
       ...form,
-      [fieldName]: event.target.value
-    });
+      [fieldName]: fieldValue,
+    });  
     setError({
       ...error,
       [fieldName]: validation({
         ...form,
-        [fieldName]: event.target.value
+        [fieldName]: fieldValue,
       })[fieldName],
     });
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(validation(form));    
-    // if (Object.keys(error).length > 0) {
-    //   return alert("Asegurate de completar todos los campos");
-    // }
+    event.preventDefault();  
+    if (Object.keys(error).length > 0) {
+      return alert("Asegúrate de completar todos los campos");
+    }
+    setError(validation(form));
     try {
-        let answer = await axios.post('http://localhost:3001/LilianaGameStore/user', form)
+      let answer = await axios.post('http://localhost:3001/LilianaGameStore/user', form)
         .then(response => {
-            console.log(response.data);
-            localStorage.setItem("newUser", JSON.stringify({
-              first_name : response.data.first_name,
-              last_name : response.data.last_name,
-              username : response.data.username,
-              email : response.data.email,
-              password : response.data.password,
-              cp : response.data.cp,
-              address : response.data.address,
-              phone : response.data.phone,
-              avatar_img : response.data.avatar_img,
-          }))
-            navigate('/')
-          })
+          console.log(response.data);
+          localStorage.setItem("newUser", JSON.stringify({
+            first_name: response.data.first_name,
+            last_name: response.data.last_name,
+            username: response.data.username,
+            email: response.data.email,
+            password: response.data.password,
+            cp: response.data.cp,
+            address: response.data.address,
+            phone: response.data.phone,
+            avatar_img: response.data.avatar_img,
+          }));
+          navigate('/');
+        });
     } catch (error) {
-        setError(error.response.data)
+      setError(error.response.data);
     }
   };
 
@@ -162,8 +163,8 @@ const Form = () => {
                     </div>
 
                     <div className="form-check d-flex justify-content-center mb-5">
-                      <input className="form-check-input me-2" type="checkbox" value={form.agreeTerms}
-                        onChange={handleChange} id="agreeTerms" />
+                      <input className="form-check-input me-2" type="checkbox" id="agreeTerms" name="agreeTerms"
+                        checked={form.agreeTerms} onChange={handleChange} />
                       <label className="form-check-label" htmlFor="agreeTerms">
                         Al hacer click en el botón estás aceptando los <a href="#!" className="text-body"><u>Términos y condiciones</u></a>
                       </label>
