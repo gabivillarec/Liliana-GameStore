@@ -8,7 +8,7 @@ const getAllUsers = async (req,res)=>{
         const users = await Users.findAll({where : {admin : {
             [Op.or]: [true, false]
         }
-    }, include:[{model:Favorites}, {model:PurchaseHistory}, {model:Orders}]});
+    }, include:[{model:Favorites}, {model:Orders}]});
 
         const usersArray = [...users];
 
