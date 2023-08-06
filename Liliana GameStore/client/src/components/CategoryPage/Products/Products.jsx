@@ -3,6 +3,7 @@ import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../redux/actions";
 import axios from 'axios'
+import style from "./Products.module.css"
 
 const Products = ({ products }) => {
     const dispatch = useDispatch()
@@ -55,34 +56,41 @@ const Products = ({ products }) => {
     } 
 
     return(
-        <div className="container">
-            <div>
-                <select name="category" onChange={handleFilter}>
-                    <option value="Hardware">Hardware</option>
-                    <option value="VideoGames">VideoGames</option>
-                    <option value="Accessories">Accessories</option>
-                </select>
-                <select name="subcategory" onChange={handleFilter}>
-                    {subcategories?.map((subcategory) => (
-                        <option value={subcategory.name}>
-                        {subcategory.name}
-                        </option>
-                    ))}
-                </select>
-                <select name="brand" onChange={handleFilter}>
-                    {brand?.map((brand) => (
-                        <option value={brand.name}>
-                        {brand.name}
-                        </option>
-                    ))}
-                </select>
-                <select name="order" onChange={handleFilter}>
-                    <option value="D">Min-Max</option>
-                    <option value="A">Max-Min</option>
-                </select>
-                <button onClick={() => handleBtnFiltrar()}>Filtrar</button>
+        <div className={style.fondo}>
+            <div className={style.productsContainer}>
+                <div className="container d-flex flex-column">
+                    <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-4">
+                        <select className={style.selects} name="category" onChange={handleFilter}>
+                            <option value="">All Categories</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="VideoGames">VideoGames</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                        <select className={style.selects} name="subcategory" onChange={handleFilter}>
+                            <option value="">All Subcategories</option>
+                            {subcategories?.map((subcategory) => (
+                                <option value={subcategory.name}>
+                                {subcategory.name}
+                                </option>
+                            ))}
+                        </select>
+                        <select className={style.selects} name="brand" onChange={handleFilter}>
+                            <option value="">All brands</option>
+                            {brand?.map((brand) => (
+                                <option value={brand.name}>
+                                {brand.name}
+                                </option>
+                            ))}
+                        </select>
+                        <select className={style.selects} name="order" onChange={handleFilter}>
+                            <option value="D">Min-Max</option>
+                            <option value="A">Max-Min</option>
+                        </select>
+                        <button className="btn btn-outline-info border-2" onClick={() => handleBtnFiltrar()}>Filtrar</button>
+                    </div>
+                    <CardsContainer products={products}/>
+                </div>
             </div>
-            <CardsContainer products={products}/>
         </div>
     )
 }

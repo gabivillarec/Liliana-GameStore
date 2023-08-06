@@ -32,8 +32,8 @@ const AdminForm = () => {
 
 
     return(
-        <div className="container bg-dark">
-            <form className="row g-3 needs-validation" novalidate onSubmit={handlerSubmit}>
+        <div className="p-4 container bg-dark">
+            <form className="row needs-validation" novalidate onSubmit={handlerSubmit}>
             {
                 inputs.map((input , index) => {
                     return(
@@ -44,7 +44,7 @@ const AdminForm = () => {
                     )
                 })
             }
-            <button type="submit">Subir Producto</button>
+            <button className="mt-4 btn btn-info" type="submit">Subir Producto</button>
             </form>
         </div>
     )
