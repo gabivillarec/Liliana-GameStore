@@ -43,6 +43,7 @@ const validation = (form) => {
   if (!form.agreeTerms) { errors.agreeTerms = 'Debes aceptar los términos y condiciones'
   }
 
+  console.log(errors)
   return errors;
 };
 
