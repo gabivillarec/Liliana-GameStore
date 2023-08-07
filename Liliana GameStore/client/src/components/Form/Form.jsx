@@ -82,7 +82,7 @@ const Form = () => {
   };
 
   return (
-    <section className="vh-100 bg-image" style={{ backgroundColor: 'rgb(19, 19, 72)' }}>
+    <section className=" bg-image" style={{ backgroundColor: 'rgb(19, 19, 72)' }}>
       <div className="mask d-flex align-items-center h-100">
         <div className="container-fluid h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

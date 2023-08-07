@@ -53,7 +53,6 @@ const Carrito = () => {
           </thead>
           <ProducCarrito estado={estado}/>
           </table>
-
         </div>
 
       </div>

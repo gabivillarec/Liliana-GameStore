@@ -1,10 +1,11 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL  , GET_FAVORITES} from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL  , GET_FAVORITES , GET_ADMIN_PRODUCTS} from "./action-type";
 
 const initialState = {
     products: [],
     productsCopy: [],
     detail: {},
-    favorites:[]
+    favorites:[],
+    adminProducts:[]
 }
 
 const reducer = (state = initialState , action ) => {
@@ -29,6 +30,11 @@ const reducer = (state = initialState , action ) => {
             return {
                 ...state,
                 favorites: action.payload
+            }
+        case GET_ADMIN_PRODUCTS:
+            return{
+                ...state,
+                adminProducts: action.payload
             }
         default:
             return {...state}
