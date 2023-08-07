@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
 
       const [register, created] = await Users.findOrCreate({
         where: { username, email },
-        defaults: { first_name, last_name, password: hashedPassword, cp, address, phone, avatar_img, admin },
+        defaults: { username, email, first_name, last_name, password: hashedPassword, cp, address, phone, avatar_img, admin },
       });
 
       if (created) {
