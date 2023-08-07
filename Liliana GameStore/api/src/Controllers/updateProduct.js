@@ -81,7 +81,12 @@ const updateProduct = async (req, res) => {
                     return socketDB;
                 })
             );
-            updateFields.sockets = socketDBs;
+            
+            // Asociar los sockets actualizados y/o nuevos con el producto
+            await product.setSockets(socketDBs);
+
+            // Recargar las relaciones después de actualizar el producto
+            await product.reload({ include: Socket });
         }
 
         // Actualizar los campos del producto en la tabla Products
@@ -94,3 +99,5 @@ const updateProduct = async (req, res) => {
 };
 
 module.exports = updateProduct;
+
+
