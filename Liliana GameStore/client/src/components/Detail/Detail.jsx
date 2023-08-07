@@ -5,6 +5,7 @@ import { getProductDetail, clearDetail } from "../../redux/actions"
 import style from "./Detail.module.css"
 import DisqusComments from '../DisqusComments/DisqusComments'
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
+import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
 
 function Detail() {
 
@@ -53,8 +54,9 @@ function Detail() {
       console.log(response.product)
       alert(`producto con id  ${detail.id} agragado con exito`, response.product)
     };
-    const handleDeleteFavorites = () => {
-      
+    const handleDeleteFavorites = async() => {
+      let response = await deleteFavorite(detail.id)
+      alert(`Producto con ID: ${detail.id} Quitado de favoritos`)
     };
 
     useEffect(() => {
@@ -151,6 +153,9 @@ function Detail() {
                   </a>
                   <a href="#" className="btn btn-light border border-secondary py-2 icon-hover px-3" onClick={handleFavorites} >
                     <i className="me-1 fa fa-heart fa-lg"></i> Favoritos
+                  </a>
+                  <a href="#" className="btn btn-light border border-secondary py-2 icon-hover px-3" onClick={handleDeleteFavorites} >
+                    <i className="me-1 fa fa-heart fa-lg"></i> Quitar Favoritos
                   </a>
                 </div>
               </main>
