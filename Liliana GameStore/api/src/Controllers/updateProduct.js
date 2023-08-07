@@ -37,8 +37,11 @@ const updateProduct = async (req, res) => {
         if (characteristics) {
             // Recorrer las propiedades del objeto characteristics proporcionadas en el cuerpo de la solicitud
             Object.keys(characteristics).forEach((prop) => {
+
+                const lowerCaseProp = prop.toLowerCase();
+
                 // Actualizar la propiedad en el objeto updateFields
-                updateFields[`characteristics.${prop}`] = characteristics[prop];
+                updateFields[`characteristics.${lowerCaseProp}`] = characteristics[prop];
             });
         }
 
@@ -99,5 +102,3 @@ const updateProduct = async (req, res) => {
 };
 
 module.exports = updateProduct;
-
-
