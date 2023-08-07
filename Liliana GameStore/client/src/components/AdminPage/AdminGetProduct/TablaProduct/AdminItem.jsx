@@ -26,7 +26,7 @@ const AdminItem = ({ product, handlerDelete }) => {
                     <img
                         src={image}
                         alt={name}
-                        className={`rounded-circle ${style.img}`}
+                        className={`rounded-circle ${style.imgen}`}
                     />
                     <div className="ms-3">
                         <p className="fw-bold mb-1">{name}</p>
