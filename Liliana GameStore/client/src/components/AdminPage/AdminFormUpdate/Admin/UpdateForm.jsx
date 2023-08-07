@@ -1,7 +1,9 @@
 import { useState } from "react"
-import createProduct from "../funcionesAuxiliares/createProduct"
+import { updateproducto } from "./updateproducto"
+import { useNavigate } from "react-router-dom"
 
-const AdminForm = () => {
+const UpdateForm = ({id}) => {
+    const navigate = useNavigate()
     const [create , setCreate] = useState({
         name:"",
         price:undefined,
@@ -26,7 +28,9 @@ const AdminForm = () => {
 
     const handlerSubmit = async(event) => {
         event.preventDefault()
-        let response = await createProduct(create)
+        let response = await updateproducto(id ,create)
+        alert(`Producto con Id: ${id} modificado con exito`)
+        navigate('/adminpage')
     }
 
 
@@ -49,4 +53,4 @@ const AdminForm = () => {
     )
 }
 
-export default AdminForm
+export default UpdateForm
