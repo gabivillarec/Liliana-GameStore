@@ -1,3 +1,7 @@
 .img{
     border-radius: 10000px !important;
 }
+
+.perfildata{
+    filter: opacity(0.9);
+}

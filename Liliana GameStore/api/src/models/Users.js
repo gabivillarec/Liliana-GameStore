@@ -56,7 +56,7 @@ const Users = (sequelize)=>{
         avatar_img : {
             type : DataTypes.STRING,
             allowNull : true,
-            defaultValue: '../assets/Perfil_Neutro.png'
+            defaultValue: 'https://static.thenounproject.com/png/5034901-200.png'
         },
 
         admin : {

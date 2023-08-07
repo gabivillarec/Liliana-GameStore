@@ -3,6 +3,7 @@ import Sections from './Sections/Sections'
 import PedidosCurso from './Sections/PedidosCurso'
 import PerfilData from './Sections/PerfilData'
 import { useState , useEffect } from 'react'
+import axios from 'axios'
 
 const MiCuenta = () => {
     let clientePrueva = {  
@@ -18,18 +19,27 @@ const MiCuenta = () => {
     }
     const [client , setCliente] = useState({})
     useEffect(()=>{
-        setCliente(clientePrueva)
+        const usuario = JSON.parse(localStorage.getItem("user"))
+        console.log(usuario.id);
+        axios.get(`http://localhost:3001/LilianaGameStore/user/${usuario.id}`)
+            .then(response =>{
+                setCliente(response.data)
+            })
     },[])
 
 
 
     return(
-        <article className={style.article}>
-            <section className='container'>
-                <PerfilData client={client}/>
-                <PedidosCurso/>
-            </section>
-        </article>
+        <div className={style.fondo}>
+            <div className={style.fondoBlur}>
+                <article className="p-4">
+                    <section className='container'>
+                        <PerfilData client={client}/>
+                        <PedidosCurso/>
+                    </section>
+                </article>
+            </div>
+        </div>
     )
 }
 

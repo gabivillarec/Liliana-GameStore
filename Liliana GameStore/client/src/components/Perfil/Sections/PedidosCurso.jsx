@@ -6,9 +6,9 @@ const PedidosCurso = () =>{
 
 
     return(
-        <div className="card mb-3" >
+        <div className="card mb-3 border-0" >
             <div className="row g-0">
-                <div className='card-header bg-dark'>
+                <div className="card-body bg-dark">
                     <h5 className="card-title text-primary">Pedidos en Curso</h5>
                     <table class="table">
                         <thead className="bg-dark">
