@@ -1,82 +1,103 @@
-const { Products , Socket, Category, SubCategory, Brand } = require("../db");
+const { Products, Socket, Category, SubCategory, Brand } = require("../db");
 const { Op } = require("sequelize");
 
-const updateProduct = async (req , res) => {
-    
+const updateProduct = async (req, res) => {
     try {
-
         const { id } = req.params;
-        const { name , price , image , stock , rating , description_text , category , subcategory , brand , socket } = req.body;
+        const {
+            name,
+            price,
+            image,
+            stock,
+            rating,
+            description_text,
+            characteristics,
+            category,
+            subcategory,
+            brand,
+            socket,
+        } = req.body;
 
         // Buscar el producto que se desea actualizar
-        const product = await Products.findByPk(id);
-        if(!product) return res.status(404).send("Product not found");
+        const product = await Products.findByPk(id, { include: Socket });
+        if (!product) return res.status(404).send("Product not found");
 
-        // Buscar o crear la categoría según su nombre
-        const [catDB] = await Category.findOrCreate({
-            where: {
-                name: { [Op.iLike]: category }
-            },
-            defaults: {
-                name: category
-            }
-        });
+        // Definir un objeto para almacenar los campos a actualizar
+        const updateFields = {};
 
-        // Buscar o crear la subcategoría según su nombre
-        const [subCatDB] = await SubCategory.findOrCreate({
-            where: {
-                name: { [Op.iLike]: subcategory }
-            },
-            defaults: {
-                name: subcategory
-            }
-        });
+        // Verificar si los campos están presentes en el cuerpo de la solicitud y agregarlos al objeto updateFields
+        if (name) updateFields.name = name;
+        if (price) updateFields.price = price;
+        if (image) updateFields.image = image;
+        if (stock) updateFields.stock = stock;
+        if (rating) updateFields.rating = rating;
+        if (description_text) updateFields.description_text = description_text;
 
-        // Buscar o crear la marca según su nombre
-        const [brandDB] = await Brand.findOrCreate({
-            where: {
-                name: { [Op.iLike]: brand }
-            },
-            defaults: {
-                name: brand
-            }
-        });
+        // Verificar si se proporcionó el objeto characteristics y actualizar propiedades automáticamente
+        if (characteristics) {
+            // Recorrer las propiedades del objeto characteristics proporcionadas en el cuerpo de la solicitud
+            Object.keys(characteristics).forEach((prop) => {
 
+                const lowerCaseProp = prop.toLowerCase();
 
-        const socketDBs = await Promise.all(socket.map(async (socketValue) => {
-            const [socketDB] = await Socket.findOrCreate({
-                where: {
-                    name: { [Op.iLike]: socketValue }
-                },
-                defaults: {
-                    name: socketValue
-                }
+                // Actualizar la propiedad en el objeto updateFields
+                updateFields[`characteristics.${lowerCaseProp}`] = characteristics[prop];
             });
-            return socketDB;
-        }));
+        }
+
+        // Verificar si se proporcionaron las categorías, subcategorías y marcas
+        if (category) {
+            const [catDB] = await Category.findOrCreate({
+                where: { name: { [Op.iLike]: category } },
+                defaults: { name: category },
+            });
+            updateFields.category_name = catDB.dataValues.name;
+            updateFields.categoryId = catDB.dataValues.id;
+        }
+
+        if (subcategory) {
+            const [subCatDB] = await SubCategory.findOrCreate({
+                where: { name: { [Op.iLike]: subcategory } },
+                defaults: { name: subcategory },
+            });
+            updateFields.subcategory_name = subCatDB.dataValues.name;
+            updateFields.subCategoryId = subCatDB.dataValues.id;
+        }
+
+        if (brand) {
+            const [brandDB] = await Brand.findOrCreate({
+                where: { name: { [Op.iLike]: brand } },
+                defaults: { name: brand },
+            });
+            updateFields.brand_name = brandDB.dataValues.name;
+            updateFields.brandId = brandDB.dataValues.id;
+        }
+
+        // Verificar si se proporcionaron los sockets y agregarlos al objeto updateFields
+        if (socket && socket.length > 0) {
+            const socketDBs = await Promise.all(
+                socket.map(async (socketValue) => {
+                    const [socketDB] = await Socket.findOrCreate({
+                        where: { name: { [Op.iLike]: socketValue } },
+                        defaults: { name: socketValue },
+                    });
+                    return socketDB;
+                })
+            );
+            
+            // Asociar los sockets actualizados y/o nuevos con el producto
+            await product.setSockets(socketDBs);
+
+            // Recargar las relaciones después de actualizar el producto
+            await product.reload({ include: Socket });
+        }
 
         // Actualizar los campos del producto en la tabla Products
-        const result = await product.update({
-            name, price, image, stock, rating, description_text,
-            category_name: catDB.name,
-            subcategory_name: subCatDB.name,
-            brand_name: brandDB.name,
-            categoryId: catDB.id,
-            subCategoryId: subCatDB.id,
-            brandId: brandDB.id
-        });
+        const result = await product.update(updateFields);
 
-        // Asociar los sockets actualizados y/o nuevos con el producto
-        if (socketDBs.length > 0) {
-            await product.setSockets(socketDBs);
-        }
-        
-            return res.status(200).send("Profile updated successfully.");
-
+        return res.status(200).send(result);
     } catch (error) {
-
-        return res.status(500).json({error: error.message});
-
+        return res.status(500).json({ error: error.message });
     }
 };
 
