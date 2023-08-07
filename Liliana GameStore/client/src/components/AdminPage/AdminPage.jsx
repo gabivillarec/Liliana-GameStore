@@ -1,5 +1,7 @@
 import AdminForm from "./AdminForm/AdminForm"
+import AdminGetProduct from "./AdminGetProduct/AdminGetProduct"
 import style from "./AdminPage.module.css"
+
 
 const AdminPage = () => {
 
@@ -9,6 +11,7 @@ const AdminPage = () => {
         <div className={style.fondo}>
             <div className={style.fondoBlureado}>
                 <div className="pt-5">
+                    <AdminGetProduct/>
                     <AdminForm/>
                 </div>
             </div>
