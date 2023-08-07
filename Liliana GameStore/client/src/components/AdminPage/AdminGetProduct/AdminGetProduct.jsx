@@ -66,9 +66,10 @@ const AdminGetProduct = () =>{
           <thead className="bg-dark">
             <tr className='table-dark'>
               <th>Producto</th>
+              <th>Category</th>
               <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Modificar</th>
+              <th>Stock</th>
+              <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>

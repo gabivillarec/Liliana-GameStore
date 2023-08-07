@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminItem = ({ product, handlerDelete }) => {
     const navigate = useNavigate()
-    const { image, name, price, id, stock } = product;
+    const { image, name, price, id, stock , category_name} = product;
     const [checkbox, setCheckbox] = useState(false);
-
+    console.log(product)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
@@ -32,6 +32,9 @@ const AdminItem = ({ product, handlerDelete }) => {
                         <p className="fw-bold mb-1">{name}</p>
                     </div>
                 </div>
+            </td>
+            <td>
+                <p className="fw-normal mb-1">{category_name}</p>
             </td>
             <td>
                 <p className="fw-normal mb-1">{price}</p>
