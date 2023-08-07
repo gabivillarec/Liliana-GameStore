@@ -41,9 +41,9 @@ export const clearDetail = () => {
 
 //-------------------------------------------------------------------------------------------FAVRITES---------------------------------------------------------------------------------------//
 
-export const getFavorites = () => {
+export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
-      axios.get('http://localhost:3001/LilianaGameStore/Favorites')
+      axios.get(`http://localhost:3001/LilianaGameStore/favorites/${id}`)
         .then((response) => {
           dispatch({
             type: GET_FAVORITES,

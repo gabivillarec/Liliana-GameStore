@@ -9,19 +9,19 @@ import CardsContainer from "../CardsContainer/CardsContainer";
 
 const Favorites = () => {
   // Use useSelector to access the Redux store state
+    const idUser = JSON.parse(localStorage.getItem('user')) ;
     let dispatch = useDispatch()
     useEffect(()=> {
-        dispatch(getFavorites())
+        dispatch(getFavorites(idUser.id))
     },[dispatch])
 
     let  products  = useSelector(state => state.favorites)
-    let productsRender = products.map((prod) => prod.product)
 
   // Render the component
     return (
     <div className={styles.inicio}>
         <div className="container">
-            <CardsContainer products={productsRender}/>
+            <CardsContainer products={products}/>
         </div>
     </div>
     );
