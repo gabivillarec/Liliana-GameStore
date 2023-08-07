@@ -9,6 +9,8 @@ import CategoryPage from "./components/CategoryPage/CategoryPage";
 import Carrito from "./components/Carrito/Carrito";
 import MiCuenta from "./components/Perfil/MiCuenta";
 import AdminPage from "./components/AdminPage/AdminPage";
+import AdminForm from "./components/AdminPage/AdminForm/AdminForm";
+import AdminFormUpdate from "./components/AdminPage/AdminFormUpdate/AdminFormUpdate";
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/categorypage" element={<CategoryPage/>}/>
           <Route path="/micuenta" element={<MiCuenta/>}/>
           <Route path="/adminpage" element={<AdminPage/>}/>
+          <Route path="/adminpage/form" element={<AdminForm/>}/>
+          <Route path="/adminpage/formupdate/:id" element={<AdminFormUpdate/>}/>
       </Routes>
     </>
   )
