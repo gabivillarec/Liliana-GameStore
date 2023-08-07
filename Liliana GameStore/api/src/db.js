@@ -44,7 +44,7 @@ const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCa
 Users.beforeCreate((user, options) => {
 	if (!user.avatar_img) {
 	  // Asigno la imagen por defecto al avatar solo si la URL de la imagen no se pasa
-	  user.avatar_img = '../assets/Perfil_Neutro.png';
+	  user.avatar_img = 'https://static.thenounproject.com/png/5034901-200.png';
 	}
   });
 

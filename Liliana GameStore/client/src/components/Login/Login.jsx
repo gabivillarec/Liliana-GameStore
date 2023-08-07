@@ -26,7 +26,7 @@ const Login = () => {
             .then(response => {
                 // Manejo de la respuesta exitosa
                 console.log(response.data);
-                localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin }) )
+                localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )
                 navigate('/')
               })                                                                     
         } catch (error) {
