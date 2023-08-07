@@ -87,7 +87,7 @@ const updateProduct = async (req, res) => {
         // Actualizar los campos del producto en la tabla Products
         const result = await product.update(updateFields);
 
-        return res.status(200).send("Profile updated successfully.");
+        return res.status(200).send(result);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
