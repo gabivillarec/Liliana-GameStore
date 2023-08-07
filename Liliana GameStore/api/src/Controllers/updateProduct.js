@@ -19,7 +19,7 @@ const updateProduct = async (req, res) => {
         } = req.body;
 
         // Buscar el producto que se desea actualizar
-        const product = await Products.findByPk(id);
+        const product = await Products.findByPk(id, { include: Socket });
         if (!product) return res.status(404).send("Product not found");
 
         // Definir un objeto para almacenar los campos a actualizar
