@@ -5,14 +5,11 @@ import axios from "axios";
 
 
 const TablaProduts = ({products , setDeleteTrigger, deleteTrigger}) => {
-    const [productRender , setProductRender] = useState([])
-
-    
 
     const handlerDelete =async (checkbox , id) => {
         if(checkbox){
             const URL = 'http://localhost:3001/LilianaGameStore/products/'
-            let response = await axios.delete(URL +id)
+            await axios.delete(URL +id)
             alert(`Producto con id ${id} eliminado con exito`)
             setDeleteTrigger(!deleteTrigger); 
         }else{
