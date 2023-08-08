@@ -7,10 +7,8 @@ export const createFavorite = async(userId , productId) =>{
         userId:userId
     }
     try {
-        console.log(URLfav)
-        console.log(objet)
+        
         let response= await axios.post(URLfav, objet)
-        console.log(response ,'response')
         return response.data
     } catch (error) {
         return error.message

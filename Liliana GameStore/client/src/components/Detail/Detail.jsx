@@ -6,13 +6,13 @@ import style from "./Detail.module.css"
 import DisqusComments from '../DisqusComments/DisqusComments'
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
+import { postCarrito } from "./funcionesAuxiliares/postCarrito";
 
 function Detail() {
 
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
-    console.log(detail)
     
     const [quantity, setQuantity] = useState(1);
 
@@ -46,12 +46,17 @@ function Detail() {
     const handleBuyNow = () => {
       console.log('Comprar Ahora');
     };
-    const handleAddItem = () => {
-      console.log('Agregar al carrito');
+    const handleAddItem = async() => {
+      let idUser = localStorage.getItem('user');
+      idUser = JSON.parse(idUser)
+      await postCarrito(detail.id , idUser.id , quantity)
+      alert(`Producto ${detail.name} agregado de manera exitosa`)
+    
     };
     const handleFavorites = async() => {
-      let response = await createFavorite( 1, detail.id )
-      console.log(response.product)
+      let idUser = localStorage.getItem('user');
+      idUser = JSON.parse(idUser)
+      let response = await createFavorite( idUser.id, detail.id )
       alert(`producto con id  ${detail.id} agragado con exito`, response.product)
     };
     const handleDeleteFavorites = async() => {
