@@ -7,10 +7,11 @@ import axios from "axios";
 import Buttons from "./TablaProduct/Buttons";
 
 const AdminGetProduct = () =>{
+    const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
     useEffect(()=> {
         dispatch(getAdminProducts())
-    },[dispatch])
+    },[dispatch , deleteTrigger])
     let  products  = useSelector(state => state.adminProducts)
 
     const [filtros, setFiltros] = useState({})
@@ -20,15 +21,12 @@ const AdminGetProduct = () =>{
     useEffect(() => {
         axios.get('http://localhost:3001/LilianaGameStore/subcategory')
           .then(response => {
-            console.log(response.data , 'subcategori')
             setSubcategories(response.data);
           })
           .catch(error => {
-            console.error('Error al obtener las subcategorías:', error);
           });
         axios.get('http://localhost:3001/LilianaGameStore/brand')
             .then(response => {
-                console.log(response.data , "brand")
                 setBrand(response.data);
             })
             .catch(error => {
@@ -47,24 +45,18 @@ const AdminGetProduct = () =>{
     }
 
     const handleFilter = (event) => {
-
-        console.log('handlerFil;ter')
-        console.log(event.target.name)
-        console.log(event.target.value);
         setFiltros({
             ...filtros,
             [event.target.name] : event.target.value
         })
-        console.log(filtros)
     }
 
     const handleBtnFiltrar = () => {
-        console.log('handlerBtN')
         const resultString = objectToString(filtros)
         dispatch(getAdminProducts(resultString))
     } 
 
-    
+
     return(
 
       <div className= 'container'>
@@ -74,13 +66,14 @@ const AdminGetProduct = () =>{
           <thead className="bg-dark">
             <tr className='table-dark'>
               <th>Producto</th>
+              <th>Category</th>
               <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Modificar</th>
+              <th>Stock</th>
+              <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>
-          <TablaProduts products={products}/>
+          <TablaProduts products={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
           </table>
         </div>
       </div>

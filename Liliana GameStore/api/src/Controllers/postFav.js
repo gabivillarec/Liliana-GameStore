@@ -2,8 +2,6 @@ const { Favorites, Users, Products } = require('../db');
 
 const postFavorite = async (req, res) => {
     const { product, userId } = req.body;
-    console.log(userId , 'userId')
-    console.log(product, 'product')
     try {
     // Primero, verifica si el usuario existe
     const user = await Users.findByPk(userId);
