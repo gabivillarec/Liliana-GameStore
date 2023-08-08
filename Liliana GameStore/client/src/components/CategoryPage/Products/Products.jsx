@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../redux/actions";
@@ -7,9 +7,12 @@ import style from "./Products.module.css"
 
 const Products = ({ products }) => {
     const dispatch = useDispatch()
-    const [filtros, setFiltros] = useState({})
+    const [filtros, setFiltros] = useState({ pageNumber: 1, })
     const [subcategories, setSubcategories] = useState([])
     const [brand, setBrand] = useState([])
+    const totalPages = useSelector(state => state.totalPages)
+    const currentPage = useSelector(state => state.currentPage)
+
 
     useEffect(() => {
         axios.get('http://localhost:3001/LilianaGameStore/subcategory')
@@ -49,12 +52,52 @@ const Products = ({ products }) => {
     const handleBtnFiltrar = () => {
         const resultString = objectToString(filtros)
         dispatch(getAllProducts(resultString))
-    } 
+    }
+    
+    //sector de botones de paginado
+
+    useEffect(()=>{
+        handleBtnFiltrar()
+    },[filtros.pageNumber])
+
+    const generatePaginationButtons = (totalPages) => {
+        const paginationButtons = [];
+      
+        if (currentPage > 1) {
+          paginationButtons.push(
+            <button key="prev" className="btn btn-info" onClick={() => setFiltros({...filtros, pageNumber: currentPage - 1})}>
+              Anterior
+            </button>
+          );
+        }
+      
+        for (let i = 1; i <= totalPages; i++) {
+          paginationButtons.push(
+            <button
+              key={i}
+              className={i === currentPage ? "btn btn-info" : "btn btn-outline-info"}
+              onClick={() => setFiltros({...filtros, pageNumber: i})}
+            >
+              {i}
+            </button>
+          );
+        }
+      
+        if (currentPage < totalPages) {
+          paginationButtons.push(
+            <button key="next" className="btn btn-info" onClick={() => setFiltros({...filtros, pageNumber: currentPage + 1})}>
+              Siguiente
+            </button>
+          );
+        }
+      
+        return paginationButtons;
+      };
 
     return(
         <div className={style.fondo}>
             <div className={style.productsContainer}>
-                <div className="container d-flex flex-column">
+                <div className="container d-flex justify-content-center flex-column">
                     <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-4">
                         <select className={style.selects} name="category" onChange={handleFilter}>
                             <option value="">All Categories</option>
@@ -85,6 +128,7 @@ const Products = ({ products }) => {
                         <button className="btn btn-outline-info border-2" onClick={() => handleBtnFiltrar()}>Filtrar</button>
                     </div>
                     <CardsContainer products={products}/>
+                    <div className="p-4 d-flex justify-content-center flex-row gap-3">{generatePaginationButtons(totalPages)}</div>
                 </div>
             </div>
         </div>

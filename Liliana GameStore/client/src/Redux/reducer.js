@@ -6,7 +6,9 @@ const initialState = {
     detail: {},
     favorites:[],
     adminProducts:[],
-    cartProducts:[]
+    cartProducts:[],
+    currentPage: 1,
+    totalPages: 1
 }
 
 const reducer = (state = initialState , action ) => {
@@ -14,8 +16,10 @@ const reducer = (state = initialState , action ) => {
         case GET_ALL_PRODUCTS:
             return{
                 ...state,
-                products : action.payload,
-                productsCopy: action.payload,
+                products : action.payload.data,
+                productsCopy: action.payload.data,
+                currentPage: action.payload.currentPage,
+                totalPages: action.payload.totalPages
             }
         case GET_PRODUCT_DETAIL:
             return {

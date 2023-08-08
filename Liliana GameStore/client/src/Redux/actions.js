@@ -9,7 +9,11 @@ export const getAllProducts = (filtros) => {       //funcion que trae si no hay 
             let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
-                    payload: response.data.data
+                    payload:{
+                                data: response.data.data,
+                                totalPages: response.data.totalPages,
+                                currentPage: response.data.currentPage
+                            }
                 })    // type indica la action a ejecutar payload pasa la info al estado global
         } catch (error) {
                 return dispatch({
