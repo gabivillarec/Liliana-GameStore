@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import style from "./NavBar.module.css"
+import SearchBar from '../SearchBar/SearchBar'
 
 const NavBar = () => {
     const navigate = useNavigate()
@@ -19,6 +20,9 @@ const NavBar = () => {
     return(
         <nav id="navbar-example2" className={`navbar px-3 p-3 ${style.navbarE}`}>
             <img className={style.logo} src='../../../vistas/LilianaGameStore.png' alt="logo" onClick={() => navigate('/')}/>
+
+            <SearchBar/>
+
             <div className="d-flex flex-wrap gap-2">
                 {usuario && usuario.admin &&(<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/adminpage')}>Admin</button>)}
                 <button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/categorypage')}>Catalogue</button>
