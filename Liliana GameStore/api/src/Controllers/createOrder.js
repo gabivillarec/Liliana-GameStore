@@ -46,7 +46,7 @@ const createOrders = async (req,res) =>{
       await order.addProduct(product, { through: { quantity } });
     
       // Resto el stock del producto
-      for (const item of cart) {
+      for (let item of cart) {
         const cartProduct = await Products.findByPk(item.productId);
         if (cartProduct && cartProduct.stock >= item.cantidad) {
           await cartProduct.decrement('stock', { by: item.cantidad });
@@ -58,12 +58,12 @@ const createOrders = async (req,res) =>{
         items: [],
       };
       
-      for (const item of cart) {
+      for (let item of cart) {
         const product = await Products.findByPk(item.productId);
         if (product && product.stock >= item.cantidad) {
           preference.items.push({
             title: product.name,
-            unit_price: product.price,
+            unit_price: +product.price,
             quantity: item.cantidad,
           });
         }
