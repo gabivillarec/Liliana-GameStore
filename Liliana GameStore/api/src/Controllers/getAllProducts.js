@@ -6,7 +6,7 @@ const getAllProducts = async (req, res) => {
     let { name, price, category, subcategory, brand, sockets, order, pageNumber } = req.query;
 
     let offset = 0;
-    let limit = 20;
+    let limit = 15;
 
     if (pageNumber) {
       pageNumber = parseInt(pageNumber);
@@ -54,8 +54,7 @@ const getAllProducts = async (req, res) => {
       where: filters,
       ...orderOption,
       limit,
-      offset,
-      include: include,
+      offset
     });
 
     return res.status(200).json({

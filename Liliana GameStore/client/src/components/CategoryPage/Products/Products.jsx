@@ -62,21 +62,31 @@ const Products = ({ products }) => {
 
     const generatePaginationButtons = (totalPages) => {
         const paginationButtons = [];
+        const maxButtonsToShow = 5
+        let startPage;
+
+        if (currentPage <= Math.floor(maxButtonsToShow / 2)) {
+            startPage = 1;
+          } else if (currentPage > totalPages - Math.floor(maxButtonsToShow / 2)) {
+            startPage = Math.max(1, totalPages - maxButtonsToShow + 1);
+          } else {
+            startPage = Math.max(1, currentPage - Math.floor(maxButtonsToShow / 2));
+          }
       
         if (currentPage > 1) {
           paginationButtons.push(
-            <button key="prev" className="btn btn-info" onClick={() => setFiltros({...filtros, pageNumber: currentPage - 1})}>
+            <button key="prev" className="btn btn-info" onClick={() => {setFiltros({...filtros, pageNumber: currentPage - 1}); window.scrollTo(0, 0)}}>
               Anterior
             </button>
           );
         }
       
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = startPage; i <= Math.min(totalPages, startPage + maxButtonsToShow - 1); i++) {
           paginationButtons.push(
             <button
               key={i}
               className={i === currentPage ? "btn btn-info" : "btn btn-outline-info"}
-              onClick={() => setFiltros({...filtros, pageNumber: i})}
+              onClick={() => {setFiltros({...filtros, pageNumber: i}); window.scrollTo(0, 0)}}
             >
               {i}
             </button>
@@ -85,7 +95,7 @@ const Products = ({ products }) => {
       
         if (currentPage < totalPages) {
           paginationButtons.push(
-            <button key="next" className="btn btn-info" onClick={() => setFiltros({...filtros, pageNumber: currentPage + 1})}>
+            <button key="next" className="btn btn-info" onClick={() => {setFiltros({...filtros, pageNumber: currentPage + 1}); window.scrollTo(0, 0)}}>
               Siguiente
             </button>
           );
@@ -97,7 +107,7 @@ const Products = ({ products }) => {
     return(
         <div className={style.fondo}>
             <div className={style.productsContainer}>
-                <div className="container d-flex justify-content-center flex-column">
+                <div className="d-flex justify-content-center flex-column">
                     <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-4">
                         <select className={style.selects} name="category" onChange={handleFilter}>
                             <option value="">All Categories</option>
@@ -125,10 +135,10 @@ const Products = ({ products }) => {
                             <option value="D">Min-Max</option>
                             <option value="A">Max-Min</option>
                         </select>
-                        <button className="btn btn-outline-info border-2" onClick={() => handleBtnFiltrar()}>Filtrar</button>
+                        <button className="btn btn-outline-info border-2" onClick={() => {filtros.pageNumber === 1 ? handleBtnFiltrar() : setFiltros({...filtros, pageNumber: 1})}}>Filtrar</button>
                     </div>
                     <CardsContainer products={products}/>
-                    <div className="p-4 d-flex justify-content-center flex-row gap-3">{generatePaginationButtons(totalPages)}</div>
+                    <div className="p-2 d-flex justify-content-center flex-row gap-3">{generatePaginationButtons(totalPages)}</div>
                 </div>
             </div>
         </div>
