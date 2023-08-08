@@ -3,9 +3,10 @@ import ProducCarrito from "./ProducCarrito/ProducCarrito";
 import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {getAllCart} from '../../redux/actions'
-
+import { useState } from 'react';
 
 const Carrito = () => {
+  const [deleteTrigger, setDeleteTrigger] = useState(false);
   let user = localStorage.getItem('user');
   let  products  = useSelector(state => state.cartProducts)
   user = JSON.parse(user);
@@ -13,7 +14,7 @@ const Carrito = () => {
   let dispatch = useDispatch()
   useEffect(()=> {
       dispatch(getAllCart(user.id))
-  },[dispatch ])
+  },[dispatch ,  deleteTrigger])
     
     return(
 
@@ -29,7 +30,7 @@ const Carrito = () => {
               <th>Eliminar</th>
             </tr>
           </thead>
-          <ProducCarrito estado={products}/>
+          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
           </table>
         </div>
 

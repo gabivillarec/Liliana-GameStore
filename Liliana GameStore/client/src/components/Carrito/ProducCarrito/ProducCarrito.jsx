@@ -2,41 +2,44 @@ import { useState , useEffect } from "react";
 import Item from './Item'
 import Totalizar from "./Totalizar";
 import style from './ProducCarrito.module.css'
-import { calcualarTotal } from './funcionesAuxiliares'
+import { calcualarTotal  , deleteCart , putCart} from './funcionesAuxiliares'
 
-const ProducCarrito = ({estado}) => {
+const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger }) => {
     const [products , setProducts] = useState([])
     
     useEffect(()=>{
         setProducts(estado)
     },[estado])
 
-    const handlerDelete = (id) => {
-        setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
-    };
 
-    const handlerCantidad = (id, operacion) => {
-        setProducts(prevProducts => {
-            // Busca el producto con el id correspondiente
-            const updatedProducts = prevProducts.map(product => {
-                if (product.id === id) {
-                    // Realiza la operación de agregar o restar cantidad
-                    if (operacion === "agregar") {
-                        return { ...product, cantidad: product.cantidad + 1 };
-                    } else if (operacion === "restar") {
-                        return { ...product, cantidad: product.cantidad - 1 };
-                    }
-                }
-                return product;
-            });
-            return updatedProducts;
-        });
-    };
+    const handlerDeleteItem = async(itemCartId) =>{
+        await deleteCart(itemCartId)
+        setDeleteTrigger(!deleteTrigger)
+    }
+
+
+    const handlerAgregar = async(itemCartId , cantidad) =>{
+        alert(itemCartId + 'agrear'  + cantidad)
+        await putCart(itemCartId , cantidad)
+        setDeleteTrigger(!deleteTrigger)
+    }
+
+    const handlerQuitar = async(itemCartId , cantidad) => {
+        alert(itemCartId, 'quitar' , cantidad)
+        if(cantidad === 0){
+            await deleteCart(itemCartId)
+            setDeleteTrigger(!deleteTrigger)
+        }else{
+            await putCart(itemCartId , cantidad)
+            setDeleteTrigger(!deleteTrigger)
+
+        }
+    }
 
     return(
         <tbody>
             {
-                products.map((product , index)=> <Item key={index} product={product} handlerCantidad={handlerCantidad} handlerDelete={handlerDelete}/>)
+                products.map((product , index)=> <Item key={index} product={product}  handlerDeleteItem={handlerDeleteItem}  handlerAgregar={handlerAgregar} handlerQuitar={handlerQuitar}/>)
             }
             <Totalizar total={calcualarTotal(products )}/>
         </tbody>

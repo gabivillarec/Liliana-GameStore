@@ -1,7 +1,7 @@
 import style from './Item.module.css'
 
-const Item = ({product , handlerCantidad , handlerDelete}) =>{
-    let {image , name , price , id , cantidad} = product
+const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>{
+    let {image , name , price , id , itemCartId , cantidad} = product
     return(
         <tr className='table-dark'>
             <td>
@@ -20,12 +20,12 @@ const Item = ({product , handlerCantidad , handlerDelete}) =>{
                 <p className="fw-normal mb-1">{price}</p>
             </td>
             <td>
-                <button className='btn btn-outline-success' onClick={()=> handlerCantidad(id , 'suma')}> +</button>
-                <button className='btn btn-outline-danger' onClick={()=> handlerCantidad(id , 'resta')}> -</button>
+                <button className='btn btn-outline-success' onClick={()=> handlerAgregar(itemCartId , cantidad+1) }> +</button>
+                <button className='btn btn-outline-danger' onClick={()=> handlerQuitar(itemCartId , cantidad-1)}> -</button>
             </td>
                 <td>{cantidad}</td>
             <td>
-                <button type="button" className="btn btn-link btn-sm btn-rounded" onClick={() => handlerDelete(id)}>
+                <button type="button" className="btn btn-link btn-sm btn-rounded" onClick={() => handlerDeleteItem(itemCartId)}>
                 <i className="bi bi-trash3-fill"></i>
                 </button>
             </td>
