@@ -14,17 +14,30 @@ const getCartByUser = async (req, res) => {
     try {
         const { id } = req.params;
         if (id) {
+            // Obtener los elementos en el carrito para el usuario dado
             const cart = await Cart.findAll({
                 where: {userId: id},
             });
 
+            // Obtener los IDs de los productos en el carrito
             const productIds = cart.map(favorite => favorite.productId);
 
+            // Obtener detalles de los productos en el carrito
             const cartProducts = await Products.findAll({
                 where: {id: productIds }
             })
 
-            res.status(200).json(cartProducts)
+            // Crear una lista enriquecida con la cantidad de productos y detalles de los productos
+            const cartWithQuantities = cartProducts.map(product => {
+                const cartItem = cart.find(item => item.productId === product.id);
+                return {
+                    ...product.toJSON(),
+                    itemCartId: cartItem.id,// Agregar el ID del elemento del carrito
+                    cantidad: cartItem.cantidad
+                }
+            })
+
+            res.status(200).json(cartWithQuantities);
         }else{
             res.status(400).json({ error: 'ID not provided'})
         }
