@@ -25,12 +25,10 @@ const Login = () => {
             let respuesta = await axios.post('http://localhost:3001/LilianaGameStore/login', userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
-                console.log(response.data);
                 localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )
                 navigate('/')
               })                                                                     
         } catch (error) {
-            console.log(error.response.data);
             setError(error.response.data)
         }
     }

@@ -10,6 +10,7 @@ import CardsContainer from "../CardsContainer/CardsContainer";
 const Favorites = () => {
   // Use useSelector to access the Redux store state
     const idUser = JSON.parse(localStorage.getItem('user')) ;
+    console.log(idUser)
     let dispatch = useDispatch()
     useEffect(()=> {
         dispatch(getFavorites(idUser.id))

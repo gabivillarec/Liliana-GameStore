@@ -14,7 +14,6 @@ const Products = ({ products }) => {
     useEffect(() => {
         axios.get('http://localhost:3001/LilianaGameStore/subcategory')
           .then(response => {
-            console.log(response.data)
             setSubcategories(response.data);
           })
           .catch(error => {
@@ -22,7 +21,6 @@ const Products = ({ products }) => {
           });
         axios.get('http://localhost:3001/LilianaGameStore/brand')
             .then(response => {
-                console.log(response.data)
                 setBrand(response.data);
             })
             .catch(error => {
@@ -41,8 +39,6 @@ const Products = ({ products }) => {
     }
 
     const handleFilter = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value);
         setFiltros({
             ...filtros,
             [event.target.name] : event.target.value

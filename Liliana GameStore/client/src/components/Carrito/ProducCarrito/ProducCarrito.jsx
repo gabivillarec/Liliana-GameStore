@@ -9,7 +9,7 @@ const ProducCarrito = ({estado}) => {
     
     useEffect(()=>{
         setProducts(estado)
-    },[])
+    },[estado])
 
     const handlerDelete = (id) => {
         setProducts(prevProducts => prevProducts.filter(product => product.id !== id));

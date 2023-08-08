@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL , GET_FAVORITES  , GET_ADMIN_PRODUCTS} from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL , GET_FAVORITES  , GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS} from "./action-type";
 import axios from 'axios'
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
@@ -71,5 +71,21 @@ export const getFavorites = (id) => {
                     type: GET_ALL_PRODUCTS,
                     payload:  'payload'
                 })}
+    }
+}
+
+  //------------------------------------------------------------------------------------- getAllCart ----------------------------------------------------------------------
+
+  export const getAllCart = (idUser) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+    return async (dispatch) => {
+        try {
+            let response = await axios.get(`http://localhost:3001/LilianaGameStore/cart/${idUser}`);
+                return dispatch({
+                    type: GET_CART_PRODUCTS,
+                    payload: response.data
+                })    // type indica la action a ejecutar payload pasa la info al estado global
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 }
