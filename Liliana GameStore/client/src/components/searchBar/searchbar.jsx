@@ -16,7 +16,7 @@ const SearchBar = () => {
 
     const handleSearch = async (event) => {
         event.preventDefault();
-        const categories = ["category", "subcategory", "brand", "name"];
+        const categories = ["name", "category", "subcategory", "brand"];
         let filters = "";
 
         for (const category of categories) {

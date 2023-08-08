@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CardsContainer from "../../CardsContainer/CardsContainer";
+import CardsContainer from "../CardsContainer/CardsContainer";
 import style from "./SearchedProducts.module.css";
 
 const SearchedProducts = () => {
