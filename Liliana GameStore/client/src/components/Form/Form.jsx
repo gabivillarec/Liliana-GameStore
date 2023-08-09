@@ -60,22 +60,8 @@ const Form = () => {
     }
     setError(validation(form));
     try {
-      let answer = await axios.post('http://localhost:3001/LilianaGameStore/user', form)
-        .then(response => {
-          console.log(response.data);
-          localStorage.setItem("newUser", JSON.stringify({
-            first_name: response.data.first_name,
-            last_name: response.data.last_name,
-            username: response.data.username,
-            email: response.data.email,
-            password: response.data.password,
-            cp: response.data.cp,
-            address: response.data.address,
-            phone: response.data.phone,
-            avatar_img: response.data.avatar_img,
-          }));
-          navigate('/');
-        });
+      const response = await axios.post('http://localhost:3001/LilianaGameStore/user', form);
+      navigate('/login', { state: { newUser: response.data } });
     } catch (error) {
       setError(error.response.data);
     }
