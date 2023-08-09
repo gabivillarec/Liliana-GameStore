@@ -19,13 +19,13 @@ const AdminGetProduct = () =>{
     const [brand, setBrand] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3001/LilianaGameStore/subcategory')
+        axios.get('/LilianaGameStore/subcategory')
           .then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
           });
-        axios.get('http://localhost:3001/LilianaGameStore/brand')
+        axios.get('/LilianaGameStore/brand')
             .then(response => {
                 setBrand(response.data);
             })
