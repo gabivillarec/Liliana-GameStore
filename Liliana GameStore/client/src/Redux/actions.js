@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED } from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED } from "./action-type";
 import axios from 'axios'
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
@@ -95,10 +95,20 @@ export const getFavorites = (id) => {
 }
 
 
-export const filterSearched = (filtros) => {
+export const filterSearched = (filtroName, filtroValue) => {
     return (dispatch) => {
-            dispatch({
+            return dispatch({
                 type: FILTER_SEARCHED,
-                payload: filtros,
+                payload: { nombreFiltro : filtroName,
+                            valorFiltro : filtroValue },
+        })}
+}
+
+export const setFilterSearched = () => {
+    return (dispatch) => {
+            return dispatch({
+                type: SET_FILTER_SEARCHED,
+                payload: { nombreFiltro : undefined,
+                            valorFiltro : undefined },
         })}
 }
