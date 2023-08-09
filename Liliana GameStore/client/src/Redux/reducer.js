@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED} from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED} from "./action-type";
 
 const initialState = {
     products: [],
@@ -7,6 +7,7 @@ const initialState = {
     favorites:[],
     adminProducts:[],
     cartProducts:[],
+    searchedProductList:{},
     currentPage: 1,
     totalPages: 1
 }
@@ -47,6 +48,11 @@ const reducer = (state = initialState , action ) => {
                 cartProducts: action.payload
             }
         case FILTER_SEARCHED:
+            return{
+                ...state,
+                searchedProductList: action.payload
+            }
+        case SET_FILTER_SEARCHED:
             return{
                 ...state,
                 searchedProductList: action.payload
