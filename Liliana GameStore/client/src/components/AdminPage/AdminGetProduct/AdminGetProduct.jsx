@@ -1,6 +1,6 @@
 import TablaProduts from "./TablaProduct/TablaProduts"
 import { useSelector , useDispatch } from "react-redux";
-import {getAdminProducts} from '../../../redux/actions'
+import {getAdminProducts} from '../../../Redux/actions'
 import { useEffect , useState} from "react";
 import axios from "axios";
 

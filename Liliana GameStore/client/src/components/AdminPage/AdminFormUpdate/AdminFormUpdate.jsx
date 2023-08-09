@@ -4,7 +4,7 @@ import UpdateForm from "./Admin/updateForm";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail, clearDetail } from "../../../redux/actions"
+import { getProductDetail, clearDetail } from "../../../Redux/actions"
 
 
 

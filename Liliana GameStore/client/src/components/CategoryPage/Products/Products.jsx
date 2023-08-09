@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../../redux/actions";
+import { getAllProducts } from "../../../Redux/actions";
 import axios from 'axios'
 import style from "./Products.module.css"
 

@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import styles from './Favorites.module.css';
-import { getFavorites } from '../../redux/actions';
+import { getFavorites } from '../../Redux/actions';
 import { useEffect } from "react";
 import CardsContainer from "../CardsContainer/CardsContainer";
 

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import Buttons from "./Buttons";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../../../redux/actions"
+import { getAllProducts } from "../../../../Redux/actions"
 import axios from 'axios'
 import style from "./AdminItem.module.css"
 import TablaProduts from "./TablaProduts";
