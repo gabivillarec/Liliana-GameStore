@@ -22,7 +22,7 @@ const Login = () => {
         event.preventDefault()
         setError({})
         try {
-            let respuesta = await axios.post('http://localhost:3001/LilianaGameStore/login', userData)
+            let respuesta = await axios.post('/LilianaGameStore/login', userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
                 localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )

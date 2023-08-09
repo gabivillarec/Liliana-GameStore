@@ -60,7 +60,7 @@ const Form = () => {
     }
     setError(validation(form));
     try {
-      const response = await axios.post('http://localhost:3001/LilianaGameStore/user', form);
+      const response = await axios.post('/LilianaGameStore/user', form);
       navigate('/login', { state: { newUser: response.data } });
     } catch (error) {
       setError(error.response.data);
