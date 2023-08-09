@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail, clearDetail } from "../../redux/actions"
+import { getProductDetail, clearDetail } from "../../Redux/actions"
 import style from "./Detail.module.css"
 import DisqusComments from '../DisqusComments/DisqusComments'
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";

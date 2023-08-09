@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Products from './Products/Products';
 import styles from './CategoryPage.module.css'
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts, setFilterSearched } from '../../redux/actions'
+import { getAllProducts, setFilterSearched } from '../../Redux/actions'
 
 const CategoryPage = () => {
     const dispatch = useDispatch();

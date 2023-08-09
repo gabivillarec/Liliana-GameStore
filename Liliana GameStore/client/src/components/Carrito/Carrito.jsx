@@ -2,7 +2,7 @@ import style from './Carrito.module.css'
 import ProducCarrito from "./ProducCarrito/ProducCarrito";
 import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
-import {getAllCart} from '../../redux/actions'
+import {getAllCart} from '../../Redux/actions'
 import { useState } from 'react';
 
 const Carrito = () => {
