@@ -9,7 +9,7 @@
 }
 
 .navbarE{
-    /* background-image: url('../../../vistas/PS_Background_Medium.png'); */
+    background-image: url('../../../vistas/PS_Background_Medium.png');
     background-size: cover;
     background-position-y: bottom;
     height: 13vh;
@@ -20,7 +20,7 @@
 }
 
 .perfilCanvaHeader{
-    /* background-image: url('../../../vistas/PS_Background_Medium.png'); */
+    background-image: url('../../../vistas/PS_Background_Medium.png');
     background-position-y: center;
     box-shadow:
      inset 0 -3em 3em rgba(0, 0, 0, 0.212),

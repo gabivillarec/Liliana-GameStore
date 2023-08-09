@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import style from './Form.module.css'
 import validation from './Validation.js';
-//import backgroundImage from '../../../vistas/PS_Background_Medium.png';
+import backgroundImage from '../../../vistas/PS_Background_Medium.png';
 
 const Form = () => {
   
@@ -74,8 +74,7 @@ const Form = () => {
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
               <div className="card" style={{ borderRadius: '15px' }}>
-              {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
-                <div className="card-body p-5"> 
+                <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }}> 
                   <h2 className="text-uppercase text-center text-white mb-5">CREÁ TU CUENTA</h2>
 
                   <form onSubmit={handleSubmit}>
