@@ -14,7 +14,7 @@
 }
 
 .fondo{
-    background-image: url('../../../../assets/PS_Background_Medium.png');
+    background-image: url('../../../../vistas/PS_Background_Medium.png');
     background-size: cover;
     background-position-y: bottom;
 }
