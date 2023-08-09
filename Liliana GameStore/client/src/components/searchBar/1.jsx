@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; 
-import { filterSearched, getAllProducts } from '../../redux/actions.js'
+import { useNavigate } from "react-router-dom";
+import { getAllProducts } from '../../redux/actions.js'
 import style from './SearchBar.module.css';
 
 const SearchBar = () => {
@@ -16,19 +16,28 @@ const SearchBar = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const categories = ["name", "category", "subcategory", "brand"];
-        let filters = "";
-
+        let queryCategory = "";
+    
         for (const category of categories) {
-            if (filterValue) {
-                const query = `${category}=${filterValue}`;
-                const response = await dispatch(getAllProducts(query))
-                if (response && response.payload.length > 0) {
-                    dispatch(filterSearched(query))
-                    navigate(`/categorypage?${query}`);
-                    break;
-                }}}
+            if (category === "name" && filterValue) {
+                queryCategory = `name=${filterValue}`;
+                break;
+            } else if (category === "category" && filterValue) {
+                queryCategory = `category=${filterValue}`;
+                break;
+            } else if (category === "subcategory" && filterValue) {
+                queryCategory = `subcategory=${filterValue}`;
+                break;
+            } else if (category === "brand" && filterValue) {
+                queryCategory = `brand=${filterValue}`;
+                break;
+            }
+        }    
+        if (queryCategory) {
+            navigate(`/search?${queryCategory}`);
+        }    
         setFilterValue('');
-    };    
+    };
 
     return (
         <form className="d-flex" role="search">

@@ -1,23 +1,33 @@
+import React, { useEffect } from "react";
 import Products from './Products/Products';
 import styles from './CategoryPage.module.css'
-import { useSelector ,  useDispatch} from "react-redux";
-import { useEffect } from "react";
-import {getAllProducts} from '../../redux/actions'
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { getAllProducts } from '../../redux/actions'
 
 const CategoryPage = () => {
-    let dispatch = useDispatch()
-    useEffect(()=> {
-        dispatch(getAllProducts())
-    },[dispatch])
+    const dispatch = useDispatch();
+    const location = useLocation();
 
-    let  products = useSelector(state => state.products)
+    const queryParams = new URLSearchParams(location.search);
+    const searchParams = Object.fromEntries(queryParams.entries());
 
+    useEffect(() => {
+        if (Object.keys(searchParams).length > 0) {
+            const queryString = new URLSearchParams(searchParams).toString();
+            dispatch(getAllProducts(queryString));
+        } else {
+            dispatch(getAllProducts());
+        }
+    }, [dispatch, location.search]);
 
-    return(
+    const products = useSelector(state => state.products);
+
+    return (
         <div className={styles.inicio}>
-            <Products products={products}/>
+            <Products products={products} />
         </div>
-    )
+    );
 }
 
 export default CategoryPage;
