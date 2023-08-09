@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED } from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED } from "./action-type";
 import axios from 'axios'
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
@@ -6,7 +6,7 @@ import axios from 'axios'
 export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload:{
@@ -27,7 +27,7 @@ export const getAllProducts = (filtros) => {       //funcion que trae si no hay 
 
 export const getProductDetail = (id) => {
     try {
-        const endpoint = `http://localhost:3001/LilianaGameStore/products/${id}`
+        const endpoint = `/LilianaGameStore/products/${id}`
         return async (dispatch) => {
         const { data } = await axios.get(endpoint)
             return dispatch({
@@ -47,7 +47,7 @@ export const clearDetail = () => {
 
 export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
-      axios.get(`http://localhost:3001/LilianaGameStore/favorites/${id}`)
+      axios.get(`/LilianaGameStore/favorites/${id}`)
         .then((response) => {
           dispatch({
             type: GET_FAVORITES,
@@ -65,7 +65,7 @@ export const getFavorites = (id) => {
   export const getAdminProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ADMIN_PRODUCTS,
                     payload: response.data.data
@@ -83,7 +83,7 @@ export const getFavorites = (id) => {
   export const getAllCart = (idUser) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`http://localhost:3001/LilianaGameStore/cart/${idUser}`);
+            let response = await axios.get(`/LilianaGameStore/cart/${idUser}`);
                 return dispatch({
                     type: GET_CART_PRODUCTS,
                     payload: response.data
@@ -95,10 +95,20 @@ export const getFavorites = (id) => {
 }
 
 
-export const filterSearched = (filtros) => {
+export const filterSearched = (filtroName, filtroValue) => {
     return (dispatch) => {
-            dispatch({
+            return dispatch({
                 type: FILTER_SEARCHED,
-                payload: filtros,
+                payload: { nombreFiltro : filtroName,
+                            valorFiltro : filtroValue },
+        })}
+}
+
+export const setFilterSearched = () => {
+    return (dispatch) => {
+            return dispatch({
+                type: SET_FILTER_SEARCHED,
+                payload: { nombreFiltro : undefined,
+                            valorFiltro : undefined },
         })}
 }

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts } from '../../redux/actions.js'
+import { getAllProducts } from '../../Redux/actions.js'
 import style from './SearchBar.module.css';
 
 const SearchBar = () => {

@@ -8,7 +8,7 @@ const TablaProduts = ({products , setDeleteTrigger, deleteTrigger}) => {
 
     const handlerDelete =async (checkbox , id) => {
         if(checkbox){
-            const URL = 'http://localhost:3001/LilianaGameStore/products/'
+            const URL = '/LilianaGameStore/products/'
             await axios.delete(URL +id)
             alert(`Producto con id ${id} eliminado con exito`)
             setDeleteTrigger(!deleteTrigger); 

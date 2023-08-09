@@ -1,28 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../../redux/actions";
+import { getAllProducts } from "../../../Redux/actions";
 import axios from 'axios'
 import style from "./Products.module.css"
 
 const Products = ({ products }) => {
     const dispatch = useDispatch()
-    const [filtros, setFiltros] = useState({ pageNumber: 1, })
-    const [subcategories, setSubcategories] = useState([])
-    const [brand, setBrand] = useState([])
+    const searchedProductList = useSelector(state => state.searchedProductList)
     const totalPages = useSelector(state => state.totalPages)
     const currentPage = useSelector(state => state.currentPage)
+    const [filtros, setFiltros] = useState({ pageNumber: 1, [searchedProductList.nombreFiltro] : searchedProductList.valorFiltro, })
+    const [subcategories, setSubcategories] = useState([])
+    const [brand, setBrand] = useState([])
 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/LilianaGameStore/subcategory')
-          .then(response => {
+
+        axios.get('/LilianaGameStore/subcategory').then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
             console.error('Error al obtener las subcategorías:', error);
           });
-        axios.get('http://localhost:3001/LilianaGameStore/brand')
+        axios.get('/LilianaGameStore/brand')
             .then(response => {
                 setBrand(response.data);
             })
@@ -30,6 +31,13 @@ const Products = ({ products }) => {
                 console.error('Error al obtener las subcategorías:', error);
             });
       }, []);
+
+    useEffect(()=> {
+      setFiltros({
+        ...filtros,
+        [searchedProductList.nombreFiltro] : searchedProductList.valorFiltro
+      })
+    },[searchedProductList])
 
     function objectToString(obj) {
         const keyValuePairs = [];
@@ -50,6 +58,7 @@ const Products = ({ products }) => {
     }
 
     const handleBtnFiltrar = () => {
+        console.log(searchedProductList)
         const resultString = objectToString(filtros)
         dispatch(getAllProducts(resultString))
     }

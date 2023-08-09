@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Products from './Products/Products';
 import styles from './CategoryPage.module.css'
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { getAllProducts } from '../../redux/actions'
+import { getAllProducts, setFilterSearched } from '../../Redux/actions'
 
 const CategoryPage = () => {
     const dispatch = useDispatch();
-    const location = useLocation();
-
-    const queryParams = new URLSearchParams(location.search);
-    const searchParams = Object.fromEntries(queryParams.entries());
+    const searchedProductList = useSelector(state => state.searchedProductList)
 
     useEffect(() => {
-        if (Object.keys(searchParams).length > 0) {
-            const queryString = new URLSearchParams(searchParams).toString();
-            dispatch(getAllProducts(queryString));
-        } else {
+        console.log(searchedProductList.valorFiltro);
+        if (searchedProductList.valorFiltro === undefined) {
             dispatch(getAllProducts());
         }
-    }, [dispatch, location.search]);
+        return () => {
+            dispatch(setFilterSearched())
+        }
+    }, []);
 
     const products = useSelector(state => state.products);
 

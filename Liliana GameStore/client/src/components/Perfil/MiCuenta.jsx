@@ -21,7 +21,7 @@ const MiCuenta = () => {
     useEffect(()=>{
         const usuario = JSON.parse(localStorage.getItem("user"))
         console.log(usuario.id);
-        axios.get(`http://localhost:3001/LilianaGameStore/user/${usuario.id}`)
+        axios.get(`/LilianaGameStore/user/${usuario.id}`)
             .then(response =>{
                 setCliente(response.data)
             })

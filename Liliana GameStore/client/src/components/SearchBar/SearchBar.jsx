@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"; 
-import { filterSearched, getAllProducts } from '../../redux/actions.js'
+import { filterSearched, getAllProducts } from '../../Redux/actions.js';
 import style from './SearchBar.module.css';
 
 const SearchBar = () => {
@@ -16,17 +16,31 @@ const SearchBar = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const categories = ["name", "category", "subcategory", "brand"];
+        let exito = false
         let filters = "";
-
         for (const category of categories) {
             if (filterValue) {
                 const query = `${category}=${filterValue}`;
-                const response = await dispatch(getAllProducts(query))
-                if (response && response.payload.length > 0) {
-                    dispatch(filterSearched(query))
-                    navigate(`/categorypage?${query}`);
-                    break;
-                }}}
+                try {
+                    await dispatch(getAllProducts(query))
+                    .then(response => {
+                        if(response.payload.data.length > 0){
+                            dispatch(filterSearched(category, filterValue))
+                            navigate(`/categorypage`);
+                            exito = true
+                        }
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
+                if (exito){break}
+                // if (response && ) {
+                //     
+                    
+                    
+                // }
+            }}
+                
         setFilterValue('');
     };    
 

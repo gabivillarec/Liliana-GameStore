@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import style from './Form.module.css'
@@ -60,7 +60,7 @@ const Form = () => {
     }
     setError(validation(form));
     try {
-      const response = await axios.post('http://localhost:3001/LilianaGameStore/user', form);
+      const response = await axios.post('/LilianaGameStore/user', form);
       navigate('/login', { state: { newUser: response.data } });
     } catch (error) {
       setError(error.response.data);
@@ -74,7 +74,7 @@ const Form = () => {
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
               <div className="card" style={{ borderRadius: '15px' }}>
-                <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }} >
+                <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }}> 
                   <h2 className="text-uppercase text-center text-white mb-5">CREÁ TU CUENTA</h2>
 
                   <form onSubmit={handleSubmit}>
