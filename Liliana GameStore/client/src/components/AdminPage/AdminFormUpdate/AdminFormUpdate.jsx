@@ -1,5 +1,5 @@
 import AdminDetail from "./Admin/AdminDetail";
-import UpdateForm from "./Admin/updateForm";
+import UpdateForm from "./Admin/UpdateForm";
 
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
