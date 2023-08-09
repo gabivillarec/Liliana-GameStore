@@ -7,10 +7,14 @@ const SearchedProducts = () => {
   const searchedProducts = useSelector((state) => state.products);
 
   return (
-    <div>
-      <h2>Productos Encontrados:</h2>
-      <CardsContainer products={searchedProducts} />
-    </div>
+      <article className={style.contenedor}>
+          <div className={`d-flex justify-content-center ${style.blurFondoSearch}`}>
+            <div>
+              <h2>Productos Encontrados:</h2>
+              <CardsContainer products={searchedProducts} />
+            </div>
+          </div>
+      </article>
   );
 };
 
