@@ -6,7 +6,7 @@ import axios from 'axios'
 export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload: response.data.data
@@ -23,7 +23,7 @@ export const getAllProducts = (filtros) => {       //funcion que trae si no hay 
 
 export const getProductDetail = (id) => {
     try {
-        const endpoint = `http://localhost:3001/LilianaGameStore/products/${id}`
+        const endpoint = `/LilianaGameStore/products/${id}`
         return async (dispatch) => {
         const { data } = await axios.get(endpoint)
             return dispatch({
@@ -43,7 +43,7 @@ export const clearDetail = () => {
 
 export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
-      axios.get(`http://localhost:3001/LilianaGameStore/favorites/${id}`)
+      axios.get(`/LilianaGameStore/favorites/${id}`)
         .then((response) => {
           dispatch({
             type: GET_FAVORITES,
@@ -61,7 +61,7 @@ export const getFavorites = (id) => {
   export const getAdminProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`http://localhost:3001/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
                 return dispatch({
                     type: GET_ADMIN_PRODUCTS,
                     payload: response.data.data
