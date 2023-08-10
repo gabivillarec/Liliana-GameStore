@@ -1,6 +1,6 @@
 import TablaProduts from "./TablaProduct/TablaProduts"
 import { useSelector , useDispatch } from "react-redux";
-import {getAdminProducts} from '../../../redux/actions'
+import {getAdminProducts} from '../../../Redux/actions'
 import { useEffect , useState} from "react";
 import axios from "axios";
 
@@ -19,13 +19,13 @@ const AdminGetProduct = () =>{
     const [brand, setBrand] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3001/LilianaGameStore/subcategory')
+        axios.get('/LilianaGameStore/subcategory')
           .then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
           });
-        axios.get('http://localhost:3001/LilianaGameStore/brand')
+        axios.get('/LilianaGameStore/brand')
             .then(response => {
                 setBrand(response.data);
             })

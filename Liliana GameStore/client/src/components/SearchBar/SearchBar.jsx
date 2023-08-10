@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"; 
-import { getAllProducts } from '../../redux/actions.js'
+import { filterSearched, getAllProducts } from '../../Redux/actions.js';
 import style from './SearchBar.module.css';
 
 const SearchBar = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [filterValue, setFilterValue] = useState('');
@@ -17,16 +16,31 @@ const SearchBar = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const categories = ["name", "category", "subcategory", "brand"];
+        let exito = false
         let filters = "";
-
         for (const category of categories) {
             if (filterValue) {
                 const query = `${category}=${filterValue}`;
-                const response = await dispatch(getAllProducts(query));
-                if (response && response.payload.length > 0) {
-                    navigate("/search");
-                    break;
-                }}}
+                try {
+                    await dispatch(getAllProducts(query))
+                    .then(response => {
+                        if(response.payload.data.length > 0){
+                            dispatch(filterSearched(category, filterValue))
+                            navigate(`/categorypage`);
+                            exito = true
+                        }
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
+                if (exito){break}
+                // if (response && ) {
+                //     
+                    
+                    
+                // }
+            }}
+                
         setFilterValue('');
     };    
 
@@ -34,7 +48,7 @@ const SearchBar = () => {
         <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search"
                 value={filterValue} onChange={handleInputChange} />
-            <button className="btn btn-outline-success" type="button" onClick={handleSearch} >Buscar</button>
+            <button className="btn btn-outline-info" type="button" onClick={handleSearch} >Buscar</button>
         </form>
     );
 };

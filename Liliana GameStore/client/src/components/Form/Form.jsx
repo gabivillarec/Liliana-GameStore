@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import style from './Form.module.css'
@@ -60,22 +60,8 @@ const Form = () => {
     }
     setError(validation(form));
     try {
-      let answer = await axios.post('http://localhost:3001/LilianaGameStore/user', form)
-        .then(response => {
-          console.log(response.data);
-          localStorage.setItem("newUser", JSON.stringify({
-            first_name: response.data.first_name,
-            last_name: response.data.last_name,
-            username: response.data.username,
-            email: response.data.email,
-            password: response.data.password,
-            cp: response.data.cp,
-            address: response.data.address,
-            phone: response.data.phone,
-            avatar_img: response.data.avatar_img,
-          }));
-          navigate('/');
-        });
+      const response = await axios.post('/LilianaGameStore/user', form);
+      navigate('/login', { state: { newUser: response.data } });
     } catch (error) {
       setError(error.response.data);
     }
@@ -88,7 +74,7 @@ const Form = () => {
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
               <div className="card" style={{ borderRadius: '15px' }}>
-                <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }} >
+                <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }}> 
                   <h2 className="text-uppercase text-center text-white mb-5">CREÁ TU CUENTA</h2>
 
                   <form onSubmit={handleSubmit}>

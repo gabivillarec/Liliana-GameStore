@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import Buttons from "./Buttons";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../../../redux/actions"
+import { getAllProducts } from "../../../../Redux/actions"
 import axios from 'axios'
 import style from "./AdminItem.module.css"
 import TablaProduts from "./TablaProduts";
@@ -14,7 +14,7 @@ const BotonesItem = ({ products }) => {
     const [brand, setBrand] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3001/LilianaGameStore/subcategory')
+        axios.get('/LilianaGameStore/subcategory')
           .then(response => {
             console.log(response.data)
             setSubcategories(response.data);
@@ -22,7 +22,7 @@ const BotonesItem = ({ products }) => {
           .catch(error => {
             console.error('Error al obtener las subcategorías:', error);
           });
-        axios.get('http://localhost:3001/LilianaGameStore/brand')
+        axios.get('/LilianaGameStore/brand')
             .then(response => {
                 console.log(response.data)
                 setBrand(response.data);

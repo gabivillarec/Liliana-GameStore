@@ -16,7 +16,7 @@ server.use(bodyParser.json({ limit: '50mb' })); //También se establece un lími
 server.use(cookieParser()); //para analizar las cookies en las solicitudes entrantes.
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // . Permite las solicitudes desde el origen 'http://localhost:3000'
+	res.header('Access-Control-Allow-Origin', 'https://lilianagamesstore.netlify.app'); // . Permite las solicitudes desde el origen 'http://localhost:3000' o *
 	res.header('Access-Control-Allow-Credentials', 'true');
 	res.header(
 		'Access-Control-Allow-Headers',
