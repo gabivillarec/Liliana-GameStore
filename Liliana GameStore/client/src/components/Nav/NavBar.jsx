@@ -34,7 +34,7 @@ const NavBar = () => {
                 {usuario && (<button className="btn btn-outline-info border-2 fs-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">User</button>)}
             </div>
 
-            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div className={`offcanvas-header ${style.perfilCanvaHeader}`}>
                     <h5 className="offcanvas-title text-info" id="offcanvasExampleLabel">{usuario && usuario.username}</h5>
                     <button type="button" className="btn btn-outline-info fs-5" data-bs-dismiss="offcanvas" aria-label="Close">✖</button>
