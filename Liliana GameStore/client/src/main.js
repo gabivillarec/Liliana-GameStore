@@ -13,7 +13,7 @@ axios.defaults.baseURL = "https://liliana-server.onrender.com";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store = {store} > 
     <BrowserRouter>
-      <App />
+    <App />
     </BrowserRouter>
-</Provider>,
+  </Provider>
 )
