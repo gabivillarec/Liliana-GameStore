@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 import { useState } from 'react';
 import axios from 'axios';
-import {getAllCart} from '../../redux/actions'
+import {getAllCart} from '../../Redux/actions'
 
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
