@@ -6,7 +6,6 @@ const AdminItem = ({ product, handlerDelete }) => {
     const navigate = useNavigate()
     const { image, name, price, id, stock , category_name} = product;
     const [checkbox, setCheckbox] = useState(false);
-    console.log(product)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };

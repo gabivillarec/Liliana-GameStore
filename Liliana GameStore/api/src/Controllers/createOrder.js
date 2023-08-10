@@ -1,9 +1,10 @@
 const { Orders, Users, Products, Cart } = require("../db");
 const mercadopago = require("mercadopago");
+const { MERCADO_PAGO } = process.env;
 
 // Agrego credenciales de prueba
 mercadopago.configure({
-	access_token: "TEST-225481503403433-080411-1b1e4fa5ace6ac244082f24d57c07281-60345564",
+	access_token: MERCADO_PAGO,
   });
 
 // Creo una función para establecer la fecha
