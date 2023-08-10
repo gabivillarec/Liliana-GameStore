@@ -7,6 +7,8 @@ export const getAllProducts = (filtros) => {       //funcion que trae si no hay 
     return async (dispatch) => {
         try {
             let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
+            console.log(response);
+            
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload:{
