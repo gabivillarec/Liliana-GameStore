@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import style from "./NavBar.module.css"
 import SearchBar from '../SearchBar/SearchBar'
+import imageLogo from '../../../vistas/LilianaGameStore.png'
 
 const NavBar = () => {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ const NavBar = () => {
 
     return(
         <nav id="navbar-example2" className={`navbar px-3 p-3 ${style.navbarE}`}>
-            <img className={style.logo} src='../../../vistas/LilianaGameStore.png' alt="logo" onClick={() => navigate('/')}/>
+            <img className={style.logo} src={imageLogo} alt="logo" onClick={() => navigate('/')}/>
 
             <SearchBar/>
 
