@@ -46,7 +46,11 @@ const Products = (sequelize) => {
 		brand_name: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+		disabled: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		}
 	});
 };
 
