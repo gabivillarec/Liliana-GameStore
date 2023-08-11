@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 const getAllProducts = async (req, res) => {
   try {
-    let { name, price, category, subcategory, brand, sockets, order, pageNumber, disabled } = req.query;
+    let { name, price, category, subcategory, brand, sockets, order, pageNumber } = req.query;
 
     let offset = 0;
     let limit = 15;
