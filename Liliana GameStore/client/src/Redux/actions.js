@@ -1,12 +1,13 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED } from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED , GET_ALL_USERS ,GET_DETAIL_USERS ,GET_MERCADO_ORDER} from "./action-type";
 import axios from 'axios'
+import { URL } from "../main";
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
 
 export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`${URL}products?${filtros}`);
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload:{
@@ -27,7 +28,7 @@ export const getAllProducts = (filtros) => {       //funcion que trae si no hay 
 
 export const getProductDetail = (id) => {
     try {
-        const endpoint = `/LilianaGameStore/products/${id}`
+        const endpoint = `${URL}products/${id}`
         return async (dispatch) => {
         const { data } = await axios.get(endpoint)
             return dispatch({
@@ -47,7 +48,7 @@ export const clearDetail = () => {
 
 export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
-      axios.get(`/LilianaGameStore/favorites/${id}`)
+      axios.get(`${URL}favorites/${id}`)
         .then((response) => {
           dispatch({
             type: GET_FAVORITES,
@@ -65,9 +66,9 @@ export const getFavorites = (id) => {
   export const getAdminProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`/LilianaGameStore/products?${filtros}`);
+            let response = await axios.get(`${URL}products?${filtros}`);
                 return dispatch({
-                    type: GET_ADMIN_PRODUCTS,
+                    type: GET_DETAIL_USERS,
                     payload: response.data.data
                 })    // type indica la action a ejecutar payload pasa la info al estado global
         } catch (error) {
@@ -83,7 +84,7 @@ export const getFavorites = (id) => {
   export const getAllCart = (idUser) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
-            let response = await axios.get(`/LilianaGameStore/cart/${idUser}`);
+            let response = await axios.get(`${URL}cart/${idUser}`);
                 return dispatch({
                     type: GET_CART_PRODUCTS,
                     payload: response.data
@@ -111,4 +112,55 @@ export const setFilterSearched = () => {
                 payload: { nombreFiltro : undefined,
                             valorFiltro : undefined },
         })}
+}
+
+
+  //------------------------------------------------------------------------------------- getAllUsers ---------------------------------------------------------------
+
+  export const getAllUsers = () => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+    return async (dispatch) => {
+        try {
+            let response = await axios.get(`${URL}user/`);
+                return dispatch({
+                    type: GET_ALL_USERS,
+                    payload: response.data
+                })    // type indica la action a ejecutar payload pasa la info al estado global
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+  //------------------------------------------------------------------------------------- getDetailUser ---------------------------------------------------------------
+
+  export const getDetailUser = (idUser) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+    return async (dispatch) => {
+        try {
+            let response = await axios.get(`${URL}user/${idUser}`);
+                return dispatch({
+                    type: GET_DETAIL_USERS,
+                    payload: response.data
+                })    // type indica la action a ejecutar payload pasa la info al estado global
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+  //------------------------------------------------------------------------------------- getMercadoOrder ------------------------------------------------------------
+
+export const getMercadoOrder = (JsonBody) => {  
+         //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(`${URL}order/`, JsonBody);
+                console.log(response.data , 'redux')
+                return dispatch({
+                    type: GET_MERCADO_ORDER,
+                    payload: response.data
+                })    // type indica la action a ejecutar payload pasa la info al estado global
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 }

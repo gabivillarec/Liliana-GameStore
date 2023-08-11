@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { URL } from "../../../main";
 
 export const createFavorite = async(userId , productId) =>{
-    const URLfav = 'http://localhost:3001/LilianaGameStore/Favorites'
+    const URLfav = `${URL}favorites`
     let objet = {
         product:productId,
         userId:userId
