@@ -5,6 +5,7 @@ const { Sequelize } = require('sequelize'); // para interactuar con postgresSQL
 const fs = require('fs'); //manipula sistemas de archivos
 const path = require('path');
 
+
 //Local Host
  const sequelize = new Sequelize(
 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`, 	{
@@ -12,6 +13,7 @@ const path = require('path');
 	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
  	}
 );
+
 
 //? Render
 /* const sequelize = new Sequelize(
@@ -48,7 +50,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory } = sequelize.models;
+const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory, Review } = sequelize.models;
 
 Users.beforeCreate((user, options) => {
 	if (!user.avatar_img) {
@@ -82,6 +84,13 @@ Favorites.belongsToMany(Products, {through:"favorites_products"});
 
 Products.belongsToMany(Socket, {through:"socket_products"});
 Socket.belongsToMany(Products, {through:"socket_products"});
+
+Products.hasMany(Review, { foreignKey: 'productId' });
+Review.belongsTo(Products, { foreignKey: 'productId' });
+
+Users.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(Users, { foreignKey: 'userId' });
+
 
 //Products.belongsTo(Category);
 Category.hasMany(Products, {as:'products-category'});

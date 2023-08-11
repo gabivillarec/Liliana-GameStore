@@ -7,7 +7,9 @@ import { URL } from "../main";
 export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
+
             let response = await axios.get(`${URL}products?${filtros}`);
+
                 return dispatch({
                     type: GET_ALL_PRODUCTS,
                     payload:{

@@ -22,6 +22,7 @@ const createProduct = async (req, res) => {
         subcategory,
         brand,
         socket,
+        disabled
       } = productData;
 
       if (
@@ -109,6 +110,7 @@ const createProduct = async (req, res) => {
         categoryId: catDB.dataValues.id,
         subCategoryId: subCatDB.dataValues.id,
         brandId: brandDB.dataValues.id,
+        disabled: disabled
       });
 
       // Asocio la tabla Socket con el producto creado (en caso de que exista)
