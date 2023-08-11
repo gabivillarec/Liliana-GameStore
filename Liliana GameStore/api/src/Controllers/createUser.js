@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => {
   try {
-    const { first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin, disabled } = req.body;
+    const { first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin, master, disabled } = req.body;
 
     if (username && email) {
       const saltRounds = 10; // Número de rondas de cifrado
@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
 
       const [register, created] = await Users.findOrCreate({
         where: { username, email },
-        defaults: { username, email, first_name, last_name, password: hashedPassword, cp, address, phone, avatar_img, admin, disabled },
+        defaults: { username, email, first_name, last_name, password: hashedPassword, cp, address, phone, avatar_img, admin, master, disabled },
       });
 
       if (created) {
@@ -26,7 +26,8 @@ const createUser = async (req, res) => {
           phone: register.phone,
           avatar_img: register.avatar_img,
           admin: register.admin,
-          disabled: disabled
+          master: register.master,
+          disabled: register.disabled
         };
 
         return res.json(response);
