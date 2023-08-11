@@ -3,15 +3,20 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const UserItem = ({ product, handlerDelete }) => {
+const UserItem = ({ product, handlerDelete , inCatalogue}) => {
     const navigate = useNavigate()
-    const {  email , phone , id ,first_name  , last_name} = product;
+    const {  email , phone , id ,first_name  , last_name , disabled} = product;
     const [checkbox, setCheckbox] = useState(false);
+    const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
+    const toggleHabilitado = () => {
+        setHabilitado(prevCheckbox => !prevCheckbox);
+    };
 
     useEffect(() => {
+        setHabilitado(disabled)
         setCheckbox(false);
     }, [id]);
 
@@ -33,6 +38,19 @@ const UserItem = ({ product, handlerDelete }) => {
             </td>
             <td>
                 <p className="fw-normal mb-1">{phone}</p>
+            </td>
+            <td>
+            <div className="form-check form-switch">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={habilitado}
+                        onChange={toggleHabilitado}
+                        onClick={()=>inCatalogue(id, habilitado)}
+                        role="switch"
+                        id={`flexSwitchCheckDefault_${id}`}
+                    />
+                </div>
             </td>
             
             <td>

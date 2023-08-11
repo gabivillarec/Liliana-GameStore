@@ -17,6 +17,7 @@ const AdminUsers = () => {
         dispatch(getAllUsers())
     },[dispatch , deleteTrigger, ])
     
+    
     return(
         <div className= 'container'>
         <div className='container'>
@@ -28,6 +29,7 @@ const AdminUsers = () => {
                     <th>Apellido</th>
                     <th>Email</th>
                     <th>Telefono</th>
+                    <th>DesHabilitar</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
