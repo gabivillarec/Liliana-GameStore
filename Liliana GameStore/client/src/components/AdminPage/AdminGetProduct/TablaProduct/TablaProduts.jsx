@@ -16,6 +16,15 @@ const TablaProduts = ({products , setDeleteTrigger, deleteTrigger}) => {
             alert(`El checkbox debe estar en true para poder eliminar un producto`)
         }
     }
+
+    const inCatalogue = async(id , habilitado) =>{
+        console.log(id)
+        console.log(id)
+        await axios.put(`${URL}products/${id}`, {disabled:!habilitado})
+        setDeleteTrigger(!deleteTrigger);
+    }
+
+
     useEffect(()=> {
 
     },[handlerDelete])
@@ -23,7 +32,7 @@ const TablaProduts = ({products , setDeleteTrigger, deleteTrigger}) => {
     return(
         <tbody>
             {
-                products.map((product , index)=> <AdminItem key={index} product={product} handlerDelete={handlerDelete}/>)
+                products.map((product , index)=> <AdminItem key={index} product={product} handlerDelete={handlerDelete} inCatalogue={inCatalogue}/>)
             }
         </tbody>
     )

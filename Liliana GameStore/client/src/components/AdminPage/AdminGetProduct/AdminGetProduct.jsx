@@ -70,6 +70,7 @@ const AdminGetProduct = () =>{
               <th>Category</th>
               <th>Precio</th>
               <th>Stock</th>
+              <th>En Pausa</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>

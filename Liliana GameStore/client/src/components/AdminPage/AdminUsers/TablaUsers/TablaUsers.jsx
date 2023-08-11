@@ -17,6 +17,12 @@ const TablaUsers = ({users , deleteTrigger ,setDeleteTrigger}) => {
         } else {
             alert(`El checkbox debe estar en true para poder eliminar un producto`);
         }}
+        const inCatalogue = async(id , habilitado) =>{
+            console.log(id)
+            console.log(id)
+            await axios.put(`${URL}user/${id}`, {disabled:!habilitado})
+            setDeleteTrigger(!deleteTrigger);
+        }
 
     useEffect(()=> {
 
@@ -25,7 +31,7 @@ const TablaUsers = ({users , deleteTrigger ,setDeleteTrigger}) => {
     return(
         <tbody>
             {
-                users.map((product , index)=> <UserItem key={index} product={product} handlerDelete={handlerDelete}/>)
+                users.map((product , index)=> <UserItem key={index} product={product} handlerDelete={handlerDelete} inCatalogue={inCatalogue}/>)
             }
         </tbody>
     )
