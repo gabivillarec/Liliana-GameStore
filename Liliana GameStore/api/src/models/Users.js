@@ -62,6 +62,16 @@ const Users = (sequelize)=>{
         admin : {
             type: DataTypes.BOOLEAN,
             defaultValue : false
+        },
+
+        master : {
+            type:DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+
+        disabled : {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     
     }, {timestamps: false});
