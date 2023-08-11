@@ -12,6 +12,7 @@ import AdminPage from "./components/AdminPage/AdminPage";
 import AdminForm from "./components/AdminPage/AdminForm/AdminForm";
 import AdminFormUpdate from "./components/AdminPage/AdminFormUpdate/AdminFormUpdate";
 import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
+import AdminUserEdit from './components/AdminPage/AdminUserEdit/AdminUserEdit'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/adminpage" element={<AdminPage/>}/>
           <Route path="/adminpage/form" element={<AdminForm/>}/>
           <Route path="/adminpage/formupdate/:id" element={<AdminFormUpdate/>}/>
+          <Route path="/adminpage/adminuseredit/:id" element={<AdminUserEdit/>}/>
           <Route path="/search" element={<SearchedProducts/>}/>
       </Routes>
     </>

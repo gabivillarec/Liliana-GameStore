@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./Login.module.css"
 import axios from "axios"
 import { useState } from "react";
+import { URL } from "../../main";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ const Login = () => {
         event.preventDefault()
         setError({})
         try {
-            let respuesta = await axios.post('/LilianaGameStore/login', userData)
+            await axios.post(`${URL}login`, userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
                 localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )
