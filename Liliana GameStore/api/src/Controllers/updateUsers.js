@@ -3,12 +3,12 @@ const { Users } = require("../db");
 const updateUsers = async (req,res) =>{
     
     const { id } = req.params;
-    const { first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin } = req.body;
+    const { first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin, disabled } = req.body;
 
     try {
 
         const result = await Users.update({
-            first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin
+            first_name, last_name, username, email, password, cp, address, phone, avatar_img, admin, disabled
         }, {where : {id: id}});
 
         if (result[0] === 1) {
