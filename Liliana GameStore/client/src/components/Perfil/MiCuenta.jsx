@@ -1,5 +1,6 @@
 import style from './MiCuenta.module.css'
 import Sections from './Sections/Sections'
+import ProductosAdquiridos from './Sections/ProductosAdquiridos'
 import PedidosCurso from './Sections/PedidosCurso'
 import PerfilData from './Sections/PerfilData'
 import { useState , useEffect } from 'react'
@@ -35,6 +36,7 @@ const MiCuenta = () => {
                 <article className="p-4">
                     <section className='container'>
                         <PerfilData client={client}/>
+                        <ProductosAdquiridos/>
                         <PedidosCurso/>
                     </section>
                 </article>

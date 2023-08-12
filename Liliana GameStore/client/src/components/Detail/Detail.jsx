@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail, clearDetail } from "../../Redux/actions"
 import style from "./Detail.module.css"
-import DisqusComments from '../DisqusComments/DisqusComments'
+import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
 import { postCarrito } from "./funcionesAuxiliares/postCarrito";
@@ -166,7 +166,7 @@ function Detail() {
               </main>
             </div>
           </div>
-          <DisqusComments/>
+          <CommentaryBox/>
         </section>
     )
 }
