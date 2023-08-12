@@ -18,8 +18,6 @@ const TablaProduts = ({products , setDeleteTrigger, deleteTrigger}) => {
     }
 
     const inCatalogue = async(id , habilitado) =>{
-        console.log(id)
-        console.log(id)
         await axios.put(`${URL}products/${id}`, {disabled:!habilitado})
         setDeleteTrigger(!deleteTrigger);
     }
