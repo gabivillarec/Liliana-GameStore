@@ -1,41 +1,37 @@
 import style from './Carrito.module.css'
 import ProducCarrito from "./ProducCarrito/ProducCarrito";
-import MercadoPago from './MercadoPago/MercadoPago';
-
+import Totalizar from './ProducCarrito/Totalizar'
 import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
-
 import { useState } from 'react';
-
-
-import {getAllCart , getMercadoOrder} from '../../Redux/actions'
+import {getAllCart } from '../../Redux/actions'
+import {objetoMercado} from './ProducCarrito/funcionesAuxiliares'
+import axios from 'axios';
+import { URL } from '../../main';
 
 
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
   let  products  = useSelector(state => state.cartProducts)
-  let  mercadoOrder  = useSelector(state => state.mercadoOrder)
-
-  console.log(mercadoOrder)
   let user = localStorage.getItem('user');
-  
   user = JSON.parse(user);
-  
-  
-  let JsonBody ={  
-    userId:user.id,
-    productId:9,
-    quantity:1
-    }
 
   let dispatch = useDispatch()
 
   useEffect(()=> {
       dispatch(getAllCart(user.id))
-      dispatch(getMercadoOrder(JsonBody))
   },[dispatch ,  deleteTrigger])
 
-
+  const purchaseHandler = async() => {
+    try {
+      let obtMercado = objetoMercado(products)
+      let response = await axios.post(`${URL}mercadoorder`, obtMercado)
+          window.location.href = response.data.response.body.init_point;
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+  };
 
 
 
@@ -53,8 +49,11 @@ const Carrito = () => {
               <th>Eliminar</th>
             </tr>
           </thead>
-          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} preferenceId={mercadoOrder}/>
+          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
           </table>
+        </div>
+        <div>
+          <Totalizar  purchaseHandler={purchaseHandler}/>
         </div>
       </div>
 

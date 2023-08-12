@@ -8,29 +8,17 @@ mercadopago.configure({
 
 const placeOrder = async (req, res) => {
   try {
-    const {id, title, description, image, stock, condition, price, quantity} =
-      req.body;
-    console.log(id, title, price)
+      let products = req.body
+      let mercadoProducts = products.map(prod => prod) 
     let preference = {
-      items: [
-        {
-          id,
-          title,
-          quantity,
-          currency_id: "ARS",
-          unit_price: price,
-          description,
-          picture_url: image,
-        },
-      ],
-
+      items: mercadoProducts,
+      
       back_urls: {
-        success: "http://localhost:3001/payment/success",
-        failure: "http://localhost:3001/payment/failure",
-        pending: "http://localhost:3001/payment/pending",
+        success: "http://localhost:5173/micuenta",
+        failure: "http://localhost:5173/carrito",
+        pending: "http://localhost:5173/micuenta",
       },
     };
-
     const response = await mercadopago.preferences.create(preference);
     res.status(200).json({response});
   } catch (error) {
@@ -39,3 +27,15 @@ const placeOrder = async (req, res) => {
 };
 
 module.exports = {placeOrder};
+
+/* [
+  {
+    id,
+    title,
+    quantity,
+    currency_id: "ARS",
+    unit_price,
+    description,
+    picture_url: image,
+  },
+] */

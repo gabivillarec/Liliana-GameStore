@@ -1,6 +1,6 @@
 import { useState , useEffect } from "react";
 import Item from './Item'
-import MercadoPago from "../MercadoPago/MercadoPago";
+//import MercadoPago from "../MercadoPago/MercadoPago";
 import {  deleteCart , putCart} from './funcionesAuxiliares'
 
 const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger , preferenceId}) => {
@@ -40,9 +40,6 @@ const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger , preferenceId}
             {
                 products.map((product , index)=> <Item key={index} product={product}  handlerDeleteItem={handlerDeleteItem}  handlerAgregar={handlerAgregar} handlerQuitar={handlerQuitar}/>)
             }
-            <div className="container bg-black">
-                <MercadoPago preferenceId={preferenceId}/>
-            </div>
         </tbody>
     )
 }

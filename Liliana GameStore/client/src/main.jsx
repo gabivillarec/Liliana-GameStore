@@ -13,7 +13,7 @@ export const URL = "http://localhost:3001/LilianaGameStore/";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store = {store} > 
     <BrowserRouter>
-    <App />
+      <App/>
     </BrowserRouter>
   </Provider>
 
