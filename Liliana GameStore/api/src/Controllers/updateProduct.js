@@ -33,7 +33,10 @@ const updateProduct = async (req, res) => {
         if (stock) updateFields.stock = stock;
         if (rating) updateFields.rating = rating;
         if (description_text) updateFields.description_text = description_text;
-        if (disabled) updateFields.disabled = disabled;
+        if (disabled !== undefined) {
+            updateFields.disabled = disabled === true || disabled === 'true';
+        }
+        
 
         // Verificar si se proporcionó el objeto characteristics y actualizar propiedades automáticamente
         if (characteristics) {
