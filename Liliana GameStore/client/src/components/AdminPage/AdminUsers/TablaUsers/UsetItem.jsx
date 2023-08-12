@@ -1,11 +1,11 @@
-import style from './AdminItem.module.css'
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
+const UserItem = ({ product, handlerDelete , inCatalogue}) => {
     const navigate = useNavigate()
-    const { image, name, price, id, stock , category_name,disabled } = product;
+    const {  email , phone , id ,first_name  , last_name , disabled} = product;
     const [checkbox, setCheckbox] = useState(false);
     const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
@@ -14,7 +14,6 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
     const toggleHabilitado = () => {
         setHabilitado(prevCheckbox => !prevCheckbox);
     };
-
 
     useEffect(() => {
         setHabilitado(disabled)
@@ -27,27 +26,21 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
 
     return (
         <tr className='table-dark'>
+            <td>{id}</td>
             <td>
-                <div className="d-flex align-items-center">
-                    <img
-                        src={image}
-                        alt={name}
-                        className={`rounded-circle ${style.imgen}`}
-                    />
-                    <div className="ms-3">
-                        <p className="fw-bold mb-1">{name}</p>
-                    </div>
-                </div>
+                {first_name}
             </td>
             <td>
-                <p className="fw-normal mb-1">{category_name}</p>
+                {last_name}
             </td>
             <td>
-                <p className="fw-normal mb-1">{price}</p>
+                <p className="fw-normal mb-1">{email}</p>
             </td>
-            <td>{stock}</td>
             <td>
-                <div className="form-check form-switch">
+                <p className="fw-normal mb-1">{phone}</p>
+            </td>
+            <td>
+            <div className="form-check form-switch">
                     <input
                         className="form-check-input"
                         type="checkbox"
@@ -59,9 +52,10 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                     />
                 </div>
             </td>
+            
             <td>
                 <button
-                    onClick={() => navigate(`formupdate/${id}`)}
+                    onClick={() => navigate(`adminuseredit/${id}`)}
                     type="button"
                     className="btn btn-link btn-sm btn-rounded"
                 >
@@ -99,4 +93,4 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
     );
 }
 
-export default AdminItem;
+export default UserItem;

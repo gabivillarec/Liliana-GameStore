@@ -9,7 +9,6 @@ const CategoryPage = () => {
     const searchedProductList = useSelector(state => state.searchedProductList)
 
     useEffect(() => {
-        console.log(searchedProductList.valorFiltro);
         if (searchedProductList.valorFiltro === undefined) {
             dispatch(getAllProducts());
         }

@@ -1,31 +1,32 @@
 import TablaProduts from "./TablaProduct/TablaProduts"
 import { useSelector , useDispatch } from "react-redux";
-import {getAdminProducts} from '../../../Redux/actions'
+import {getAllProducts} from '../../../Redux/actions'
 import { useEffect , useState} from "react";
 import axios from "axios";
-
+import { URL } from "../../../main";
 import Buttons from "./TablaProduct/Buttons";
 
 const AdminGetProduct = () =>{
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
     useEffect(()=> {
-        dispatch(getAdminProducts())
+        dispatch(getAllProducts())
     },[dispatch , deleteTrigger])
-    let  products  = useSelector(state => state.adminProducts)
+    let  products  = useSelector(state => state.products)
 
     const [filtros, setFiltros] = useState({})
     const [subcategories, setSubcategories] = useState([])
     const [brand, setBrand] = useState([])
 
     useEffect(() => {
-        axios.get('/LilianaGameStore/subcategory')
+        axios.get(`${URL}subcategory`)
           .then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
+            console.log(error)
           });
-        axios.get('/LilianaGameStore/brand')
+        axios.get(`${URL}brand`)
             .then(response => {
                 setBrand(response.data);
             })
@@ -53,7 +54,7 @@ const AdminGetProduct = () =>{
 
     const handleBtnFiltrar = () => {
         const resultString = objectToString(filtros)
-        dispatch(getAdminProducts(resultString))
+        dispatch(getAllProducts(resultString))
     } 
 
 
@@ -69,6 +70,7 @@ const AdminGetProduct = () =>{
               <th>Category</th>
               <th>Precio</th>
               <th>Stock</th>
+              <th>En Pausa</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>

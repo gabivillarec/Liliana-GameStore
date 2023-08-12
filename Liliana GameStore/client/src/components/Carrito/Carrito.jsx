@@ -6,44 +6,37 @@ import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { useState } from 'react';
-import axios from 'axios';
-import {getAllCart} from '../../Redux/actions'
+
+
+import {getAllCart , getMercadoOrder} from '../../Redux/actions'
+
 
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
-  const [preferenceId , setPreferenceId] = useState('')
   let  products  = useSelector(state => state.cartProducts)
+  let  mercadoOrder  = useSelector(state => state.mercadoOrder)
+
+  console.log(mercadoOrder)
   let user = localStorage.getItem('user');
+  
   user = JSON.parse(user);
-
-  let dispatch = useDispatch()
-  useEffect(()=> {
-      dispatch(getAllCart(user.id))
-  },[dispatch ,  deleteTrigger])
-
+  
+  
   let JsonBody ={  
     userId:user.id,
     productId:9,
     quantity:1
     }
-    console.log(JsonBody.userId)
-    useEffect(() => {
-      async function fetchPreference() {
-          const preference = await fetchPreferenceId();
-          setPreferenceId(preference);
-      }
-      fetchPreference();
-  }, []);
-    
 
-  const fetchPreferenceId = async () => {
-    try {
-        const response = await axios.post(`http://localhost:3001/LilianaGameStore/order/`, JsonBody);
-        return (response.data); // Assuming the response contains preferenceId
-    } catch (error) {
-        console.error('Error fetching preferenceId:', error);
-    }
-};
+  let dispatch = useDispatch()
+
+  useEffect(()=> {
+      dispatch(getAllCart(user.id))
+      dispatch(getMercadoOrder(JsonBody))
+  },[dispatch ,  deleteTrigger])
+
+
+
 
 
     return(
@@ -60,9 +53,8 @@ const Carrito = () => {
               <th>Eliminar</th>
             </tr>
           </thead>
-          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} preferenceId={mercadoOrder}/>
           </table>
-          <MercadoPago preferenceId={preferenceId}/>
         </div>
       </div>
 

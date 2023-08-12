@@ -1,9 +1,9 @@
 import axios from "axios"
-import { URL } from "../../../../main"
+import {  URL } from "../../../../main"
 
-export const updateproducto = async(id, create) =>{
+export const updateUser = async(id, create) =>{
     let objetoEnviar =  cleanObject(create)
-    const UR = `${URL}products/`
+    const UR = `${URL}user/`
     let response = await axios.put(UR + id, objetoEnviar)
     return response.data
 }

@@ -9,6 +9,7 @@ const categoryRoutes = require('./categoryRoutes');
 const orderRoutes = require('./orderRoutes');
 const socketRoutes = require('./socketRoutes');
 const subCategoryRoutes = require('./subCategoryRoutes');
+const reviewRoutes = require('./reviewRoutes');
 
 
 const router = Router();
@@ -24,9 +25,10 @@ router.use('/LilianaGameStore',orderRoutes);
 router.use('/LilianaGameStore',socketRoutes);
 router.use('/LilianaGameStore',subCategoryRoutes);
 router.use('/LilianaGameStore',usersRoutes);
-router.use('/LilianaGameStore',login);
+//router.use('/LilianaGameStore',login);
 router.use('/LilianaGameStore',usersRoutes);
-router.use('/LilianaGameStore',login);
+//router.use('/LilianaGameStore',login);
+router.use('/LilianaGameStore', reviewRoutes);
 
 
 module.exports = router;

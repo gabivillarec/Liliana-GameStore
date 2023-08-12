@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../Redux/actions";
 import axios from 'axios'
 import style from "./Products.module.css"
+import { URL } from "../../../main";
 
 const Products = ({ products }) => {
     const dispatch = useDispatch()
@@ -17,13 +18,13 @@ const Products = ({ products }) => {
 
     useEffect(() => {
 
-        axios.get('/LilianaGameStore/subcategory').then(response => {
+        axios.get(`${URL}subcategory`).then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
             console.error('Error al obtener las subcategorías:', error);
           });
-        axios.get('/LilianaGameStore/brand')
+        axios.get(`${URL}brand`)
             .then(response => {
                 setBrand(response.data);
             })
@@ -58,7 +59,6 @@ const Products = ({ products }) => {
     }
 
     const handleBtnFiltrar = () => {
-        console.log(searchedProductList)
         const resultString = objectToString(filtros)
         dispatch(getAllProducts(resultString))
     }

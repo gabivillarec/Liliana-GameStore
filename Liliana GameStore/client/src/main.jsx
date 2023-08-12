@@ -5,10 +5,10 @@ import App from './App.jsx'
 import store from './Redux/store.js';
 import './index.css';
 import './scss/style.scss';
-import axios from "axios"
 
-axios.defaults.baseURL = "http://localhost:3001"; 
-// axios.defaults.baseURL = "https://liliana-server.onrender.com";
+export const URL = "http://localhost:3001/LilianaGameStore/"; 
+//axios.defaults.baseURL = "https://liliana-server.onrender.com";
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store = {store} > 
