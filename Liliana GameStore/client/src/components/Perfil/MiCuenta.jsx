@@ -1,4 +1,5 @@
 import style from './MiCuenta.module.css'
+import ProductosAdquiridos from './Sections/ProductosAdquiridos'
 import { URL } from '../../main'
 import PedidosCurso from './Sections/PedidosCurso'
 import PerfilData from './Sections/PerfilData'
@@ -25,6 +26,7 @@ const MiCuenta = () => {
                 <article className="p-4">
                     <section className='container'>
                         <PerfilData client={client}/>
+                        <ProductosAdquiridos/>
                         <PedidosCurso/>
                     </section>
                 </article>

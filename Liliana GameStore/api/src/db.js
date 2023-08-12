@@ -24,6 +24,8 @@ const path = require('path');
 	}
 );
  */
+
+
 const basename = path.basename(__filename); // Obtiene el nombre base del archivo actual.
 
 const modelDefiners = []; // Crea un arreglo para almacenar los definidores de modelos.
