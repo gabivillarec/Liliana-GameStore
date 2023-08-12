@@ -52,7 +52,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory, Review } = sequelize.models;
+const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, Review } = sequelize.models;
 
 Users.beforeCreate((user, options) => {
 	if (!user.avatar_img) {
