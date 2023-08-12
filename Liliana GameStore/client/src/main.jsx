@@ -8,7 +8,7 @@ import './scss/style.scss';
 
 
 export const URL = "http://localhost:3001/LilianaGameStore/"; 
-//axios.defaults.baseURL = "https://liliana-server.onrender.com";
+//axios.defaults.baseURL = "https://liliana-server.onrender.com/";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store = {store} > 

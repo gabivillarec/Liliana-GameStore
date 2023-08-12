@@ -34,6 +34,5 @@ export const objetoMercado = (products) =>{
             picture_url: produc.image
         }
     })
-    console.log(objMercado)
     return objMercado
 } 
