@@ -7,12 +7,14 @@ import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
 import { postCarrito } from "./funcionesAuxiliares/postCarrito";
+import axios from "axios";
 
 function Detail() {
 
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
+    const [reviews, setReviews] = useState([])
     
     const [quantity, setQuantity] = useState(1);
 
@@ -64,13 +66,16 @@ function Detail() {
       alert(`Producto con ID: ${detail.id} Quitado de favoritos`)
     };
 
+
     useEffect(() => {
         dispatch(getProductDetail(id));
+        axios.get(`http://localhost:3001/LilianaGameStore/review/product/${id}`).then(response => setReviews(response.data))
         return () => {
           dispatch(clearDetail());
         };
       }, [dispatch, id]);
 
+      
     const stockMessage =
       detail.stock === 0 ? "SIN STOCK ⛔"
       : detail.stock > 0 && detail.stock <= 5 ? "BAJO STOCK ⚠️"
@@ -166,7 +171,7 @@ function Detail() {
               </main>
             </div>
           </div>
-          <CommentaryBox/>
+          <CommentaryBox reviews={reviews}/>
         </section>
     )
 }
