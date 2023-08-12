@@ -1,11 +1,5 @@
 const { Orders, Users, Products, Cart } = require("../db");
-const mercadopago = require("mercadopago");
-const { MERCADO_PAGO } = process.env;
 
-// Agrego credenciales de prueba
-mercadopago.configure({
-	access_token: MERCADO_PAGO,
-  });
 
 // Creo una función para establecer la fecha
 const formatDate = (date) => {
@@ -52,28 +46,10 @@ const createOrders = async (req,res) =>{
         if (cartProduct && cartProduct.stock >= item.cantidad) {
           await cartProduct.decrement('stock', { by: item.cantidad });
         }
-      }
-                  
-      // manejo respuesta mercadoPago
-      let preference = {
-        items: [],
-      };
-      
-      for (let item of cart) {
-        const product = await Products.findByPk(item.productId);
-        if (product && product.stock >= item.cantidad) {
-          preference.items.push({
-            title: product.name,
-            unit_price: +product.price,
-            quantity: item.cantidad,
-          });
-        }
       };
 
-      if (preference.items.length !== 0) {
-        const response = await mercadopago.preferences.create(preference);
-        const preferenceId = response.body.id;
-        return res.json(preferenceId);
+      if (order) {
+        return res.json(order);
       } else {
         return res.status(400).json({ error: 'Insufficient stock for one or more products in the cart.' });
       };    
