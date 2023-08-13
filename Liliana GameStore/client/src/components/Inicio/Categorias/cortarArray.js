@@ -1,4 +1,4 @@
-const modificarArray=(array, n = 5)=> {
+const modificarArray=(array, n = 4)=> {
     if (array.length > n) {
       array.splice(n); // Mantener solo los primeros n elementos y eliminar el resto
     } else if (array.length < n) {
