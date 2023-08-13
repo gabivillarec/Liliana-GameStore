@@ -28,7 +28,7 @@ const Login = () => {
                 // Manejo de la respuesta exitosa
                 localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )
                 navigate('/')
-              })                                                                     
+            })                                                                     
         } catch (error) {
             setError(error.response.data)
         }

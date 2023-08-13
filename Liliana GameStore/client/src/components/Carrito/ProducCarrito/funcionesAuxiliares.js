@@ -36,3 +36,18 @@ export const objetoMercado = (products) =>{
     })
     return objMercado
 } 
+export const detailMercado = (products) =>{
+    let objMercado = {
+        id: products.id,
+        title: products.name,
+        quantity: products.cantidad,
+        currency_id: "ARS",
+        unit_price: parseInt(products.price),
+        description: products.description_text,
+        picture_url: products.image
+
+    }
+        
+    
+    return objMercado
+} 
