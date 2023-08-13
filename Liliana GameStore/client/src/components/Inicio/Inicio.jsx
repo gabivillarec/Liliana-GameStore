@@ -10,7 +10,7 @@ import {getAllProducts} from '../../Redux/actions'
 const Inicio = () => {
     let dispatch = useDispatch()
     useEffect(()=> {
-        dispatch(getAllProducts(""))
+        dispatch(getAllProducts())
     },[dispatch])
 
     let  products  = useSelector(state => state.products)
