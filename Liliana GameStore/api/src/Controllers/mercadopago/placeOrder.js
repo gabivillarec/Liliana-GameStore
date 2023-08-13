@@ -1,9 +1,10 @@
 const mercadopago = require("mercadopago");
-//require("dotenv").config();
-//const {ACCESS_TOKEN} = process.env;
+require("dotenv").config();
+const {ACCESS_TOKEN} = process.env;
+const URL = `http://localhost:5173/`
 
 mercadopago.configure({
-  access_token: 'APP_USR-8709825494258279-092911-227a84b3ec8d8b30fff364888abeb67a-1160706432',
+  access_token: `APP_USR-8709825494258279-092911-227a84b3ec8d8b30fff364888abeb67a-1160706432`,
 });
 
 const placeOrder = async (req, res) => {
@@ -14,9 +15,9 @@ const placeOrder = async (req, res) => {
       items: mercadoProducts,
       
       back_urls: {
-        success: "http://localhost:5173/micuenta",
-        failure: "http://localhost:5173/carrito",
-        pending: "http://localhost:5173/micuenta",
+        success: `${URL}micuenta`,
+        failure: `${URL}carrito`,
+        pending: `${URL}micuenta`,
       },
     };
     const response = await mercadopago.preferences.create(preference);

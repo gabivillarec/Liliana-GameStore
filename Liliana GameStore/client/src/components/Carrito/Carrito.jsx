@@ -29,7 +29,6 @@ const Carrito = () => {
           window.location.href = response.data.response.body.init_point;
     } catch (error) {
       console.log(error.message);
-      
     }
   };
 

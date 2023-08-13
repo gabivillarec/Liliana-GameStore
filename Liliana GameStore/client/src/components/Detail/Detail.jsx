@@ -6,8 +6,10 @@ import style from "./Detail.module.css"
 import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
+import {detailMercado} from '../Carrito/ProducCarrito/funcionesAuxiliares'
 import { postCarrito } from "./funcionesAuxiliares/postCarrito";
 import axios from "axios";
+import { URL } from "../../main";
 
 function Detail() {
 
@@ -45,8 +47,15 @@ function Detail() {
       }
     };
 
-    const handleBuyNow = () => {
-      console.log('Comprar Ahora');
+    const handleBuyNow = async() => {
+      try {
+        let obtMercado = detailMercado(detail)
+        console.log(obtMercado)
+        let response = await axios.post(`${URL}mercadoorder`, obtMercado)
+            window.location.href = response.data.response.body.init_point;
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     const handleAddItem = async() => {
       let idUser = localStorage.getItem('user');
@@ -69,7 +78,7 @@ function Detail() {
 
     useEffect(() => {
         dispatch(getProductDetail(id));
-        axios.get(`http://localhost:3001/LilianaGameStore/review/product/${id}`).then(response => setReviews(response.data))
+        axios.get(`${URL}review/product/${id}`).then(response => setReviews(response.data))
         return () => {
           dispatch(clearDetail());
         };
@@ -157,7 +166,7 @@ function Detail() {
                   </div>
                   <a href="#" className="btn btn-warning shadow-0" onClick={handleBuyNow}>
                     Comprar Ahora
-                  </a>
+                  </a> 
                   <a href="#" className="btn btn-primary shadow-0" onClick={handleAddItem} >
                     <i className="me-1"></i>🛒 Agregar al carrito
                   </a>
