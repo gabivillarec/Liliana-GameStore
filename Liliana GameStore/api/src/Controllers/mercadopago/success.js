@@ -48,7 +48,7 @@ const successfulPayment = async (req, res) => {
   });
 
   // Redirige de nuevo a la URL especificada con los datos
-  res.redirect(`${URL}/micuenta`);
+  res.redirect(`${URL}`);
 
 };
 

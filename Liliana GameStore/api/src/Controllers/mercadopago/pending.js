@@ -8,7 +8,7 @@ const pendingPayment = (req, res) => {
     console.log(id)
     res
       .status(200)
-      .redirect(`${URLFront}micuenta`);
+      .redirect(`${URLFront}`);
   };
   
   module.exports = pendingPayment;
