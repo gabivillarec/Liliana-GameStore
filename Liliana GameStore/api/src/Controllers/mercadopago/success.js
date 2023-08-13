@@ -15,13 +15,13 @@ const successfulPayment = async (req, res) => {
   const info = req.query;
   const infoJSON = JSON.stringify(info);
 
-  const { userId } = req.params;
-  const user = await Users.findByPk(userId);
-  if (!user) {
+  const { id } = req.params;
+  const user = await Users.findByPk(id);
+/*   if (!user) {
     return res.status(404).json({ error: 'User not found.' });
-  }
+  } */
 
-  const cart = await Cart.findAll({ where: { userId: userId } });
+  const cart = await Cart.findAll({ where: { userId: id } });
   
   // Calcula el precio total y la cantidad
   let totalPrice = 0;
@@ -30,8 +30,8 @@ const successfulPayment = async (req, res) => {
     const cartProduct = await Products.findByPk(item.productId);
     if (cartProduct && cartProduct.stock >= item.cantidad) {
       await cartProduct.decrement('stock', { by: item.cantidad });
-      totalPrice += cartProduct.price;
-      totalQuantity += item.cantidad;
+      totalPrice += +cartProduct.price;
+      totalQuantity += +item.cantidad;
     }
   }
 
@@ -41,10 +41,12 @@ const successfulPayment = async (req, res) => {
     quantity: totalQuantity,
     total_price: totalPrice,
     created: true,
+    userId: id,
+		user: id,
   });
 
   // Redirige de nuevo a la URL especificada con los datos
-  res.redirect(`http://localhost:5173/?data=${encodeURIComponent(infoJSON)}`);
+  res.redirect(`http://localhost:5173/micuenta`);
 
 };
 
