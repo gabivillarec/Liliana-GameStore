@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_RENDER } = process.env;
-
+const URL = 'http://localhost:5173/'
 const { Sequelize } = require('sequelize'); // para interactuar con postgresSQL
 const fs = require('fs'); //manipula sistemas de archivos
 const path = require('path');
@@ -107,5 +107,6 @@ Brand.hasMany(Products, {as:'products-brand'});
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-	conn: sequelize, // para importar la conexión { conn } = require('./db.js');
+	conn: sequelize,
+	URL // para importar la conexión { conn } = require('./db.js');
 };

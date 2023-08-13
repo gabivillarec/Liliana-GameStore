@@ -52,6 +52,7 @@ export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
       axios.get(`${URL}favorites/${id}`)
         .then((response) => {
+            console.log(response)
           dispatch({
             type: GET_FAVORITES,
             payload: response.data,
@@ -156,7 +157,6 @@ export const getMercadoOrder = (JsonBody) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(`${URL}order/`, JsonBody);
-                console.log(response.data , 'redux')
                 return dispatch({
                     type: GET_MERCADO_ORDER,
                     payload: response.data

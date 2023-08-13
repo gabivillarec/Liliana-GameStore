@@ -2,6 +2,7 @@ import axios from 'axios'
 import { URL } from "../../../main";
 
 export const createFavorite = async(userId , productId) =>{
+    console.log("createFavorite")
     const URLfav = `${URL}favorites`
     let objet = {
         product:productId,
