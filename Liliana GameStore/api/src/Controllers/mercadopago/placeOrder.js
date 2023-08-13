@@ -15,8 +15,8 @@ const placeOrder = async (req, res) => {
       items: mercadoProducts,
       
       back_urls: {
-        success: `${URL}micuenta`,
-        failure: `${URL}carrito`,
+        success: `http://localhost:3001/LilianaGameStore/mercadosuccess/${products[0].idUser}`,
+        failure: `http://localhost:3001/LilianaGameStore/mercadofailure`,
         pending: `${URL}micuenta`,
       },
     };
