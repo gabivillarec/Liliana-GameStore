@@ -24,7 +24,7 @@ const Carrito = () => {
 
   const purchaseHandler = async() => {
     try {
-      let obtMercado = objetoMercado(products)
+      let obtMercado = objetoMercado(products , user.id)
       let response = await axios.post(`${URL}mercadoorder`, obtMercado)
           window.location.href = response.data.response.body.init_point;
     } catch (error) {

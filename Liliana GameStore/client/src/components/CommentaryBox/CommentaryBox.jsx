@@ -1,8 +1,6 @@
-import { useState } from "react";
 import style from "./CommentaryBox.module.css";
-import axios from "axios";
 
-const CommentaryBox = ({ reviews }) => {
+const CommentaryBox = ({ reviews, usuarios }) => {
 
   const fullStars = (rating) => {
     const fullStarsElements = [];
@@ -20,7 +18,6 @@ const CommentaryBox = ({ reviews }) => {
     }
     return emptyStarsElements
   }
-
   
   return (
     <section>
@@ -32,14 +29,16 @@ const CommentaryBox = ({ reviews }) => {
                   <h4 className="mb-0">Comentarios</h4>
                   <p className="fw-light mb-4 pb-2"></p>
                   {reviews?.map(review => {
+                    const usuario = usuarios[review.userId] || {};
+
                     return (
-                      <div>
+                      <div key={review.id}>
                         <div className="d-flex flex-row">
                           <img className="rounded-circle shadow-1-strong me-3"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
+                          src={usuario.avatar_img} alt="avatar" width="60"
                           height="60" />
                           <div style={{width:"100%"}}>
-                            <h6 className="fw-bold mb-1">pepe</h6>
+                            <h6 className="fw-bold mb-1">{`${usuario.first_name} ${usuario.last_name}`}</h6>
                             <div className="d-flex align-items-center mb-3 justify-content-between">
                               <p className="mb-0">March 07, 2021</p>
                               <a className="mb-1">
@@ -52,7 +51,7 @@ const CommentaryBox = ({ reviews }) => {
                             </p>
                           </div>
                         </div>
-                          <hr class="border border-primary border-3 opacity-75"/>
+                          <hr className="border border-primary border-3 opacity-75"/>
                       </div>
                     )
                   })}

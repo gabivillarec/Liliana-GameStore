@@ -17,11 +17,14 @@ function Detail() {
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
     const [reviews, setReviews] = useState([])
+    const [usuarios, setUsuarios] = useState({});
     
     const [quantity, setQuantity] = useState(1);
 
-    const fullStars = Math.floor(detail.rating);
-    const hasHalfStar = detail.rating - fullStars >= 0.5;
+    const totalRating = reviews?.reduce((total, review) => total + review.rating, 0);
+    const promedioRating = totalRating / reviews.length;
+    const fullStars = Math.floor(promedioRating);
+    const hasHalfStar = promedioRating - fullStars >= 0.5;
     
     const fullStarsElements = [];
     for (let i = 0; i < fullStars; i++) {
@@ -36,6 +39,18 @@ function Detail() {
       emptyStarsElements.push(<i key={fullStars + (hasHalfStar ? 1 : 0) + i} className="bi bi-star"></i>);
     }
 
+
+    async function obtenerDetallesUsuario(userId) {
+      try {
+        const respuesta = await axios.get(`${URL}user/${userId}`);
+        return respuesta.data;
+      } catch (error) {
+        console.error(`Error al obtener detalles del usuario ${userId}: ${error.message}`);
+        return { nombre: 'Usuario', apellido: 'Desconocido', imagen: '' };
+      }
+    }
+
+
     const handleIncrement = () => {
       if (quantity < detail.stock) {
         setQuantity(quantity + 1);
@@ -49,8 +64,9 @@ function Detail() {
 
     const handleBuyNow = async() => {
       try {
-        let obtMercado = detailMercado(detail)
-        console.log(obtMercado)
+        let idUser = localStorage.getItem('user');
+        idUser = JSON.parse(idUser)
+        let obtMercado = detailMercado(detail ,idUser.id )
         let response = await axios.post(`${URL}mercadoorder`, obtMercado)
             window.location.href = response.data.response.body.init_point;
       } catch (error) {
@@ -78,7 +94,28 @@ function Detail() {
 
     useEffect(() => {
         dispatch(getProductDetail(id));
-        axios.get(`${URL}review/product/${id}`).then(response => setReviews(response.data))
+        axios.get(`${URL}review/product/${id}`)
+        .then(response => {
+          setReviews(response.data);
+  
+          // Obtiene los detalles de los usuarios y almacena en el estado
+          const userIds = response.data.map(review => review.userId);
+          const detallesUsuarios = {};
+  
+          Promise.all(userIds.map(userId => obtenerDetallesUsuario(userId)))
+            .then(detalles => {
+              detalles.forEach((detalle, index) => {
+                detallesUsuarios[userIds[index]] = detalle;
+              });
+              setUsuarios(detallesUsuarios);
+            })
+            .catch(error => {
+              console.error('Error al obtener detalles de los usuarios:', error.message);
+            });
+        })
+        .catch(error => {
+          console.error('Error al obtener las reviews:', error.message);
+        });
         return () => {
           dispatch(clearDetail());
         };
@@ -120,7 +157,7 @@ function Detail() {
                     {fullStarsElements}
                     {halfStarElement}
                     {emptyStarsElements}
-                    <span className="ms-1">{detail.rating}</span>
+                    <span className="ms-1">{promedioRating?.toFixed(2)}</span>
                   </div>
                     <span className="text-success ms-2">{stockMessage}</span>
                   </div>
@@ -180,7 +217,7 @@ function Detail() {
               </main>
             </div>
           </div>
-          <CommentaryBox reviews={reviews}/>
+          <CommentaryBox reviews={reviews} usuarios={usuarios}/>
         </section>
     )
 }

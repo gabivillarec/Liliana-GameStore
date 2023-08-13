@@ -1,7 +1,8 @@
 const mercadopago = require("mercadopago");
 require("dotenv").config();
 const {ACCESS_TOKEN} = process.env;
-const URL = `http://localhost:5173/`
+const URLBack = `http://localhost:3001/LilianaGameStore/`
+const URLFront = `http://localhost:5173/`
 
 mercadopago.configure({
   access_token: `APP_USR-8709825494258279-092911-227a84b3ec8d8b30fff364888abeb67a-1160706432`,
@@ -15,9 +16,9 @@ const placeOrder = async (req, res) => {
       items: mercadoProducts,
       
       back_urls: {
-        success: `${URL}micuenta`,
-        failure: `${URL}carrito`,
-        pending: `${URL}micuenta`,
+        success: `${URLBack}mercadosuccess/${products[0].idUser}`,
+        failure: `${URLBack}mercadofailure`,
+        pending: `${URLBack}mercadopending/${products[0].idUser}`,
       },
     };
     const response = await mercadopago.preferences.create(preference);
@@ -27,7 +28,11 @@ const placeOrder = async (req, res) => {
   }
 };
 
-module.exports = {placeOrder};
+module.exports = {
+  placeOrder,
+  URLBack,
+  URLFront
+};
 
 /* [
   {

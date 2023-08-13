@@ -1,13 +1,13 @@
 import CardsContainer from "../../CardsContainer/CardsContainer"
 import { useState , useEffect } from "react";
-
+import modificarArray from './cortarArray'
 
 const Categorias = ({products , categoriaNombres}) => {
     const [categoria , setCategoria] = useState([])
     
     useEffect(()=>{
 
-        setCategoria(products)
+        setCategoria(modificarArray(products))
 
     }, [products])
     return(

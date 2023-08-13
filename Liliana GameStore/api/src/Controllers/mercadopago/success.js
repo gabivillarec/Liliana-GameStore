@@ -45,6 +45,7 @@ const successfulPayment = async (req, res) => {
 
   // Redirige de nuevo a la URL especificada con los datos
   res.redirect(`http://localhost:5173/?data=${encodeURIComponent(infoJSON)}`);
+
 };
 
 module.exports = successfulPayment;
