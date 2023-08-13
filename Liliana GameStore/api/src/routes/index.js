@@ -26,11 +26,10 @@ router.use('/LilianaGameStore',orderRoutes);
 router.use('/LilianaGameStore',socketRoutes);
 router.use('/LilianaGameStore',subCategoryRoutes);
 router.use('/LilianaGameStore',usersRoutes);
-//router.use('/LilianaGameStore',login);
 router.use('/LilianaGameStore',usersRoutes);
-//router.use('/LilianaGameStore',login);
 router.use('/LilianaGameStore', reviewRoutes);
 router.use('/LilianaGameStore', paymentRouter);
+router.use('/LilianaGameStore',login);
 
 
 module.exports = router;
