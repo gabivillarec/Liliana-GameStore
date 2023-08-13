@@ -49,8 +49,9 @@ function Detail() {
 
     const handleBuyNow = async() => {
       try {
-        let obtMercado = detailMercado(detail)
-        console.log(obtMercado)
+        let idUser = localStorage.getItem('user');
+        idUser = JSON.parse(idUser)
+        let obtMercado = detailMercado(detail ,idUser.id )
         let response = await axios.post(`${URL}mercadoorder`, obtMercado)
             window.location.href = response.data.response.body.init_point;
       } catch (error) {
