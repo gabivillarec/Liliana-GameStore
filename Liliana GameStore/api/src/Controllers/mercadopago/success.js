@@ -1,4 +1,6 @@
 const { Orders, Users, Products, Cart } = require("../../db");
+//const URL = "http://localhost:5173"
+const URL = "https://lilianagamesstore.onrender.com"
 
 // Crea una función para formatear la fecha
 const formatDate = (date) => {
@@ -46,7 +48,7 @@ const successfulPayment = async (req, res) => {
   });
 
   // Redirige de nuevo a la URL especificada con los datos
-  res.redirect(`http://localhost:5173/micuenta`);
+  res.redirect(`${URL}`);
 
 };
 
