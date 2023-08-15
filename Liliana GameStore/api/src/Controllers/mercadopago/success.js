@@ -19,7 +19,7 @@ const successfulPayment = async (req, res) => {
   const { id } = req.params;
 
 
-  const cart = await Cart.findAll({ where: { userId: id } });
+  const cart = await getCartByUser({ params: { id } });
   
   // Calculo el precio total y la cantidad
   let totalPrice = 0;
@@ -27,12 +27,10 @@ const successfulPayment = async (req, res) => {
   const orderedProducts = [];
 
   for (let item of cart) {
-    const cartProduct = await Products.findByPk(item.productId);
-    if (cartProduct && cartProduct.stock >= item.cantidad) {
-      await cartProduct.decrement('stock', { by: item.cantidad });
-      totalPrice += +cartProduct.price;
+    if (item.stock >= item.cantidad) {
+      totalPrice += +item.price;
       totalQuantity += +item.cantidad;
-      orderedProducts.push(cartProduct);
+      orderedProducts.push(item);
     }
   };
 
