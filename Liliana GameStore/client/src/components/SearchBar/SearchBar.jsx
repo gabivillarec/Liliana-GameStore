@@ -48,7 +48,7 @@ const SearchBar = () => {
         <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search"
                 value={filterValue} onChange={handleInputChange} />
-            <button className="btn btn-outline-info" type="button" onClick={handleSearch} >Buscar</button>
+            <button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" type="button" onClick={handleSearch} >Buscar</button>
         </form>
     );
 };
