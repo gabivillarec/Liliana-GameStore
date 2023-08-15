@@ -10,17 +10,20 @@ import {getAllProducts} from '../../Redux/actions'
 const Inicio = () => {
     let dispatch = useDispatch()
     useEffect(()=> {
-        dispatch(getAllProducts())
+        dispatch(getAllProducts(`pageNumber=1&undefined=undefined&category=Hardware`))
     },[dispatch])
 
     let  products  = useSelector(state => state.products)
-    let categoriaNombre = 'nombre'
+    let categorias = ['Accesorios' , 'Hardware','Videojuegos']
+
 
     return (
         <div className={style.contenedorInicio}>
             <article className={style.inicio} >
                 <Carousel/>
-                <Categorias products={products} categoriaNombre={categoriaNombre}/>
+                {
+                    categorias.map((cat , index)=> <Categorias products={products} categoriaNombre={cat}/>)
+                }
             </article>
         </div>
     );

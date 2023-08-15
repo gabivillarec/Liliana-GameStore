@@ -4,7 +4,8 @@ import { URL } from "../main";
 
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
 
-export const getAllProducts = (filtros) => {       //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+export const getAllProducts = (filtros) => {  
+    console.log(filtros, "filtros")     //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
 
