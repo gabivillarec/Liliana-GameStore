@@ -4,6 +4,7 @@ const { Sequelize } = require('sequelize'); // para interactuar con postgresSQL
 const fs = require('fs'); //manipula sistemas de archivos
 const path = require('path');
 
+
 //? Local Host
 const sequelize = new Sequelize(
 `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`,

@@ -7,7 +7,6 @@ const NavBar = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const usuario = JSON.parse(localStorage.getItem("user"))
-    console.log(usuario)
 
     const handleLogOut = () => {
         localStorage.removeItem("user")
