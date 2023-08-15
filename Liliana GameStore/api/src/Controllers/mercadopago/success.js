@@ -16,7 +16,7 @@ const formatDate = (date) => {
 const successfulPayment = async (req, res) => {
   const info = req.query;
   const infoJSON = JSON.stringify(info);
-
+  console.log(infoJSON)
   const { id } = req.params;
   const user = await Users.findByPk(id);
 /*   if (!user) {

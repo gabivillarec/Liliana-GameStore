@@ -4,6 +4,7 @@ import AdminNav from "./AdminNav/AdminNav"
 import AdminUsers from './AdminUsers/AdminUsers'
 import PerfilData from "../Perfil/Sections/PerfilData"
 import AdminCreateUser from "./AdminCreateUser/AdminCreateUser"
+import AdminGetOrders from "./AdminGetOrders/AdminGetOrders"
 import style from "./AdminPage.module.css"
 import { useState , useEffect } from "react"
 import axios from "axios"
@@ -37,6 +38,7 @@ const AdminPage = () => {
                 {selectedComponent === 'AdminForm' && <AdminForm />} 
                 {selectedComponent === 'AdminUsers' && <AdminUsers/>} 
                 {selectedComponent === 'AdminCreateUser' && <AdminCreateUser/>} 
+                {selectedComponent === 'AdminGetOrder' && <AdminGetOrders/>} 
             </div>
         </div>
     </div>
