@@ -12,7 +12,7 @@ const Categorias = ({products , categoriaNombres}) => {
     }, [products])
     return(
         <div className="container">
-            <h2>Categoria: {categoriaNombres}</h2>
+            <h2>Categoría: {categoriaNombres}</h2>
             <CardsContainer products={categoria}/>
         </div>
     )

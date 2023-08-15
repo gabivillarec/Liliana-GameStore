@@ -121,12 +121,6 @@ function Detail() {
         };
       }, [dispatch, id]);
 
-      
-    const stockMessage =
-      detail.stock === 0 ? "SIN STOCK ⛔"
-      : detail.stock > 0 && detail.stock <= 5 ? "BAJO STOCK ⚠️"
-      : "EN STOCK ✅"
-
     return(
         <section className={`py-5 ${style.vBackground}`}>
           <div className="container">
@@ -158,8 +152,11 @@ function Detail() {
                     {halfStarElement}
                     {emptyStarsElements}
                     <span className="ms-1">{promedioRating?.toFixed(2)}</span>
-                  </div>
-                    <span className="text-success ms-2">{stockMessage}</span>
+                  </div> {detail.stock === 0
+                          ? (<span className="text-danger ms-2">SIN STOCK ⛔</span>)
+                          : detail.stock > 0 && detail.stock <= 5
+                          ? (<span className="text-warning ms-2">BAJO STOCK ⚠️</span>)
+                          : (<span className="text-success ms-2">EN STOCK ✅</span>)}
                   </div>
 
                   <div className="mb-3">
