@@ -1,4 +1,7 @@
 const { Orders, Users, Products, Cart } = require("../../db");
+const {getCartByUser} = require('../getCart')
+const {deleteAllCart} = require('../deleteCart')
+
 const URL = "http://localhost:5173"
 //const URL = "https://lilianagamesstore.onrender.com"
 
@@ -19,18 +22,39 @@ const successfulPayment = async (req, res) => {
   const { id } = req.params;
 
 
-  const cart = await getCartByUser({ params: { id } });
+  const cart = await Cart.findAll({
+    where: {userId: +id},
+  });
+// Obtener los IDs de los productos en el carrito
+  const productIds = cart.map(favorite => favorite.productId);
+// Obtener detalles de los productos en el carrito
+  const cartProducts = await Products.findAll({
+      where: {id: productIds }
+  })
+// Crear una lista enriquecida con la cantidad de productos y detalles de los productos
+    const cartWithQuantities = cartProducts.map(product => {
+    const cartItem = cart.find(item => item.productId === product.id);
+    return {
+        ...product.toJSON(),
+        itemCartId: cartItem.id,// Agregar el ID del elemento del carrito
+        cantidad: cartItem.cantidad
+    }
+})
+  console.log(cartWithQuantities, 'cart')
+
+
   
   // Calculo el precio total y la cantidad
   let totalPrice = 0;
   let totalQuantity = 0;
+
   const orderedProducts = [];
 
-  for (let item of cart) {
+  for (let item of cartWithQuantities) {
     if (item.stock >= item.cantidad) {
       totalPrice += +item.price;
       totalQuantity += +item.cantidad;
-      orderedProducts.push(item);
+      orderedProducts.push(item); 
     }
   };
 
@@ -43,18 +67,22 @@ const successfulPayment = async (req, res) => {
     userId: id,
 		user: id,
   });
-
+  console.log(order , 'order')
+  console.log(orderedProducts , 'orderedProducts')
   // Asocio la Orden con los productos
-  await order.addProducts(orderedProducts);
+  await order.addProducts(...orderedProducts);
 
   // Elimino el carrito y los items
-  await deleteAllCart(req, res);
+
+        await Cart.destroy({
+            where: { userId: id}
+        });
 
   // Obtengo la order nuevamente para incluir los productos asociados
   const orderWithProducts = await Orders.findByPk(order.order_number, {
     include: Products,
   });
-
+  console.log(orderWithProducts, 'orderproducts')
   // Redirige de nuevo a la URL especificada con los datos
   res.redirect(`${URL}`);
 
