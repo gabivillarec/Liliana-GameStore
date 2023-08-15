@@ -13,6 +13,13 @@ const postCart = async (req, res) => {
             return res.status(404).json({ error: 'Producto no encontrado'})
         }
         
+        const cartInstace = await Cart.findOne({
+            where: { productId: productId}
+        })
+        if(cartInstace){
+            return res.status(404).json({ error: 'El producto no se puede agregar 2 veces al carrito'})
+        }
+
         const cart = await Cart.create({
             productId,
             userId,
