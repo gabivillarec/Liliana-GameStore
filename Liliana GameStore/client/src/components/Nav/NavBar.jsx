@@ -25,14 +25,14 @@ const NavBar = () => {
             <SearchBar/>
 
             <div className="d-flex flex-wrap gap-2">
-                {usuario && usuario.admin &&(<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/adminpage')}>Admin</button>)}
-                <button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/categorypage')}>Catalogue</button>
+                {usuario && usuario.admin &&(<button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" onClick={()=> navigate('/adminpage')}>Admin</button>)}
+                <button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" onClick={()=> navigate('/categorypage')}>Catálogo</button>
                 {usuario ? 
                 (<button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/carrito')}>🛒</button>
                 ) : 
-                <button className="btn btn-outline-info border-2 fs-5" onClick={()=> navigate('/login')}>Login</button>
+                <button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" onClick={()=> navigate('/login')}>Ingresá</button>
                 }
-                {usuario && (<button className="btn btn-outline-info border-2 fs-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">User</button>)}
+                {usuario && (<button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Usuario</button>)}
             </div>
 
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -41,9 +41,9 @@ const NavBar = () => {
                     <button type="button" className="btn btn-outline-info fs-5" data-bs-dismiss="offcanvas" aria-label="Close">✖</button>
                 </div>
                 <div className={`offcanvas-body d-flex flex-column gap-3 ${style.perfilCanvaBody}`}>
-                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/micuenta')} data-bs-dismiss="offcanvas" aria-label="Close">My Account</button>
-                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')} data-bs-dismiss="offcanvas" aria-label="Close">Favorites</button>
-                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> handleLogOut()} data-bs-dismiss="offcanvas" aria-label="Close">logOut</button>
+                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/micuenta')} data-bs-dismiss="offcanvas" aria-label="Close">Mi Cuenta</button>
+                    <button className="btn btn-outline-info border-3 fs-5" onClick={()=> navigate('/favorites')} data-bs-dismiss="offcanvas" aria-label="Close">Mis Favoritos</button>
+                    <button className="btn btn-outline-danger border-3 fs-5 fw-semibold text-uppercase" onClick={()=> handleLogOut()} data-bs-dismiss="offcanvas" aria-label="Close">Cerrar Sesión</button>
                 </div>
             </div>
         </nav>
