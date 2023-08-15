@@ -1,8 +1,8 @@
 const { Orders, Users, Products, Cart } = require("../../db");
-//const URL = "http://localhost:5173"
-const URL = "https://lilianagamesstore.onrender.com"
+const URL = "http://localhost:5173"
+//const URL = "https://lilianagamesstore.onrender.com"
 
-// Crea una función para formatear la fecha
+// Creo una función para formatear la fecha
 const formatDate = (date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -15,29 +15,28 @@ const formatDate = (date) => {
 // Controlador
 const successfulPayment = async (req, res) => {
   const info = req.query;
-  const infoJSON = JSON.stringify(info);
-  console.log(infoJSON)
+
   const { id } = req.params;
-  const user = await Users.findByPk(id);
-/*   if (!user) {
-    return res.status(404).json({ error: 'User not found.' });
-  } */
+
 
   const cart = await Cart.findAll({ where: { userId: id } });
   
-  // Calcula el precio total y la cantidad
+  // Calculo el precio total y la cantidad
   let totalPrice = 0;
   let totalQuantity = 0;
+  const orderedProducts = [];
+
   for (let item of cart) {
     const cartProduct = await Products.findByPk(item.productId);
     if (cartProduct && cartProduct.stock >= item.cantidad) {
       await cartProduct.decrement('stock', { by: item.cantidad });
       totalPrice += +cartProduct.price;
       totalQuantity += +item.cantidad;
+      orderedProducts.push(cartProduct);
     }
-  }
+  };
 
-  // Crea la orden
+  // Creo la orden
   const order = await Orders.create({
     order_date: formatDate(new Date()),
     quantity: totalQuantity,
@@ -45,6 +44,17 @@ const successfulPayment = async (req, res) => {
     created: true,
     userId: id,
 		user: id,
+  });
+
+  // Asocio la Orden con los productos
+  await order.addProducts(orderedProducts);
+
+  // Elimino el carrito y los items
+  await deleteAllCart(req, res);
+
+  // Obtengo la order nuevamente para incluir los productos asociados
+  const orderWithProducts = await Orders.findByPk(order.order_number, {
+    include: Products,
   });
 
   // Redirige de nuevo a la URL especificada con los datos
