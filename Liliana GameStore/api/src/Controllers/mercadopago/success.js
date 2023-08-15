@@ -52,7 +52,7 @@ const successfulPayment = async (req, res) => {
    // Elimino cada producto del carrito 
    for (let item of cart) {
     await deleteCart({ params: { id: item.id } });
-  }
+  };
 
   // Obtengo la order nuevamente para incluir los productos asociados
   const orderWithProducts = await Orders.findByPk(order.order_number, {
