@@ -7,6 +7,7 @@ const AdminNav = ({ handlerRender }) => {
             <button className="btn btn-dark" onClick={() => handlerRender('AdminForm')}>Crear Producto</button>
             <button className="btn btn-dark" onClick={() => handlerRender('AdminUsers')}>Mostrar Users</button>
             <button className="btn btn-dark" onClick={() => handlerRender('AdminCreateUser')}>Crear Users</button>
+            <button className="btn btn-dark" onClick={() => handlerRender('AdminGetOrder')}>Mostrar Ordenes</button>
         </div>
     );
 }

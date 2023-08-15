@@ -140,6 +140,7 @@ export const setFilterSearched = () => {
     return async (dispatch) => {
         try {
             let response = await axios.get(`${URL}user/${idUser}`);
+                
                 return dispatch({
                     type: GET_DETAIL_USERS,
                     payload: response.data
@@ -165,4 +166,21 @@ export const getMercadoOrder = (JsonBody) => {
             console.log(error.message);
         }
     }
-}
+}  
+//------------------------------------------------------------------------------------- getAllOrder ----------------------------------------------------------
+export const getAllOrder = () => {  
+    //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+    return (dispatch) => { // No uses async/await aquí
+        axios.get(`${URL}order`)
+          .then((response) => {
+              console.log(response)
+            dispatch({
+              type: `GET_USER_ORDER`,
+              payload: response.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      };
+    };

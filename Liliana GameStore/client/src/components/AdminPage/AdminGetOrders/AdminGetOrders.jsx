@@ -1,18 +1,21 @@
 
 import { useSelector , useDispatch } from "react-redux";
-import {getAllUsers} from '../../../Redux/actions'
+import {getAllOrder} from '../../../Redux/actions'
 import { useEffect , useState} from "react";
-import TablaUsers from "./TablaUsers/TablaUsers";
+import TablaOrder from "./TablaOrders/TablaOrders";
 
 
-const AdminUsers = () => {
+const AdminGetOrder = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
-    let  users  = useSelector(state => state.usersAdmin)
-
+    let orders = useSelector(state => {
+        console.log(state ,"state")
+         return state.AdminOrder});
+    console.log(orders)
+    
     useEffect(()=> {
-        dispatch(getAllUsers())
-    },[dispatch , deleteTrigger, ])
+        dispatch(getAllOrder());
+    },[dispatch ])
     
     
     return(
@@ -21,17 +24,17 @@ const AdminUsers = () => {
             <table className="table align-middle mb-0 bg-white">
             <thead className="bg-dark">
                 <tr className='table-dark'>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>N° Order</th>
+                    <th>User Id</th>
                     <th>Email</th>
-                    <th>Telefono</th>
-                    <th>DesHabilitar</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
-                <TablaUsers users={users} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+                <TablaOrder orders={orders} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
             </table>
         </div>
         </div>
@@ -39,4 +42,4 @@ const AdminUsers = () => {
     )
 }
 
-export default AdminUsers;
+export default AdminGetOrder;
