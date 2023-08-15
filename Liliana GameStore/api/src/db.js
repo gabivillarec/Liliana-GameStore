@@ -1,10 +1,10 @@
 require('dotenv').config();
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_RENDER } = process.env;
-
 const { Sequelize } = require('sequelize'); // para interactuar con postgresSQL
 const fs = require('fs'); //manipula sistemas de archivos
 const path = require('path');
 
+<<<<<<< HEAD
 //? Local Host
 const sequelize = new Sequelize(
 `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`,
@@ -22,6 +22,26 @@ const sequelize = new Sequelize(
 // 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // 	}
 // );
+=======
+
+//Local Host
+  const sequelize = new Sequelize(
+ 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`, 	{
+	logging: false, // set to console.log to see the raw SQL queries
+	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+ 	}
+ );
+
+
+//? Render
+/* const sequelize = new Sequelize(
+	DB_RENDER,
+	{
+		logging: false, // set to console.log to see the raw SQL queries
+		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+	}
+); */
+>>>>>>> 7156349f74e95d5b135fe647e812628810b10a9d
 
 const basename = path.basename(__filename); // Obtiene el nombre base del archivo actual.
 
@@ -49,7 +69,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, PurchaseHistory, Review } = sequelize.models;
+const { Users, Products, Orders, Favorites, Cart, Socket, Brand, Category, SubCategory, Review } = sequelize.models;
 
 Users.beforeCreate((user, options) => {
 	if (!user.avatar_img) {
@@ -59,7 +79,7 @@ Users.beforeCreate((user, options) => {
   });
 
 // Relación de Users
-//Orders.belongsTo(Users);
+
 Users.hasMany(Orders, {as:'users'});
 
 Users.hasOne(Cart, { foreignKey: 'userId' });
@@ -104,5 +124,5 @@ Brand.hasMany(Products, {as:'products-brand'});
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-	conn: sequelize, // para importar la conexión { conn } = require('./db.js');
+	conn: sequelize,
 };

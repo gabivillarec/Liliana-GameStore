@@ -1,10 +1,8 @@
 
 
+
 const Pedidos = ({estado}) => {
-    console.log(estado)
     let {fecha , envio , monto , id } =estado
-    
-    
 
     return(
         <tbody>

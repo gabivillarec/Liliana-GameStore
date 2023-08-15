@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../Redux/actions";
 import axios from 'axios'
 import style from "./Products.module.css"
+import { URL } from "../../../main";
 
 const Products = ({ products }) => {
     const dispatch = useDispatch()
@@ -17,13 +18,13 @@ const Products = ({ products }) => {
 
     useEffect(() => {
 
-        axios.get('/LilianaGameStore/subcategory').then(response => {
+        axios.get(`${URL}subcategory`).then(response => {
             setSubcategories(response.data);
           })
           .catch(error => {
             console.error('Error al obtener las subcategorías:', error);
           });
-        axios.get('/LilianaGameStore/brand')
+        axios.get(`${URL}brand`)
             .then(response => {
                 setBrand(response.data);
             })
@@ -58,7 +59,6 @@ const Products = ({ products }) => {
     }
 
     const handleBtnFiltrar = () => {
-        console.log(searchedProductList)
         const resultString = objectToString(filtros)
         dispatch(getAllProducts(resultString))
     }
@@ -119,32 +119,33 @@ const Products = ({ products }) => {
                 <div className="d-flex justify-content-center flex-column">
                     <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-2 mt-4">
                         <select className={style.selects} name="category" onChange={handleFilter}>
-                            <option value="">All Categories</option>
+                            <option value="">Categorías</option>
+                            <option value="Accessories">Accesorios</option>
                             <option value="Hardware">Hardware</option>
-                            <option value="VideoGames">VideoGames</option>
-                            <option value="Accessories">Accessories</option>
+                            <option value="VideoGames">Videojuegos</option>
                         </select>
                         <select className={style.selects} name="subcategory" onChange={handleFilter}>
-                            <option value="">All Subcategories</option>
-                            {subcategories?.map((subcategory) => (
-                                <option value={subcategory.name}>
-                                {subcategory.name}
-                                </option>
-                            ))}
+                            <option value="">Sub-Categorías</option>
+                            {subcategories ?.sort((a, b) => a.name.localeCompare(b.name)).map((subcategory) => (
+                                    <option key={subcategory.name} value={subcategory.name}>
+                                        {subcategory.name}
+                                    </option>
+                                ))}
                         </select>
                         <select className={style.selects} name="brand" onChange={handleFilter}>
-                            <option value="">All brands</option>
-                            {brand?.map((brand) => (
-                                <option value={brand.name}>
-                                {brand.name}
+                            <option value="">Marcas</option>
+                            {brand?.sort((a, b) => a.name.localeCompare(b.name)).map((brand) => (
+                                <option value={brand.name} key={brand.name}>
+                                    {brand.name}
                                 </option>
                             ))}
                         </select>
                         <select className={style.selects} name="order" onChange={handleFilter}>
+                            <option value="">Precio</option>
                             <option value="D">Min-Max</option>
                             <option value="A">Max-Min</option>
                         </select>
-                        <button className="btn btn-outline-info border-2" onClick={() => {filtros.pageNumber === 1 ? handleBtnFiltrar() : setFiltros({...filtros, pageNumber: 1})}}>Filtrar</button>
+                        <button className="btn btn-outline-info border-2 fw-semibold text-uppercase" onClick={() => {filtros.pageNumber === 1 ? handleBtnFiltrar() : setFiltros({...filtros, pageNumber: 1})}}>Filtrar</button>
                     </div>
                     <CardsContainer products={products}/>
                     <div className="p-2 d-flex justify-content-center flex-row gap-3">{generatePaginationButtons(totalPages)}</div>

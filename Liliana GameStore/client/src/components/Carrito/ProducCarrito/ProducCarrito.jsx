@@ -1,10 +1,9 @@
 import { useState , useEffect } from "react";
 import Item from './Item'
-import Totalizar from "./Totalizar";
-import style from './ProducCarrito.module.css'
-import { calcualarTotal  , deleteCart , putCart} from './funcionesAuxiliares'
+//import MercadoPago from "../MercadoPago/MercadoPago";
+import {  deleteCart , putCart} from './funcionesAuxiliares'
 
-const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger }) => {
+const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger , preferenceId}) => {
     const [products , setProducts] = useState([])
     
     useEffect(()=>{
@@ -41,7 +40,6 @@ const ProducCarrito = ({estado , deleteTrigger, setDeleteTrigger }) => {
             {
                 products.map((product , index)=> <Item key={index} product={product}  handlerDeleteItem={handlerDeleteItem}  handlerAgregar={handlerAgregar} handlerQuitar={handlerQuitar}/>)
             }
-            <Totalizar total={calcualarTotal(products )}/>
         </tbody>
     )
 }

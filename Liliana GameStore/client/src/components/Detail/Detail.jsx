@@ -3,21 +3,28 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail, clearDetail } from "../../Redux/actions"
 import style from "./Detail.module.css"
-import DisqusComments from '../DisqusComments/DisqusComments'
+import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
+import {detailMercado} from '../Carrito/ProducCarrito/funcionesAuxiliares'
 import { postCarrito } from "./funcionesAuxiliares/postCarrito";
+import axios from "axios";
+import { URL } from "../../main";
 
 function Detail() {
 
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
+    const [reviews, setReviews] = useState([])
+    const [usuarios, setUsuarios] = useState({});
     
     const [quantity, setQuantity] = useState(1);
 
-    const fullStars = Math.floor(detail.rating);
-    const hasHalfStar = detail.rating - fullStars >= 0.5;
+    const totalRating = reviews?.reduce((total, review) => total + review.rating, 0);
+    const promedioRating = totalRating / reviews.length;
+    const fullStars = Math.floor(promedioRating);
+    const hasHalfStar = promedioRating - fullStars >= 0.5;
     
     const fullStarsElements = [];
     for (let i = 0; i < fullStars; i++) {
@@ -32,6 +39,18 @@ function Detail() {
       emptyStarsElements.push(<i key={fullStars + (hasHalfStar ? 1 : 0) + i} className="bi bi-star"></i>);
     }
 
+
+    async function obtenerDetallesUsuario(userId) {
+      try {
+        const respuesta = await axios.get(`${URL}user/${userId}`);
+        return respuesta.data;
+      } catch (error) {
+        console.error(`Error al obtener detalles del usuario ${userId}: ${error.message}`);
+        return { nombre: 'Usuario', apellido: 'Desconocido', imagen: '' };
+      }
+    }
+
+
     const handleIncrement = () => {
       if (quantity < detail.stock) {
         setQuantity(quantity + 1);
@@ -43,8 +62,16 @@ function Detail() {
       }
     };
 
-    const handleBuyNow = () => {
-      console.log('Comprar Ahora');
+    const handleBuyNow = async() => {
+      try {
+        let idUser = localStorage.getItem('user');
+        idUser = JSON.parse(idUser)
+        let obtMercado = detailMercado(detail ,idUser.id )
+        let response = await axios.post(`${URL}mercadoorder`, obtMercado)
+            window.location.href = response.data.response.body.init_point;
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     const handleAddItem = async() => {
       let idUser = localStorage.getItem('user');
@@ -64,17 +91,35 @@ function Detail() {
       alert(`Producto con ID: ${detail.id} Quitado de favoritos`)
     };
 
+
     useEffect(() => {
         dispatch(getProductDetail(id));
+        axios.get(`${URL}review/product/${id}`)
+        .then(response => {
+          setReviews(response.data);
+  
+          // Obtiene los detalles de los usuarios y almacena en el estado
+          const userIds = response.data.map(review => review.userId);
+          const detallesUsuarios = {};
+  
+          Promise.all(userIds.map(userId => obtenerDetallesUsuario(userId)))
+            .then(detalles => {
+              detalles.forEach((detalle, index) => {
+                detallesUsuarios[userIds[index]] = detalle;
+              });
+              setUsuarios(detallesUsuarios);
+            })
+            .catch(error => {
+              console.error('Error al obtener detalles de los usuarios:', error.message);
+            });
+        })
+        .catch(error => {
+          console.error('Error al obtener las reviews:', error.message);
+        });
         return () => {
           dispatch(clearDetail());
         };
       }, [dispatch, id]);
-
-    const stockMessage =
-      detail.stock === 0 ? "SIN STOCK ⛔"
-      : detail.stock > 0 && detail.stock <= 5 ? "BAJO STOCK ⚠️"
-      : "EN STOCK ✅"
 
     return(
         <section className={`py-5 ${style.vBackground}`}>
@@ -106,9 +151,12 @@ function Detail() {
                     {fullStarsElements}
                     {halfStarElement}
                     {emptyStarsElements}
-                    <span className="ms-1">{detail.rating}</span>
-                  </div>
-                    <span className="text-success ms-2">{stockMessage}</span>
+                    <span className="ms-1">{promedioRating?.toFixed(2)}</span>
+                  </div> {detail.stock === 0
+                          ? (<span className="text-danger ms-2">SIN STOCK ⛔</span>)
+                          : detail.stock > 0 && detail.stock <= 5
+                          ? (<span className="text-warning ms-2">BAJO STOCK ⚠️</span>)
+                          : (<span className="text-success ms-2">EN STOCK ✅</span>)}
                   </div>
 
                   <div className="mb-3">
@@ -152,7 +200,7 @@ function Detail() {
                   </div>
                   <a href="#" className="btn btn-warning shadow-0" onClick={handleBuyNow}>
                     Comprar Ahora
-                  </a>
+                  </a> 
                   <a href="#" className="btn btn-primary shadow-0" onClick={handleAddItem} >
                     <i className="me-1"></i>🛒 Agregar al carrito
                   </a>
@@ -166,7 +214,7 @@ function Detail() {
               </main>
             </div>
           </div>
-          <DisqusComments/>
+          <CommentaryBox reviews={reviews} usuarios={usuarios}/>
         </section>
     )
 }

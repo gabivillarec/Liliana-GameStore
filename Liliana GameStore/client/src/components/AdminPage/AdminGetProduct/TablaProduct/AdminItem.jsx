@@ -2,15 +2,22 @@ import style from './AdminItem.module.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const AdminItem = ({ product, handlerDelete }) => {
+
+const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
     const navigate = useNavigate()
-    const { image, name, price, id, stock , category_name} = product;
+    const { image, name, price, id, stock , category_name,disabled } = product;
     const [checkbox, setCheckbox] = useState(false);
+    const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
+    const toggleHabilitado = () => {
+        setHabilitado(prevCheckbox => !prevCheckbox);
+    };
+
 
     useEffect(() => {
+        setHabilitado(disabled)
         setCheckbox(false);
     }, [id]);
 
@@ -39,6 +46,19 @@ const AdminItem = ({ product, handlerDelete }) => {
                 <p className="fw-normal mb-1">{price}</p>
             </td>
             <td>{stock}</td>
+            <td>
+                <div className="form-check form-switch">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={habilitado}
+                        onChange={toggleHabilitado}
+                        onClick={()=>inCatalogue(id, habilitado)}
+                        role="switch"
+                        id={`flexSwitchCheckDefault_${id}`}
+                    />
+                </div>
+            </td>
             <td>
                 <button
                     onClick={() => navigate(`formupdate/${id}`)}

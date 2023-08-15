@@ -1,49 +1,37 @@
 import style from './Carrito.module.css'
 import ProducCarrito from "./ProducCarrito/ProducCarrito";
-import MercadoPago from './MercadoPago/MercadoPago';
-
+import Totalizar from './ProducCarrito/Totalizar'
 import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
-
 import { useState } from 'react';
+import {getAllCart } from '../../Redux/actions'
+import {objetoMercado} from './ProducCarrito/funcionesAuxiliares'
 import axios from 'axios';
-import {getAllCart} from '../../Redux/actions'
+import { URL } from '../../main';
+
 
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
-  const [preferenceId , setPreferenceId] = useState('')
   let  products  = useSelector(state => state.cartProducts)
   let user = localStorage.getItem('user');
   user = JSON.parse(user);
 
   let dispatch = useDispatch()
+
   useEffect(()=> {
       dispatch(getAllCart(user.id))
   },[dispatch ,  deleteTrigger])
 
-  let JsonBody ={  
-    userId:user.id,
-    productId:9,
-    quantity:1
-    }
-    console.log(JsonBody.userId)
-    useEffect(() => {
-      async function fetchPreference() {
-          const preference = await fetchPreferenceId();
-          setPreferenceId(preference);
-      }
-      fetchPreference();
-  }, []);
-    
-
-  const fetchPreferenceId = async () => {
+  const purchaseHandler = async() => {
     try {
-        const response = await axios.post(`http://localhost:3001/LilianaGameStore/order/`, JsonBody);
-        return (response.data); // Assuming the response contains preferenceId
+      let obtMercado = objetoMercado(products , user.id)
+      let response = await axios.post(`${URL}mercadoorder`, obtMercado)
+          window.location.href = response.data.response.body.init_point;
     } catch (error) {
-        console.error('Error fetching preferenceId:', error);
+      console.log(error.message);
     }
-};
+  };
+
 
 
     return(
@@ -60,9 +48,11 @@ const Carrito = () => {
               <th>Eliminar</th>
             </tr>
           </thead>
-          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
           </table>
-          <MercadoPago preferenceId={preferenceId}/>
+        </div>
+        <div>
+          <Totalizar  purchaseHandler={purchaseHandler}/>
         </div>
       </div>
 
