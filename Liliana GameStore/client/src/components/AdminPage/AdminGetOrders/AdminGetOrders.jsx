@@ -8,10 +8,8 @@ import TablaOrder from "./TablaOrders/TablaOrders";
 const AdminGetOrder = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
-    let orders = useSelector(state => {
-        console.log(state ,"state")
-         return state.AdminOrder});
-    console.log(orders)
+    let orders = useSelector(state => state.AdminOrder);
+    
     
     useEffect(()=> {
         dispatch(getAllOrder());

@@ -1,4 +1,4 @@
-
+import { cambiarFecha } from './funcionAuxiliar';
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,8 @@ const OrderItem = ({ order, handlerDelete , }) => {
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
-
+    console.log(order)
+    let fecha = cambiarFecha(order_date)
 
     useEffect(() => {
         setCheckbox(false);
@@ -28,10 +29,13 @@ const OrderItem = ({ order, handlerDelete , }) => {
             <td>
                 {userId}
             </td>
-       
             <td>
-                <p className="fw-normal mb-1">{order_date}</p>
+                <p className="fw-normal mb-1">{user?.email}</p>
             </td>
+            <td>
+                <p className="fw-normal mb-1">{fecha}</p>
+            </td>
+       
             <td>
                 <p className="fw-normal mb-1">{quantity}</p>
             </td>
