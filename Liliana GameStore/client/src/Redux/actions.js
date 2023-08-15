@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED , GET_ALL_USERS ,GET_DETAIL_USERS ,GET_MERCADO_ORDER} from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED , GET_ALL_USERS ,GET_DETAIL_USERS ,GET_MERCADO_ORDER ,GET_ALL_REVIEW} from "./action-type";
 import axios from 'axios'
 import { URL } from "../main";
 
@@ -173,7 +173,6 @@ export const getAllOrder = () => {
     return (dispatch) => { // No uses async/await aquí
         axios.get(`${URL}order`)
           .then((response) => {
-              console.log(response)
             dispatch({
               type: `GET_USER_ORDER`,
               payload: response.data,
@@ -184,3 +183,21 @@ export const getAllOrder = () => {
           });
       };
     };
+
+    //------------------------------------------------------------------------------------- getAllReview ----------------------------------------------------------
+    export const getAllReview = () => {  
+        //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+        return (dispatch) => { // No uses async/await aquí
+            axios.get(`${URL}review`)
+              .then((response) => {
+                console.log(response)
+                dispatch({
+                  type: GET_ALL_REVIEW,
+                  payload: response.data,
+                });
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+          };
+        };

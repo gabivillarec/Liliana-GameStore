@@ -1,17 +1,19 @@
-import { cambiarFecha } from './funcionAuxiliar';
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const OrderItem = ({ order, handlerDelete , }) => {
+const ReviewItem = ({ review, handlerDelete , }) => {
     const navigate = useNavigate()
-    const {order_numer,userId , user , order_date , quantity ,total_price} = order;
+
+    const {id,userId,productId ,rating , comment} = review;
+
     const [checkbox, setCheckbox] = useState(false);
     const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
-    let fecha = cambiarFecha(order_date)
+
 
     useEffect(() => {
         setCheckbox(false);
@@ -23,24 +25,19 @@ const OrderItem = ({ order, handlerDelete , }) => {
 
     return (
         <tr className='table-dark'>
-            <td>{order_numer}</td>
+            <td>{id}</td>
             <td>
                 {userId}
             </td>
             <td>
-                <p className="fw-normal mb-1">{user?.email}</p>
+                <p className="fw-normal mb-1">{productId}</p>
             </td>
             <td>
-                <p className="fw-normal mb-1">{fecha}</p>
-            </td>
-       
-            <td>
-                <p className="fw-normal mb-1">{quantity}</p>
+                <p className="fw-normal mb-1">{rating}</p>
             </td>
             <td>
-                <p>{total_price}</p>
+                <p className="fw-normal mb-1">{comment}</p>
             </td>
-            
             <td>
                 <button
                     onClick={() => navigate(`adminuseredit/${userId}`)}
@@ -81,4 +78,4 @@ const OrderItem = ({ order, handlerDelete , }) => {
     );
 }
 
-export default OrderItem;
+export default ReviewItem;
