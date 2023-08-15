@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize'); // para interactuar con postgresSQL
 const fs = require('fs'); //manipula sistemas de archivos
 const path = require('path');
 
-<<<<<<< HEAD
+
 //? Local Host
 const sequelize = new Sequelize(
 `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`,
@@ -22,26 +22,9 @@ const sequelize = new Sequelize(
 // 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // 	}
 // );
-=======
-
-//Local Host
-  const sequelize = new Sequelize(
- 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lilianadb`, 	{
-	logging: false, // set to console.log to see the raw SQL queries
-	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
- 	}
- );
 
 
-//? Render
-/* const sequelize = new Sequelize(
-	DB_RENDER,
-	{
-		logging: false, // set to console.log to see the raw SQL queries
-		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-	}
-); */
->>>>>>> 7156349f74e95d5b135fe647e812628810b10a9d
+
 
 const basename = path.basename(__filename); // Obtiene el nombre base del archivo actual.
 

@@ -1,18 +1,18 @@
 
 import { useSelector , useDispatch } from "react-redux";
-import {getAllOrder} from '../../../Redux/actions'
+import {getAllReview} from '../../../Redux/actions'
 import { useEffect , useState} from "react";
-import TablaOrder from "./TablaOrders/TablaOrders";
+import TablaReview from "./TablaReview/TablaReview";
 
 
-const AdminGetOrder = () => {
+const AdminReview = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
-    let orders = useSelector(state => state.AdminOrder);
+    let review = useSelector(state => state.adminReview);
     
     
     useEffect(()=> {
-        dispatch(getAllOrder());
+        dispatch(getAllReview());
     },[dispatch ])
     
     
@@ -22,17 +22,16 @@ const AdminGetOrder = () => {
             <table className="table align-middle mb-0 bg-white">
             <thead className="bg-dark">
                 <tr className='table-dark'>
-                    <th>N° Order</th>
+                    <th>ID Coment</th>
                     <th>User Id</th>
-                    <th>Email</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
+                    <th>Prod Id</th>
+                    <th>Rating</th>
+                    <th>Coment</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
-                <TablaOrder orders={orders} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+                <TablaReview review={review} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
             </table>
         </div>
         </div>
@@ -40,4 +39,4 @@ const AdminGetOrder = () => {
     )
 }
 
-export default AdminGetOrder;
+export default AdminReview;

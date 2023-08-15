@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED ,GET_ALL_USERS, GET_DETAIL_USERS,GET_MERCADO_ORDER, GET_USER_ORDER} from "./action-type";
+import { GET_ALL_PRODUCTS, GET_PRODUCT_DETAIL, CLEAR_DETAIL, GET_FAVORITES, GET_ADMIN_PRODUCTS, GET_CART_PRODUCTS, FILTER_SEARCHED, SET_FILTER_SEARCHED ,GET_ALL_USERS, GET_DETAIL_USERS,GET_MERCADO_ORDER, GET_USER_ORDER ,GET_ALL_REVIEW} from "./action-type";
 
 const initialState = {
     products: [],
@@ -13,7 +13,8 @@ const initialState = {
     usersAdmin:[],
     userDetail:[],
     mercadoOrder:'',
-    AdminOrder:[]
+    AdminOrder:[],
+    adminReview:[]
 
 }
 
@@ -80,6 +81,11 @@ const reducer = (state = initialState , action ) => {
             return{
                 ...state,
                 AdminOrder:action.payload
+            }
+        case GET_ALL_REVIEW:
+            return{
+                ...state,
+                adminReview:action.payload
             }
         default:
             return {...state}
