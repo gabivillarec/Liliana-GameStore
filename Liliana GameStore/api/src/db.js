@@ -59,7 +59,7 @@ Users.beforeCreate((user, options) => {
   });
 
 // Relación de Users
-//Orders.belongsTo(Users);
+
 Users.hasMany(Orders, {as:'users'});
 
 Users.hasOne(Cart, { foreignKey: 'userId' });
