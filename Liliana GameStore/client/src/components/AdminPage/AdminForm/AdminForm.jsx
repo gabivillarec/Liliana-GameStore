@@ -26,13 +26,17 @@ const AdminForm = () => {
 
     const handlerSubmit = async(event) => {
         event.preventDefault()
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToast'))
+        const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastError'))
         let response = await createProduct(create)
+        response === "OK" ? toastBootstrap.show() : toastBootstrapError.show()
+
     }
 
 
     return(
         <div className="p-4 container bg-dark">
-            <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
+            <form className="row needs-validation" novalidate onSubmit={handlerSubmit}>
             {
                 inputs.map((input , index) => {
                     return(
@@ -45,8 +49,30 @@ const AdminForm = () => {
             }
             <button className="mt-4 btn btn-info" type="submit">Subir Producto</button>
             </form>
+            <div className="toast-container position-fixed top-0 end-50 p-3 m-2">
+                <div id="liveToast" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="toast-header bg-success">
+                        <strong className="me-auto">Admin Products</strong>
+                        <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div className="toast-body">
+                        Se creo el producto de manera exitosa!
+                    </div>
+                </div>
+            </div>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
+                <div id="liveToastError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="toast-header bg-danger">
+                        <strong className="me-auto">Admin Products</strong>
+                        <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div className="toast-body">
+                        Error al crear el producto!
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default AdminForm
+export default AdminForm;
