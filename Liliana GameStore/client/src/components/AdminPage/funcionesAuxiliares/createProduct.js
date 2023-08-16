@@ -6,11 +6,11 @@ const createProduct = async (create) =>{
         let productsExport = [create]
 
         const response = await axios.post(`${URL}products` , productsExport);
-        console.log(response)
-        return alert(response.data)
+        return response.request.statusText
         
     } catch (error) {
-        return alert(error.message)
+        console.log(error)
+        return error.message
     }
 
 }
