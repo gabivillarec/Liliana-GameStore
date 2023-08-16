@@ -27,7 +27,10 @@ const AdminCreateUser = () => {
     const handlerSubmit = async(event) => {
         event.preventDefault()
         console.log(event)
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastUser'))
+        const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastErrorUser'))
         let response = await createUser(create)
+        response === "OK" ? toastBootstrap.show() : toastBootstrapError.show()
     }
 
 
@@ -44,8 +47,30 @@ const AdminCreateUser = () => {
                     )
                 })
             }
-            <button className="mt-4 btn btn-info" type="submit">Subir Producto</button>
+            <button className="mt-4 btn btn-info" type="submit">Crear Usuario</button>
             </form>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToastUser" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="toast-header bg-success">
+                        <strong className="me-auto">Admin Users</strong>
+                        <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div className="toast-body">
+                        Se creo el usuario de manera exitosa!
+                    </div>
+                </div>
+            </div>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToastErrorUser" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div className="toast-header bg-danger">
+                        <strong className="me-auto">Admin Users</strong>
+                        <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div className="toast-body">
+                        Error al crear el usuario!
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

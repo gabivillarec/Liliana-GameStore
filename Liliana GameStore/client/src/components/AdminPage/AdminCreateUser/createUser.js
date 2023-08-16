@@ -4,11 +4,11 @@ export const createUser = async (create) =>{
     console.log(create)
     try {
         const response = await axios.post(`${URL}user` , create);
-        return alert(response.data)
+        return response.request.statusText
         
     } catch (error) {
         console.log(error.message)
-        return alert(error.message)
+        return error.message
     }
 
 }

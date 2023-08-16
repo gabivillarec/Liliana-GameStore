@@ -30,7 +30,7 @@ const AdminPage = () => {
     return(
         <div className={style.fondo}>
         <div className={style.fondoBlureado}>
-            <div className="pt-5">
+            <div className="pt-5 pb-3">
                 <AdminNav handlerRender={handlerRender} />
                 <div className="container">
                     <PerfilData client={client} />
