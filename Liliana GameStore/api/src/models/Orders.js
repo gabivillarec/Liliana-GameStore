@@ -12,6 +12,11 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false
         },
+        estado:{
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+        ,
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false
