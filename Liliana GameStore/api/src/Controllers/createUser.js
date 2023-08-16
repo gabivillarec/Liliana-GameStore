@@ -1,3 +1,4 @@
+const transporter = require("../configMail")
 const { Users } = require("../db");
 const bcrypt = require('bcrypt');
 
@@ -29,6 +30,13 @@ const createUser = async (req, res) => {
           master: register.master,
           disabled: register.disabled
         };
+
+        await transporter.sendMail({
+          from: '"Fred Foo 👻" <nicorojaselcapo@gmail.com>', // sender address
+          to: register.email, // list of receivers
+          subject: "Hello ✔", // Subject line
+          html: "<b>Hello world?</b>", // html body
+        });
 
         return res.json(response);
       } else {
