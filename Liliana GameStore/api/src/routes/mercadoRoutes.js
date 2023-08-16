@@ -1,8 +1,8 @@
 const {Router} = require("express");
 const {placeOrder} = require("../Controllers/mercadopago/placeOrder");
-const successfulPayment = require("../Controllers/mercadopago/success");
+const {successfulPayment} = require("../Controllers/mercadopago/success");
 const failurPayment = require("../Controllers/mercadopago/failure");
-const pendingPayment = require('../Controllers/mercadopago/pending')
+const pendingPayment = require('../Controllers/mercadopago/pending');
 const paymentRouter = Router();
 
 paymentRouter.post("/mercadoorder", placeOrder);
