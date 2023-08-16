@@ -1,53 +1,137 @@
-import { useState } from "react"
-import createProduct from "../funcionesAuxiliares/createProduct"
+//Cloudinary Implementado
+import { useState } from "react";
+import axios from "axios";
+import createProduct from "../funcionesAuxiliares/createProduct";
 
 const AdminForm = () => {
-    const [create , setCreate] = useState({
-        name:"",
-        price:undefined,
-        image:"",
-        stock:undefined,
-        rating:undefined,
-        description_text:"",
-        category:'',
-        subcategory:"",
-        brand:"",
-        socket:['']
-    })
-    let inputs = Object.keys(create)
+    const [create, setCreate] = useState({
+        name: "",
+        price: undefined,
+        image: "",
+        stock: undefined,
+        rating: undefined,
+        description_text: "",
+        category: "",
+        subcategory: "",
+        brand: "",
+        socket:[]
+    });
+
+    let inputs = Object.keys(create);
+
+    const preset_key = "uploads";
+    const cloud_name = "depihylqc";
+    const [file, setFile] = useState(null);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setCreate({
-            ...create,
-            [name]: value
-        });
+        if (name === "socket") {
+            setCreate({
+                ...create,
+                [name]: value.split(",").map(item => item.trim())
+            });
+        } else {
+            setCreate({
+                ...create,
+                [name]: value
+            });
+        }
     };
 
-    const handlerSubmit = async(event) => {
-        event.preventDefault()
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToast'))
-        const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastError'))
-        let response = await createProduct(create)
-        response === "OK" ? toastBootstrap.show() : toastBootstrapError.show()
+    const handleFile = (event) => {
+        setFile(event.target.files[0]);
+    };
 
-    }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
+        if (file) {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", preset_key);
 
-    return(
-        <div className="p-4 container bg-dark">
-            <form className="row needs-validation" novalidate onSubmit={handlerSubmit}>
-            {
-                inputs.map((input , index) => {
-                    return(
-                        <div className="col-md-4" key={index}>
-                            <label for="validationCustom01"  name={input} className="form-label">{input}</label>
-                            <input type='text'  className="form-control" id="validationCustom01" value={create[input]} name={input} onChange={handleChange}  />
-                        </div>
-                    )
-                })
+            try {
+                const res = await axios.post(
+                    `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+                    formData
+                );
+
+                let updatedCreate = { ...create };
+                if (create.image) {
+                    updatedCreate.image = res.data.url;
+                } else {
+                    updatedCreate = {
+                        ...create,
+                        image: res.data.url
+                    };
+                }
+
+                setCreate(updatedCreate);
+
+                let response = await createProduct(updatedCreate);
+
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToast'));
+                const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastError'));
+                response === "OK" ? toastBootstrap.show() : toastBootstrapError.show();
+
+            } catch (err) {
+                console.log(err);
             }
-            <button className="mt-4 btn btn-info" type="submit">Subir Producto</button>
+        }
+    };
+console.log(create)
+    return (
+        <div className="p-4 container bg-dark">
+            <form className="row needs-validation" noValidate onSubmit={handleSubmit}>
+                {inputs.map((input, index) => {
+                    if (input !== "image" && input !== "socket") {
+                        return (
+                            <div className="col-md-4" key={index}>
+                                <label htmlFor={input} className="form-label">
+                                    {input}
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id={input}
+                                    value={create[input]}
+                                    name={input}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        );
+                    } else {
+                        return null;
+                    }
+                })}
+                <div className="col-md-4">
+                    <label htmlFor="socket" className="form-label">
+                        Socket
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="socket"
+                        value={create.socket.join(",")}
+                        name="socket"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label htmlFor="validationCustom01" className="form-label">
+                        Upload Image
+                    </label>
+                    <input
+                        type="file"
+                        className="form-control"
+                        id="validationCustom01"
+                        name="image"
+                        onChange={handleFile}
+                    />
+                </div>
+                <button className="mt-4 btn btn-info" type="submit">
+                    Subir Producto
+                </button>
             </form>
             <div className="toast-container position-fixed top-0 end-50 p-3 m-2">
                 <div id="liveToast" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
@@ -56,7 +140,7 @@ const AdminForm = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div className="toast-body">
-                        Se creo el producto de manera exitosa!
+                        Se creó el producto de manera exitosa!
                     </div>
                 </div>
             </div>
@@ -72,7 +156,89 @@ const AdminForm = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AdminForm;
+
+///////////////////////// Código anterior sin Cloudinary
+
+// import { useState } from "react"
+// import createProduct from "../funcionesAuxiliares/createProduct"
+
+// const AdminForm = () => {
+//     const [create , setCreate] = useState({
+//         name:"",
+//         price:undefined,
+//         image:"",
+//         stock:undefined,
+//         rating:undefined,
+//         description_text:"",
+//         category:'',
+//         subcategory:"",
+//         brand:"",
+//         socket:['']
+//     })
+//     let inputs = Object.keys(create)
+
+//     const handleChange = (event) => {
+//         const { name, value } = event.target;
+//         setCreate({
+//             ...create,
+//             [name]: value
+//         });
+//     };
+
+//     const handlerSubmit = async(event) => {
+//         event.preventDefault()
+//         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToast'))
+//         const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById('liveToastError'))
+//         let response = await createProduct(create)
+//         response === "OK" ? toastBootstrap.show() : toastBootstrapError.show()
+
+//     }
+
+
+//     return(
+//         <div className="p-4 container bg-dark">
+//             <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
+//             {
+//                 inputs.map((input , index) => {
+//                     return(
+//                         <div className="col-md-4" key={index}>
+//                             <label for="validationCustom01"  name={input} className="form-label">{input}</label>
+//                             <input type='text'  className="form-control" id="validationCustom01" value={create[input]} name={input} onChange={handleChange}  />
+//                         </div>
+//                     )
+//                 })
+//             }
+//             <button className="mt-4 btn btn-info" type="submit">Subir Producto</button>
+//             </form>
+//             <div className="toast-container position-fixed top-0 end-50 p-3 m-2">
+//                 <div id="liveToast" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+//                     <div className="toast-header bg-success">
+//                         <strong className="me-auto">Admin Products</strong>
+//                         <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+//                     </div>
+//                     <div className="toast-body">
+//                         Se creo el producto de manera exitosa!
+//                     </div>
+//                 </div>
+//             </div>
+//             <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
+//                 <div id="liveToastError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+//                     <div className="toast-header bg-danger">
+//                         <strong className="me-auto">Admin Products</strong>
+//                         <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+//                     </div>
+//                     <div className="toast-body">
+//                         Error al crear el producto!
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default AdminForm;
+
