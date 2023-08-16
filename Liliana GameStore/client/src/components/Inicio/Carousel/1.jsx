@@ -23,7 +23,7 @@ const Carousel = () => {
         <section>
             <div id="carouselExampleIndicators" className="carousel slide">
                 <div className="carousel-inner">
-                    <div class="carousel-item active">
+                    <div className="carousel-item active">
                         <img src='https://imagenes.compragamer.com/bannerPrincipal/DC_20230731112408_6DDt4vlp.jpg' className={styles.img} alt="Hyper auricular"/>
                     </div>
                     {
