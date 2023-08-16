@@ -1,6 +1,10 @@
 const { Orders, Products, Cart } = require("../../db");
+const axios = require('axios');
+const {URLFront} = require('./placeOrder')
+const {URLBack} = require('./placeOrder');
+const { refund } = require("mercadopago");
 
-const URL = "http://localhost:5173"
+
 //const URL = "https://lilianagamesstore.onrender.com"
 
 // Creo una función para formatear la fecha
@@ -16,70 +20,73 @@ const formatDate = (date) => {
 // Controlador
 const successfulPayment = async (req, res) => {
   const info = req.query;
-
+  console.log(info)
+  let {collection_status} = info
+ /*  GET /LilianaGameStore/mercadosuccess/2?collection_id=62168048431&collection_status=approved&payment_id=62168048431&status=approved&external_reference=null&payment_type=account_money&merchant_order_id=11146411760&preference_id=1160706432-b8ece61f-a7cb-43a3-8356-28b4e35d2494&site_id=MLA&processing_mode=aggregator&merchant_account_id=null */
   const { id } = req.params;
-
-
-  const cart = await Cart.findAll({
-    where: {userId: +id},
-  });
-// Obtener los IDs de los productos en el carrito
-  const productIds = cart.map(favorite => favorite.productId);
-// Obtener detalles de los productos en el carrito
-  const cartProducts = await Products.findAll({
-      where: {id: productIds }
-  });
-// Crear una lista enriquecida con la cantidad de productos y detalles de los productos
-    const cartWithQuantities = cartProducts.map(product => {
-    const cartItem = cart.find(item => item.productId === product.id);
-    return {
-        ...product.toJSON(),
-        itemCartId: cartItem.id,// Agregar el ID del elemento del carrito
-        cantidad: cartItem.cantidad
+  const getCart = async(id) =>{
+    try {
+      const response = await axios.get(`${URLBack}cart/${id}`);
+      return response.data; 
+    } catch (error) {
+      return console.log(error.message)
     }
-});
+  }
+  const deleteCart = async(id) =>{
+    try {
+      await axios.delete(`${URLBack}cart/compra/${id}`);
+    } catch (error) {
+      return console.log(error.message)
+    }
+  }
 
-  
+
+
+  const carts = await getCart(id)
+  // Obtener los IDs de los productos en el carrito
+  const productIds = carts.map(favorite => favorite.productId);
+
+
 // Calculo el precio total y la cantidad
-  let totalPrice = 0;
-  let totalQuantity = 0;
-  const orderedProducts = [];
-
-  for (let item of cartWithQuantities) {
-    if (item.stock >= item.cantidad) {
-      totalPrice += +item.price;
-      totalQuantity += +item.cantidad;
-      orderedProducts.push(item); 
-    }
-  };
-
+let totalPrice = 0;
+let totalQuantity = 0;
+const orderedProducts = [];
+for (let item of carts) {
+  if (item.stock >= item.cantidad) {
+    totalPrice += +item.price;
+    totalQuantity += +item.cantidad;
+    orderedProducts.push(item); 
+  }
+};
 // Creo la orden
   const order = await Orders.create({
     order_date: formatDate(new Date()),
     quantity: totalQuantity,
     total_price: totalPrice,
-    created: true,
+    created: true ,
     userId: id,
 		user: id,
   });
-
-
 // Asocio la Orden con los productos
-  await order.addProducts(orderedProducts);
+let productsIds = carts.map(product=> {
+  return product.id
+})
 
+try {
+  await order.addProducts(productsIds);//el error esta aca
+} catch (error) {
+  console.error('Error al agregar productos a la orden:', error.message);
+  // Manejo de errores
+}
 // Elimino el carrito y los items
 
-  await Cart.destroy({
-      where: { userId: id}
-  });
-
-// Obtengo la order nuevamente para incluir los productos asociados
-  const orderWithProducts = await Orders.findByPk(order.order_number, {
-    include: Products,
-  });
-
+    // Obtengo la order nuevamente para incluir los productos asociados
+    const orderWithProducts = await Orders.findByPk(order.order_number, {
+      include: Products,
+    });
+    await deleteCart(id)
 // Redirige de nuevo a la URL especificada con los datos
-  res.redirect(`${URL}`);
+res.redirect(`${URLFront}`);
 
 };
 
