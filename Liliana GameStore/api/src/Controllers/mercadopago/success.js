@@ -20,7 +20,9 @@ const formatDate = (date) => {
 // Controlador
 const successfulPayment = async (req, res) => {
   const info = req.query;
-
+  console.log(info)
+  let {collection_status} = info
+ /*  GET /LilianaGameStore/mercadosuccess/2?collection_id=62168048431&collection_status=approved&payment_id=62168048431&status=approved&external_reference=null&payment_type=account_money&merchant_order_id=11146411760&preference_id=1160706432-b8ece61f-a7cb-43a3-8356-28b4e35d2494&site_id=MLA&processing_mode=aggregator&merchant_account_id=null */
   const { id } = req.params;
   const getCart = async(id) =>{
     try {
@@ -43,11 +45,7 @@ const successfulPayment = async (req, res) => {
   const carts = await getCart(id)
   // Obtener los IDs de los productos en el carrito
   const productIds = carts.map(favorite => favorite.productId);
-  // Obtener detalles de los productos en el carrito
-  const cartProducts = await Products.findAll({
-      where: {id: productIds }
-  });
-// Crear una lista enriquecida con la cantidad de productos y detalles de los productos
+
 
 // Calculo el precio total y la cantidad
 let totalPrice = 0;
@@ -65,7 +63,7 @@ for (let item of carts) {
     order_date: formatDate(new Date()),
     quantity: totalQuantity,
     total_price: totalPrice,
-    created: true,
+    created: true ,
     userId: id,
 		user: id,
   });
@@ -73,7 +71,7 @@ for (let item of carts) {
 let productsIds = carts.map(product=> {
   return product.id
 })
-console.log(productsIds , "cart")
+
 try {
   await order.addProducts(productsIds);//el error esta aca
 } catch (error) {

@@ -4,6 +4,7 @@ import axios from "axios"
 import style from './Form.module.css'
 import validation from './Validation.js';
 import backgroundImage from '../../../vistas/PS_Background_Medium.png';
+import {URL} from '../../main'
 
 const Form = () => {
   
@@ -60,7 +61,7 @@ const Form = () => {
     }
     setError(validation(form));
     try {
-      const response = await axios.post('/LilianaGameStore/user', form);
+      const response = await axios.post(`${URL}user`, form);
       navigate('/login', { state: { newUser: response.data } });
     } catch (error) {
       setError(error.response.data);
