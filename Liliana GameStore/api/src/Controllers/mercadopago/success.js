@@ -60,6 +60,7 @@ const successfulPayment = async (req, res) => {
       quantity: totalQuantity,
       total_price: totalPrice,
       created: true ,
+      estado:'exitoso',
       userId: id,
       user: id,
     });

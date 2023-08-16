@@ -14,8 +14,8 @@ const successfulPayment = async (req, res) => {
     const { id } = req.params;
 
     // Verificar si el estado es "pending"
-    if (collection_status === "pending") {
 
+    
     const carts = await getCart(id)
 
     // Calculo el precio total y la cantidad
@@ -33,7 +33,8 @@ const successfulPayment = async (req, res) => {
         order_date: formatDate(new Date()),
         quantity: totalQuantity,
         total_price: totalPrice,
-        created: false ,
+        created: true ,
+        estado:'pendiente',
         userId: id,
         user: id,
       });
@@ -63,11 +64,7 @@ const successfulPayment = async (req, res) => {
   
     // Redirigir a la URL especificada
       res.redirect(URLFront);
-    } else {
-      // Si el estado no es "pending", puedes manejarlo de acuerdo a tus necesidades
-      // Por ejemplo, redirigir a otra página o enviar un mensaje de error.
-      res.status(400).send('El estado de pago no es pendiente.');
-    };
+ 
 
     
   } catch (error) {

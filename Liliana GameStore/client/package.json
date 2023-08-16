@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dump-work/react-google-login": "^6.0.14",
     "@mercadopago/sdk-react": "^0.0.13",
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "gapi-script": "^1.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-google-login": "^5.2.2",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -24,8 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
