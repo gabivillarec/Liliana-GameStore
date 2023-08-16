@@ -4,6 +4,7 @@ const pendingPayment = (req, res) => {
     //www.localhost/compras
     const id = req.params
     const info = req.query;
+    console.log(info)
     const infoJSON = JSON.stringify(info);
     console.log(id)
     res
