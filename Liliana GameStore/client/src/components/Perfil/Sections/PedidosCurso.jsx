@@ -10,7 +10,7 @@ const PedidosCurso = () =>{
             <div className="row g-0">
                 <div className="card-body bg-dark">
                     <h5 className="card-title text-primary">Pedidos en Curso</h5>
-                    <table class="table">
+                    <table className="table">
                         <thead className="bg-dark">
                             <tr className='table-dark'>
                                 <th scope="col">#</th>

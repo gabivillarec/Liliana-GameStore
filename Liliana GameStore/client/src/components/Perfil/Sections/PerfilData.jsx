@@ -13,15 +13,15 @@ const PerfilData = ({client}) => {
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <div class="d-flex gap-2 flex-row mb-2">
+                        <div className="d-flex gap-2 flex-row mb-2">
                             <div className="border border-info rounded p-2">Nombre: {first_name} {last_name}</div>
                             {/* <div className="border border-info rounded p-2">Apellido: {last_name}</div> */}
                         </div>
-                        <div class="d-flex gap-2 flex-row mb-2">
+                        <div className="d-flex gap-2 flex-row mb-2">
                             <div className="border border-info rounded p-2">Email: {email}</div>
                             <div className="border border-info rounded p-2">Telefono: {phone}</div>
                         </div>
-                        <div class="d-flex gap-2 flex-row mb-2">
+                        <div className="d-flex gap-2 flex-row mb-2">
                             <div className="border border-info rounded p-2">Dirección: {address}</div>
                             <div className="border border-info rounded p-2">Codigo Postal: {cp}</div>
                         </div>

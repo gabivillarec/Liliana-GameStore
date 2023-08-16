@@ -3,7 +3,7 @@ import style from './Sections.module.css'
 const Sections = ({title }) => {
 
     return(
-        <table class="table">
+        <table className="table">
   <thead>
     <tr>
       <th scope="col">#</th>

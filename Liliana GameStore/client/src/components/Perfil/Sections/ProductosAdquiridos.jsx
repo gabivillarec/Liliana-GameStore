@@ -3,10 +3,10 @@ import Adquisiciones from "./Adquisiciones/Adquisiciones";
 const ProductosAdquiridos = () =>{
 
     let buy = {
+        id: 29,
         image: 'https://http2.mlstatic.com/D_NQ_NP_736145-MLA50145467465_052022-O.webp',
         name: 'Juego Original PS5 Spider-Man: Miles Morales',
         price: 59900,
-        rating: 4,
         date: '04/08/23',
     }
 
