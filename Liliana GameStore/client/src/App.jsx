@@ -13,7 +13,6 @@ import AdminForm from "./components/AdminPage/AdminForm/AdminForm";
 import AdminFormUpdate from "./components/AdminPage/AdminFormUpdate/AdminFormUpdate";
 import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 import AdminUserEdit from './components/AdminPage/AdminUserEdit/AdminUserEdit'
-import GoogleButton from "./components/InicioGoogle/InicioGoogle";
 
 function App() {
 
@@ -34,7 +33,6 @@ function App() {
           <Route path="/adminpage/formupdate/:id" element={<AdminFormUpdate/>}/>
           <Route path="/adminpage/adminuseredit/:id" element={<AdminUserEdit/>}/>
           <Route path="/search" element={<SearchedProducts/>}/>
-          <Route path="/google" element={<GoogleButton/>}/>
       </Routes>
     </>
   )
