@@ -15,8 +15,8 @@ const Products = (sequelize) => {
 			type: DataTypes.DECIMAL,
 			allowNull: false,
 		},
-		image: {
-			type: DataTypes.STRING,
+		images: {
+			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false,
 		},
 		stock: {

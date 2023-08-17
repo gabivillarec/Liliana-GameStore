@@ -9,7 +9,7 @@ const UpdateForm = ({ id }) => {
     const [create, setCreate] = useState({
         name: "",
         price: undefined,
-        image: "", // URL de Cloudinary para la imagen
+        images: [], // Usar un array para almacenar las URLs de las imágenes
         stock: undefined,
         rating: undefined,
         description_text: "",
@@ -23,7 +23,7 @@ const UpdateForm = ({ id }) => {
 
     const preset_key = "uploads";
     const cloud_name = "depihylqc";
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,32 +42,36 @@ const UpdateForm = ({ id }) => {
     };
 
     const handleFile = (event) => {
-        setFile(event.target.files[0]);
+        setFiles([...files, ...event.target.files]);
     };
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
-    
-        let updatedCreate = { ...create }; // Crear una copia del objeto create
-    
-        if (file) {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", preset_key);
-    
+
+        let updatedCreate = { ...create };
+
+        if (files.length > 0) {
+            const formDataArray = files.map((file) => {
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("upload_preset", preset_key);
+                return formData;
+            });
+
             try {
-                const res = await axios.post(
-                    `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-                    formData
+                const uploadResponses = await Promise.all(
+                    formDataArray.map((formData) =>
+                        axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+                    )
                 );
-    
-                updatedCreate.image = res.data.url; // Actualizar la URL de la imagen en la copia
+
+                const imageUrls = uploadResponses.map((response) => response.data.url);
+                updatedCreate.images = imageUrls;
             } catch (err) {
                 console.log(err);
             }
         }
-    
-        // Actualizar el producto (con o sin la imagen)
+
         let response = await updateproducto(id, updatedCreate);
         alert(`Producto con Id: ${id} modificado con éxito`);
         navigate("/adminpage");
@@ -77,7 +81,7 @@ const UpdateForm = ({ id }) => {
         <div className="p-4 container bg-dark">
             <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
                 {inputs.map((input, index) => {
-                    if (input !== "image" && input !== "socket") {
+                    if (input !== "images" && input !== "socket") {
                         return (
                             <div className="col-md-4" key={index}>
                                 <label htmlFor={input} className="form-label">
@@ -115,13 +119,14 @@ const UpdateForm = ({ id }) => {
                 })}
                 <div className="col-md-4">
                     <label htmlFor="validationCustom01" className="form-label">
-                        Subir Imagen
+                        Subir Imágenes
                     </label>
                     <input
                         type="file"
                         className="form-control"
                         id="validationCustom01"
-                        name="image"
+                        name="images"
+                        multiple
                         onChange={handleFile}
                     />
                 </div>

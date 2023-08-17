@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const createProduct = async (req, res) => {
   try {
     const productsData = req.body; // Array de objetos con datos de los productos
-    
+
     // Array para almacenar los productos creados
     const createdProducts = [];
 
@@ -13,7 +13,7 @@ const createProduct = async (req, res) => {
       const {
         name,
         price,
-        image,
+        images,
         stock,
         rating,
         description_text,
@@ -24,11 +24,11 @@ const createProduct = async (req, res) => {
         socket,
         disabled
       } = productData;
-
+console.log(images)
       if (
         !name ||
         !price ||
-        !image ||
+        !images ||
         !stock ||
         !rating ||
         !category ||
@@ -99,7 +99,7 @@ const createProduct = async (req, res) => {
       const newProduct = await Products.create({
         name: name,
         price: price,
-        image: image,
+        images: images,
         stock: stock,
         rating: rating,
         description_text: description_text,
