@@ -3,8 +3,11 @@ import style from "./Login.module.css"
 import axios from "axios"
 import { useState } from "react";
 import { URL } from "../../main";
+import InicioGoogle from '../InicioGoogle/InicioGoogle'
 
 const Login = () => {
+    
+
     const navigate = useNavigate()
     const [userData, setUserData] = useState({
         username: '',
@@ -34,6 +37,8 @@ const Login = () => {
         }
     }
 
+ 
+
     return(
         <article className={style.contenedor}>
             <div className={`d-flex justify-content-center ${style.blurFondoLogin}`}>
@@ -52,6 +57,7 @@ const Login = () => {
                     </form>
                     <hr className="border-2 opacity-50"/>
                     <button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" onClick={()=> navigate('/user')}>Creá tu cuenta</button>
+                    <InicioGoogle   />
                 </div>
             </div>
         </article>
