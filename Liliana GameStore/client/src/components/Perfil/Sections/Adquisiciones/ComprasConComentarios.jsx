@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import axios from "axios"
-import style from './Adquiciones.module.css'
 import { URL } from "../../../../main";
+import { cambiarFecha } from '../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar';
+import style from './Compras.module.css'
 
-const Adquisiciones = ({compra}) => {
-    
-    let { id, image, name, price, rating, date } = compra
-    
+const ComprasConComentarios = ({ userId, productId, commentId, images, name, price, rating, comment, date }) => {
+
     const [mouseHover, setMouseHover] = useState(false);
-    const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(0);
+    const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(rating);
     const [error, setError] = useState(null);
     
-    const fullStars = Math.floor(rating);
+    const fullStars = rating;
     const totalStars = 5;
     
     const fullStarsElements = [];
@@ -24,50 +23,58 @@ const Adquisiciones = ({compra}) => {
     for (let i = 0; i < emptyStarsCount; i++) {
         emptyStarsElements.push(<i key={i + fullStars} className="bi bi-star text-info"></i>);
     }
+
+    let fecha = cambiarFecha(date)
     
     const [review, setReview] = useState({
-        productId: id,
-        userId: null,
-        comment: '',
-        rating: 0,
+        productId: productId,
+        userId: userId,
+        comment: comment,
+        rating: rating,
     });
 
-    const handleSubmit = async () => {
-        const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-        const userId = userFromLocalStorage ? userFromLocalStorage.id : null;
-
-        const newReview = {
-            productId: id,
-            userId: userId,
-            comment: review.comment,
-            rating: calificacionSeleccionada,
-        };
-        console.log(newReview);
+    const handleDelete = async () => {
         try {
-            const response = await axios.post(`${URL}review`, newReview);
+            const response = await axios.delete(`${URL}review/${commentId}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error al eliminar el comentario:", error);
+            setError(error.response?.data || "Ocurrió un error al eliminar");
+        }
+    };
+    
+
+    const handleUpdate = async () => {
+        const updateReview = {
+            id: commentId,
+            newComment: review.comment,
+            newRating: calificacionSeleccionada
+        };    
+        try {
+            const response = await axios.put(`${URL}review/`, updateReview);
             console.log(response.data);
         } catch (error) {
             console.error("Error de Axios:", error);
             setError(error.response?.data || "Ocurrió un error");
         }
-    };
+    };        
 
     return(
       <tbody>
           <tr className='table-dark'>
-              <th scope="row"><img src={image} alt={name} className={`rounded-circle ${style.img}`} /></th>
+              <th scope="row"><img src={images[0]} alt={name} className={`rounded-circle ${style.img}`} /></th>
               <td className="align-middle">{name}</td>
               <td className="align-middle text-center">${price}</td>
               <td className="align-middle text-center" >{fullStarsElements}{emptyStarsElements}</td>
               <td className="align-middle text-center">
-                  <i className="bi bi-pencil-square" data-bs-toggle="collapse" data-bs-target={`#collapse${id}`}></i>
+                  <i className="bi bi-pencil-square" data-bs-toggle="collapse" data-bs-target={`#collapse${productId}`}></i>
               </td>
-              <td className="align-middle text-center">{date}</td>
+              <td className="align-middle text-center">{fecha}</td>
           </tr>
-          <tr id={`collapse${id}`} className="collapse">
+          <tr id={`collapse${productId}`} className="collapse">
               <td colSpan="6" className="bg-secondary rounded">
                   <div className="container p-3 bg-secondary text-white">
-                      <p className="text-dark fw-bold">Calificar:
+                      <p className="text-dark fw-bold">Calificar nuevamente:
                         <td className="align-middle text-center" >
                             {[1, 2, 3, 4, 5].map((indice) => ( <i
                                 key={indice}
@@ -84,7 +91,10 @@ const Adquisiciones = ({compra}) => {
                       <textarea className="form-control" id="comment" rows="3" maxLength="250" value={review.comment} onChange={(event) => setReview({ ...review, comment: event.target.value })} style={{ resize: "none" }} />
                           <p id="comment-counter" className="form-text text-dark fw-lighter">{review.comment.length} / 250 caracteres</p>
                       </div>
-                      <i className="d-flex justify-content-end"><button className="btn btn-light" onClick={handleSubmit} >Aceptar</button></i>
+                      <div className="mb-3 d-flex justify-content-between">
+                          <button className="btn btn-light" onClick={handleDelete}>Eliminar comentario</button>
+                          <button className="btn btn-light" onClick={handleUpdate}>Actualizar</button>
+                      </div>
                   </div>
               </td>
           </tr>
@@ -92,4 +102,4 @@ const Adquisiciones = ({compra}) => {
     )
 }
 
-export default Adquisiciones;
+export default ComprasConComentarios;
