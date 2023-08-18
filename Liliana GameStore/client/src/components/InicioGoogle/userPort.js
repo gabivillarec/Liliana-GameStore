@@ -1,7 +1,6 @@
 export const userPost = (userData) =>{
     let {displayName , email ,photoURL  ,accessToken} = userData
     let names = displayName.split(" ");
-    console.log(photoURL)
     let firstName = names[0];  // "Franco"
     let lastName = names[1]; 
 
@@ -16,6 +15,5 @@ export const userPost = (userData) =>{
         phone: "+542668877",
         avatar_img: `${photoURL}`
     }
-    console.log(userObj , "userpost")
     return userObj
 }

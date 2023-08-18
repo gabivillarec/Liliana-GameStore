@@ -6,7 +6,6 @@ const login = async (req, res) => {
 
     try {
         const { username, password } = req.body;
-
         if(username){ 
             const user = await Users.findOne({ where: { username } })
             if (user) {

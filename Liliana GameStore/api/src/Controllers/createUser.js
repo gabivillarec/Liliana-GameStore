@@ -31,9 +31,9 @@ const createUser = async (req, res) => {
           disabled: register.disabled
         };
 
-        await transporter.sendMail({
+       /*  await transporter.sendMail({
           from: '"Liliana Games Store" <nicorojaselcapo@gmail.com>', // sender address
-          to: register.email, // list of receivers
+          to: email, // list of receivers
           subject: "Bienvenido!", // Subject line
           html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -251,7 +251,7 @@ const createUser = async (req, res) => {
           </div>
           </body>
           </html>`, // html body
-        });
+        }); */
 
         return res.json(response);
       } else {
