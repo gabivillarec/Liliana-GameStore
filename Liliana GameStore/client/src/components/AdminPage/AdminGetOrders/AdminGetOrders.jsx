@@ -26,7 +26,7 @@ const AdminGetOrder = () => {
                     <th>User Id</th>
                     <th>Email</th>
                     <th>Fecha</th>
-                    <th>Cantidad</th>
+                    <th>Estado</th>
                     <th>Total</th>
                     <th>Editar</th>
                     <th>Eliminar</th>

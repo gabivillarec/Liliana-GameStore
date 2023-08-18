@@ -26,9 +26,8 @@ router.use('/LilianaGameStore',orderRoutes);
 router.use('/LilianaGameStore',socketRoutes);
 router.use('/LilianaGameStore',subCategoryRoutes);
 router.use('/LilianaGameStore',usersRoutes);
-router.use('/LilianaGameStore',usersRoutes);
-router.use('/LilianaGameStore', reviewRoutes);
-router.use('/LilianaGameStore', paymentRouter);
+router.use('/LilianaGameStore',reviewRoutes);
+router.use('/LilianaGameStore',paymentRouter);
 router.use('/LilianaGameStore',login);
 
 

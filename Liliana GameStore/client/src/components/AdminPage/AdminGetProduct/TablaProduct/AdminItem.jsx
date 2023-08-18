@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
     const navigate = useNavigate()
-    const { image, name, price, id, stock , category_name,disabled } = product;
+    const { images, name, price, id, stock , category_name, disabled } = product;
     const [checkbox, setCheckbox] = useState(false);
     const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
@@ -30,7 +30,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
             <td>
                 <div className="d-flex align-items-center">
                     <img
-                        src={image}
+                        src={images[0]} //Muestra siempre la primer URL almacenada
                         alt={name}
                         className={`rounded-circle ${style.imgen}`}
                     />

@@ -1,4 +1,4 @@
-const { Users, Favorites, PurchaseHistory, Orders } = require("../db");
+const { Users, Favorites, Orders } = require("../db");
 
 
 const getUserById = async (req, res) => {

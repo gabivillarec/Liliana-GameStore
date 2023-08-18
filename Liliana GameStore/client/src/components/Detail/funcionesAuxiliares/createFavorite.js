@@ -13,6 +13,7 @@ export const createFavorite = async(userId , productId) =>{
         let response= await axios.post(URLfav, objet)
         return response.data
     } catch (error) {
+        console.log(error.message)
         return error.message
     }
 }

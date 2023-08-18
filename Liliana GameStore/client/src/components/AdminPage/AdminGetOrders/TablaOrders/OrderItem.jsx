@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const OrderItem = ({ order, handlerDelete , }) => {
     const navigate = useNavigate()
-    const {order_numer,userId , user , order_date , quantity ,total_price} = order;
+    const {order_numer,userId , user , order_date , quantity ,total_price , estado} = order;
     const [checkbox, setCheckbox] = useState(false);
     const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
@@ -35,7 +35,7 @@ const OrderItem = ({ order, handlerDelete , }) => {
             </td>
        
             <td>
-                <p className="fw-normal mb-1">{quantity}</p>
+                <p className="fw-normal mb-1">{estado}</p>
             </td>
             <td>
                 <p>{total_price}</p>
@@ -71,8 +71,7 @@ const OrderItem = ({ order, handlerDelete , }) => {
                     />
                     <label
                         className="form-check-label"
-                        htmlFor={`flexSwitchCheckDefault_${userId}`}
-                    >
+                        htmlFor={`flexSwitchCheckDefault_${userId}`}>
                         Eliminar
                     </label>
                 </div>
