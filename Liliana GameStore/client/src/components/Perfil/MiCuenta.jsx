@@ -5,31 +5,45 @@ import PedidosCurso from './Sections/PedidosCurso'
 import PerfilData from './Sections/PerfilData'
 import { useState , useEffect } from 'react'
 import axios from 'axios'
+import ValidationLoginCard from '../ValidationLoginCard/ValidationLoginCard'
 
 const MiCuenta = () => {
-
     const [client , setCliente] = useState({})
+    const [logueado, setLogueado] = useState(false)
+
     useEffect(()=>{
         const usuario = JSON.parse(localStorage.getItem("user"))
 
-        axios.get(`${URL}user/${usuario.id}`)
-            .then(response =>{
-                setCliente(response.data)
-            })
+        if(!usuario){
+            console.log("aa");
+            setLogueado(false)
+        }else{
+            axios.get(`${URL}user/${usuario.id}`)
+                .then(response =>{
+                    setLogueado(true)
+                    setCliente(response.data)
+                })
+        }
     },[])
-
-
 
     return(
         <div className={style.fondo}>
             <div className={style.fondoBlur}>
-                <article className="p-4">
-                    <section className='container'>
-                        <PerfilData client={client}/>
-                        <ProductosAdquiridos/>
-                        <PedidosCurso/>
-                    </section>
-                </article>
+                {
+                    logueado ? (
+                        <article className="p-4">
+                            <section className='container'>
+                                <PerfilData client={client}/>
+                                <ProductosAdquiridos/>
+                                <PedidosCurso/>
+                            </section>
+                        </article>
+                    )
+                    : (
+                        <ValidationLoginCard/>
+                    )
+                }
+                
             </div>
         </div>
     )
