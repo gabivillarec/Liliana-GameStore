@@ -5,6 +5,7 @@ const createUser = require('../Controllers/createUser');
 const getUserById = require('../Controllers/getUserById');
 const updateUsers = require('../Controllers/updateUsers');
 const deleteUser = require('../Controllers/deleteUser');
+const getUserByEmail = require('../Controllers/getUserByEmail')
 
 const userRoutes = Router();
 
@@ -14,10 +15,13 @@ userRoutes.get("/user" , getAllUsers);
 
 userRoutes.get("/user/:id" , getUserById);
 
+userRoutes.get('/user/:email', getUserByEmail);
+
 userRoutes.post("/user" , createUser);
 
 userRoutes.put("/user/:id" , updateUsers);
 
 userRoutes.delete("/user/:id" , deleteUser);
+
 
 module.exports = userRoutes;
