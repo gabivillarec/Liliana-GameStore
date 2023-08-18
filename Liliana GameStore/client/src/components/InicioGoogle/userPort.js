@@ -16,5 +16,6 @@ export const userPost = (userData) =>{
         phone: "+542668877",
         avatar_img: `${photoURL}`
     }
+    console.log(userObj , "userpost")
     return userObj
 }

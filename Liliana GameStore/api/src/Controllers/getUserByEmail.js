@@ -11,7 +11,7 @@ const getUserByEmail = async (req, res) => {
         if (emailUser) {
             return res.json(true);
         } else {
-            return res.status(400).send("User not Found");
+            return res.status(200).json(false);
         }
     } catch (error) {
         // Captura y loguea el error para diagnóstico

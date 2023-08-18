@@ -24,8 +24,6 @@ function Detail() {
     const [usuarios, setUsuarios] = useState({});
     
     const [quantity, setQuantity] = useState(1);
-    const userFavorites = useSelector(state => state.userDetail.favorites)
-    console.log(userFavorites , "favorit")
     async function obtenerDetallesUsuario(userId) {
       try {
         const respuesta = await axios.get(`${URL}user/${userId}`);
@@ -39,15 +37,11 @@ function Detail() {
     idUser = JSON.parse(idUser)
     
     const handleAddItem = async() => {
-      console.log(detail.id , "detsil id")
-      console.log(idUser.id , "user id")
-      console.log(quantity , "cantidad")
       await postCarrito(detail.id , idUser.id , quantity)
       alert(`Producto ${detail.name} agregado de manera exitosa`)
     
     };
     const handleFavorites = async() => {
-      console.log("add")
       await createFavorite( idUser.id, detail.id )
       setFavorito({
         style:"btn-danger",
@@ -56,7 +50,6 @@ function Detail() {
       alert(`producto con id  ${detail.id} agragado con exito`)
     };
     const handleDeleteFavorites = async() => {
-      console.log("add")
       await deleteFavorite(detail.id)
       setFavorito({
         style:"btn-light",
