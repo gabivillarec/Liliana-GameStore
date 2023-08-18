@@ -29,7 +29,7 @@ const Login = () => {
             await axios.post(`${URL}login`, userData)
             .then(response => {
                 // Manejo de la respuesta exitosa
-                localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id }) )
+                localStorage.setItem("user", JSON.stringify({ username : response.data.username, admin : response.data.admin, id : response.data.id, favorites : response.data.favorites }) )
                 navigate('/')
             })                                                                     
         } catch (error) {
