@@ -9,14 +9,17 @@ import Buttons from "./TablaProduct/Buttons";
 const AdminGetProduct = () =>{
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
+    let  products  = useSelector(state => state.products)
+    const searchedProductList = useSelector(state => state.searchedProductList)
+    const totalPages = useSelector(state => state.totalPages)
+    const currentPage = useSelector(state => state.currentPage)
+    const [filtros, setFiltros] = useState({ pageNumber: 1, [searchedProductList.nombreFiltro] : searchedProductList.valorFiltro, })
+    const [subcategories, setSubcategories] = useState([])
+    const [brand, setBrand] = useState([])
+    
     useEffect(()=> {
         dispatch(getAllProducts())
     },[dispatch , deleteTrigger])
-    let  products  = useSelector(state => state.products)
-
-    const [filtros, setFiltros] = useState({})
-    const [subcategories, setSubcategories] = useState([])
-    const [brand, setBrand] = useState([])
 
     useEffect(() => {
         axios.get(`${URL}subcategory`)
@@ -34,6 +37,16 @@ const AdminGetProduct = () =>{
                 console.error('Error al obtener las subcategorías:', error);
             });
       }, []);
+      
+    useEffect(()=> {
+      setFiltros({
+        ...filtros,
+        [searchedProductList.nombreFiltro] : searchedProductList.valorFiltro
+      })
+    },[searchedProductList])
+    useEffect(()=>{
+      handleBtnFiltrar()
+  },[filtros.pageNumber])
 
     function objectToString(obj) {
         const keyValuePairs = [];
@@ -56,12 +69,56 @@ const AdminGetProduct = () =>{
         const resultString = objectToString(filtros)
         dispatch(getAllProducts(resultString))
     } 
+    const generatePaginationButtons = (totalPages) => {
+      const paginationButtons = [];
+      const maxButtonsToShow = 5
+      let startPage;
+
+      if (currentPage <= Math.floor(maxButtonsToShow / 2)) {
+          startPage = 1;
+        } else if (currentPage > totalPages - Math.floor(maxButtonsToShow / 2)) {
+          startPage = Math.max(1, totalPages - maxButtonsToShow + 1);
+        } else {
+          startPage = Math.max(1, currentPage - Math.floor(maxButtonsToShow / 2));
+        }
+    
+      if (currentPage > 1) {
+        paginationButtons.push(
+          <button key="prev" className="btn btn-info" onClick={() => {setFiltros({...filtros, pageNumber: currentPage - 1}); window.scrollTo(0, 0)}}>
+            Anterior
+          </button>
+        );
+      }
+    
+      for (let i = startPage; i <= Math.min(totalPages, startPage + maxButtonsToShow - 1); i++) {
+        paginationButtons.push(
+          <button
+            key={i}
+            className={i === currentPage ? "btn btn-info" : "btn btn-outline-info"}
+            onClick={() => {setFiltros({...filtros, pageNumber: i}); window.scrollTo(0, 0)}}
+          >
+            {i}
+          </button>
+        );
+      }
+    
+      if (currentPage < totalPages) {
+        paginationButtons.push(
+          <button key="next" className="btn btn-info" onClick={() => {setFiltros({...filtros, pageNumber: currentPage + 1}); window.scrollTo(0, 0)}}>
+            Siguiente
+          </button>
+        );
+      }
+    
+      return paginationButtons;
+    };
 
 
     return(
 
       <div className= 'container'>
         <div className='container'>
+        <div className="p-2 d-flex justify-content-center flex-row gap-3">{generatePaginationButtons(totalPages)}</div>
           <Buttons  handleBtnFiltrar={handleBtnFiltrar}  handleFilter={handleFilter} subcategories={subcategories} brand={brand}/>
           <table className="table align-middle mb-0 bg-white">
           <thead className="bg-dark">

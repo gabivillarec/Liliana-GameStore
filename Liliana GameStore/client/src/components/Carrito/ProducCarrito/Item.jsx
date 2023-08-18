@@ -8,7 +8,7 @@ const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>
                 <div className="d-flex align-items-center">
                     <img
                         src={images}
-                        alt=""
+                        alt={name}
                         className={`rounded-circle ${style.img}`}
                         />
                     <div className="ms-3">
