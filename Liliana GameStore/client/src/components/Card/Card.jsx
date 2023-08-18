@@ -5,7 +5,7 @@ const Card = ({ id, name, images, price, stock }) => {
     const navigate = useNavigate()
     return (
         <div className={style.card} onClick={() => navigate(`/detail/${id}`)}>
-            <img className={style.image} src={images[0]} alt={name} />
+            <img className={style.image} src={images?.[0]} alt={name} />
             <h6 className={style.detailCard}>{name}</h6>
             <h6 className={style.detailCard}>Stock: {stock}</h6>
             <h4 className={style.detailCard}>${price}</h4>
