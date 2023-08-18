@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail, clearDetail } from "../../Redux/actions"
+import { getProductDetail, clearDetail , getDetailUser } from "../../Redux/actions"
 import style from "./Detail.module.css"
 import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
 import { deleteFavorite } from "./funcionesAuxiliares/deleteFavorite";
-import {detailMercado} from '../Carrito/ProducCarrito/funcionesAuxiliares'
 import { postCarrito } from "./funcionesAuxiliares/postCarrito";
 import axios from "axios";
 import { URL } from "../../main";
+import Favoritos from "./components/Favoritos";
+import AsideDetail from "./components/Aside";
+import EnStock from "./components/EnStock";
+import Brand from "./components/Brand";
+import Cantidad from "./components/Cantidad";
 
 function Detail() {
 
@@ -20,26 +24,8 @@ function Detail() {
     const [usuarios, setUsuarios] = useState({});
     
     const [quantity, setQuantity] = useState(1);
-
-    const totalRating = reviews?.reduce((total, review) => total + review.rating, 0);
-    const promedioRating = totalRating / reviews.length;
-    const fullStars = Math.floor(promedioRating);
-    const hasHalfStar = promedioRating - fullStars >= 0.5;
-    
-    const fullStarsElements = [];
-    for (let i = 0; i < fullStars; i++) {
-      fullStarsElements.push(<i key={i} className="bi bi-star-fill"></i>);
-    }
-    const halfStarElement = hasHalfStar ? (
-      <i key={fullStars} className="bi bi-star-half"></i>
-    ) : null;
-    const emptyStarsElements = [];
-    const totalStars = 5;
-    for (let i = 0; i < totalStars - fullStars - (hasHalfStar ? 1 : 0); i++) {
-      emptyStarsElements.push(<i key={fullStars + (hasHalfStar ? 1 : 0) + i} className="bi bi-star"></i>);
-    }
-
-
+    const userFavorites = useSelector(state => state.userDetail.favorites)
+    console.log(userFavorites , "favorit")
     async function obtenerDetallesUsuario(userId) {
       try {
         const respuesta = await axios.get(`${URL}user/${userId}`);
@@ -49,59 +35,49 @@ function Detail() {
         return { nombre: 'Usuario', apellido: 'Desconocido', imagen: '' };
       }
     }
-
-
-    const handleIncrement = () => {
-      if (quantity < detail.stock) {
-        setQuantity(quantity + 1);
-      }
-    };
-    const handleDecrement = () => {
-      if (quantity > 1) {
-        setQuantity(quantity - 1);
-      }
-    };
-
-    const handleBuyNow = async() => {
-      try {
-        let idUser = localStorage.getItem('user');
-        idUser = JSON.parse(idUser)
-        let obtMercado = detailMercado(detail ,idUser.id )
-        let response = await axios.post(`${URL}mercadoorder`, obtMercado)
-            window.location.href = response.data.response.body.init_point;
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
+    let idUser = localStorage.getItem('user');
+    idUser = JSON.parse(idUser)
+    
     const handleAddItem = async() => {
-      let idUser = localStorage.getItem('user');
-      idUser = JSON.parse(idUser)
+      console.log(detail.id , "detsil id")
+      console.log(idUser.id , "user id")
+      console.log(quantity , "cantidad")
       await postCarrito(detail.id , idUser.id , quantity)
       alert(`Producto ${detail.name} agregado de manera exitosa`)
     
     };
     const handleFavorites = async() => {
-      let idUser = localStorage.getItem('user');
-      idUser = JSON.parse(idUser)
-      let response = await createFavorite( idUser.id, detail.id )
-      alert(`producto con id  ${detail.id} agragado con exito`, response.product)
+      console.log("add")
+      await createFavorite( idUser.id, detail.id )
+      setFavorito({
+        style:"btn-danger",
+        handler:handleDeleteFavorites
+      })
+      alert(`producto con id  ${detail.id} agragado con exito`)
     };
     const handleDeleteFavorites = async() => {
-      let response = await deleteFavorite(detail.id)
+      console.log("add")
+      await deleteFavorite(detail.id)
+      setFavorito({
+        style:"btn-light",
+        handler:handleFavorites
+      })
       alert(`Producto con ID: ${detail.id} Quitado de favoritos`)
     };
 
+    const [favorito , setFavorito] =useState({
+      style:"btn-light",
+      handler:handleFavorites
+  })
 
     useEffect(() => {
         dispatch(getProductDetail(id));
         axios.get(`${URL}review/product/${id}`)
         .then(response => {
           setReviews(response.data);
-  
           // Obtiene los detalles de los usuarios y almacena en el estado
           const userIds = response.data.map(review => review.userId);
           const detallesUsuarios = {};
-  
           Promise.all(userIds.map(userId => obtenerDetallesUsuario(userId)))
             .then(detalles => {
               detalles.forEach((detalle, index) => {
@@ -121,95 +97,29 @@ function Detail() {
         };
       }, [dispatch, id]);
 
+
     return(
         <section className={`py-5 ${style.vBackground}`}>
           <div className="container">
             <div className="row gx-5">
-              <aside className="col-lg-6">
-                <div className="border rounded-4 mb-3 d-flex justify-content-center">
-                  <a
-                    data-fslightbox="mygalley"
-                    className="rounded-4"
-                    target="_blank"
-                    data-type="image"
-                    href={detail.image}
-                  >
-                    <img
-                      style={{ maxWidth: '100%', maxHeight: '100vh', margin: 'auto' }}
-                      className="rounded-4 fit"
-                      src={detail.image}
-                      alt={detail.name}
-                    />
-                  </a>
-                </div>
-              </aside>
+              <AsideDetail detail={detail}/>
               <main className="col-lg-6">
                 <div className="ps-lg-3">
                   <h4 className={`title ${style["text-dark"]} ${style["green-text"]}`}>{detail.name}<br />{detail.category}</h4>
-                  <div className="d-flex flex-row my-3">
-                  <div className="text-warning mb-1 me-2">
-                    {fullStarsElements}
-                    {halfStarElement}
-                    {emptyStarsElements}
-                    <span className="ms-1">{promedioRating?.toFixed(2)}</span>
-                  </div> {detail.stock === 0
-                          ? (<span className="text-danger ms-2">SIN STOCK ⛔</span>)
-                          : detail.stock > 0 && detail.stock <= 5
-                          ? (<span className="text-warning ms-2">BAJO STOCK ⚠️</span>)
-                          : (<span className="text-success ms-2">EN STOCK ✅</span>)}
-                  </div>
-
+                  <EnStock reviews={reviews} detail={detail}/>
                   <div className="mb-3">
                     <span className="h5">${detail.price}</span>
                   </div>
-
                   <p>{detail.description_text} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, consectetur aperiam. Est tenetur corrupti vel iusto facere quos repellat. Necessitatibus inventore quis exercitationem laudantium. Optio corporis assumenda ducimus totam explicabo? </p>
-
-                  <div className="row">
-                    <dt className="col-3">Brand</dt>
-                    <dd className="col-9">{detail.brand}</dd>
-
-                    {/* <dt className="col-3">Type:</dt>
-                    <dd className="col-9">Regular</dd> */}
-
-                  </div>
-
+                  <Brand detail={detail} />
                   <hr />
-
                   <div className="row mb-4">
-                    <div className="col-md-4 col-6 mb-3">
-                      <label className="mb-2 d-block">Cantidad</label>
-                      <div className="input-group mb-3" style={{ width: '170px' }}>
-                        <button className="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark" onClick={handleDecrement} >
-                          <i className="bi bi-dash"></i>
-                        </button>
-                        <input
-                          type="text"
-                          value={quantity}
-                          min="1"
-                          max={detail.stock}
-                          className="form-control text-center border border-secondary"
-                          aria-label="Example text with button addon"
-                          aria-describedby="button-addon1"
-                        />
-                        <button className="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark" onClick={handleIncrement} >
-                          <i className="bi bi-plus"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <Cantidad  quantity={quantity}  detail={detail} setQuantity={setQuantity}/>
                   </div>
-                  <a href="#" className="btn btn-warning shadow-0" onClick={handleBuyNow}>
-                    Comprar Ahora
-                  </a> 
                   <a href="#" className="btn btn-primary shadow-0" onClick={handleAddItem} >
                     <i className="me-1"></i>🛒 Agregar al carrito
                   </a>
-                  <a href="#" className="btn btn-light border border-secondary py-2 icon-hover px-3" onClick={handleFavorites} >
-                    <i className="me-1 fa fa-heart fa-lg"></i> Favoritos
-                  </a>
-                  <a href="#" className="btn btn-light border border-secondary py-2 icon-hover px-3" onClick={handleDeleteFavorites} >
-                    <i className="me-1 fa fa-heart fa-lg"></i> Quitar Favoritos
-                  </a>
+                  <Favoritos  favorito={favorito}/>
                 </div>
               </main>
             </div>

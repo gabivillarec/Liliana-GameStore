@@ -6,7 +6,7 @@ export const postCarrito = async(productID , userID , cantidad) => {
         productId:productID,
         userId: userID,
         cantidad: cantidad }
-        let URLcart = `${URL}cart/`
+        let URLcart = `${URL}cart`
         try {
             let response = await axios.post(URLcart, objPost)
             return response
