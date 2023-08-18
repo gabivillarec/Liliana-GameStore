@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminDetail = ({ detail }) => {
+const AdminDetail = ({ detail, handleImageDelete }) => {
   const {
     name,
     price,
@@ -11,10 +11,9 @@ const AdminDetail = ({ detail }) => {
     category_name,
     subcategory_name,
     brand_name,
-    sockets, // Cambio de "socket" a "sockets"
+    sockets,
   } = detail;
 
-  // Función para unir los nombres de los sockets con comas
   const joinSockets = (sockets) => {
     return sockets?.map((socketObj) => socketObj.name).join(' - ');
   };
@@ -24,13 +23,20 @@ const AdminDetail = ({ detail }) => {
       <div className="row g-0">
         <div className="col-md-4">
           {images?.map((imageUrl, index) => (
-            <img
-              key={index}
-              src={imageUrl}
-              className="img-fluid rounded-start"
-              alt={`Image ${index + 1}`}
-              style={{ maxWidth: '300px' }}
-            />
+            <div key={index} className="image-container">
+              <img
+                src={imageUrl}
+                className="img-fluid rounded-start"
+                alt={`Image ${index + 1}`}
+                style={{ maxWidth: '300px' }}
+              />
+              <button
+                className="btn btn-danger mt-2"
+                onClick={() => handleImageDelete(index)}
+              >
+                X
+              </button>
+            </div>
           ))}
         </div>
         <div className="col-md-8">
@@ -57,7 +63,6 @@ const AdminDetail = ({ detail }) => {
             <p className="card-text">
               <strong>Brand:</strong> {brand_name}
             </p>
-            {/* Renderizar los nombres de los sockets separados por comas */}
             <p className="card-text">
               <strong>Sockets:</strong> {joinSockets(sockets)}
             </p>
