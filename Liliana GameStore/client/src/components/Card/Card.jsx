@@ -4,7 +4,7 @@ import style from "./Card.module.css"
 const Card = ({ id, name, images, price, stock }) => {
     const navigate = useNavigate()
     return (
-        <div className={style.card} onClick={() => navigate(`/detail/${id}`)}>
+        <div key={id} className={style.card} onClick={() => navigate(`/detail/${id}`)}>
             <img className={style.image} src={images?.[0]} alt={name} />
             <h6 className={style.detailCard}>{name}</h6>
             <h6 className={style.detailCard}>Stock: {stock}</h6>
