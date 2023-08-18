@@ -1,3 +1,5 @@
+import React from 'react';
+
 const AdminDetail = ({ detail }) => {
   const {
     name,
@@ -9,12 +11,16 @@ const AdminDetail = ({ detail }) => {
     category_name,
     subcategory_name,
     brand_name,
-    socket,
+    sockets, // Cambio de "socket" a "sockets"
   } = detail;
+
+  // Función para unir los nombres de los sockets con comas
+  const joinSockets = (sockets) => {
+    return sockets?.map((socketObj) => socketObj.name).join(' - ');
+  };
 
   return (
     <div className="card mb-3 bg-black">
-    {/* Mapeo images para renderizar todas, seteo maxwidth 300px*/}
       <div className="row g-0">
         <div className="col-md-4">
           {images?.map((imageUrl, index) => (
@@ -23,8 +29,7 @@ const AdminDetail = ({ detail }) => {
               src={imageUrl}
               className="img-fluid rounded-start"
               alt={`Image ${index + 1}`}
-              style={{ maxWidth: '300px' }
-            }
+              style={{ maxWidth: '300px' }}
             />
           ))}
         </div>
@@ -52,6 +57,10 @@ const AdminDetail = ({ detail }) => {
             <p className="card-text">
               <strong>Brand:</strong> {brand_name}
             </p>
+            {/* Renderizar los nombres de los sockets separados por comas */}
+            <p className="card-text">
+              <strong>Sockets:</strong> {joinSockets(sockets)}
+            </p>
           </div>
         </div>
       </div>
@@ -60,3 +69,8 @@ const AdminDetail = ({ detail }) => {
 };
 
 export default AdminDetail;
+
+
+
+
+  
