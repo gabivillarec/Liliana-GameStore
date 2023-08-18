@@ -1,13 +1,13 @@
 import style from './Item.module.css'
 
 const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>{
-    let {image , name , price , id , itemCartId , cantidad} = product
+    let {images , name , price , id , itemCartId , cantidad} = product
     return(
         <tr className='table-dark'>
             <td>
                 <div className="d-flex align-items-center">
                     <img
-                        src={image}
+                        src={images}
                         alt=""
                         className={`rounded-circle ${style.img}`}
                         />
