@@ -3,10 +3,11 @@ import axios from "axios"
 import { URL } from "../../../main";
 import ComprasConComentarios from './Adquisiciones/ComprasConComentarios';
 import ComprasSinComentarios from './Adquisiciones/ComprasSinComentarios';
-// import orderData from './Adquisiciones/1';
-// import reviewsDone from './Adquisiciones/2';
 
 const ProductosAdquiridos = () => {
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const id = user.id;
     const [orderData, setOrderData] = useState([]);
     const [reviewsDone, setReviewsDone] = useState([]);
     const successfulOrder = orderData[0];
@@ -22,7 +23,7 @@ const ProductosAdquiridos = () => {
             }
         };
         getOrders();
-    }, []);    
+    }, [id]);    
 
     useEffect(() => {
         const getReviews = async () => {
@@ -34,7 +35,7 @@ const ProductosAdquiridos = () => {
             }
         };
         getReviews();
-    }, []);
+    }, [id]);
 
     return (
         <div className="card mb-3 border-0">
@@ -63,7 +64,7 @@ const ProductosAdquiridos = () => {
                                             userId={successfulOrder.user.id}
                                             productId={product.id}
                                             commentId={reviewsDone.find(review => review.productId === product.id)?.id}
-                                            image={product.image}
+                                            images={product.images}
                                             name={product.name}
                                             price={product.price}
                                             rating={reviewsDone.find(review => review.productId === product.id)?.rating}
@@ -75,7 +76,7 @@ const ProductosAdquiridos = () => {
                                             key={product.id}
                                             userId={successfulOrder.user.id}
                                             productId={product.id}
-                                            image={product.image}
+                                            images={product.images}
                                             name={product.name}
                                             price={product.price}
                                             date={successfulOrder.order_date}

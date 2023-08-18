@@ -4,7 +4,7 @@ import { URL } from "../../../../main";
 import { cambiarFecha } from '../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar';
 import style from './Compras.module.css'
 
-const ComprasSinComentarios = ({ userId, productId, image, name, price, date }) => {
+const ComprasSinComentarios = ({ userId, productId, images, name, price, date }) => {
 
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(0);
@@ -54,7 +54,7 @@ const ComprasSinComentarios = ({ userId, productId, image, name, price, date }) 
     return(
       <tbody>
           <tr className='table-dark'>
-              <th scope="row"><img src={image} alt={name} className={`rounded-circle ${style.img}`} /></th>
+              <th scope="row"><img src={images[0]} alt={name} className={`rounded-circle ${style.img}`} /></th>
               <td className="align-middle">{name}</td>
               <td className="align-middle text-center">${price}</td>
               <td className="align-middle text-center" >{fullStarsElements}{emptyStarsElements}</td>
