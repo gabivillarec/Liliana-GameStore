@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const OrderItem = ({ order, handlerDelete , }) => {
+const OrderItem = ({ order, handlerDelete }) => {
     const navigate = useNavigate()
     const {order_numer,userId , user , order_date , quantity ,total_price , estado} = order;
     const [checkbox, setCheckbox] = useState(false);

@@ -1,7 +1,7 @@
-import React from 'react';
 
 const AdminDetail = ({ detail, handleImageDelete }) => {
   const {
+    id,
     name,
     price,
     images,
@@ -11,7 +11,7 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
     category_name,
     subcategory_name,
     brand_name,
-    sockets,
+    sockets
   } = detail;
 
   const joinSockets = (sockets) => {
@@ -31,7 +31,7 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
                 style={{ maxWidth: '300px' }}
               />
               <button
-                className="btn btn-danger mt-2"
+                className="btn btn-outline-danger mt-2"
                 onClick={() => handleImageDelete(index)}
               >
                 X
@@ -74,8 +74,3 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
 };
 
 export default AdminDetail;
-
-
-
-
-  
