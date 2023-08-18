@@ -39,6 +39,9 @@ function Detail() {
     idUser = JSON.parse(idUser)
     
     const handleAddItem = async() => {
+      console.log(detail.id , "detsil id")
+      console.log(idUser.id , "user id")
+      console.log(quantity , "cantidad")
       await postCarrito(detail.id , idUser.id , quantity)
       alert(`Producto ${detail.name} agregado de manera exitosa`)
     

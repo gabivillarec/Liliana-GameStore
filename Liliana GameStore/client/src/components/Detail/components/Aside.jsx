@@ -10,12 +10,12 @@ const AsideDetail = ({detail}) =>{
                     className="rounded-4"
                     target="_blank"
                     data-type="image"
-                    href={detail.image}
+                    href={detail.images}
                 >
                 <img
                     style={{ maxWidth: '100%', maxHeight: '100vh', margin: 'auto' }}
                     className="rounded-4 fit"
-                    src={detail.image}
+                    src={detail.images}
                     alt={detail.name}
                 />
                 </a>
