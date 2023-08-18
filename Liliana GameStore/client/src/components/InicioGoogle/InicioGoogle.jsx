@@ -16,13 +16,11 @@ const InicioGoogle = () =>{
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      console.log(user);
   
       setUserGoogle(user);
   
       // Realiza el trabajo adicional aquí con el usuario actualizado
       let objetPost = userPost(user);
-      console.log(objetPost);
       await axios.post(`${URL}login`, objetPost)
         .then(response => {
           localStorage.setItem("user", JSON.stringify({ username: response.data.username, admin: response.data.admin, id: response.data.id }));
