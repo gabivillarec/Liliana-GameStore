@@ -6,5 +6,5 @@
 
 .fondoBlureado{
     backdrop-filter: blur(3px);
-    min-height: 85vh;
+    min-height: 87vh;
 }

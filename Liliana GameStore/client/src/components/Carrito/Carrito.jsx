@@ -8,18 +8,24 @@ import {getAllCart } from '../../Redux/actions'
 import {objetoMercado} from './ProducCarrito/funcionesAuxiliares'
 import axios from 'axios';
 import { URL } from '../../main';
+import ValidationLoginCard from '../ValidationLoginCard/ValidationLoginCard';
 
 
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
+  const [logueado, setLogueado] = useState(false)
   let  products  = useSelector(state => state.cartProducts)
-  let user = localStorage.getItem('user');
-  user = JSON.parse(user);
+  let user = JSON.parse(localStorage.getItem('user'));
 
   let dispatch = useDispatch()
 
   useEffect(()=> {
+    if(!user){
+      setLogueado(false)
+    }else{
       dispatch(getAllCart(user.id))
+      setLogueado(true)
+    }
   },[dispatch ,  deleteTrigger])
 
   const purchaseHandler = async() => {
@@ -37,23 +43,33 @@ const Carrito = () => {
     return(
 
       <div className= {style.container}>
-        <div className='container'>
-          <table className="table align-middle mb-0 bg-white">
-          <thead className="bg-dark">
-            <tr className='table-dark'>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Agregar/Quitar</th>
-              <th>Cantidad</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-          <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
-          </table>
-        </div>
-        <div>
-          <Totalizar  purchaseHandler={purchaseHandler}/>
-        </div>
+        {
+          logueado ? (
+            <div>
+              <div className='container'>
+                <table className="table align-middle mb-0 bg-white">
+                <thead className="bg-dark">
+                  <tr className='table-dark'>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Agregar/Quitar</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
+                </table>
+              </div>
+              <div>
+                <Totalizar  purchaseHandler={purchaseHandler}/>
+              </div>
+            </div>
+          ) 
+          : (
+            <ValidationLoginCard/>
+          )
+        }
+        
       </div>
 
     )
