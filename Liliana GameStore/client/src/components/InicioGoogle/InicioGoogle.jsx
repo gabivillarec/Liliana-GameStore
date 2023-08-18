@@ -29,7 +29,7 @@ const InicioGoogle = () => {
             console.log(error.message);
           });
       } else {
-        let userData = { email: user.email, password: user.uid };
+        let userData = { username: user.displayName, password: user.accessToken}
         try {
           let response = await axios.post(`${URL}login`, userData);
           localStorage.setItem("user", JSON.stringify({ username: response.data.username, admin: response.data.admin, id: response.data.id }));
