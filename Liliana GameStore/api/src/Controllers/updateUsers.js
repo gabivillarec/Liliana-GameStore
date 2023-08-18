@@ -16,7 +16,6 @@ const updateUsers = async (req,res) =>{
         } else {
             return res.status(400).json({ error: "Could not update user profile." });
         }      
-       
     } catch (error) {
         return res.status(500).json({ error: error.message });
     };
