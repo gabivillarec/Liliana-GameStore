@@ -1,27 +1,34 @@
-const { Review } = require('../db')
+const { Review } = require('../db');
 
 const updateReview = async (req, res) => {
     try {
-        const {id, newComment} = req.body;
+        const { id, newComment, newRating } = req.body;
 
-        if(!id || !newComment){
-            return res.status(400).json({ error: 'la id o el newComment son incorrectos'});
+        if (!id || (newComment === undefined && newRating === undefined)) {
+            return res.status(400).json({ error: 'La ID, el nuevo comentario o la nueva calificación son incorrectos' });
         }
 
         const review = await Review.findByPk(id);
 
-        if(!review){
-            return res.status(404).json({ error: 'No se encontro la review'})
+        if (!review) {
+            return res.status(404).json({ error: 'No se encontro la review' });
         }
 
-        review.comment = newComment;
+        if (newComment !== undefined) {
+            review.comment = newComment;
+        }
+
+        if (newRating !== undefined) {
+            review.rating = newRating;
+        }
+
         await review.save();
 
-        return res.status(200).json({ message: 'El comentario a sido actualizado'})
+        return res.status(200).json({ message: 'El comentario a sido actualizado' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
 
 module.exports = {
     updateReview,

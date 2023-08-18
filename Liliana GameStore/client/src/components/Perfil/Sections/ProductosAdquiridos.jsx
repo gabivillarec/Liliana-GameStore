@@ -1,17 +1,43 @@
-import Adquisiciones from "./Adquisiciones/Adquisiciones";
+import { useState , useEffect } from "react"
+import axios from "axios"
+import { URL } from "../../../main";
+import ComprasConComentarios from './Adquisiciones/ComprasConComentarios';
+import ComprasSinComentarios from './Adquisiciones/ComprasSinComentarios';
+// import orderData from './Adquisiciones/1';
+// import reviewsDone from './Adquisiciones/2';
 
-const ProductosAdquiridos = () =>{
+const ProductosAdquiridos = () => {
+    const [orderData, setOrderData] = useState([]);
+    const [reviewsDone, setReviewsDone] = useState([]);
+    const successfulOrder = orderData[0];
+    const purchasedProducts = successfulOrder && successfulOrder.products ? successfulOrder.products : [];
+    
+    useEffect(() => {
+        const getOrders = async () => {
+            try {
+                const response = await axios.get(`${URL}order/${id}`);
+                setOrderData(response.data);
+            } catch (error) {
+                console.error('Error al obtener los pedidos:', error);
+            }
+        };
+        getOrders();
+    }, []);    
 
-    let buy = {
-        id: 29,
-        image: 'https://http2.mlstatic.com/D_NQ_NP_736145-MLA50145467465_052022-O.webp',
-        name: 'Juego Original PS5 Spider-Man: Miles Morales',
-        price: 59900,
-        date: '04/08/23',
-    }
+    useEffect(() => {
+        const getReviews = async () => {
+            try {
+                const response = await axios.get(`${URL}review/user/${id}`);
+                setReviewsDone(response.data);
+            } catch (error) {
+                console.error('Error al obtener las reseñas:', error);
+            }
+        };
+        getReviews();
+    }, []);
 
-    return(
-        <div className="card mb-3 border-0" >
+    return (
+        <div className="card mb-3 border-0">
             <div className="row g-0">
                 <div className="card-body bg-dark">
                     <h5 className="card-title text-primary">Productos Adquiridos</h5>
@@ -26,12 +52,42 @@ const ProductosAdquiridos = () =>{
                                 <th scope="col" className="text-center" >Fecha</th>
                             </tr>
                         </thead>
-                        <Adquisiciones compra={buy} />
+                        <tbody>
+                            {purchasedProducts
+                                .filter(product => successfulOrder.estado === "exitoso")
+                                .map(product => {
+                                    const hasReview = reviewsDone.some(review => review.productId === product.id);                                    
+                                    return hasReview ? (
+                                        <ComprasConComentarios
+                                            key={product.id}
+                                            userId={successfulOrder.user.id}
+                                            productId={product.id}
+                                            commentId={reviewsDone.find(review => review.productId === product.id)?.id}
+                                            image={product.image}
+                                            name={product.name}
+                                            price={product.price}
+                                            rating={reviewsDone.find(review => review.productId === product.id)?.rating}
+                                            comment={reviewsDone.find(review => review.productId === product.id)?.comment}
+                                            date={successfulOrder.order_date}
+                                        />
+                                    ) : (
+                                        <ComprasSinComentarios
+                                            key={product.id}
+                                            userId={successfulOrder.user.id}
+                                            productId={product.id}
+                                            image={product.image}
+                                            name={product.name}
+                                            price={product.price}
+                                            date={successfulOrder.order_date}
+                                        />
+                                    );
+                                })}
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default ProductosAdquiridos
+export default ProductosAdquiridos;

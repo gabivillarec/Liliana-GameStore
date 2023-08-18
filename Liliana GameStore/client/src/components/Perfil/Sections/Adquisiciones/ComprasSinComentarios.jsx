@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import axios from "axios"
-import style from './Adquiciones.module.css'
 import { URL } from "../../../../main";
+import { cambiarFecha } from '../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar';
+import style from './Compras.module.css'
 
-const Adquisiciones = ({compra}) => {
-    
-    let { id, image, name, price, rating, date } = compra
-    
+const ComprasSinComentarios = ({ userId, productId, image, name, price, date }) => {
+
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(0);
     const [error, setError] = useState(null);
     
-    const fullStars = Math.floor(rating);
+    const fullStars = 0;
     const totalStars = 5;
     
     const fullStarsElements = [];
@@ -24,20 +23,20 @@ const Adquisiciones = ({compra}) => {
     for (let i = 0; i < emptyStarsCount; i++) {
         emptyStarsElements.push(<i key={i + fullStars} className="bi bi-star text-info"></i>);
     }
+
+    let fecha = cambiarFecha(date)
     
     const [review, setReview] = useState({
-        productId: id,
-        userId: null,
+        productId: productId,
+        userId: userId,
         comment: '',
         rating: 0,
     });
 
     const handleSubmit = async () => {
-        const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-        const userId = userFromLocalStorage ? userFromLocalStorage.id : null;
 
         const newReview = {
-            productId: id,
+            productId: productId,
             userId: userId,
             comment: review.comment,
             rating: calificacionSeleccionada,
@@ -60,11 +59,11 @@ const Adquisiciones = ({compra}) => {
               <td className="align-middle text-center">${price}</td>
               <td className="align-middle text-center" >{fullStarsElements}{emptyStarsElements}</td>
               <td className="align-middle text-center">
-                  <i className="bi bi-pencil-square" data-bs-toggle="collapse" data-bs-target={`#collapse${id}`}></i>
+                  <i className="bi bi-pencil-square" data-bs-toggle="collapse" data-bs-target={`#collapse${productId}`}></i>
               </td>
-              <td className="align-middle text-center">{date}</td>
+              <td className="align-middle text-center">{fecha}</td>
           </tr>
-          <tr id={`collapse${id}`} className="collapse">
+          <tr id={`collapse${productId}`} className="collapse">
               <td colSpan="6" className="bg-secondary rounded">
                   <div className="container p-3 bg-secondary text-white">
                       <p className="text-dark fw-bold">Calificar:
@@ -92,4 +91,4 @@ const Adquisiciones = ({compra}) => {
     )
 }
 
-export default Adquisiciones;
+export default ComprasSinComentarios;
