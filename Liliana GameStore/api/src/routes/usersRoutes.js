@@ -15,7 +15,7 @@ userRoutes.get("/user" , getAllUsers);
 
 userRoutes.get("/user/:id" , getUserById);
 
-userRoutes.get('/user/:email', getUserByEmail);
+userRoutes.get('/user/email/:email', getUserByEmail);
 
 userRoutes.post("/user" , createUser);
 
