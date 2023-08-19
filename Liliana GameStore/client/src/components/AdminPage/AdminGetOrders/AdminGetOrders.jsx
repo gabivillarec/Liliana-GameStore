@@ -13,7 +13,7 @@ const AdminGetOrder = () => {
     
     useEffect(()=> {
         dispatch(getAllOrder());
-    },[dispatch ])
+    },[dispatch,deleteTrigger])
     
     
     return(
@@ -28,7 +28,6 @@ const AdminGetOrder = () => {
                     <th>Fecha</th>
                     <th>Estado</th>
                     <th>Total</th>
-                    <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>

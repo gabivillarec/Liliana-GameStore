@@ -5,11 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const ReviewItem = ({ review, handlerDelete , }) => {
     const navigate = useNavigate()
-
     const {id,userId,productId ,rating , comment} = review;
-
     const [checkbox, setCheckbox] = useState(false);
-    const [ habilitado, setHabilitado ] = useState(false)
     const toggleCheckbox = () => {
         setCheckbox(prevCheckbox => !prevCheckbox);
     };
@@ -20,7 +17,6 @@ const ReviewItem = ({ review, handlerDelete , }) => {
     }, [userId]);
 
     useEffect(() => {
-
     }, [checkbox, userId]);
 
     return (
@@ -30,7 +26,9 @@ const ReviewItem = ({ review, handlerDelete , }) => {
                 {userId}
             </td>
             <td>
-                <p className="fw-normal mb-1">{productId}</p>
+                <button className="btn btn-secondary" onClick={()=> navigate(`/detail/${productId}`)}>
+                    {productId}
+                </button>
             </td>
             <td>
                 <p className="fw-normal mb-1">{rating}</p>
@@ -40,19 +38,10 @@ const ReviewItem = ({ review, handlerDelete , }) => {
             </td>
             <td>
                 <button
-                    onClick={() => navigate(`adminuseredit/${userId}`)}
-                    type="button"
-                    className="btn btn-link btn-sm btn-rounded"
-                >
-                    <i className="bi bi-pencil-square"></i>
-                </button>
-            </td>
-            <td>
-                <button
                     type="button"
                     className="btn btn-link btn-sm btn-rounded"
                     onClick={() => {
-                        handlerDelete(checkbox, userId);
+                        handlerDelete(checkbox, id);
                     }}
                 >
                     <i className="bi bi-trash3-fill"></i>
@@ -64,11 +53,11 @@ const ReviewItem = ({ review, handlerDelete , }) => {
                         checked={checkbox}
                         onChange={toggleCheckbox}
                         role="switch"
-                        id={`flexSwitchCheckDefault_${userId}`}
+                        id={`flexSwitchCheckDefault_${id}`}
                     />
                     <label
                         className="form-check-label"
-                        htmlFor={`flexSwitchCheckDefault_${userId}`}
+                        htmlFor={`flexSwitchCheckDefault_${id}`}
                     >
                         Eliminar
                     </label>

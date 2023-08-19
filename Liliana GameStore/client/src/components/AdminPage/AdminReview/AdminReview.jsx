@@ -13,7 +13,7 @@ const AdminReview = () => {
     
     useEffect(()=> {
         dispatch(getAllReview());
-    },[dispatch ])
+    },[dispatch ,deleteTrigger])
     
     
     return(
@@ -27,7 +27,6 @@ const AdminReview = () => {
                     <th>Prod Id</th>
                     <th>Rating</th>
                     <th>Coment</th>
-                    <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>

@@ -9,10 +9,13 @@ const TablaOrder = ({orders , deleteTrigger ,setDeleteTrigger}) => {
     const handlerDelete = async (checkbox, id) => {
         if (checkbox) {
             try {
-                await axios.delete(`${URL}user/${id}`);
+                console.log(URL)
+                console.log(id)
+
+                await axios.delete(`${URL}order/${id}`);
                 setDeleteTrigger(!deleteTrigger); 
             } catch (error) {
-                console.error("Error deleting user:", error);
+                console.error("Error deleting order:", error);
             }
         } else {
             alert(`El checkbox debe estar en true para poder eliminar un producto`);

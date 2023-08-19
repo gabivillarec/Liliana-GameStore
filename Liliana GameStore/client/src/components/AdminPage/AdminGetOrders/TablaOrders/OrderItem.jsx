@@ -15,11 +15,11 @@ const OrderItem = ({ order, handlerDelete }) => {
 
     useEffect(() => {
         setCheckbox(false);
-    }, [userId]);
+    }, [order_numer]);
 
     useEffect(() => {
 
-    }, [checkbox, userId]);
+    }, [checkbox, order_numer]);
 
     return (
         <tr className='table-dark'>
@@ -43,19 +43,10 @@ const OrderItem = ({ order, handlerDelete }) => {
             
             <td>
                 <button
-                    onClick={() => navigate(`adminuseredit/${userId}`)}
-                    type="button"
-                    className="btn btn-link btn-sm btn-rounded"
-                >
-                    <i className="bi bi-pencil-square"></i>
-                </button>
-            </td>
-            <td>
-                <button
                     type="button"
                     className="btn btn-link btn-sm btn-rounded"
                     onClick={() => {
-                        handlerDelete(checkbox, userId);
+                        handlerDelete(checkbox, order_numer);
                     }}
                 >
                     <i className="bi bi-trash3-fill"></i>
@@ -67,11 +58,11 @@ const OrderItem = ({ order, handlerDelete }) => {
                         checked={checkbox}
                         onChange={toggleCheckbox}
                         role="switch"
-                        id={`flexSwitchCheckDefault_${userId}`}
+                        id={`flexSwitchCheckDefault_${order_numer}`}
                     />
                     <label
                         className="form-check-label"
-                        htmlFor={`flexSwitchCheckDefault_${userId}`}>
+                        htmlFor={`flexSwitchCheckDefault_${order_numer}`}>
                         Eliminar
                     </label>
                 </div>

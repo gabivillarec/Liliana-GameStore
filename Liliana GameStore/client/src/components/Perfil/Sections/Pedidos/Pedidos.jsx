@@ -1,16 +1,17 @@
 
+import { cambiarFecha } from "../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar"
 
-
-const Pedidos = ({estado}) => {
-    let {fecha , envio , monto , id } =estado
-
+const Pedidos = ({order}) => {
+    let {order_numer , order_date ,estado , total_price , quantity} = order
+    let fecha = cambiarFecha(order_date)
     return(
         <tbody>
             <tr className='table-dark'>
-                <th scope="row">{id}</th>
+                <th scope="row">{order_numer}</th>
                 <td>{fecha}</td>
-                <td>{envio === 'pendiente' && <i className="bi bi-truck"></i>}{envio === 'realizado' && <i className="bi bi-check2-circle"></i>}</td>
-                <td>{monto}</td>
+                <td>{quantity}</td>
+                <td>{estado === 'pendiente' && <p>{estado}</p>}{estado === 'exitoso' && <i className="bi bi-check2-circle"></i>}</td>
+                <td>{total_price}</td>
             </tr>
         </tbody>
     )
