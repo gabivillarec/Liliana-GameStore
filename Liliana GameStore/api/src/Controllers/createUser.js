@@ -31,7 +31,7 @@ const createUser = async (req, res) => {
           disabled: register.disabled
         };
 
-       /*  await transporter.sendMail({
+/*        await transporter.sendMail({
           from: '"Liliana Games Store" <nicorojaselcapo@gmail.com>', // sender address
           to: email, // list of receivers
           subject: "Bienvenido!", // Subject line
@@ -171,7 +171,7 @@ const createUser = async (req, res) => {
           </table></td>
           </tr>
           <tr>
-          <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px"><h2 style="Margin:0;font-family:'Barlow Condensed', Arial, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:28px;font-style:normal;font-weight:normal;line-height:34px;color:#ffffff">Hola ${register.first_name} ${register.last_name},</h2><p style="Margin:0;mso-line-height-rule:exactly;font-family:Barlow, sans-serif;line-height:24px;letter-spacing:0;color:#E2CFEA;font-size:16px"><br></p><p style="Margin:0;mso-line-height-rule:exactly;font-family:Barlow, sans-serif;line-height:24px;letter-spacing:0;color:#ffffff;font-size:16px">Su cuenta en Liliana Games Store fue creada de manera exitosa. Gracias por registrarte en nuestra pagina!</p></td>
+          <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px"><h2 style="Margin:0;font-family:'Barlow Condensed', Arial, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:28px;font-style:normal;font-weight:normal;line-height:34px;color:#ffffff">Hola ${first_name} ${last_name},</h2><p style="Margin:0;mso-line-height-rule:exactly;font-family:Barlow, sans-serif;line-height:24px;letter-spacing:0;color:#E2CFEA;font-size:16px"><br></p><p style="Margin:0;mso-line-height-rule:exactly;font-family:Barlow, sans-serif;line-height:24px;letter-spacing:0;color:#ffffff;font-size:16px">Su cuenta en Liliana Games Store fue creada de manera exitosa. Gracias por registrarte en nuestra pagina!</p></td>
           </tr>
           <tr>
           <td align="center" style="padding:0;Margin:0;padding-top:15px;padding-bottom:15px;font-size:0">
@@ -251,7 +251,7 @@ const createUser = async (req, res) => {
           </div>
           </body>
           </html>`, // html body
-        }); */
+        });  */
 
         return res.json(response);
       } else {

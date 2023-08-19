@@ -9,7 +9,7 @@ const TablaReview = ({review , deleteTrigger ,setDeleteTrigger}) => {
     const handlerDelete = async (checkbox, id) => {
         if (checkbox) {
             try {
-                await axios.delete(`${URL}user/${id}`);
+                await axios.delete(`${URL}review/${id}`);
                 setDeleteTrigger(!deleteTrigger); 
             } catch (error) {
                 console.error("Error deleting user:", error);
