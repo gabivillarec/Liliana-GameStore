@@ -17,6 +17,7 @@ const createUser = async (req, res) => {
 
       if (created) {
         const response = {
+          id: register.id,
           first_name: register.first_name,
           last_name : register.last_name,
           username: register.username,
@@ -31,7 +32,7 @@ const createUser = async (req, res) => {
           disabled: register.disabled
         };
 
-/*        await transporter.sendMail({
+        await transporter.sendMail({
           from: '"Liliana Games Store" <nicorojaselcapo@gmail.com>', // sender address
           to: email, // list of receivers
           subject: "Bienvenido!", // Subject line
@@ -251,7 +252,7 @@ const createUser = async (req, res) => {
           </div>
           </body>
           </html>`, // html body
-        });  */
+        });  
 
         return res.json(response);
       } else {
