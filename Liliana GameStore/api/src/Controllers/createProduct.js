@@ -28,7 +28,7 @@ console.log(images)
       if (
         !name ||
         !price ||
-        !images ||
+        (images.length === 0) ||
         !stock ||
         !rating ||
         !category ||
