@@ -4,7 +4,7 @@ import { URL } from "../../../../main";
 import { cambiarFecha } from '../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar';
 import style from './Compras.module.css'
 
-const ComprasSinComentarios = ({ userId, productId, images, name, price, date }) => {
+const ComprasSinComentarios = ({ userId, productId, images, name, price, date, handleRefresh }) => {
 
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(0);
@@ -33,6 +33,15 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date })
         rating: 0,
     });
 
+    const toggleCollapse = () => {
+        const collapseId = `#collapse${productId}`;
+        const collapseElement = document.querySelector(collapseId);
+        const collapseToggle = new bootstrap.Collapse(collapseElement, {
+            toggle: true
+        });
+        collapseToggle.toggle();
+    }; 
+
     const handleSubmit = async () => {
 
         const newReview = {
@@ -45,6 +54,8 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date })
         try {
             const response = await axios.post(`${URL}review`, newReview);
             console.log(response.data);
+            toggleCollapse();
+            handleRefresh();
         } catch (error) {
             console.error("Error de Axios:", error);
             setError(error.response?.data || "Ocurrió un error");

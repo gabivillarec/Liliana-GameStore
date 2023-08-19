@@ -1,8 +1,8 @@
-import Pedidos from "./Pedidos/Pedidos"
 import { useState , useEffect } from "react"
+import { useParams } from "react-router-dom"
 import axios from "axios"
 import { URL } from "../../../main"
-import { useParams } from "react-router-dom"
+import Pedidos from "./Pedidos/Pedidos"
 
 const PedidosCurso = ({idUser}) =>{
     const [orders , setOrders] = useState([])
@@ -19,7 +19,7 @@ const PedidosCurso = ({idUser}) =>{
             }
         };
         getOrders();
-    })
+    }, [])
     console.log(orders)
 
     return(
@@ -30,15 +30,15 @@ const PedidosCurso = ({idUser}) =>{
                     <table className="table">
                         <thead className="bg-dark">
                             <tr className='table-dark'>
-                                <th scope="col">N Order</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Monto</th>
+                                <th scope="col" className="text-center" >Nº de Orden</th>
+                                <th scope="col" className="text-center" >Productos Adquiridos</th>
+                                <th scope="col" className="text-center" >Monto</th>
+                                <th scope="col" className="text-center" >Estado</th>
+                                <th scope="col" className="text-center" >Fecha</th>
                             </tr>
                         </thead>
                     {
-                        orders?.map((order , index)=> <Pedidos order={order}  key={index}/>)
+                        orders?.map((order , index)=> <Pedidos order={order} key={index}/>)
                     }
                     </table>
                 </div>

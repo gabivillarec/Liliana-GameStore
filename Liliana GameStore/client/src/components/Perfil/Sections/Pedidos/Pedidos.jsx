@@ -1,4 +1,3 @@
-
 import { cambiarFecha } from "../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar"
 
 const Pedidos = ({order}) => {
@@ -7,11 +6,11 @@ const Pedidos = ({order}) => {
     return(
         <tbody>
             <tr className='table-dark'>
-                <th scope="row">{order_numer}</th>
-                <td>{fecha}</td>
-                <td>{quantity}</td>
-                <td>{estado === 'pendiente' && <p>{estado}</p>}{estado === 'exitoso' && <i className="bi bi-check2-circle"></i>}</td>
-                <td>{total_price}</td>
+                <th className="align-middle text-center" scope="row"># {order_numer}</th>
+                <td className="align-middle text-center">{quantity === 1 ? `${quantity} artículo` : `${quantity} artículos`}</td>
+                <td className="align-middle text-center" >${total_price}</td>
+                <td className="align-middle text-center" >{estado === 'pendiente' && <p>{estado}</p>}{estado === 'exitoso' && <i className="bi bi-check2-circle"></i>}</td>
+                <td className="align-middle text-center" >{fecha}</td>
             </tr>
         </tbody>
     )

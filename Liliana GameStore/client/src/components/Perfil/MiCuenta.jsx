@@ -34,7 +34,7 @@ const MiCuenta = () => {
                         <article className="p-4">
                             <section className='container'>
                                 <PerfilData client={client}/>
-                                <ProductosAdquiridos/>
+                                <ProductosAdquiridos id={client.id}/>
                                 <PedidosCurso idUser={client.id}/>
                             </section>
                         </article>
