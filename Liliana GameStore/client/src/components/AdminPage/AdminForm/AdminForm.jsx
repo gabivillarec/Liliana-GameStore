@@ -71,11 +71,31 @@ const AdminForm = () => {
     
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
             const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
-            response === "OK" ? toastBootstrap.show() : toastBootstrapError.show();
+    
+            if (response === "OK") {
+                toastBootstrap.show();
+                // Limpiar los inputs después de una creación exitosa
+                setCreate({
+                    name: "",
+                    price: "",
+                    images: [],
+                    stock: "",
+                    rating: "",
+                    description_text: "",
+                    category: "",
+                    subcategory: "",
+                    brand: "",
+                    socket: [],
+                });
+                setFiles([]); // Limpiar los archivos de imágenes seleccionados
+            } else {
+                toastBootstrapError.show();
+            }
         } catch (err) {
             console.log(err);
         }
     };
+    
 
 console.log(create)
     return (
