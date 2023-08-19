@@ -4,7 +4,7 @@ import { URL } from "../../../../main";
 import { cambiarFecha } from '../../../AdminPage/AdminGetOrders/TablaOrders/funcionAuxiliar';
 import style from './Compras.module.css'
 
-const ComprasConComentarios = ({ userId, productId, commentId, images, name, price, rating, comment, date }) => {
+const ComprasConComentarios = ({ userId, productId, commentId, images, name, price, rating, comment, date, handleRefresh }) => {
 
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(rating);
@@ -33,17 +33,27 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
         rating: rating,
     });
 
+    const toggleCollapse = () => {
+        const collapseId = `#collapse${productId}`;
+        const collapseElement = document.querySelector(collapseId);
+        const collapseToggle = new bootstrap.Collapse(collapseElement, {
+            toggle: true
+        });
+        collapseToggle.toggle();
+    };
+
     const handleDelete = async () => {
         try {
             const response = await axios.delete(`${URL}review/${commentId}`);
             console.log(response.data);
+            toggleCollapse();
+            handleRefresh();
         } catch (error) {
             console.error("Error al eliminar el comentario:", error);
             setError(error.response?.data || "Ocurrió un error al eliminar");
         }
     };
     
-
     const handleUpdate = async () => {
         const updateReview = {
             id: commentId,
@@ -53,11 +63,13 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
         try {
             const response = await axios.put(`${URL}review/`, updateReview);
             console.log(response.data);
+            toggleCollapse();
+            handleRefresh();
         } catch (error) {
             console.error("Error de Axios:", error);
             setError(error.response?.data || "Ocurrió un error");
         }
-    };        
+    };  
 
     return(
       <tbody>
