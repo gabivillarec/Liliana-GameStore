@@ -96,8 +96,8 @@ const AdminForm = () => {
         }
     };
     
+//console.log(create)
 
-console.log(create)
     return (
         <div className="p-4 container bg-dark">
             <form className="row needs-validation" noValidate onSubmit={handleSubmit}>
