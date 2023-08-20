@@ -14,7 +14,8 @@ const AdminCreateUser = () => {
     avatar_img: "",
     admin: "",
   });
-  let inputs = Object.keys(create);
+   //Condición para que no se renderice el input avatar_img
+   let inputs = Object.keys(create).filter(key => key !== "avatar_img");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
