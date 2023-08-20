@@ -6,9 +6,9 @@ const deleteReview = async (req, res) => {
         if(!id) throw new Error('Missing Review ID');
 
         const response = await Review.findByPk(id)
-        response.destroy();
+        await response.destroy();
 
-        res.json(response);
+        res.status(200).json({ message: 'Review eliminada exitosamente' });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

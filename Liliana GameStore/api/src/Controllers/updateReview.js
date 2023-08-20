@@ -24,7 +24,7 @@ const updateReview = async (req, res) => {
 
         await review.save();
 
-        return res.status(200).json({ message: 'El comentario a sido actualizado' });
+        return res.status(200).json({ message: 'El comentario ha sido actualizado' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
