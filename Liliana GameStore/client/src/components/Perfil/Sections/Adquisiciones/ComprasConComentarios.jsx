@@ -8,7 +8,6 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
 
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(rating);
-    const [error, setError] = useState(null);
     
     const fullStars = rating;
     const totalStars = 5;
@@ -36,21 +35,26 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
     const toggleCollapse = () => {
         const collapseId = `#collapse${productId}`;
         const collapseElement = document.querySelector(collapseId);
-        const collapseToggle = new bootstrap.Collapse(collapseElement, {
-            toggle: true
-        });
+        const collapseToggle = new bootstrap.Collapse(collapseElement, { toggle: true });
         collapseToggle.toggle();
     };
 
     const handleDelete = async () => {
         try {
             const response = await axios.delete(`${URL}review/${commentId}`);
-            console.log(response.data);
-            toggleCollapse();
-            handleRefresh();
+            if (response.status === 200) {
+                const successToast = document.getElementById("liveToastDeleteReview");
+                const successToastInstance = new bootstrap.Toast(successToast);
+                successToastInstance.show();
+                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
+                toggleCollapse();
+                console.log(successToastInstance)
+            }
         } catch (error) {
+            const errorToast = document.getElementById("liveToastDeleteReviewError");
+            const errorToastInstance = new bootstrap.Toast(errorToast);
+            errorToastInstance.show();
             console.error("Error al eliminar el comentario:", error);
-            setError(error.response?.data || "Ocurrió un error al eliminar");
         }
     };
     
@@ -62,12 +66,19 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
         };    
         try {
             const response = await axios.put(`${URL}review/`, updateReview);
-            console.log(response.data);
-            toggleCollapse();
-            handleRefresh();
+            if (response.status === 200) {
+                const successToast = document.getElementById("liveToastUpdateReview");
+                const successToastInstance = new bootstrap.Toast(successToast);
+                successToastInstance.show();
+                toggleCollapse();
+                handleRefresh();    //  <-- Pero acá NO!
+                console.log(successToastInstance)
+            }
         } catch (error) {
+            const errorToast = document.getElementById("liveToastUpdateReviewError");
+            const errorToastInstance = new bootstrap.Toast(errorToast);
+            errorToastInstance.show();
             console.error("Error de Axios:", error);
-            setError(error.response?.data || "Ocurrió un error");
         }
     };  
 
@@ -110,6 +121,42 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                   </div>
               </td>
           </tr>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToastUpdateReview" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="toast-header bg-success">
+                    <strong className="me-auto">Productos Adquiridos</strong>
+                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div className="toast-body">¡Reseña actualizada exitosamente!</div>
+            </div>
+          </div>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToastUpdateReviewError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="toast-header bg-danger">
+                    <strong className="me-auto">Productos Adquiridos</strong>
+                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div className="toast-body">¡Error al actualizar la reseña!</div>
+            </div>
+          </div>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToastDeleteReview" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="toast-header bg-success">
+                    <strong className="me-auto">Productos Adquiridos</strong>
+                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div className="toast-body">¡Reseña eliminada exitosamente!</div>
+            </div>
+          </div>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToastDeleteReviewError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="toast-header bg-danger">
+                    <strong className="me-auto">Productos Adquiridos</strong>
+                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div className="toast-body">¡Error al eliminar la reseña!</div>
+            </div>
+          </div>
       </tbody>
     )
 }

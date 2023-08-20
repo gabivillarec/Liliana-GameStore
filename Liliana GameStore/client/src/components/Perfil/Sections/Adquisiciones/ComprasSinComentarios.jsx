@@ -8,7 +8,6 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date, h
 
     const [mouseHover, setMouseHover] = useState(false);
     const [calificacionSeleccionada, setCalificacionSeleccionada] = useState(0);
-    const [error, setError] = useState(null);
     
     const fullStars = 0;
     const totalStars = 5;
@@ -36,29 +35,32 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date, h
     const toggleCollapse = () => {
         const collapseId = `#collapse${productId}`;
         const collapseElement = document.querySelector(collapseId);
-        const collapseToggle = new bootstrap.Collapse(collapseElement, {
-            toggle: true
-        });
+        const collapseToggle = new bootstrap.Collapse(collapseElement, { toggle: true });
         collapseToggle.toggle();
-    }; 
+    };
 
     const handleSubmit = async () => {
-
         const newReview = {
             productId: productId,
             userId: userId,
             comment: review.comment,
             rating: calificacionSeleccionada,
         };
-        console.log(newReview);
         try {
             const response = await axios.post(`${URL}review`, newReview);
-            console.log(response.data);
-            toggleCollapse();
-            handleRefresh();
+            if (response.status === 201) {
+                const successToast = document.getElementById("liveToastNewReview");
+                const successToastInstance = new bootstrap.Toast(successToast);
+                successToastInstance.show();
+                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
+                toggleCollapse();
+                console.log(successToastInstance)
+            }
         } catch (error) {
+            const errorToast = document.getElementById("liveToastNewReviewError");
+            const errorToastInstance = new bootstrap.Toast(errorToast);
+            errorToastInstance.show();
             console.error("Error de Axios:", error);
-            setError(error.response?.data || "Ocurrió un error");
         }
     };
 
@@ -98,6 +100,24 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date, h
                   </div>
               </td>
           </tr>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+              <div id="liveToastNewReview" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div className="toast-header bg-success">
+                      <strong className="me-auto">Productos Adquiridos</strong>
+                      <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div className="toast-body">¡Reseña creada exitosamente!</div>
+              </div>
+          </div>
+          <div className="toast-container position-fixed bottom-0 end-0 p-3">
+              <div id="liveToastNewReviewError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div className="toast-header bg-danger">
+                      <strong className="me-auto">Productos Adquiridos</strong>
+                      <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div className="toast-body">¡Error al crear la reseña!</div>
+              </div>
+          </div>
       </tbody>
     )
 }
