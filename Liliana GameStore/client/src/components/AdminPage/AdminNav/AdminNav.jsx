@@ -13,4 +13,4 @@ const AdminNav = ({ handlerRender }) => {
     );
 }
 
-export default AdminNav
+export default AdminNavgit 
