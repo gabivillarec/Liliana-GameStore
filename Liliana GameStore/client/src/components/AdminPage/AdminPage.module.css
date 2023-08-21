@@ -8,3 +8,8 @@
     backdrop-filter: blur(3px);
     min-height: 87vh;
 }
+
+.cardLogin{
+    background-color: rgba(159, 20, 20, 0.471);
+    width: 60%;
+}

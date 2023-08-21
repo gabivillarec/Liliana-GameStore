@@ -29,9 +29,9 @@ function App() {
           <Route path="/categorypage" element={<CategoryPage/>}/>
           <Route path="/micuenta" element={<MiCuenta/>}/>
           <Route path="/adminpage" element={<AdminPage/>}/>
-          <Route path="/adminpage/form" element={<AdminForm/>}/>
+          {/* <Route path="/adminpage/form" element={<AdminForm/>}/>
           <Route path="/adminpage/formupdate/:id" element={<AdminFormUpdate/>}/>
-          <Route path="/adminpage/adminuseredit/:id" element={<AdminUserEdit/>}/>
+          <Route path="/adminpage/adminuseredit/:id" element={<AdminUserEdit/>}/> */}
           <Route path="/search" element={<SearchedProducts/>}/>
       </Routes>
     </>
