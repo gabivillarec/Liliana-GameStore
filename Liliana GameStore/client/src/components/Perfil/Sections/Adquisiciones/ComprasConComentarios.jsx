@@ -46,8 +46,8 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                 const successToast = document.getElementById("liveToastDeleteReview");
                 const successToastInstance = new bootstrap.Toast(successToast);
                 successToastInstance.show();
-                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
                 toggleCollapse();
+                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
                 console.log(successToastInstance)
             }
         } catch (error) {
@@ -121,42 +121,6 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                   </div>
               </td>
           </tr>
-          <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToastUpdateReview" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                <div className="toast-header bg-success">
-                    <strong className="me-auto">Productos Adquiridos</strong>
-                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div className="toast-body">¡Reseña actualizada exitosamente!</div>
-            </div>
-          </div>
-          <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToastUpdateReviewError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                <div className="toast-header bg-danger">
-                    <strong className="me-auto">Productos Adquiridos</strong>
-                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div className="toast-body">¡Error al actualizar la reseña!</div>
-            </div>
-          </div>
-          <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToastDeleteReview" className="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-                <div className="toast-header bg-success">
-                    <strong className="me-auto">Productos Adquiridos</strong>
-                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div className="toast-body">¡Reseña eliminada exitosamente!</div>
-            </div>
-          </div>
-          <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToastDeleteReviewError" className="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                <div className="toast-header bg-danger">
-                    <strong className="me-auto">Productos Adquiridos</strong>
-                    <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div className="toast-body">¡Error al eliminar la reseña!</div>
-            </div>
-          </div>
       </tbody>
     )
 }
