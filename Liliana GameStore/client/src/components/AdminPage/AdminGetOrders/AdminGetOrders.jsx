@@ -9,7 +9,7 @@ const AdminGetOrder = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
     let orders = useSelector(state => state.AdminOrder);
-    
+    orders.reverse()
     
     useEffect(()=> {
         dispatch(getAllOrder());

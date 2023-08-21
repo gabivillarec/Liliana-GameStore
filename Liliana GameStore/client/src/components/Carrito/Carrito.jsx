@@ -5,7 +5,7 @@ import { useSelector , useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from 'react';
 import {getAllCart } from '../../Redux/actions'
-import {objetoMercado} from './ProducCarrito/funcionesAuxiliares'
+import {objetoMercado , calcualarTotal} from './ProducCarrito/funcionesAuxiliares'
 import axios from 'axios';
 import { URL } from '../../main';
 import ValidationLoginCard from '../ValidationLoginCard/ValidationLoginCard';
@@ -16,7 +16,7 @@ const Carrito = () => {
   const [logueado, setLogueado] = useState(false)
   let  products  = useSelector(state => state.cartProducts)
   let user = JSON.parse(localStorage.getItem('user'));
-
+  const [total , setTotal] = useState()
   let dispatch = useDispatch()
 
   useEffect(()=> {
@@ -26,7 +26,11 @@ const Carrito = () => {
       dispatch(getAllCart(user.id))
       setLogueado(true)
     }
-  },[dispatch ,  deleteTrigger])
+  },[dispatch ,  deleteTrigger ])
+
+  useEffect(()=>{
+    setTotal(calcualarTotal(products))
+  },[products])
 
   const purchaseHandler = async() => {
     try {
@@ -61,7 +65,7 @@ const Carrito = () => {
                 </table>
               </div>
               <div>
-                <Totalizar  purchaseHandler={purchaseHandler}/>
+                <Totalizar  purchaseHandler={purchaseHandler} total={total}/>
               </div>
             </div>
           ) 

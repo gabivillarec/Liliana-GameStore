@@ -9,7 +9,7 @@ const AdminReview = () => {
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     let dispatch = useDispatch()
     let review = useSelector(state => state.adminReview);
-    
+    review.reverse()
     
     useEffect(()=> {
         dispatch(getAllReview());
