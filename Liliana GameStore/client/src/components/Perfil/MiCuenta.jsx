@@ -10,7 +10,7 @@ import ValidationLoginCard from '../ValidationLoginCard/ValidationLoginCard'
 const MiCuenta = () => {
     const [client , setCliente] = useState({})
     const [logueado, setLogueado] = useState(false)
-    console.log(client)
+    const [actualizar , setActualizar] = useState(false)
     useEffect(()=>{
         const usuario = JSON.parse(localStorage.getItem("user"))
 
@@ -24,7 +24,7 @@ const MiCuenta = () => {
                     setCliente(response.data)
                 })
         }
-    },[])
+    },[actualizar])
 
     return(
         <div className={style.fondo}>
@@ -33,7 +33,7 @@ const MiCuenta = () => {
                     logueado ? (
                         <article className="p-4">
                             <section className='container'>
-                                <PerfilData client={client}/>
+                                <PerfilData client={client} setActualizar={setActualizar}/>
                                 <ProductosAdquiridos id={client.id}/>
                                 <PedidosCurso idUser={client.id}/>
                             </section>
