@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { updateUser } from "./updateUser"
+import { updateUser } from "../../AdminPage/AdminUserEdit/AdminUserComponentes/updateUser"
 import { useNavigate } from "react-router-dom"
-import validate from "./validarForm"
 
 
-const AdminEdit = ({id}) => {
+
+const UpdateUser = ({id, setActualizar}) => {
     const navigate = useNavigate()
     const [error, setError] = useState({
         username:'',
@@ -22,7 +22,6 @@ const AdminEdit = ({id}) => {
         email:'',
         phone:'',
         address:'',
-        admin:''
     })
     let inputs = Object.keys(create)
 
@@ -37,19 +36,30 @@ const AdminEdit = ({id}) => {
             ...inputs,
             [name]: value.trim()
         }))
-        console.log(error, "errorss")
     };
 
     const handlerSubmit = async(event) => {
         event.preventDefault()
-        if(verificarErrors(error)){
-            console.log(error.name)
-        }
-        let response = await updateUser(id ,create)
-        alert(`Producto con Id: ${id} modificado con exito`)
-        navigate('/adminpage')
+        await updateUser(id ,create)
+        alert(`Usuario modificado con exito`)
+        setCreate({
+            username:'',
+            first_name:'',
+            last_name:'',
+            email:'',
+            phone:'',
+            address:'',
+        })
+        setActualizar(true)
     }
-
+    const label = (input)=>{
+        if (input === "username") return 'Usuario'
+        if (input === "first_name") return 'Nombre'
+        if (input === "last_name") return 'Apellido'
+        if (input === "email") return 'Email'
+        if (input === "phone") return 'Telefono'
+        if (input === "address") return 'Direccion'
+    }
 
     return(
         <div className="p-4 container bg-dark">
@@ -58,17 +68,17 @@ const AdminEdit = ({id}) => {
                 inputs.map((input , index) => {
                     return(
                         <div className="col-md-4" key={index}>
-                            <label for="validationCustom01"  name={input} className="form-label">{input}</label>
+                            <label for="validationCustom01"  name={input} className="form-label">{label(input)}</label>
                             <input type='text'  className="form-control" id="validationCustom01" value={create[input]} name={input} onChange={handleChange}  />
                             <span>{error.input}</span> 
                         </div>
                     )
                 })
             }
-            <button className="mt-4 btn btn-info" type="submit">Modificar User</button>
+            <button className="mt-4 btn btn-info" type="submit">Modificar Perfil</button>
             </form>
         </div>
     )
 }
 
-export default AdminEdit
+export default UpdateUser

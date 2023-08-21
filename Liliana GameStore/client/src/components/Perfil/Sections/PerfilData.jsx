@@ -1,12 +1,17 @@
 import style from './PerfilData.module.css'
+import UpdateUser from './UpdateUser'
 
-const PerfilData = ({client}) => {
-    const { first_name , last_name , username ,email ,cp ,address ,phone ,avatar_img}= client
+const PerfilData = ({client , setActualizar}) => {
+    console.log(client)
+    const { first_name , last_name , username ,email ,cp ,address ,phone ,avatar_img , id}= client
     return(
         <div className="card mb-3 bg-dark">
             <div className="row g-0">
-                    <div className='card-header'>
-                        <h5 className="card-title text-primary">Usuario: {username}</h5>
+                    <div className='card-header d-flex justify-content-between'>
+                        <h5 className="card-title  text-primary">Usuario: {username}</h5>
+                        <button className="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <i className="bi bi-pencil-square"></i>
+                        </button>
                     </div>
                 <div className="d-flex col-md-2 justify-content-center align-items-center">
                     <img src={avatar_img} className={`img-fluid rounded-start ${style.img}`} alt={username} />
@@ -28,6 +33,11 @@ const PerfilData = ({client}) => {
                     </div>
                 </div>
             </div>
+            <div className="collapse" id="collapseExample">
+                <div className="card bg-dark card-body">
+                    <UpdateUser  id={id} setActualizar={setActualizar}/>
+                </div>
+</div>
     </div>
     )
 }
