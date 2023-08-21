@@ -5,7 +5,7 @@ import { URL } from "../main";
 //-------------------------------------------------------------------------------- GET ALL PRODUCTS --------------------------------------------------------------------------------//
 
 export const getAllProducts = (filtros) => {  
-    console.log(filtros, "filtros")     //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
+   //funcion que trae si no hay o server no esta activo devuelve un array con 8 dogs vacios
     return async (dispatch) => {
         try {
 
@@ -53,7 +53,6 @@ export const getFavorites = (id) => {
     return (dispatch) => { // No uses async/await aquí
       axios.get(`${URL}favorites/${id}`)
         .then((response) => {
-            console.log(response)
           dispatch({
             type: GET_FAVORITES,
             payload: response.data,
