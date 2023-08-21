@@ -35,7 +35,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                         className={`rounded-circle ${style.imgen}`}
                     />
                     <div className="ms-3">
-                        <p className="fw-bold mb-1">{name}</p>
+                        <button type="button" className="btn btn-outline-info" onClick={()=> navigate(`/detail/${id}`)}>{name}</button>
                     </div>
                 </div>
             </td>
