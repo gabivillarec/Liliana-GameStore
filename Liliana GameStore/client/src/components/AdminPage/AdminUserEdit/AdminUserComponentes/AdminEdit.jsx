@@ -42,7 +42,7 @@ const AdminEdit = ({id}) => {
 
     const handlerSubmit = async(event) => {
         event.preventDefault()
-        if(everificarErrors(error)){
+        if(verificarErrors(error)){
             console.log(error.name)
         }
         let response = await updateUser(id ,create)
