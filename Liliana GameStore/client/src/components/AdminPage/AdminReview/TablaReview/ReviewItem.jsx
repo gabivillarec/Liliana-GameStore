@@ -26,7 +26,7 @@ const ReviewItem = ({ review, handlerDelete , }) => {
                 {userId}
             </td>
             <td>
-                <button className="btn btn-secondary" onClick={()=> navigate(`/detail/${productId}`)}>
+                <button className="btn btn-outline-info" onClick={()=> navigate(`/detail/${productId}`)}>
                     {productId}
                 </button>
             </td>
