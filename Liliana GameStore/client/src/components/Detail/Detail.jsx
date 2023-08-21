@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail, clearDetail , getDetailUser } from "../../Redux/actions"
+import { getProductDetail, clearDetail , getFavorites } from "../../Redux/actions"
 import style from "./Detail.module.css"
 import CommentaryBox from "../CommentaryBox/CommentaryBox";
 import { createFavorite } from "./funcionesAuxiliares/createFavorite";
@@ -20,9 +20,10 @@ function Detail() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.detail);
+    const userFavorites = useSelector((state) => state.favorites);
+    
     const [reviews, setReviews] = useState([])
     const [usuarios, setUsuarios] = useState({});
-    
     const [quantity, setQuantity] = useState(1);
     async function obtenerDetallesUsuario(userId) {
       try {
@@ -35,36 +36,33 @@ function Detail() {
     }
     let idUser = localStorage.getItem('user');
     idUser = JSON.parse(idUser)
-    
     const handleAddItem = async() => {
       await postCarrito(detail.id , idUser.id , quantity)
       alert(`Producto ${detail.name} agregado de manera exitosa`)
     
     };
     const handleFavorites = async() => {
-      await createFavorite( idUser.id, detail.id )
+      await createFavorite( idUser.id, id )
       setFavorito({
         style:"btn-danger",
         handler:handleDeleteFavorites
       })
-      alert(`producto con id  ${detail.id} agragado con exito`)
+      alert(`Producto con ID:  ${id} Agragado con exito`)
     };
     const handleDeleteFavorites = async() => {
-      await deleteFavorite(detail.id)
+      await deleteFavorite(id)
       setFavorito({
         style:"btn-light",
         handler:handleFavorites
       })
-      alert(`Producto con ID: ${detail.id} Quitado de favoritos`)
+      alert(`Producto con ID: ${id} Quitado de favoritos`)
     };
 
-    const [favorito , setFavorito] =useState({
-      style:"btn-light",
-      handler:handleFavorites
-  })
+    const [favorito , setFavorito] =useState({})
 
     useEffect(() => {
         dispatch(getProductDetail(id));
+        dispatch(getFavorites(idUser.id))
         axios.get(`${URL}review/product/${id}`)
         .then(response => {
           setReviews(response.data);
@@ -82,14 +80,27 @@ function Detail() {
               console.error('Error al obtener detalles de los usuarios:', error.message);
             });
         })
+        
         .catch(error => {
           console.error('Error al obtener las reviews:', error.message);
         });
+        const isFavorite = userFavorites.some(fav => fav.id === parseInt(id));
+
+        if (isFavorite) {
+          setFavorito({
+            style: "btn-danger",
+            handler: handleDeleteFavorites
+          });
+        } else {
+          setFavorito({
+            style: "btn-light",
+            handler: handleFavorites
+          });
+        }
         return () => {
           dispatch(clearDetail());
         };
       }, [dispatch, id]);
-
 
     return(
         <section className={`py-5 ${style.vBackground}`}>

@@ -3,6 +3,7 @@ import { useState , useEffect } from "react"
 
 
 const Favoritos = ({favorito}) =>{
+    
     useEffect(() =>{
     },[favorito])
 
