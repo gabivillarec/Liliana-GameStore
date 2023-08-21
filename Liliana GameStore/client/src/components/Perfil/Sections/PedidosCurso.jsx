@@ -10,17 +10,14 @@ const PedidosCurso = ({idUser}) =>{
     useEffect(()=>{
         const getOrders = async () => {
             try {
-                console.log(URL)
                 const response = await axios.get(`${URL}order/${idUser}`);
-                console.log(response , "response")
-                setOrders(response.data);
+                setOrders(response.data.reverse());
             } catch (error) {
                 console.error('Error al obtener las reseñas:', error);
             }
         };
         getOrders();
     }, [])
-    console.log(orders)
 
     return(
         <div className="card mb-3 border-0" >
