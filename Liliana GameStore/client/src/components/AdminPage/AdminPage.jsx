@@ -14,19 +14,20 @@ import { useNavigate } from "react-router-dom"
 import ValidationLoginCard from "../ValidationLoginCard/ValidationLoginCard"
 
 const AdminPage = () => {
+    const navigate = useNavigate()
     const [client , setCliente] = useState({})
     const [selectedComponent, setSelectedComponent] = useState('AdminGetProduct'); // Nuevo estado
-    const [logueado, setLogueado] = useState(false)
+    const [logueado, setLogueado] = useState({ login : false, admin : false })
 
     useEffect(()=>{
         const usuario = JSON.parse(localStorage.getItem("user"))
 
         if(!usuario){
-            setLogueado(false)
+            setLogueado({ login : false, admin : false })
         }else{
             axios.get(`${URL}user/${usuario.id}`)
                 .then(response =>{
-                    setLogueado(true)
+                    setLogueado({ login : true, admin : response.data.admin })
                     setCliente(response.data)
                 })
         }
@@ -40,7 +41,7 @@ const AdminPage = () => {
         <div className={style.fondo}>
         <div className={style.fondoBlureado}>
             {
-                logueado ? (
+                logueado.login && logueado.admin ? (
                     <div className="pt-5 pb-3">
                         <AdminNav handlerRender={handlerRender} />
                         <div className="container">
@@ -54,9 +55,15 @@ const AdminPage = () => {
                         {selectedComponent === 'AdminReview' && <AdminReview/>} 
                     </div>
                 )
-                : (
-                    <ValidationLoginCard/>
+                : logueado.login && !logueado.admin ? (
+                    <div className="p-5 d-flex flex-column align-items-center">
+                        <div className={`border border-danger border-3 rounded d-flex flex-column align-items-center ${style.cardLogin}`}>
+                            <h1 className="m-4 mb-0 pb-4 text-center text-danger border-bottom border-danger border-2">No tienes el rango suficiente para ingresar aqui</h1>
+                            <button type="button" className="btn btn-danger btn-lg m-4" onClick={()=>{navigate('/')}}>Inicio</button>
+                        </div>
+                    </div>
                 )
+                : ( <ValidationLoginCard/> )
             }
         </div>
     </div>
