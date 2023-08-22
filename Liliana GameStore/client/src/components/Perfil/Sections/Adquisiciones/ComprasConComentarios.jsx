@@ -47,7 +47,7 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                 const successToastInstance = new bootstrap.Toast(successToast);
                 successToastInstance.show();
                 toggleCollapse();
-                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
+                handleRefresh();
                 console.log(successToastInstance)
             }
         } catch (error) {
@@ -71,7 +71,7 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                 const successToastInstance = new bootstrap.Toast(successToast);
                 successToastInstance.show();
                 toggleCollapse();
-                handleRefresh();    //  <-- Pero acá NO!
+                handleRefresh();
                 console.log(successToastInstance)
             }
         } catch (error) {
