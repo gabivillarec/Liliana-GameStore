@@ -25,7 +25,7 @@ const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>
             </td>
                 <td>{cantidad}</td>
             <td>
-                <button type="button" className="btn btn-link btn-sm btn-rounded" onClick={() => handlerDeleteItem(itemCartId)}>
+                <button type="button" className="btn btn-outline-info" onClick={() => handlerDeleteItem(itemCartId)}>
                 <i className="bi bi-trash3-fill"></i>
                 </button>
             </td>

@@ -39,7 +39,7 @@ const ReviewItem = ({ review, handlerDelete , }) => {
             <td>
                 <button
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                     onClick={() => {
                         handlerDelete(checkbox, id);
                     }}

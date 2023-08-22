@@ -63,7 +63,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                 <button
                     onClick={() => navigate(`formupdate/${id}`)}
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                 >
                     <i className="bi bi-pencil-square"></i>
                 </button>
@@ -71,7 +71,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
             <td>
                 <button
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                     onClick={() => {
                         handlerDelete(checkbox, id);
                     }}
