@@ -20,10 +20,8 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         admin: "",
     });
     const [create, setCreate] = useState({
-        username: "",
         first_name: "",
         last_name: "",
-        email: "",
         phone: "",
         address: "",
         cp:"",
@@ -73,10 +71,8 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         event.preventDefault();
         await updateUser(id, create);
         setCreate({
-            username:'',
             first_name:'',
             last_name:'',
-            email:'',
             phone:'',
             address:'',
             cp:"",
