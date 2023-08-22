@@ -73,8 +73,10 @@ const UpdateForm = ({ id }) => {
         }
 
         let response = await updateproducto(id, updatedCreate);
-        alert(`Producto con Id: ${id} modificado con éxito`);
-        navigate("/adminpage");
+        const toastBootstrapUpdate = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastUpdate"));
+        const toastBootstrapErrorUpdate = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastErrorUpdate"));
+
+        response === "OK" ? toastBootstrapUpdate.show() : toastBootstrapErrorUpdate.show()
     };
 
     return (
@@ -132,8 +134,51 @@ const UpdateForm = ({ id }) => {
                 </div>
                 <button className="mt-4 btn btn-info" type="submit">
                     Actualizar Producto
-                </button>
+                </button>    
             </form>
+            <button className="mt-4 btn btn-outline-info w-100" onClick={()=>navigate('/adminpage')}>
+                Volver a Admin
+            </button>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
+                <div
+                    id="liveToastUpdate"
+                    className="toast text-bg-success"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+                    <div className="toast-header bg-success">
+                        <strong className="me-auto">Admin Products</strong>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="toast"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div className="toast-body">Se modifico el producto de manera exitosa!</div>
+                </div>
+            </div>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
+                <div
+                    id="liveToastErrorUpdate"
+                    className="toast text-bg-danger"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+                    <div className="toast-header bg-danger">
+                        <strong className="me-auto">Admin Products</strong>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="toast"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div className="toast-body">Error al modificar el producto!</div>
+                </div>
+            </div>
         </div>
     );
 };

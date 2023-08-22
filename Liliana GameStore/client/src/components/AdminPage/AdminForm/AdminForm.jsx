@@ -152,7 +152,7 @@ const AdminForm = () => {
                     Subir Producto
                 </button>
             </form>
-            <div className="toast-container position-fixed top-0 end-50 p-3 m-2">
+            <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
                 <div
                     id="liveToast"
                     className="toast text-bg-success"

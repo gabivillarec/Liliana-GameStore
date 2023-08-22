@@ -1,11 +1,16 @@
-import axios from "axios"
+import axios, { toFormData } from "axios"
 import { URL } from "../../../../main"
 
 export const updateproducto = async(id, create) =>{
     let objetoEnviar =  cleanObject(create)
     const UR = `${URL}products/`
-    let response = await axios.put(UR + id, objetoEnviar)
-    return response.data
+    try {
+        let response = await axios.put(UR + id, objetoEnviar)
+        return response.request.statusText
+    } catch (error) {
+        return error.message
+    }
+    
 }
 
 function cleanObject(obj) {
