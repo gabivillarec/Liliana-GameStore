@@ -1,8 +1,7 @@
 import style from './PerfilData.module.css'
 import UpdateUser from './UpdateUser'
 
-const PerfilData = ({client , setActualizar}) => {
-    console.log(client)
+const PerfilData = ({client , setActualizar ,actualizar }) => {
     const { first_name , last_name , username ,email ,cp ,address ,phone ,avatar_img , id}= client
     return(
         <div className="card mb-3 bg-dark">
@@ -35,7 +34,7 @@ const PerfilData = ({client , setActualizar}) => {
             </div>
             <div className="collapse" id="collapseExample">
                 <div className="card bg-dark card-body">
-                    <UpdateUser  id={id} setActualizar={setActualizar}/>
+                    <UpdateUser  id={id} setActualizar={setActualizar} actualizar={actualizar}/>
                 </div>
 </div>
     </div>

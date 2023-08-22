@@ -33,7 +33,7 @@ const MiCuenta = () => {
                     logueado ? (
                         <article className="p-4">
                             <section className='container'>
-                                <PerfilData client={client} setActualizar={setActualizar}/>
+                                <PerfilData client={client} setActualizar={setActualizar} actualizar={actualizar }/>
                                 <ProductosAdquiridos id={client.id}/>
                                 <PedidosCurso idUser={client.id}/>
                             </section>

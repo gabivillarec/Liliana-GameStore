@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 
 
-const UpdateUser = ({id, setActualizar}) => {
+const UpdateUser = ({id, setActualizar ,actualizar }) => {
     const navigate = useNavigate()
     const [error, setError] = useState({
         username:'',
@@ -50,7 +50,7 @@ const UpdateUser = ({id, setActualizar}) => {
             phone:'',
             address:'',
         })
-        setActualizar(true)
+        setActualizar(!actualizar)
     }
     const label = (input)=>{
         if (input === "username") return 'Usuario'
