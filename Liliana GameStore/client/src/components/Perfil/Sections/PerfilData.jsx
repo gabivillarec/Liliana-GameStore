@@ -3,6 +3,7 @@ import UpdateUser from './UpdateUser'
 
 const PerfilData = ({client , setActualizar ,actualizar }) => {
     const { first_name , last_name , username ,email ,cp ,address ,phone ,avatar_img , id}= client
+    console.log(client , "client")
     return(
         <div className="card mb-3 bg-dark">
             <div className="row g-0">

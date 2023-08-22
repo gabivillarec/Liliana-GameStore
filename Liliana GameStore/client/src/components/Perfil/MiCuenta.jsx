@@ -15,7 +15,6 @@ const MiCuenta = () => {
         const usuario = JSON.parse(localStorage.getItem("user"))
 
         if(!usuario){
-            console.log("aa");
             setLogueado(false)
         }else{
             axios.get(`${URL}user/${usuario.id}`)
