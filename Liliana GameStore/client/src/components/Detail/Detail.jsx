@@ -62,7 +62,7 @@ function Detail() {
 
     useEffect(() => {
         dispatch(getProductDetail(id));
-        dispatch(getFavorites(idUser.id))
+        if(idUser){ dispatch(getFavorites(idUser.id)) }
         axios.get(`${URL}review/product/${id}`)
         .then(response => {
           setReviews(response.data);
