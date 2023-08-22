@@ -41,16 +41,7 @@ const OrderItem = ({ order, handlerDelete }) => {
                 <p>{total_price}</p>
             </td>
             
-            <td>
-                <button
-                    type="button"
-                    className="btn btn-outline-info"
-                    onClick={() => {
-                        handlerDelete(checkbox, order_numer);
-                    }}
-                >
-                    <i className="bi bi-trash3-fill"></i>
-                </button>
+            <td >
                 <div className="form-check form-switch">
                     <input
                         className="form-check-input"
@@ -63,12 +54,21 @@ const OrderItem = ({ order, handlerDelete }) => {
                     <label
                         className="form-check-label"
                         htmlFor={`flexSwitchCheckDefault_${order_numer}`}>
-                        Eliminar
+                        Ckeck
                     </label>
                 </div>
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={() => {
+                        handlerDelete(checkbox, order_numer);
+                    }}>
+                    <i className="bi bi-trash3-fill"></i>
+                </button>
             </td>
         </tr>
     );
 }
 
 export default OrderItem;
+
