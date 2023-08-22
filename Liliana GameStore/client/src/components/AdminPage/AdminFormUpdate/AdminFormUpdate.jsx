@@ -1,7 +1,6 @@
 import AdminDetail from "./Admin/AdminDetail";
 import UpdateForm from "./Admin/UpdateForm";
 import style from "./AdminFormUpdate.module.css"
-
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
