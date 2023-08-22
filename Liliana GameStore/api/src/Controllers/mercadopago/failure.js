@@ -7,7 +7,7 @@ const failurPayment = (req, res) => {
 
     res
       .status(400)
-      .redirect(`${URLFront}`);
+      .redirect(`${URLFront}carrito`);
   };
   
   module.exports = failurPayment;
