@@ -89,7 +89,7 @@ const successfulPayment = async (req, res) => {
     await deleteCart(id);
 
   // Redirigir a la URL especificada
-    res.redirect(URLFront); 
+    res.redirect(`${URLFront}micuenta`); 
     
   } catch (error) {
     console.error('Error en successfulPayment:', error);

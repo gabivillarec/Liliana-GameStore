@@ -13,7 +13,6 @@ const AdminEdit = ({id}) => {
         email:'',
         phone:'',
         address:'',
-        admin:''
     });
     const [create , setCreate] = useState({
         username:'',
@@ -22,7 +21,6 @@ const AdminEdit = ({id}) => {
         email:'',
         phone:'',
         address:'',
-        admin:''
     })
     let inputs = Object.keys(create)
 
@@ -50,7 +48,6 @@ const AdminEdit = ({id}) => {
             email:'',
             phone:'',
             address:'',
-            admin:''
         })
         const toastBootstrapEditUser = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastEditUser"));
         const toastBootstrapErrorEditUser = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastErrorEditUser"));
