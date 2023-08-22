@@ -54,7 +54,7 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date, h
                 successToastInstance.show();
                 toggleCollapse();
                 console.log(successToastInstance)
-                handleRefresh();    //  <-- Hace conflicto para mostrar successToast
+                handleRefresh();
             }
         } catch (error) {
             const errorToast = document.getElementById("liveToastNewReviewError");
