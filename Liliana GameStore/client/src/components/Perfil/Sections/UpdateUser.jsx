@@ -3,8 +3,12 @@ import { updateUser } from "../../AdminPage/AdminUserEdit/AdminUserComponentes/u
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const UpdateUser = ({ id, setActualizar }) => {
-    const navigate = useNavigate();
+
+
+
+const UpdateUser = ({id, setActualizar ,actualizar }) => {
+    const navigate = useNavigate()
+
     const [error, setError] = useState({
         username: "",
         first_name: "",
@@ -69,27 +73,26 @@ const UpdateUser = ({ id, setActualizar }) => {
         await updateUser(id, create);
         alert("Usuario modificado con éxito");
         setCreate({
-            username: "",
-            first_name: "",
-            last_name: "",
-            email: "",
-            phone: "",
-            address: "",
-            avatar_img: "", // Clear avatar_img after update
-        });
-        setActualizar(true);
-    };
+            username:'',
+            first_name:'',
+            last_name:'',
+            email:'',
+            phone:'',
+            address:'',
+        })
+        setActualizar(!actualizar)
+    }
+    const label = (input)=>{
+        if (input === "username") return 'Usuario'
+        if (input === "first_name") return 'Nombre'
+        if (input === "last_name") return 'Apellido'
+        if (input === "email") return 'Email'
+        if (input === "phone") return 'Telefono'
+        if (input === "address") return 'Direccion'
+    }
 
-    const label = (input) => {
-        if (input === "username") return "Usuario";
-        if (input === "first_name") return "Nombre";
-        if (input === "last_name") return "Apellido";
-        if (input === "email") return "Email";
-        if (input === "phone") return "Telefono";
-        if (input === "address") return "Direccion";
-    };
+    return(
 
-    return (
         <div className="p-4 container bg-dark">
             <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
                 {inputs.map((input, index) => {
