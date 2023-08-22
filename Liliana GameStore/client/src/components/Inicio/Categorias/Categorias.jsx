@@ -19,9 +19,9 @@ const Categorias = ({ categoriaNombre}) => {
 
     return(
         <div className="container">
-            <div className="d-flex justify-content-around">
-                <h2>Categoría: {categoriaNombre}</h2>
-                <button className="btn btn-link" onClick={()=> navigate('/categorypage')}>Catalogo</button>
+            <div className="d-flex justify-content-between border-bottom border-info ps-4 pt-5 pe-4">
+                <h2 className="text-info">{categoriaNombre}</h2>
+                <button className="btn btn-info m-1" onClick={()=> navigate('/categorypage')}>Catalogo</button>
             </div>
             <CardsContainer products={products }/>
         </div>

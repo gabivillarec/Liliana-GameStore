@@ -47,7 +47,6 @@ function Detail() {
         style:"btn-danger",
         handler:handleDeleteFavorites
       })
-      alert(`Producto con ID:  ${id} Agragado con exito`)
     };
     const handleDeleteFavorites = async() => {
       await deleteFavorite(id)
@@ -55,7 +54,6 @@ function Detail() {
         style:"btn-light",
         handler:handleFavorites
       })
-      alert(`Producto con ID: ${id} Quitado de favoritos`)
     };
 
     const [favorito , setFavorito] =useState({})
