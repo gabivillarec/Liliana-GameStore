@@ -53,7 +53,6 @@ const AdminCreateUser = () => {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
     if (Object.keys(error).length > 0) {
       return alert("Asegúrate de completar todos los campos");
     }

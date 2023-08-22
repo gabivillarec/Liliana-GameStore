@@ -77,6 +77,10 @@ const UpdateForm = ({ id }) => {
         const toastBootstrapErrorUpdate = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastErrorUpdate"));
 
         response === "OK" ? toastBootstrapUpdate.show() : toastBootstrapErrorUpdate.show()
+        setTimeout(() => {
+            navigate("/adminpage");
+        }, 3000);
+        
     };
 
     return (

@@ -33,10 +33,11 @@ const AdminPage = () => {
                 })
         }
     },[actualizar])
-
     const handlerRender = (render) => {
         setSelectedComponent(render); // Actualiza el componente seleccionado
     }
+
+    console.log(client)
 
     return(
         <div className={style.fondo}>
@@ -44,7 +45,7 @@ const AdminPage = () => {
             {
                 logueado.login && logueado.admin ? (
                     <div className="pt-5 pb-3">
-                        <AdminNav handlerRender={handlerRender} />
+                        <AdminNav handlerRender={handlerRender} client={client} />
                         <div className="container">
                             <PerfilData client={client} actualizar={actualizar} setActualizar={setActualizar}/>
                         </div>
