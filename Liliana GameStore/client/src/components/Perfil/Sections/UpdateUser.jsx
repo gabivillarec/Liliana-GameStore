@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { updateUser } from "../../AdminPage/AdminUserEdit/AdminUserComponentes/updateUser";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,8 @@ import axios from "axios";
 
 
 const UpdateUser = ({id, setActualizar ,actualizar }) => {
-    const navigate = useNavigate()
+    useEffect(()=>{
+    },[actualizar])
 
     const [error, setError] = useState({
         username: "",
@@ -25,9 +26,10 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         email: "",
         phone: "",
         address: "",
+        cp:"",
         avatar_img: "", // Add avatar_img field for Cloudinary URL
     });
-    let inputs = Object.keys(create);
+    let inputs = Object.keys(create).filter(input => input !== "avatar_img");
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -47,7 +49,6 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
             const formData = new FormData();
             formData.append("file", file);
             formData.append("upload_preset", "uploads");
-
             try {
                 const response = await axios.post(
                     `https://api.cloudinary.com/v1_1/depihylqc/image/upload`,
@@ -71,7 +72,6 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
     const handlerSubmit = async (event) => {
         event.preventDefault();
         await updateUser(id, create);
-        alert("Usuario modificado con éxito");
         setCreate({
             username:'',
             first_name:'',
@@ -79,8 +79,11 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
             email:'',
             phone:'',
             address:'',
+            cp:"",
+            avatar_img: "",
         })
         setActualizar(!actualizar)
+        alert("Usuario modificado con éxito");
     }
     const label = (input)=>{
         if (input === "username") return 'Usuario'
@@ -89,6 +92,7 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         if (input === "email") return 'Email'
         if (input === "phone") return 'Telefono'
         if (input === "address") return 'Direccion'
+        if (input === "cp") return 'Codigo Postal'
     }
 
     return(
@@ -96,7 +100,6 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         <div className="p-4 container bg-dark">
             <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
                 {inputs.map((input, index) => {
-                    if (input !== "avatar_img") {
                         return (
                             <div className="col-md-4" key={index}>
                                 <label htmlFor={input} className="form-label">
@@ -113,9 +116,8 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
                                 <span>{error[input]}</span>
                             </div>
                         );
-                    } else {
-                        return (
-                            <div className="col-md-4" key={index}>
+                })}
+                <div className="col-md-4" >
                                 <label htmlFor="avatar_img" className="form-label">
                                     Avatar Image
                                 </label>
@@ -127,9 +129,6 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
                                     onChange={handleFile}
                                 />
                             </div>
-                        );
-                    }
-                })}
                 <button className="mt-4 btn btn-info" type="submit">
                     Modificar Perfil
                 </button>
