@@ -23,7 +23,7 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
       <div className="row g-0">
         <div className="col-md-4">
           {images?.map((imageUrl, index) => (
-            <div key={index} className="image-container">
+            <div key={index} className="image-container p-2">
               <img
                 src={imageUrl}
                 className="img-fluid rounded-start"
@@ -31,7 +31,7 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
                 style={{ maxWidth: '300px' }}
               />
               <button
-                className="btn btn-outline-danger mt-2"
+                className="btn btn-outline-danger position-absolute mt-2"
                 onClick={() => handleImageDelete(index)}
               >
                 X

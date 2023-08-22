@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 import styles from './Carousel.module.css'
 
 const arrayFran = [
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230731172357_JkMiVg5i.jpg',
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230712095128_lNOtrnED.jpg',
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230712095030_OsXtp6Iz.jpg',
+    'https://i.postimg.cc/fT3MRSHr/10.png',
+    'https://i.postimg.cc/j5ssx89H/2.png',
+    'https://i.postimg.cc/25dkfpHj/3.png',
+    'https://i.postimg.cc/CMrF0s48/4.png',
+    'https://i.postimg.cc/T11fmKTh/5.png',
+    'https://i.postimg.cc/TwCTpVMZ/6.png',
+    'https://i.postimg.cc/1XdPKyzB/7.png',
+    'https://i.postimg.cc/DwXfB4LX/8.png',
+    'https://i.postimg.cc/GpnLN3xS/9.png'
 ];
 
 const Carousel = () => {
@@ -15,7 +21,7 @@ const Carousel = () => {
             <div id="carouselExampleAutoplaying" className="carousel slide pt-5" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src='https://imagenes.compragamer.com/bannerPrincipal/DC_20230731112408_6DDt4vlp.jpg' className="d-block w-100" alt="bannerUno"/>
+                        <img src='https://i.postimg.cc/mkpZ6QmQ/1.png' className="d-block w-100" alt="bannerUno"/>
                     </div>
                     {arrayFran?.map((image, index) => (
                         <div key={index} className="carousel-item">
