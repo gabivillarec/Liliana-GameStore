@@ -68,7 +68,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                     <i className="bi bi-pencil-square"></i>
                 </button>
             </td>
-            <td className='d-flex flex-column'>
+            <td >
                 <div className="form-check form-switch">
                     <input
                         className="form-check-input"
