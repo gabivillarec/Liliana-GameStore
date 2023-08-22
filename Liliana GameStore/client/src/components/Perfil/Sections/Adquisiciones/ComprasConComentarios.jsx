@@ -90,7 +90,9 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
               <td className="align-middle text-center">${price}</td>
               <td className="align-middle text-center" >{fullStarsElements}{emptyStarsElements}</td>
               <td className="align-middle text-center">
+                <button className='btn btn-outline-info'>
                   <i className="bi bi-pencil-square" data-bs-toggle="collapse" data-bs-target={`#collapse${productId}`}></i>
+                </button>
               </td>
               <td className="align-middle text-center">{fecha}</td>
           </tr>

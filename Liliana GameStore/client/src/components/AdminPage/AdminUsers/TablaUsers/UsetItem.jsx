@@ -57,7 +57,7 @@ const UserItem = ({ product, handlerDelete , inCatalogue}) => {
                 <button
                     onClick={() => navigate(`adminuseredit/${id}`)}
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                 >
                     <i className="bi bi-pencil-square"></i>
                 </button>
@@ -65,7 +65,7 @@ const UserItem = ({ product, handlerDelete , inCatalogue}) => {
             <td>
                 <button
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                     onClick={() => {
                         handlerDelete(checkbox, id);
                     }}
