@@ -104,7 +104,7 @@ function Detail() {
         <section className={`py-5 ${style.vBackground}`}>
           <div className="container">
             <div className="row gx-5">
-              <AsideDetail detail={detail}/>
+              <AsideDetail id={id}/>
               <main className="col-lg-6">
                 <div className="ps-lg-3">
                   <h4 className={`title ${style["text-dark"]} ${style["green-text"]}`}>{detail.name}<br />{detail.category}</h4>

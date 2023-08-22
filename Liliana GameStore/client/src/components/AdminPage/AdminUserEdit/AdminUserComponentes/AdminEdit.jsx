@@ -84,7 +84,7 @@ const AdminEdit = ({id}) => {
                     aria-atomic="true"
                 >
                     <div className="toast-header bg-success">
-                        <strong className="me-auto">Admin Products</strong>
+                        <strong className="me-auto">Admin Users</strong>
                         <button
                             type="button"
                             className="btn-close"
@@ -92,7 +92,7 @@ const AdminEdit = ({id}) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body">Se modifico el producto de manera exitosa!</div>
+                    <div className="toast-body">Se modifico el Usuario de manera exitosa!</div>
                 </div>
             </div>
             <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
@@ -104,7 +104,7 @@ const AdminEdit = ({id}) => {
                     aria-atomic="true"
                 >
                     <div className="toast-header bg-danger">
-                        <strong className="me-auto">Admin Products</strong>
+                        <strong className="me-auto">AdminUser</strong>
                         <button
                             type="button"
                             className="btn-close"
@@ -112,7 +112,7 @@ const AdminEdit = ({id}) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body">Error al modificar el producto!</div>
+                    <div className="toast-body">Error al modificar el Usuario!</div>
                 </div>
             </div>
         </div>
