@@ -30,7 +30,8 @@ const EnStock = ({reviews , detail}) =>{
                 {fullStarsElements}
                 {halfStarElement}
                 {emptyStarsElements}
-                <span className="ms-1">{promedioRating?.toFixed(2)}</span>
+                {/*si es NaN no se renderiza*/}
+                {isNaN(promedioRating) ? null : <span className="ms-1">{promedioRating.toFixed(2)}</span>}
             </div> {detail.stock === 0
             ? (<span className="text-danger ms-2">SIN STOCK ⛔</span>)
             : detail.stock > 0 && detail.stock <= 5
