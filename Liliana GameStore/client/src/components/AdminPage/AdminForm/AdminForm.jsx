@@ -4,7 +4,8 @@ import createProduct from "../funcionesAuxiliares/createProduct";
 import style from './AdminForm.module.css'
 import validation from './Validation.js';
 
-const AdminForm = () => {
+
+const AdminForm = ({ setSelectedComponent}) => {
 
     const [error, setError] = useState({});
     const [touchedFields, setTouchedFields] = useState({});
@@ -139,6 +140,7 @@ const AdminForm = () => {
     
             // Luego de cargar las imágenes, enviar la data actualizada al backend
             let response = await createProduct(updatedCreate);
+            setSelectedComponent('AdminGetProduct') // Limpiar los archivos de imágenes seleccionados
     
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
             const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
@@ -158,11 +160,12 @@ const AdminForm = () => {
                     brand: "",
                     socket: [],
                 });
-                setFiles([]); // Limpiar los archivos de imágenes seleccionados
+                setFiles([]);
             } else {
                 toastBootstrapError.show();
             }
         } catch (err) {
+            setSelectedComponent('AdminGetProduct')
             console.log(err);
         }
     };

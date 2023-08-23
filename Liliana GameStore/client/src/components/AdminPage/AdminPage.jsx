@@ -37,7 +37,7 @@ const AdminPage = () => {
         setSelectedComponent(render); // Actualiza el componente seleccionado
     }
 
-    console.log(client)
+
 
     return(
         <div className={style.fondo}>
@@ -50,9 +50,9 @@ const AdminPage = () => {
                             <PerfilData client={client} actualizar={actualizar} setActualizar={setActualizar}/>
                         </div>
                         {selectedComponent === 'AdminGetProduct' && <AdminGetProduct />} 
-                        {selectedComponent === 'AdminForm' && <AdminForm />} 
+                        {selectedComponent === 'AdminForm' && <AdminForm   setSelectedComponent={setSelectedComponent}/>} 
                         {selectedComponent === 'AdminUsers' && <AdminUsers/>} 
-                        {selectedComponent === 'AdminCreateUser' && <AdminCreateUser/>} 
+                        {selectedComponent === 'AdminCreateUser' && <AdminCreateUser setSelectedComponent={setSelectedComponent}/>} 
                         {selectedComponent === 'AdminGetOrder' && <AdminGetOrders/>} 
                         {selectedComponent === 'AdminReview' && <AdminReview/>} 
                     </div>

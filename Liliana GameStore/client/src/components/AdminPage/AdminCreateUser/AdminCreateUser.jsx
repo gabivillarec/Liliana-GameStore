@@ -3,7 +3,7 @@ import { createUser } from "./createUser";
 import validation from './Validation.js';
 import style from './AdminCreateUser.module.css'
 
-const AdminCreateUser = () => {
+const AdminCreateUser = ({setSelectedComponent}) => {
 
   const [error, setError] = useState({});
   const [touchedFields, setTouchedFields] = useState({});
@@ -63,8 +63,15 @@ const AdminCreateUser = () => {
     const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(
       document.getElementById("liveToastErrorUser")
     );
-    let response = await createUser(create);
-    response === "OK" ? toastBootstrap.show() : toastBootstrapError.show();
+
+    try {
+      let response = await createUser(create);
+      response === "OK" ? toastBootstrap.show() : toastBootstrapError.show();
+      setSelectedComponent('AdminCreateUser')
+      
+    } catch (error) {
+      setSelectedComponent('AdminCreateUser')
+    }
   };
 
   return (
