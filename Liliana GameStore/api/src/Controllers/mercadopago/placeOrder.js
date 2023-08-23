@@ -1,10 +1,10 @@
 const mercadopago = require("mercadopago");
 require("dotenv").config();
 const {ACCESS_TOKEN} = process.env;
-const URLBack = `http://localhost:3001/LilianaGameStore/`
-const URLFront = `http://localhost:5173/`
-//const URLBack = `https://liliana-server.onrender.com/LilianaGameStore/`
-//const URLFront = `https://lilianagamesstore.onrender.com/`
+//const URLBack = `http://localhost:3001/LilianaGameStore/`
+//const URLFront = `http://localhost:5173/`
+const URLBack = `https://liliana-server.onrender.com/LilianaGameStore/`
+const URLFront = `https://lilianagamesstore.onrender.com/`
 
 
 mercadopago.configure({
