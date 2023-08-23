@@ -53,6 +53,9 @@ const AdminEdit = ({id}) => {
         const toastBootstrapErrorEditUser = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastErrorEditUser"));
 
         response === "OK" ? toastBootstrapEditUser.show() : toastBootstrapErrorEditUser.show()
+        setTimeout(() => {
+            navigate("/adminpage");
+        }, 3000);
     }
 
 
