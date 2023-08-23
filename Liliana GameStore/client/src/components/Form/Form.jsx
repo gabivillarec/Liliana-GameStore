@@ -149,8 +149,8 @@ const Form = () => {
                       <div style={{ height: '25px' }}></div>{touchedFields.repeatPassword && error.repeatPassword && <div className={`invalid-feedback ${style["error-message"]}`}>{error.repeatPassword}</div>}
                     </div>
 
-                    <div className="form-check d-flex justify-content-center mb-5">
-                      <input className="form-check-input me-2" type="checkbox" id="agreeTerms" name="agreeTerms"
+                    <div className="form-check align-items-center">
+                      <input className="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms"
                         checked={form.agreeTerms} onChange={handleChange} />
                       <label className="form-check-label" htmlFor="agreeTerms">
                         Al hacer click en el botón estás aceptando los <a href="#!" className="text-body"><u>Términos y condiciones</u></a>
