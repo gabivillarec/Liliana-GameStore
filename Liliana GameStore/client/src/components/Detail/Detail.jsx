@@ -14,6 +14,8 @@ import AsideDetail from "./components/Aside";
 import EnStock from "./components/EnStock";
 import Brand from "./components/Brand";
 import Cantidad from "./components/Cantidad";
+import Toast from "../Toast/Toast";
+import ErrorToast from "../Toast/ErrorToast";
 
 function Detail() {
 
@@ -36,9 +38,20 @@ function Detail() {
     }
     let idUser = localStorage.getItem('user');
     idUser = JSON.parse(idUser)
+    let titleToast = `Detalle`
+    let messageToast = `Producto ${detail.name} agregado a carrito.` 
+    let messageToastError = `Error al agregar producto ${detail.name}` 
+    
     const handleAddItem = async() => {
-      await postCarrito(detail.id , idUser.id , quantity)
-      alert(`Producto ${detail.name} agregado de manera exitosa`)
+      try {
+        await postCarrito(detail.id , idUser.id , quantity)
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+        toastBootstrap.show();
+      } catch (error) {
+        const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
+        toastBootstrapError.show();
+      }
+    
     
     };
     const handleFavorites = async() => {
@@ -122,6 +135,10 @@ function Detail() {
                     <i className="me-1"></i>🛒 Agregar al carrito
                   </a>
                   <Favoritos  favorito={favorito}/>
+                </div>
+                <div>
+                  <Toast  title={titleToast} message={messageToast}/>
+                  <ErrorToast title={titleToast} message={messageToastError}/>
                 </div>
               </main>
             </div>
