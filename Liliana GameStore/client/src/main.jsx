@@ -7,8 +7,8 @@ import './index.css';
 import './scss/style.scss';
 
 
-//export const URL = "http://localhost:3001/LilianaGameStore/"; 
-export const URL = "https://liliana-server.onrender.com/LilianaGameStore/";
+export const URL = "http://localhost:3001/LilianaGameStore/"; 
+//export const URL = "https://liliana-server.onrender.com/LilianaGameStore/";
 
 
 

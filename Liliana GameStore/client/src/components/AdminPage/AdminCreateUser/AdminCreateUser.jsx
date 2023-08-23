@@ -66,11 +66,14 @@ const AdminCreateUser = ({setSelectedComponent}) => {
 
     try {
       let response = await createUser(create);
-      response === "OK" ? toastBootstrap.show() : toastBootstrapError.show();
-      setSelectedComponent('AdminCreateUser')
-      
+      if(response === "OK"){
+        toastBootstrap.show()
+        setSelectedComponent('AdminUsers')
+      }else{
+        toastBootstrapError.show();
+      }
     } catch (error) {
-      setSelectedComponent('AdminCreateUser')
+      console.log(error);
     }
   };
 
