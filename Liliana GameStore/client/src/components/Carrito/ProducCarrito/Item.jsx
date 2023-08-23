@@ -7,7 +7,7 @@ const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>
             <td>
                 <div className="d-flex align-items-center">
                     <img
-                        src={images}
+                        src={images[0]}
                         alt={name}
                         className={`rounded-circle ${style.img}`}
                         />
@@ -25,7 +25,7 @@ const Item = ({product ,  handlerAgregar, handlerDeleteItem , handlerQuitar}) =>
             </td>
                 <td>{cantidad}</td>
             <td>
-                <button type="button" className="btn btn-link btn-sm btn-rounded" onClick={() => handlerDeleteItem(itemCartId)}>
+                <button type="button" className="btn btn-outline-info" onClick={() => handlerDeleteItem(itemCartId)}>
                 <i className="bi bi-trash3-fill"></i>
                 </button>
             </td>

@@ -57,21 +57,12 @@ const UserItem = ({ product, handlerDelete , inCatalogue}) => {
                 <button
                     onClick={() => navigate(`adminuseredit/${id}`)}
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                 >
                     <i className="bi bi-pencil-square"></i>
                 </button>
             </td>
             <td>
-                <button
-                    type="button"
-                    className="btn btn-link btn-sm btn-rounded"
-                    onClick={() => {
-                        handlerDelete(checkbox, id);
-                    }}
-                >
-                    <i className="bi bi-trash3-fill"></i>
-                </button>
                 <div className="form-check form-switch">
                     <input
                         className="form-check-input"
@@ -85,9 +76,18 @@ const UserItem = ({ product, handlerDelete , inCatalogue}) => {
                         className="form-check-label"
                         htmlFor={`flexSwitchCheckDefault_${id}`}
                     >
-                        Eliminar
+                        Ckeck
                     </label>
                 </div>
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={() => {
+                        handlerDelete(checkbox, id);
+                    }}
+                >
+                    <i className="bi bi-trash3-fill"></i>
+                </button>
             </td>
         </tr>
     );

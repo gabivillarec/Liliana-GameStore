@@ -14,6 +14,8 @@ import AsideDetail from "./components/Aside";
 import EnStock from "./components/EnStock";
 import Brand from "./components/Brand";
 import Cantidad from "./components/Cantidad";
+import Toast from "../Toast/Toast";
+import ErrorToast from "../Toast/ErrorToast";
 
 function Detail() {
 
@@ -36,9 +38,20 @@ function Detail() {
     }
     let idUser = localStorage.getItem('user');
     idUser = JSON.parse(idUser)
+    let titleToast = `Detalle`
+    let messageToast = `Producto ${detail.name} agregado a carrito.` 
+    let messageToastError = `Error al agregar producto ${detail.name}` 
+    
     const handleAddItem = async() => {
-      await postCarrito(detail.id , idUser.id , quantity)
-      alert(`Producto ${detail.name} agregado de manera exitosa`)
+      try {
+        await postCarrito(detail.id , idUser.id , quantity)
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+        toastBootstrap.show();
+      } catch (error) {
+        const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
+        toastBootstrapError.show();
+      }
+    
     
     };
     const handleFavorites = async() => {
@@ -47,7 +60,6 @@ function Detail() {
         style:"btn-danger",
         handler:handleDeleteFavorites
       })
-      alert(`Producto con ID:  ${id} Agragado con exito`)
     };
     const handleDeleteFavorites = async() => {
       await deleteFavorite(id)
@@ -55,7 +67,6 @@ function Detail() {
         style:"btn-light",
         handler:handleFavorites
       })
-      alert(`Producto con ID: ${id} Quitado de favoritos`)
     };
 
     const [favorito , setFavorito] =useState({})
@@ -106,7 +117,7 @@ function Detail() {
         <section className={`py-5 ${style.vBackground}`}>
           <div className="container">
             <div className="row gx-5">
-              <AsideDetail detail={detail}/>
+              <AsideDetail id={id}/>
               <main className="col-lg-6">
                 <div className="ps-lg-3">
                   <h4 className={`title ${style["text-dark"]} ${style["green-text"]}`}>{detail.name}<br />{detail.category}</h4>
@@ -114,7 +125,7 @@ function Detail() {
                   <div className="mb-3">
                     <span className="h5">${detail.price}</span>
                   </div>
-                  <p>{detail.description_text} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, consectetur aperiam. Est tenetur corrupti vel iusto facere quos repellat. Necessitatibus inventore quis exercitationem laudantium. Optio corporis assumenda ducimus totam explicabo? </p>
+                  <p>{detail.description_text}</p>
                   <Brand detail={detail} />
                   <hr />
                   <div className="row mb-4">
@@ -124,6 +135,10 @@ function Detail() {
                     <i className="me-1"></i>🛒 Agregar al carrito
                   </a>
                   <Favoritos  favorito={favorito}/>
+                </div>
+                <div>
+                  <Toast  title={titleToast} message={messageToast}/>
+                  <ErrorToast title={titleToast} message={messageToastError}/>
                 </div>
               </main>
             </div>

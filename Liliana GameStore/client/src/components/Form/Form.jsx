@@ -18,7 +18,7 @@ const Form = () => {
     username: "",
     email: "",
     password: "",
-    cp: 0,
+    cp: "",
     address: "",
     phone: "",
     avatar_img: "",
@@ -70,9 +70,9 @@ const Form = () => {
 
   return (
     <section className=" bg-image" style={{ backgroundColor: 'rgb(19, 19, 72)' }}>
-      <div className="mask d-flex align-items-center h-100">
-        <div className="container-fluid h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="mask d-flex align-items-center h-87">
+        <div className="container-fluid h-87">
+          <div className="row d-flex justify-content-center align-items-center h-87">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
               <div className="card" style={{ borderRadius: '15px' }}>
                 <div className="card-body p-5" style={{ backgroundImage: `url(${backgroundImage})` }}> 
@@ -87,35 +87,35 @@ const Form = () => {
                       <input type="text" id="username" name="username" className={`form-control form-control-lg ${touchedFields.username && error.username ? 'is-invalid' : ''}`}
                         value={form.username} onChange={handleChange} onBlur={() => handleFieldFocus('username')} />
                       <label className={`${form.username && 'form-label-floating'}`} htmlFor="first_name">Nombre de Usuario</label>
-                      {touchedFields.username && error.username && <div className="invalid-feedback">{error.username}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.username && error.username && <div className={`invalid-feedback ${style["error-message"]}`}>{error.username}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="text" id="first_name" name="first_name" className={`form-control form-control-lg ${touchedFields.first_name && error.first_name ? 'is-invalid' : ''}`}
                         value={form.first_name} onChange={handleChange} onBlur={() => handleFieldFocus('first_name')} />
                       <label className={`${form.first_name && 'form-label-floating'}`} htmlFor="first_name">Nombre</label>
-                      {touchedFields.first_name && error.first_name && <div className="invalid-feedback">{error.first_name}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.first_name && error.first_name && <div className={`invalid-feedback ${style["error-message"]}`}>{error.first_name}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="text" id="last_name" name="last_name" className={`form-control form-control-lg ${touchedFields.last_name && error.last_name ? 'is-invalid' : ''}`}
                         value={form.last_name} onChange={handleChange} onBlur={() => handleFieldFocus('last_name')} />
                       <label className={`${form.last_name && 'form-label-floating'}`} htmlFor="last_name">Apellido</label>
-                      {touchedFields.last_name && error.last_name && <div className="invalid-feedback">{error.last_name}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.last_name && error.last_name && <div className={`invalid-feedback ${style["error-message"]}`}>{error.last_name}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="text" id="phone" name="phone" className={`form-control form-control-lg ${touchedFields.phone && error.phone ? 'is-invalid' : ''}`}
                         value={form.phone} onChange={handleChange} onBlur={() => handleFieldFocus('phone')} maxLength={11} />
                       <label className={`${form.phone && 'form-label-floating'}`} htmlFor="phone">Teléfono</label>
-                      {touchedFields.phone && error.phone && <div className="invalid-feedback">{error.phone}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.phone && error.phone && <div className={`invalid-feedback ${style["error-message"]}`}>{error.phone}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="text" id="address" name="address" className={`form-control form-control-lg ${touchedFields.address && error.address ? 'is-invalid' : ''}`}
                         value={form.address} onChange={handleChange} onBlur={() => handleFieldFocus('address')} />
                       <label className={`${form.address && 'form-label-floating'}`} htmlFor="address">Dirección</label>
-                      {touchedFields.address && error.address && <div className="invalid-feedback">{error.address}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.address && error.address && <div className={`invalid-feedback ${style["error-message"]}`}>{error.address}</div>}
                     </div>
 
                     </div>
@@ -125,32 +125,32 @@ const Form = () => {
                       <input type="text" id="cp" name="cp" className={`form-control form-control-lg ${touchedFields.cp && error.cp ? 'is-invalid' : ''}`}
                         value={form.cp} onChange={handleChange} onBlur={() => handleFieldFocus('cp')} maxLength={4} />
                       <label className={`${form.cp && 'form-label-floating'}`} htmlFor="cp">Código Postal</label>
-                      {touchedFields.cp && error.cp && <div className="invalid-feedback">{error.cp}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.cp && error.cp && <div className={`invalid-feedback ${style["error-message"]}`}>{error.cp}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="email" id="email" name="email" className={`form-control form-control-lg ${touchedFields.email && error.email ? 'is-invalid' : ''}`}
                         value={form.email} onChange={handleChange} onBlur={() => handleFieldFocus('email')} />
                       <label className={`${form.email && 'form-label-floating'}`} htmlFor="email">E-Mail</label>
-                      {touchedFields.email && error.email && <div className="invalid-feedback">{error.email}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.email && error.email && <div className={`invalid-feedback ${style["error-message"]}`}>{error.email}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="password" id="password" name="password" className={`form-control form-control-lg ${touchedFields.password && error.password ? 'is-invalid' : ''}`}
                         value={form.password} onChange={handleChange} onBlur={() => handleFieldFocus('password')} />
                       <label className={`${form.password && 'form-label-floating'}`} htmlFor="password">Contraseña</label>
-                      {touchedFields.password && error.password && <div className="invalid-feedback">{error.password}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.password && error.password && <div className={`invalid-feedback ${style["error-message"]}`}>{error.password}</div>}
                     </div>
 
                     <div className="form-floating mb-4">
                       <input type="password" id="repeatPassword" name="repeatPassword" className={`form-control form-control-lg ${touchedFields.repeatPassword && error.repeatPassword ? 'is-invalid' : ''}`}
                         value={form.repeatPassword} onChange={handleChange} onBlur={() => handleFieldFocus('repeatPassword')} />
                       <label className={`${form.repeatPassword && 'form-label-floating'}`} htmlFor="repeatPassword">Confirma tu contraseña</label>
-                      {touchedFields.repeatPassword && error.repeatPassword && <div className="invalid-feedback">{error.repeatPassword}</div>}
+                      <div style={{ height: '25px' }}></div>{touchedFields.repeatPassword && error.repeatPassword && <div className={`invalid-feedback ${style["error-message"]}`}>{error.repeatPassword}</div>}
                     </div>
 
-                    <div className="form-check d-flex justify-content-center mb-5">
-                      <input className="form-check-input me-2" type="checkbox" id="agreeTerms" name="agreeTerms"
+                    <div className="form-check align-items-center">
+                      <input className="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms"
                         checked={form.agreeTerms} onChange={handleChange} />
                       <label className="form-check-label" htmlFor="agreeTerms">
                         Al hacer click en el botón estás aceptando los <a href="#!" className="text-body"><u>Términos y condiciones</u></a>
@@ -165,7 +165,7 @@ const Form = () => {
                         className={`btn btn-success btn-block btn-lg ${style["gradient-custom-4"]} text-body`}>CREAR CUENTA</button>
                     </div>
 
-                    <p className="text-center text-white mt-5 mb-0">¿Tenés una cuenta? <a href="#!"
+                    <p className="text-center text-white mt-5 mb-0">¿Tenés una cuenta? <a href="/login"
                       className="fw-bold text-body"><u>Ingresá aquí</u></a></p>
 
                   </form>

@@ -15,6 +15,7 @@ import ValidationLoginCard from "../ValidationLoginCard/ValidationLoginCard"
 
 const AdminPage = () => {
     const navigate = useNavigate()
+    const [ actualizar , setActualizar] = useState(false)
     const [client , setCliente] = useState({})
     const [selectedComponent, setSelectedComponent] = useState('AdminGetProduct'); // Nuevo estado
     const [logueado, setLogueado] = useState({ login : false, admin : false })
@@ -31,11 +32,12 @@ const AdminPage = () => {
                     setCliente(response.data)
                 })
         }
-    },[])
-
+    },[actualizar])
     const handlerRender = (render) => {
         setSelectedComponent(render); // Actualiza el componente seleccionado
     }
+
+    console.log(client)
 
     return(
         <div className={style.fondo}>
@@ -43,9 +45,9 @@ const AdminPage = () => {
             {
                 logueado.login && logueado.admin ? (
                     <div className="pt-5 pb-3">
-                        <AdminNav handlerRender={handlerRender} />
+                        <AdminNav handlerRender={handlerRender} client={client} />
                         <div className="container">
-                            <PerfilData client={client} />
+                            <PerfilData client={client} actualizar={actualizar} setActualizar={setActualizar}/>
                         </div>
                         {selectedComponent === 'AdminGetProduct' && <AdminGetProduct />} 
                         {selectedComponent === 'AdminForm' && <AdminForm />} 

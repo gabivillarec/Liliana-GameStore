@@ -3,42 +3,39 @@ import React, { useEffect, useState } from "react";
 import styles from './Carousel.module.css'
 
 const arrayFran = [
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230731112408_6DDt4vlp.jpg',
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230731172357_JkMiVg5i.jpg',
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230712095128_lNOtrnED.jpg',
-    'https://imagenes.compragamer.com/bannerPrincipal/DC_20230712095030_OsXtp6Iz.jpg',
+    'https://i.postimg.cc/fT3MRSHr/10.png',
+    'https://i.postimg.cc/j5ssx89H/2.png',
+    'https://i.postimg.cc/25dkfpHj/3.png',
+    'https://i.postimg.cc/CMrF0s48/4.png',
+    'https://i.postimg.cc/T11fmKTh/5.png',
+    'https://i.postimg.cc/TwCTpVMZ/6.png',
+    'https://i.postimg.cc/1XdPKyzB/7.png',
+    'https://i.postimg.cc/DwXfB4LX/8.png',
+    'https://i.postimg.cc/GpnLN3xS/9.png'
 ];
 
 const Carousel = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prevIndex) => (prevIndex + 1) % arrayFran.length);
-        }, 7000);
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
 
     return (
         <section>
-            <div id="carouselExampleIndicators" className="carousel slide">
+            <div id="carouselExampleAutoplaying" className="carousel slide pt-5" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                    {arrayFran.map((image, index) => (
-                        <div key={index} className={`carousel-item ${index === activeIndex ? "active" : ""}`}>
+                    <div className="carousel-item active">
+                        <img src='https://i.postimg.cc/mkpZ6QmQ/1.png' className="d-block w-100" alt="bannerUno"/>
+                    </div>
+                    {arrayFran?.map((image, index) => (
+                        <div key={index} className="carousel-item">
                             <img src={image} className={styles.img} alt={`Image ${index}`} />
                         </div>
                     ))}
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </section>

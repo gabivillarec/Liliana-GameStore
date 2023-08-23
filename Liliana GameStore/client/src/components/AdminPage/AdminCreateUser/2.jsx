@@ -1,11 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { updateproducto } from "./updateproducto";
-import { useNavigate } from "react-router-dom";
+import createProduct from "../funcionesAuxiliares/createProduct";
 
-const UpdateForm = ({ id }) => {
-    const navigate = useNavigate();
-
+const AdminForm = () => {
     const [create, setCreate] = useState({
         name: "",
         price: undefined,
@@ -23,69 +20,88 @@ const UpdateForm = ({ id }) => {
 
     const preset_key = "uploads";
     const cloud_name = "depihylqc";
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState([]); // Usar un array para almacenar los archivos de imágenes
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setCreate({
-            ...create,
-            [name]: value,
-        });
-    };
-
-    const handleSocketChange = (event) => {
-        const { value } = event.target;
-        setCreate({
-            ...create,
-            socket: value.split(",").map(item => item.trim()),
-        });
+        if (name === "socket") {
+            setCreate({
+                ...create,
+                [name]: value.split(",").map((item) => item.trim()),
+            });
+        } else {
+            setCreate({
+                ...create,
+                [name]: value,
+            });
+        }
     };
 
     const handleFile = (event) => {
-        setFiles([...files, ...event.target.files]);
+        setFiles([...event.target.files]); // Guardar todos los archivos de imágenes seleccionados
     };
 
-    const handlerSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        let updatedCreate = { ...create };
-
-        if (files.length > 0) {
+    
+        try {
             const formDataArray = files.map((file) => {
                 const formData = new FormData();
                 formData.append("file", file);
                 formData.append("upload_preset", preset_key);
                 return formData;
             });
-
-            try {
-                const uploadResponses = await Promise.all(
-                    formDataArray.map((formData) =>
-                        axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
-                    )
-                );
-
-                const imageUrls = uploadResponses.map((response) => response.data.url);
-                updatedCreate.images = imageUrls;
-            } catch (err) {
-                console.log(err);
+    
+            const uploadResponses = await Promise.all(
+                formDataArray.map((formData) =>
+                    axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+                )
+            );
+    
+            const imageUrls = uploadResponses.map((response) => response.data.url);
+    
+            // Crear una copia actualizada de la data con las URLs de las imágenes
+            const updatedCreate = {
+                ...create,
+                images: imageUrls,
+            };
+    
+            // Luego de cargar las imágenes, enviar la data actualizada al backend
+            let response = await createProduct(updatedCreate);
+    
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+            const toastBootstrapError = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
+    
+            if (response === "OK") {
+                toastBootstrap.show();
+                // Limpiar los inputs después de una creación exitosa
+                setCreate({
+                    name: "",
+                    price: "",
+                    images: [],
+                    stock: "",
+                    rating: "",
+                    description_text: "",
+                    category: "",
+                    subcategory: "",
+                    brand: "",
+                    socket: [],
+                });
+                setFiles([]); // Limpiar los archivos de imágenes seleccionados
+            } else {
+                toastBootstrapError.show();
             }
+        } catch (err) {
+            console.log(err);
         }
-
-        let response = await updateproducto(id, updatedCreate);
-        const toastBootstrapUpdate = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastUpdate"));
-        const toastBootstrapErrorUpdate = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastErrorUpdate"));
-
-        response === "OK" ? toastBootstrapUpdate.show() : toastBootstrapErrorUpdate.show()
-        setTimeout(() => {
-            navigate("/adminpage");
-        }, 3000);
-        
     };
+    
+//console.log(create)
 
     return (
         <div className="p-4 container bg-dark">
-            <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
+            <form className="row needs-validation" noValidate onSubmit={handleSubmit}>
+                
                 {inputs.map((input, index) => {
                     if (input !== "images" && input !== "socket") {
                         return (
@@ -103,26 +119,23 @@ const UpdateForm = ({ id }) => {
                                 />
                             </div>
                         );
-                    } else if (input === "socket") {
-                        return (
-                            <div className="col-md-4" key={index}>
-                                <label htmlFor="socket" className="form-label">
-                                    Socket
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="socket"
-                                    value={create.socket.join(",")}
-                                    name="socket"
-                                    onChange={handleSocketChange}
-                                />
-                            </div>
-                        );
                     } else {
                         return null;
                     }
                 })}
+                <div className="col-md-4">
+                    <label htmlFor="socket" className="form-label">
+                        Socket
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="socket"
+                        value={create.socket.join(",")}
+                        name="socket"
+                        onChange={handleChange}
+                    />
+                </div>
                 <div className="col-md-4">
                     <label htmlFor="validationCustom01" className="form-label">
                         Subir Imágenes
@@ -132,20 +145,17 @@ const UpdateForm = ({ id }) => {
                         className="form-control"
                         id="validationCustom01"
                         name="images"
-                        multiple
+                        multiple // Habilitar la selección múltiple
                         onChange={handleFile}
                     />
                 </div>
                 <button className="mt-4 btn btn-info" type="submit">
-                    Actualizar Producto
-                </button>    
+                    Subir Producto
+                </button>
             </form>
-            <button className="mt-4 btn btn-outline-info w-100" onClick={()=>navigate('/adminpage')}>
-                Volver a Admin
-            </button>
             <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
                 <div
-                    id="liveToastUpdate"
+                    id="liveToast"
                     className="toast text-bg-success"
                     role="alert"
                     aria-live="assertive"
@@ -160,12 +170,12 @@ const UpdateForm = ({ id }) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body">Se modifico el producto de manera exitosa!</div>
+                    <div className="toast-body">Se creó el producto de manera exitosa!</div>
                 </div>
             </div>
             <div className="toast-container position-fixed bottom-0 end-0 p-3 m-2">
                 <div
-                    id="liveToastErrorUpdate"
+                    id="liveToastError"
                     className="toast text-bg-danger"
                     role="alert"
                     aria-live="assertive"
@@ -180,11 +190,11 @@ const UpdateForm = ({ id }) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body">Error al modificar el producto!</div>
+                    <div className="toast-body">Error al crear el producto!</div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default UpdateForm;
+export default AdminForm;

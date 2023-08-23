@@ -1,7 +1,8 @@
 import style from './AdminItem.module.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import Toast from '../../../Toast/Toast';
+import ErrorToast from '../../../Toast/ErrorToast';
 
 const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
     const navigate = useNavigate()
@@ -63,21 +64,12 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                 <button
                     onClick={() => navigate(`formupdate/${id}`)}
                     type="button"
-                    className="btn btn-link btn-sm btn-rounded"
+                    className="btn btn-outline-info"
                 >
                     <i className="bi bi-pencil-square"></i>
                 </button>
             </td>
-            <td>
-                <button
-                    type="button"
-                    className="btn btn-link btn-sm btn-rounded"
-                    onClick={() => {
-                        handlerDelete(checkbox, id);
-                    }}
-                >
-                    <i className="bi bi-trash3-fill"></i>
-                </button>
+            <td >
                 <div className="form-check form-switch">
                     <input
                         className="form-check-input"
@@ -90,10 +82,18 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                     <label
                         className="form-check-label"
                         htmlFor={`flexSwitchCheckDefault_${id}`}
-                    >
-                        Eliminar
+                    >Ckeck
                     </label>
                 </div>
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={() => {
+                        handlerDelete(checkbox, id);
+                    }}
+                >
+                    <i className="bi bi-trash3-fill"></i>
+                </button>
             </td>
         </tr>
     );
