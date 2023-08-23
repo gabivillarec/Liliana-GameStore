@@ -35,8 +35,8 @@ const AdminUserEdit = () => {
 
 
     return(
-        <div className={style.fondo}>
-        <div className={`p-4 ${style.fondoBlureado}`}>
+        <div className={style.fondoUserEdit}>
+        <div className={`p-4 ${style.fondoUserEditBlureado}`}>
             {
                 logueado.login && logueado.admin ? (
                     <div className="container p-4 rounded bg-black">

@@ -40,8 +40,8 @@ const AdminPage = () => {
 
 
     return(
-        <div className={style.fondo}>
-        <div className={style.fondoBlureado}>
+        <div className={style.fondoAdmin}>
+        <div className={style.fondoAdminBlureado}>
             {
                 logueado.login && logueado.admin ? (
                     <div className="pt-5 pb-3">
