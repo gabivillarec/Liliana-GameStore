@@ -9,7 +9,6 @@ const createProduct = async (create) =>{
         return response.request.statusText
         
     } catch (error) {
-        console.log(error)
         return error.message
     }
 
