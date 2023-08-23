@@ -50,8 +50,8 @@ const AdminFormUpdate = () => {
 
 
     return(
-        <div className={style.fondo}>
-            <div className={`p-4 ${style.fondoBlureado}`}>
+        <div className={style.fondoFormUpdate}>
+            <div className={`p-4 ${style.fondoFormUpdateBlureado}`}>
                 {
                     logueado.login && logueado.admin ? (
                         <div className="container p-4 rounded bg-black">

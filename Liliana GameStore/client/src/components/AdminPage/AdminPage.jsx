@@ -37,11 +37,11 @@ const AdminPage = () => {
         setSelectedComponent(render); // Actualiza el componente seleccionado
     }
 
-    console.log(client)
+
 
     return(
-        <div className={style.fondo}>
-        <div className={style.fondoBlureado}>
+        <div className={style.fondoAdmin}>
+        <div className={style.fondoAdminBlureado}>
             {
                 logueado.login && logueado.admin ? (
                     <div className="pt-5 pb-3">
@@ -50,9 +50,9 @@ const AdminPage = () => {
                             <PerfilData client={client} actualizar={actualizar} setActualizar={setActualizar}/>
                         </div>
                         {selectedComponent === 'AdminGetProduct' && <AdminGetProduct />} 
-                        {selectedComponent === 'AdminForm' && <AdminForm />} 
+                        {selectedComponent === 'AdminForm' && <AdminForm   setSelectedComponent={setSelectedComponent}/>} 
                         {selectedComponent === 'AdminUsers' && <AdminUsers/>} 
-                        {selectedComponent === 'AdminCreateUser' && <AdminCreateUser/>} 
+                        {selectedComponent === 'AdminCreateUser' && <AdminCreateUser setSelectedComponent={setSelectedComponent}/>} 
                         {selectedComponent === 'AdminGetOrder' && <AdminGetOrders/>} 
                         {selectedComponent === 'AdminReview' && <AdminReview/>} 
                     </div>
