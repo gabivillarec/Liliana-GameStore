@@ -1,17 +1,17 @@
-import { useState , useEffect } from "react"
+import React, { useState, useEffect } from "react";
 
-
-
-const Favoritos = ({favorito}) =>{
+const Favoritos = ({ favorito }) => {
     
-    useEffect(() =>{
-    },[favorito])
+  const heartIconClass = favorito.style === "btn-light" ? "text-danger" : "";
 
-    return(
-        <button href="#" className={`btn ${favorito.style} border border-secondary py-2 icon-hover px-3`} onClick={favorito.handler} >
-            <i className="me-1 fa fa-heart fa-lg"></i> Favoritos
-        </button>
-    )
-}
+  useEffect(() =>{
+},[favorito])
 
-export default Favoritos
+  return (
+    <button href="#" className={`btn ${favorito.style} border border-secondary py-2 icon-hover px-3`} onClick={favorito.handler} >
+      <i className={`me-1 fa fa-heart fa-lg ${heartIconClass}`}></i> Favoritos
+    </button>
+  );
+};
+
+export default Favoritos;
