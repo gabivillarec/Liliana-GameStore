@@ -1,0 +1,9 @@
+.error-message {
+    position: absolute;
+    top: calc(70%);
+}
+
+.error-message-ta {
+    position: absolute;
+    top: calc(80%);
+}
