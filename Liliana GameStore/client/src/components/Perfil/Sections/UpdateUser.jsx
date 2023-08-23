@@ -2,11 +2,15 @@ import { useState , useEffect} from "react";
 import { updateUser } from "../../AdminPage/AdminUserEdit/AdminUserComponentes/updateUser";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
+import Toast from "../../Toast/Toast";
+import ErrorToast from "../../Toast/ErrorToast";
 
 
 const UpdateUser = ({id, setActualizar ,actualizar }) => {
+    let title = 'Perfil'
+    const [message , setMessage] = useState('')
+
+
     useEffect(()=>{
     },[actualizar])
 
@@ -69,17 +73,25 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
 
     const handlerSubmit = async (event) => {
         event.preventDefault();
-        await updateUser(id, create);
-        setCreate({
-            first_name:'',
-            last_name:'',
-            phone:'',
-            address:'',
-            cp:"",
-            avatar_img: "",
-        })
+        try {
+            await updateUser(id, create);
+            setCreate({
+                first_name:'',
+                last_name:'',
+                phone:'',
+                address:'',
+                cp:"",
+                avatar_img: "",
+            })
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+                setMessage(`Perfil modificado con exito.`)
+                toastBootstrap.show();
+        } catch (error) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+            setMessage(`${error.message}`)
+            toastBootstrap.show();
+        }
         setActualizar(!actualizar)
-        alert("Usuario modificado con éxito");
     }
     const label = (input)=>{
         if (input === "username") return 'Usuario'
@@ -94,6 +106,10 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
     return(
 
         <div className="p-4 container bg-dark">
+            <div>
+                <ErrorToast title={title} message={message}/>
+                <Toast title={title} message={message}/>
+            </div>
             <form className="row needs-validation" noValidate onSubmit={handlerSubmit}>
                 {inputs.map((input, index) => {
                         return (
@@ -128,6 +144,7 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
                 <button className="mt-4 btn btn-info" type="submit">
                     Modificar Perfil
                 </button>
+                
             </form>
         </div>
     );
@@ -135,89 +152,3 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
 
 export default UpdateUser;
 
-//Codigo Franco sin Cloudinary
-
-// import { useState } from "react"
-// import { updateUser } from "../../AdminPage/AdminUserEdit/AdminUserComponentes/updateUser"
-// import { useNavigate } from "react-router-dom"
-
-
-
-// const UpdateUser = ({id, setActualizar}) => {
-//     const navigate = useNavigate()
-//     const [error, setError] = useState({
-//         username:'',
-//         first_name:'',
-//         last_name:'',
-//         email:'',
-//         phone:'',
-//         address:'',
-//         admin:''
-//     });
-//     const [create , setCreate] = useState({
-//         username:'',
-//         first_name:'',
-//         last_name:'',
-//         email:'',
-//         phone:'',
-//         address:'',
-//     })
-//     let inputs = Object.keys(create)
-
-//     const handleChange = (event) => {
-//         const { name, value } = event.target;
-//         setCreate({
-//             ...create,
-//             [name]: value.trim()
-//         });
-//         validate({...inputs, [name]: value})
-//         setError(validate({
-//             ...inputs,
-//             [name]: value.trim()
-//         }))
-//     };
-
-//     const handlerSubmit = async(event) => {
-//         event.preventDefault()
-//         await updateUser(id ,create)
-//         alert(`Usuario modificado con exito`)
-//         setCreate({
-//             username:'',
-//             first_name:'',
-//             last_name:'',
-//             email:'',
-//             phone:'',
-//             address:'',
-//         })
-//         setActualizar(true)
-//     }
-//     const label = (input)=>{
-//         if (input === "username") return 'Usuario'
-//         if (input === "first_name") return 'Nombre'
-//         if (input === "last_name") return 'Apellido'
-//         if (input === "email") return 'Email'
-//         if (input === "phone") return 'Telefono'
-//         if (input === "address") return 'Direccion'
-//     }
-
-//     return(
-//         <div className="p-4 container bg-dark">
-//             <form className="row needs-validation" novalidate onSubmit={handlerSubmit}>
-//             {
-//                 inputs.map((input , index) => {
-//                     return(
-//                         <div className="col-md-4" key={index}>
-//                             <label for="validationCustom01"  name={input} className="form-label">{label(input)}</label>
-//                             <input type='text'  className="form-control" id="validationCustom01" value={create[input]} name={input} onChange={handleChange}  />
-//                             <span>{error.input}</span> 
-//                         </div>
-//                     )
-//                 })
-//             }
-//             <button className="mt-4 btn btn-info" type="submit">Modificar Perfil</button>
-//             </form>
-//         </div>
-//     )
-// }
-
-// export default UpdateUser

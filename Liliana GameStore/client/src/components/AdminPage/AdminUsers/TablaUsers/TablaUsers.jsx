@@ -18,8 +18,6 @@ const TablaUsers = ({users , deleteTrigger ,setDeleteTrigger}) => {
             alert(`El checkbox debe estar en true para poder eliminar un producto`);
         }}
         const inCatalogue = async(id , habilitado) =>{
-            console.log(id)
-            console.log(id)
             await axios.put(`${URL}user/${id}`, {disabled:!habilitado})
             setDeleteTrigger(!deleteTrigger);
         }

@@ -158,8 +158,7 @@ const AdminForm = () => {
                     className="toast text-bg-success"
                     role="alert"
                     aria-live="assertive"
-                    aria-atomic="true"
-                >
+                    aria-atomic="true">
                     <div className="toast-header bg-success">
                         <strong className="me-auto">Admin Products</strong>
                         <button

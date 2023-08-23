@@ -63,9 +63,9 @@ const Carrito = () => {
                 </thead>
                 <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
                 </table>
-              </div>
               <div>
                 <Totalizar  purchaseHandler={purchaseHandler} total={total}/>
+              </div>
               </div>
             </div>
           ) 
