@@ -112,7 +112,7 @@ function Detail() {
                   <div className="mb-3">
                     <span className="h5">${detail.price}</span>
                   </div>
-                  <p>{detail.description_text} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, consectetur aperiam. Est tenetur corrupti vel iusto facere quos repellat. Necessitatibus inventore quis exercitationem laudantium. Optio corporis assumenda ducimus totam explicabo? </p>
+                  <p>{detail.description_text}</p>
                   <Brand detail={detail} />
                   <hr />
                   <div className="row mb-4">
