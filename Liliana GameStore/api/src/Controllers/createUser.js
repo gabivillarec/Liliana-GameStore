@@ -140,7 +140,7 @@ const createUser = async (req, res) => {
           <td class="es-m-p0r es-m-p20b" valign="top" align="center" style="padding:0;Margin:0;width:600px">
           <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
           <tr>
-          <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://viewstripo.email" style="mso-line-height-rule:exactly;text-decoration:underline;color:#E2CFEA;font-size:16px"><img src="https://xwnunb.stripocdn.email/content/guids/CABINET_4b661d8a6f708ef25184d85710414ac0d3f74c48172cc71ba3c5acb79535e988/images/lilianagamestore.png" alt="Logo" style="display:block;font-size:16px;border:0;outline:none;text-decoration:none" title="Logo" height="120" class="img-1390"></a></td>
+          <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://lilianagamesstore.onrender.com" style="mso-line-height-rule:exactly;text-decoration:underline;color:#E2CFEA;font-size:16px"><img src="https://xwnunb.stripocdn.email/content/guids/CABINET_4b661d8a6f708ef25184d85710414ac0d3f74c48172cc71ba3c5acb79535e988/images/lilianagamestore.png" alt="Logo" style="display:block;font-size:16px;border:0;outline:none;text-decoration:none" title="Logo" height="120" class="img-1390"></a></td>
           </tr>
           <tr>
           <td align="center" style="padding:20px;Margin:0;font-size:0">
