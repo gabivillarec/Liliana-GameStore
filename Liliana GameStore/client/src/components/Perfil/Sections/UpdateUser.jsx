@@ -6,7 +6,7 @@ import Toast from "../../Toast/Toast";
 import ErrorToast from "../../Toast/ErrorToast";
 
 
-const UpdateUser = ({id, setActualizar ,actualizar }) => {
+const UpdateUser = ({id, setActualizar ,actualizar, initialData }) => {
     let title = 'Perfil'
     const [message , setMessage] = useState('')
 
@@ -24,11 +24,11 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         admin: "",
     });
     const [create, setCreate] = useState({
-        first_name: "",
-        last_name: "",
-        phone: "",
-        address: "",
-        cp:"",
+        first_name: initialData.first_name,
+        last_name: initialData.last_name,
+        phone: initialData.phone,
+        address: initialData.address,
+        cp: initialData.cp,
         avatar_img: "", // Add avatar_img field for Cloudinary URL
     });
     let inputs = Object.keys(create).filter(input => input !== "avatar_img");
@@ -76,18 +76,18 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         try {
             await updateUser(id, create);
             setCreate({
-                first_name:'',
-                last_name:'',
-                phone:'',
-                address:'',
-                cp:"",
+                first_name: create.first_name,
+                last_name: create.last_name,
+                phone: create.phone,
+                address: create.address,
+                cp: create.cp,
                 avatar_img: "",
             })
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
                 setMessage(`Perfil modificado con exito.`)
                 toastBootstrap.show();
         } catch (error) {
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToast"));
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(document.getElementById("liveToastError"));
             setMessage(`${error.message}`)
             toastBootstrap.show();
         }
@@ -97,10 +97,10 @@ const UpdateUser = ({id, setActualizar ,actualizar }) => {
         if (input === "username") return 'Usuario'
         if (input === "first_name") return 'Nombre'
         if (input === "last_name") return 'Apellido'
-        if (input === "email") return 'Email'
-        if (input === "phone") return 'Telefono'
-        if (input === "address") return 'Direccion'
-        if (input === "cp") return 'Codigo Postal'
+        if (input === "email") return 'E-Mail'
+        if (input === "phone") return 'Teléfono'
+        if (input === "address") return 'Dirección'
+        if (input === "cp") return 'Código Postal'
     }
 
     return(

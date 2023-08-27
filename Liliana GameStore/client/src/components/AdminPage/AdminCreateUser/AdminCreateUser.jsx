@@ -79,36 +79,7 @@ const AdminCreateUser = ({setSelectedComponent}) => {
 
   return (
     <div className="p-4 container bg-dark">
-      <form
-        className="row needs-validation"
-        noValidate
-        onSubmit={handlerSubmit}
-      >
-        {/* {inputs.map((input, index) => {
-          return (
-            <div className="md-4" key={index}>
-              <input
-                  type="text"
-                  id="validationCustom01"
-                  name={input}
-                  className={`form-control form-control-lg ${touchedFields[input] && error[input] ? 'is-invalid' : ''}`}
-                  value={create[input]}
-                  onChange={handleChange}
-                  onBlur={() => handleFieldFocus(input)}
-                />
-                <label
-                  className={`${create[input] && 'form-label-floating'}`}
-                  htmlFor="validationCustom01"
-                >
-                  {input}
-                </label>
-                {touchedFields[input] && error[input] && (
-                  <div className="invalid-feedback">{error[input]}</div>
-                )}
-            </div>
-          );
-        })} */}
-
+      <form className="row needs-validation" noValidate onSubmit={handlerSubmit} >
           <div className="col-md-4">
             <div className="form-floating md-4 mb-4">
               <input type="text" id="usernameAdm" name="username" className={`form-control form-control-lg ${touchedFields.username && error.username ? 'is-invalid' : ''}`}

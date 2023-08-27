@@ -2,7 +2,6 @@ import axios from 'axios'
 import { URL } from '../../../main'
 
 export const calcualarTotal = (products) =>{
-    console.log(products)
     let suma = 0
     products.forEach(prod => suma = suma + (prod.price * prod.cantidad ))
     return suma

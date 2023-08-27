@@ -9,9 +9,6 @@ const TablaOrder = ({orders , deleteTrigger ,setDeleteTrigger}) => {
     const handlerDelete = async (checkbox, id) => {
         if (checkbox) {
             try {
-                console.log(URL)
-                console.log(id)
-
                 await axios.delete(`${URL}order/${id}`);
                 setDeleteTrigger(!deleteTrigger); 
             } catch (error) {

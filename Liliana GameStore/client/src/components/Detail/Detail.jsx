@@ -131,11 +131,9 @@ function Detail() {
                   <div className="row mb-4">
                     <Cantidad  quantity={quantity}  detail={detail} setQuantity={setQuantity}/>
                   </div>
-                  <a href="#" className="btn btn-primary shadow-0" onClick={handleAddItem} >
-                    <i className="me-1"></i>🛒 Agregar al carrito
-                  </a>
-                  <Favoritos  favorito={favorito}/>
-                </div>
+                    <a href="#" className="btn btn-primary shadow-0 mx-4" onClick={handleAddItem} ><i className="me-1"></i>🛒 Agregar al carrito</a>
+                    <Favoritos  favorito={favorito}/>
+                  </div>
                 <div>
                   <Toast  title={titleToast} message={messageToast}/>
                   <ErrorToast title={titleToast} message={messageToastError}/>

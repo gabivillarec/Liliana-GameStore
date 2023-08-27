@@ -56,7 +56,7 @@ const AdminFormUpdate = () => {
                     logueado.login && logueado.admin ? (
                         <div className="container p-4 rounded bg-black">
                             <AdminDetail detail={detail} handleImageDelete={handleImageDelete}/>
-                            <UpdateForm id={id}/>
+                            <UpdateForm id={id} detail={detail} />
                         </div>
                     )
                     : logueado.login && !logueado.admin ? (

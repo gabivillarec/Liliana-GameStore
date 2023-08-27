@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import style from './Form.module.css'
+import Terms from './Terms';
 import validation from './Validation.js';
 import backgroundImage from '../../../vistas/PS_Background_Medium.png';
 import {URL} from '../../main'
@@ -153,9 +154,11 @@ const Form = () => {
                       <input className="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms"
                         checked={form.agreeTerms} onChange={handleChange} />
                       <label className="form-check-label" htmlFor="agreeTerms">
-                        Al hacer click en el botón estás aceptando los <a href="#!" className="text-body"><u>Términos y condiciones</u></a>
+                        Al hacer click en el botón estás aceptando los <a type="button" className="text-body" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><u>Términos y condiciones</u></a>
                       </label>
                     </div>
+
+                    <Terms setAgreeTerms={(value) => setForm({ ...form, agreeTerms: value })} />
 
                     </div>
                     </div>

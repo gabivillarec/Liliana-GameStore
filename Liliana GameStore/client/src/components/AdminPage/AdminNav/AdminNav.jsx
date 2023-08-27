@@ -1,7 +1,6 @@
 
 
 const AdminNav = ({ handlerRender , client}) => {
-    console.log(client)
     return (
         <div className=" container d-flex  justify-content-evenly m-b-3">
             <button className="btn btn-outline-info" onClick={() => handlerRender('AdminGetProduct')}>Mostrar Productos</button>

@@ -42,13 +42,10 @@ const BotonesItem = ({ products }) => {
     }
 
     const handleFilter = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value);
         setFiltros({
             ...filtros,
             [event.target.name] : event.target.value
         })
-        console.log(filtros)
     }
 
     const handleBtnFiltrar = () => {

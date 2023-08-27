@@ -1,22 +1,35 @@
-import { useState } from "react";
+import { useState } from 'react';
 import axios from "axios";
 import { updateproducto } from "./updateproducto";
 import { useNavigate } from "react-router-dom";
 
-const UpdateForm = ({ id }) => {
+const translations = {
+    name: 'Nombre',
+    brand: 'Marca',
+    category: 'Categoría',
+    subcategory: 'Sub-Categoría',
+    price: 'Precio',
+    stock: 'Stock Disponible',
+    rating: 'Rating',
+    description_text: 'Descripción',
+    socket: 'Socket',
+    images: 'Imágenes',
+};
+
+const UpdateForm = ({ id, detail }) => {
     const navigate = useNavigate();
 
     const [create, setCreate] = useState({
-        name: "",
-        price: undefined,
-        images: [], // Usar un array para almacenar las URLs de las imágenes
-        stock: undefined,
-        rating: undefined,
-        description_text: "",
-        category: "",
-        subcategory: "",
-        brand: "",
+        name: detail.name,
+        brand: detail.brand_name,
+        category: detail.category_name,
+        subcategory: detail.subcategory_name,
+        price: detail.price,
+        stock: detail.stock,
+        rating: detail.rating,
+        description_text: detail.description_text,
         socket: [],
+        images: [], // Usar un array para almacenar las URLs de las imágenes
     });
 
     let inputs = Object.keys(create);
@@ -91,7 +104,7 @@ const UpdateForm = ({ id }) => {
                         return (
                             <div className="col-md-4" key={index}>
                                 <label htmlFor={input} className="form-label">
-                                    {input}
+                                    {translations[input]}
                                 </label>
                                 <input
                                     type="text"

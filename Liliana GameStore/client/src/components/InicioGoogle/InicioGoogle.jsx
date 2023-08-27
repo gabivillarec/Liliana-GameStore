@@ -50,7 +50,7 @@ const InicioGoogle = () => {
   return (
     <div>
       <button onClick={loginWithGoogle} className="btn btn-dark">
-        <i class="bi bi-google"></i>
+        <i className="bi bi-google"></i>
       </button>
     </div>
   );
