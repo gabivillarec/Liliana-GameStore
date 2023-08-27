@@ -169,8 +169,6 @@ const AdminForm = ({ setSelectedComponent}) => {
             console.log(err);
         }
     };
-    
-//  console.log(create)
 
     return (
         <div className="p-4 container bg-dark">

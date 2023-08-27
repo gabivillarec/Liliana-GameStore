@@ -31,7 +31,7 @@ const NavBar = () => {
                 ) : 
                 <button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" onClick={()=> navigate('/login')}>Ingresá</button>
                 }
-                {usuario && (<button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Usuario</button>)}
+                {usuario && (<button className="btn btn-outline-info border-2 fs-5 fw-semibold text-uppercase" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">{usuario && usuario.username}</button>)}
             </div>
 
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">

@@ -1,9 +1,10 @@
+import { useState } from "react";
 import style from './PerfilData.module.css'
 import UpdateUser from './UpdateUser'
 
 const PerfilData = ({client , setActualizar ,actualizar }) => {
     const { first_name , last_name , username ,email ,cp ,address ,phone ,avatar_img , id}= client
-    console.log(client , "client")
+
     return(
         <div className="card mb-3 bg-dark">
             <div className="row g-0">
@@ -23,7 +24,7 @@ const PerfilData = ({client , setActualizar ,actualizar }) => {
                             {/* <div className="border border-info rounded p-2">Apellido: {last_name}</div> */}
                         </div>
                         <div className="d-flex gap-2 flex-row mb-2">
-                            <div className="border border-info rounded p-2">Email: {email}</div>
+                            <div className="border border-info rounded p-2">E-Mail: {email}</div>
                             <div className="border border-info rounded p-2">Telefono: {phone}</div>
                         </div>
                         <div className="d-flex gap-2 flex-row mb-2">
@@ -35,10 +36,15 @@ const PerfilData = ({client , setActualizar ,actualizar }) => {
             </div>
             <div className="collapse" id="collapseExample">
                 <div className="card bg-dark card-body">
-                    <UpdateUser  id={id} setActualizar={setActualizar} actualizar={actualizar}/>
+                    <UpdateUser
+                        id={id}
+                        setActualizar={setActualizar}
+                        actualizar={actualizar}
+                        initialData={client}
+                    />
                 </div>
-</div>
-    </div>
+            </div>
+        </div>
     )
 }
 

@@ -28,48 +28,22 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
 
     return (
         <tr className='table-dark'>
-            <td>
-                <div className="d-flex align-items-center">
-                    <img
-                        src={images[0]} //Muestra siempre la primer URL almacenada
-                        alt={name}
-                        className={`rounded-circle ${style.imgen}`}
-                    />
-                    <div className="ms-3">
-                        <button type="button" className="btn btn-outline-info" onClick={()=> navigate(`/detail/${id}`)}>{name}</button>
-                    </div>
+            <th scope="row" className="text-center"><img src={images[0]} alt={name} className={`rounded-circle ${style.imgen}`} /></th>
+            <td className="align-middle fw-bold mb-1"><button type="button" className="btn btn-outline-info" onClick={()=> navigate(`/detail/${id}`)}>{name}</button></td>
+            <td className="align-middle text-center">{category_name}</td>
+            <td className="align-middle text-center">${price}</td>
+            <td className="align-middle text-center">{stock}</td>
+            <td className="align-middle">
+                <div className="form-switch text-center">
+                    <input className="form-check-input" type="checkbox" role="switch" checked={habilitado} id={`flexSwitchCheckDefault_${id}`} onChange={toggleHabilitado} onClick={()=>inCatalogue(id, habilitado)} />
                 </div>
             </td>
-            <td>
-                <p className="fw-normal mb-1">{category_name}</p>
-            </td>
-            <td>
-                <p className="fw-normal mb-1">{price}</p>
-            </td>
-            <td>{stock}</td>
-            <td>
-                <div className="form-check form-switch">
-                    <input
-                        className="form-check-input"
-                        type="checkbox"
-                        checked={habilitado}
-                        onChange={toggleHabilitado}
-                        onClick={()=>inCatalogue(id, habilitado)}
-                        role="switch"
-                        id={`flexSwitchCheckDefault_${id}`}
-                    />
-                </div>
-            </td>
-            <td>
-                <button
-                    onClick={() => navigate(`formupdate/${id}`)}
-                    type="button"
-                    className="btn btn-outline-info"
-                >
+            <td className="text-center">
+                <button className="btn btn-outline-info" type="button" onClick={() => navigate(`formupdate/${id}`)}>
                     <i className="bi bi-pencil-square"></i>
                 </button>
             </td>
-            <td >
+            <td className="text-center">
                 <div className="form-check form-switch">
                     <input
                         className="form-check-input"
@@ -82,7 +56,7 @@ const AdminItem = ({ product, handlerDelete ,inCatalogue }) => {
                     <label
                         className="form-check-label"
                         htmlFor={`flexSwitchCheckDefault_${id}`}
-                    >Ckeck
+                    >Check
                     </label>
                 </div>
                 <button

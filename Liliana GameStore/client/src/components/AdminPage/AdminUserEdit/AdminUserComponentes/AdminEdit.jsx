@@ -35,7 +35,6 @@ const AdminEdit = ({id}) => {
             ...inputs,
             [name]: value.trim()
         }))
-        console.log(error, "errorss")
     };
 
     const handlerSubmit = async(event) => {

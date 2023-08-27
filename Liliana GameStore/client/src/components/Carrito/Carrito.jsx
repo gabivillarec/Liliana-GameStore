@@ -10,7 +10,6 @@ import axios from 'axios';
 import { URL } from '../../main';
 import ValidationLoginCard from '../ValidationLoginCard/ValidationLoginCard';
 
-
 const Carrito = () => {
   const [deleteTrigger, setDeleteTrigger] = useState(false);
   const [logueado, setLogueado] = useState(false)
@@ -42,8 +41,6 @@ const Carrito = () => {
     }
   };
 
-
-
     return(
 
       <div className= {style.container}>
@@ -54,11 +51,12 @@ const Carrito = () => {
                 <table className="table align-middle mb-0 bg-white">
                 <thead className="bg-dark">
                   <tr className='table-dark'>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Agregar/Quitar</th>
-                    <th>Cantidad</th>
-                    <th>Eliminar</th>
+                    <th scope="col"></th>
+                    <th scope="col">Producto</th>
+                    <th scope="col" className="text-center" >Precio</th>
+                    <th scope="col" className="text-center" >Agregar/Quitar</th>
+                    <th scope="col" className="text-center" >Cantidad</th>
+                    <th scope="col" className="text-center" >Eliminar</th>
                     </tr>
                 </thead>
                 <ProducCarrito estado={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>

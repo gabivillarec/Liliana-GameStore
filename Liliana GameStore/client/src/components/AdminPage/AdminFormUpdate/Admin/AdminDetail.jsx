@@ -1,4 +1,3 @@
-
 const AdminDetail = ({ detail, handleImageDelete }) => {
   const {
     id,
@@ -40,32 +39,16 @@ const AdminDetail = ({ detail, handleImageDelete }) => {
           ))}
         </div>
         <div className="col-md-8">
-          <div className="card-body">
             <h5 className="card-title">{name}</h5>
-            <p className="card-text">
-              <strong>Price:</strong> {price}
-            </p>
-            <p className="card-text">
-              <strong>Stock:</strong> {stock}
-            </p>
-            <p className="card-text">
-              <strong>Rating:</strong> {rating}
-            </p>
-            <p className="card-text">
-              <strong>Description:</strong> {description_text}
-            </p>
-            <p className="card-text">
-              <strong>Category:</strong> {category_name}
-            </p>
-            <p className="card-text">
-              <strong>Subcategory:</strong> {subcategory_name}
-            </p>
-            <p className="card-text">
-              <strong>Brand:</strong> {brand_name}
-            </p>
-            <p className="card-text">
-              <strong>Sockets:</strong> {joinSockets(sockets)}
-            </p>
+          <div className="card-body">
+            <p className="card-text"><strong>Categoría: </strong>{category_name}</p>
+            <p className="card-text"><strong>Sub-Categoría: </strong>{subcategory_name}</p>
+            <p className="card-text"><strong>Precio: </strong>${price}</p>
+            <p className="card-text"><strong>Stock Disponible: </strong>{stock} unidades</p>
+            <p className="card-text"><strong>Marca: </strong>{brand_name}</p>
+            <p className="card-text"><strong>Rating: </strong>{rating}</p>
+            <p className="card-text"><strong>Sockets: </strong>{joinSockets(sockets)}</p>
+            <p className="card-text"><strong>Descripción: </strong>{description_text}</p>
           </div>
         </div>
       </div>

@@ -48,7 +48,6 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                 successToastInstance.show();
                 toggleCollapse();
                 handleRefresh();
-                console.log(successToastInstance)
             }
         } catch (error) {
             const errorToast = document.getElementById("liveToastDeleteReviewError");
@@ -72,7 +71,6 @@ const ComprasConComentarios = ({ userId, productId, commentId, images, name, pri
                 successToastInstance.show();
                 toggleCollapse();
                 handleRefresh();
-                console.log(successToastInstance)
             }
         } catch (error) {
             const errorToast = document.getElementById("liveToastUpdateReviewError");

@@ -37,7 +37,6 @@ const validation = (create) => {
     errors.brand = 'Introduce la marca del producto';
   }
   
-  console.log(errors)
   return errors;
 };
 

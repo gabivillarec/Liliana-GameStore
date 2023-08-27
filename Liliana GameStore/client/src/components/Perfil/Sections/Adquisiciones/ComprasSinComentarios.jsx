@@ -53,7 +53,6 @@ const ComprasSinComentarios = ({ userId, productId, images, name, price, date, h
                 const successToastInstance = new bootstrap.Toast(successToast);
                 successToastInstance.show();
                 toggleCollapse();
-                console.log(successToastInstance)
                 handleRefresh();
             }
         } catch (error) {

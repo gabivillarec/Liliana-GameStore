@@ -123,13 +123,14 @@ const AdminGetProduct = () =>{
           <table className="table align-middle mb-0 bg-white">
           <thead className="bg-dark">
             <tr className='table-dark'>
-              <th>Producto</th>
-              <th>Category</th>
-              <th>Precio</th>
-              <th>Stock</th>
-              <th>En Pausa</th>
-              <th>Editar</th>
-              <th>Eliminar</th>
+              <th scope="col"></th>
+              <th scope="col">Producto</th>
+              <th scope="col" className="text-center" >Categoría</th>
+              <th scope="col" className="text-center" >Precio</th>
+              <th scope="col" className="text-center" >Stock</th>
+              <th scope="col" className="text-center" >Pausado</th>
+              <th scope="col" className="text-center" >Editar</th>
+              <th scope="col" className="text-center" >Eliminar</th>
             </tr>
           </thead>
           <TablaProduts products={products} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
