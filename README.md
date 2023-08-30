@@ -41,7 +41,7 @@ Liliana Games is designed to provide a seamless shopping experience for users in
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/Liliana-GameStore.git`
+1. Clone the repository: `git clone https://github.com/gabivillarec/Liliana-GameStore.git`
 2. Navigate to the project directory: `cd Liliana-GameStore`
 3. Install backend dependencies: `npm install`
 4. Navigate to the `client` directory: `cd client`
