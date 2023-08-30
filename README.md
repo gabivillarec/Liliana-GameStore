@@ -1,7 +1,5 @@
 # Liliana Games - Portfolio Web Application
 
-![Liliana Games Logo](link_to_logo.png) <!-- Replace with actual logo if available -->
-
 Liliana Games is a web application that serves as an e-commerce platform specializing in the sale of computer hardware, accessories, and gaming software. The platform is built using various technologies, including Node.js, Express, Sequelize, PostgreSQL, React, Vite, Bootstrap, and MercadoPago integration.
 
 ## Table of Contents
