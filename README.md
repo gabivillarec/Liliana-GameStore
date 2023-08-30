@@ -9,6 +9,7 @@ Liliana Games is a web application that serves as an e-commerce platform special
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Deploy](#deploy)
 
 ## Introduction
 
@@ -52,6 +53,11 @@ Liliana Games is designed to provide a seamless shopping experience for users in
 1. Start the backend server: `npm run start`
 2. Navigate to the `client` directory: `cd client`
 3. Start the frontend development server: `npm run dev`
+
+## Deploy
+
+https://lilianagamesstore.onrender.com
+
 
 Access the application by opening your web browser and visiting `http://localhost:3000`.
 
