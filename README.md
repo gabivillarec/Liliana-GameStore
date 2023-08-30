@@ -58,7 +58,7 @@ Liliana Games is designed to provide a seamless shopping experience for users in
 
 https://lilianagamesstore.onrender.com
 
-
+or
 Access the application by opening your web browser and visiting `http://localhost:3000`.
 
 
